@@ -1,0 +1,50 @@
+/post something button
+/=link_to "Post Something", new_post_path, :class => "btn-large"
+/ =link_to_modal "Post Something", new_post_path, :remote => true, :class=>"button"
+
+#dialog-form{:title => "Create new post"}
+  %p.validateTips All form fields are required.
+  / =form_for @post do |f|
+  /   - if @post.errors.any?
+  /     #error_explanation
+  /       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+  /       %ul
+  /         - @post.errors.full_messages.each do |msg|
+  /           %li= msg
+  /   =field_set_tag
+  /     .field
+  /       = f.label :title, :for => "title"
+  /       = f.text_field :title, :id => "title", :class=>"text ui-widget-content ui-corner-all"
+  /     .field
+  /       =f.label :email, :for => "email"
+  /       =f.text_field :email, :id => "email", :class=>"text ui-widget-content ui-corner-all"
+  /     .field
+  /       = f.label :description, :for => "description"
+  /       = f.text_area :description, :id => "description", :class=>"text ui-widget-content" 
+  / =button_tag "Create new post", :id => "create-post"
+  / 
+=button_tag "Create new post", :id => "create-post"
+
+= form_tag '/posts', :id => 'post-form' do
+  #email.text.ui-widget-content.ui-corner-all= text_field_tag :email
+  #title.text.ui-widget-content.ui-corner-all= text_field_tag :title
+  #description.text.ui-widget-content.ui-corner-all= text_area_tag :description
+  = submit_tag "Create new post"
+
+/discover button
+/ =link_to "Discover", groups_path, :class => "btn-large"
+
+
+/search bar
+=search_form_for @q, :url => { :controller => "search", :action => "index" }do |f|
+  =f.text_field :name_cont
+  =f.submit 'search'
+
+/group feed and create group button
+////render group
+////join button
+////post button
+/item-post feed
+////render post
+///////tags
+////buy button

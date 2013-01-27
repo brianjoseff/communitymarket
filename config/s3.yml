@@ -1,0 +1,12 @@
+development:
+  bucket: zounds-dev
+  access_key_id: <%= ENV["S3_KEY"] %>
+  secret_access_key: <%= ENV['S3_SECRET']
+test:
+  bucket: zounds-test
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+production:
+  bucket: zounds-pro
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>

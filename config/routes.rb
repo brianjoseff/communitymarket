@@ -6,8 +6,10 @@ Communitymarket::Application.routes.draw do
 
 
   resources :posts
+  match '/search', :to => 'search#index'
 
-
+  root :to => 'pages#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
