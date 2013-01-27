@@ -1,9 +1,19 @@
 /post something button
 /=link_to "Post Something", new_post_path, :class => "btn-large"
 / =link_to_modal "Post Something", new_post_path, :remote => true, :class=>"button"
+%div.row
+  #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    / %p.validateTips All form fields are required.
+    .modal-header
+      %h1 Post Something
+    .model-body
+      =form_for @post, :remote => true do |f|
+        =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
+        =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
+        =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
+        .model-footer
+          = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
 
-#dialog-form{:title => "Create new post"}
-  %p.validateTips All form fields are required.
   / =form_for @post do |f|
   /   - if @post.errors.any?
   /     #error_explanation
@@ -22,14 +32,36 @@
   /       = f.label :description, :for => "description"
   /       = f.text_area :description, :id => "description", :class=>"text ui-widget-content" 
   / =button_tag "Create new post", :id => "create-post"
-  / 
-=button_tag "Create new post", :id => "create-post"
+  /
+%div.row  
+  =button_tag "Create new post", :id => "create-post"
+%div.row
+  %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal
+  =link_to "Post  a Post", new_post_path, :class => "btn", :role => "button"
+/ %div#postModal
+/   = form_for @post, :remote => true, :id => 'post-form' do |f|
+/     =f.label :email
+/     =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
+/     =f.label :title
+/     =f.text_field :title
+/     =f.label :description
+/     =f.text_area :description, :class => "input-block-level", :placeholder => "Description"
+/     = submit_tag "Create new post", :value=>"Post", :id => "submit-post-1"
 
-= form_tag '/posts', :id => 'post-form' do
-  #email.text.ui-widget-content.ui-corner-all= text_field_tag :email
-  #title.text.ui-widget-content.ui-corner-all= text_field_tag :title
-  #description.text.ui-widget-content.ui-corner-all= text_area_tag :description
-  = submit_tag "Create new post"
+
+%h2 Recipe for Rum Cake:
+%h2
+  Add
+  %span#dynamic-text-wrapper
+    %span#old-text all the ingredients
+    %span#new-text all the ingredients
+  %br/
+  to the cake batter.
+%br/
+/ <span id="debug">Debug:</span>
+/ #email.text.ui-widget-content.ui-corner-all
+/ #title.text.ui-widget-content.ui-corner-all
+/ #description.text.ui-widget-content.ui-corner-all
 
 /discover button
 / =link_to "Discover", groups_path, :class => "btn-large"

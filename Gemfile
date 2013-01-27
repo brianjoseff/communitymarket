@@ -21,6 +21,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'forgery'
+gem 'faker'
+gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'jquery-modal-rails'
 gem 'jquery-rails'

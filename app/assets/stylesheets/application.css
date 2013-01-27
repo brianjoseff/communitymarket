@@ -9,5 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
  *= require_tree .
  */
+#postModal{
+	padding:10px;
+	width: 400px;
+	margin: -250px 0 0 -200px;
+}
