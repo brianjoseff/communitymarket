@@ -1,47 +1,76 @@
-= form_for @post do |f|
-  - if @post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
-        - @post.errors.full_messages.each do |msg|
-          %li= msg
+%div.span7
+  = form_for (defined?(editing) ? @post : setup_post(@post), :html => { :multipart => true})  do |f|
+    - if @post.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+        %ul
+          - @post.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :borrow
-    = f.check_box :borrow
-  .field
-    = f.label :tier
-    = f.number_field :tier
-  .field
-    = f.label :cash
-    =f.check_box :cash
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :email
-    = f.number_field :email
-  %div.container     
-    -@categories.each do |c|
-      =f.label :post_category, :class => "radio" do
-        =f.radio_button :post_category_id, c.id
-        =c.name.humanize
-  -@assets.each do |asset|
-    =f.fields_for :assets, asset do |asset_fields|
-      -if asset_fields.object.image_file_name.nil?
-        .field
-          =asset_fields.label "image"
-          =asset_fields.file_field :image
-      -else
-        .field
-          =image_tag(asset_fields.object.image.url(:article))
-          =asset_fields.label  "delete image"
-          =asset_fields.check_box :_destroy
-  / .field
-  /   = f.label :premium
-  /   = f.check_box :premium
-  .actions
-    = f.submit 'Save'
+    = f.text_field :title, :class => "input-block-level inline", :placeholder => "Post Title"
+    .field
+      = f.label :borrow
+      = f.check_box :borrow
+    .field
+      = f.label :tier
+      = f.collection_select(:tier_id, Tier.all, :id, :name, :prompt => true)
+    .field
+      = f.label :cash
+      =f.check_box :cash
+
+    = f.text_area :description, :class => "input-block-level inline", :placeholder => "Post  Description", :rows => "10"
+    .field
+      = f.text_field :email, :class => "input-block-level inline", :placeholder => "Email"
+    %div.container     
+      -@categories.each do |c|
+        =f.label :post_category, :class => "radio" do
+          =f.radio_button :post_category_id, c.id
+          =c.name.humanize
+    -@assets.each do |asset|
+      =f.fields_for :assets, asset do |asset_fields|
+        -if asset_fields.object.image_file_name.nil?
+          .field
+            =asset_fields.label "image"
+            =asset_fields.file_field :image
+        -else
+          .field
+            =image_tag(asset_fields.object.image.url(:article))
+            =asset_fields.label  "delete image"
+            =asset_fields.check_box :_destroy
+    / .field
+    /   = f.label :premium
+    /   = f.check_box :premium
+    .actions
+      = f.submit 'Save'
+      
+/STRIPE INTEGRATION FOR CREATING A CUSTOMER      
+      
+/ - if user.last_4_digits
+/   #change-card.clearfix
+/     %label Card
+/     .input
+/       %span
+/         Using card ending with
+/         \#{user.last_4_digits}
+/         \#{link_to "(change)", "#"}
+/ %noscript
+/   %p This form requires Javascript to use
+/ #credit-card{:style => user.last_4_digits ? "display:none" : "display:block"}
+/   #credit-card-errors{:style => "display:none"}
+/     #stripe-error-message.alert-message.block-message.error
+/   / these fields are disabled before submission and are never transmitted back to rails
+/   .clearfix
+/     = label_tag :credit_card_number
+/     .input
+/       = text_field_tag :credit_card_number, params[:credit_card_number], :class => "field", :disabled => true
+/   .clearfix
+/     = label_tag :cvv, "Security code (CVV)"
+/     .input
+/       = text_field_tag :cvv, params[:cvv], :class => "small", :disabled => true
+/   .clearfix
+/     = label_tag :expiry_date
+/     .input
+/       = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true}, {:class => "small"}
+/     / empty
+/   %span.note
+/     Your credit card details will be sent directly to our payment processor

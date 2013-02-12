@@ -1,7 +1,14 @@
-%h1 Editing post
+%div.row
+  %div.span7
+    %h1 Editing post
 
-= render 'form'
+    -if signed_in?
+      = render 'form'
+    -else
+      = render 'nonuser_form'
 
-= link_to 'Show', @post
-\|
-= link_to 'Back', posts_path
+    = link_to 'Back', posts_path
+
+    = link_to 'Show', @post
+    \|
+    = link_to 'Back', posts_path

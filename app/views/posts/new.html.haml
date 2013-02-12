@@ -1,5 +1,9 @@
-%h1 New post
+%div.row
+  %div.span7
+    %h1 New post
+    -if signed_in?
+      = render 'form'
+    -else
+      = render 'nonuser_form'
 
-= render 'form'
-
-= link_to 'Back', posts_path
+    = link_to 'Back', posts_path

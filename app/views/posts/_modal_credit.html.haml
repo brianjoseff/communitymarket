@@ -1,0 +1,29 @@
+-if @user.stripe_customer_id
+  #change-card.clearfix
+    %label Card
+    .input
+      %span
+        Using card ending with
+        \#{@user.stripe_customer_id}
+        \#{link_to "(change)", "#"}
+%noscript
+  %p This form requires Javascript to use
+#credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
+  #credit-card-errors{:style => "display:none"}
+    #stripe-error-message.alert-message.block-message.error
+  / these fields are disabled before submission and are never transmitted back to rails
+  .row
+    = label_tag :credit_card_number
+    .span4
+      = text_field_tag :credit_card_number, params[:credit_card_number], :class => "field", :disabled => true
+  .row
+    = label_tag :cvv, "Security code (CVV)"
+    .span1
+      = text_field_tag :cvv, params[:cvv], :class => "small", :disabled => true
+  .row
+    = label_tag :expiry_date
+    .span3
+      = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true}, {:class => "small"}
+    / empty
+  %span.note
+    Your credit card details will be sent directly to our payment processor
