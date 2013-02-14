@@ -1,0 +1,14 @@
+%div.row
+  %div.span7
+    %h1 Editing post
+
+    -if signed_in?
+      = render 'form'
+    -else
+      = render 'nonuser_form'
+
+    = link_to 'Back', posts_path
+
+    = link_to 'Show', @post
+    \|
+    = link_to 'Back', posts_path

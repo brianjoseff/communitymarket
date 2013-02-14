@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @post.title
+%p
+  %b Borrow:
+  = @post.borrow
+/ %p
+/   %b Tier:
+/   = @post.tier
+%p
+  %b Description:
+  = @post.description
+%p
+  %b User:
+  = @post.user_id
+%p
+  %b Post category:
+  = @post.post_category_id
+%p
+  %b Premium:
+  = @post.premium
+
+= link_to 'Edit', edit_post_path(@post)
+\|
+= link_to 'Back', posts_path

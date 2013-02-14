@@ -1,0 +1,51 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require token-input-facebook
+ *= require jquery.ui.all
+ *= require chosen
+ *= require_tree .
+ */
+#postModal{
+	padding:10px;
+	width: 400px;
+	margin: -250px 0 0 -200px;
+}
+.row{
+	margin-left:-10px;
+}
+.group-row > #modalCredit{
+	float: right;
+}
+#tier_explanation_wrapper{
+	width:170px;
+	position: absolute;
+	left:50px;
+	top:200px;
+
+}
+#tier_explanation{
+	/*margin: 2px;*/
+	border: 2px solid #696969;
+	padding:5px;
+	width:140px;
+	float:left;
+/*	position: absolute;
+	left:50px;
+	top:200px;
+	width: 160px;*/
+}
+#tier_arrow{
+	background-image: url(/assets/tier_exp_arrow.png);	
+	width:15px;
+	height:80px;
+	float:right;
+}

@@ -1,0 +1,92 @@
+= form_for @post.new_record? ? setup_post(@post, @group) : @post, :html => { :multipart => true, :class => "form-horizontal"} do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+      %ul
+        - @post.errors.full_messages.each do |msg|
+          %li= msg
+          
+  %div.control-group
+    %div.controls.random-form-elements.form-inline
+      %div.span2
+        %h4 Category
+        -@categories.each do |c|
+          %div.row
+            =f.radio_button :post_category_id, c.id, :onclick => ("wanted()" if c.id==32)
+            =c.name.humanize
+      %div.span2
+        -@assets.each do |asset|
+          =f.fields_for :assets, asset do |asset_fields|
+            -if asset_fields.object.image_file_name.nil?
+              =asset_fields.label "image"
+              =asset_fields.file_field :image
+            -else
+              =image_tag(asset_fields.object.image.url(:article))
+              =asset_fields.label  "delete image"
+              =asset_fields.check_box :_destroy
+              
+  %div.control-group
+    =f.label :tier, "Value tier", :class=>"control-label"
+    %div.controls#tier_field
+      = f.collection_select(:tier_id, Tier.all, :id, :name, :prompt => "Choose a value for your post", :class => "inline")
+  %div.random-form-elements
+    %p.underline or
+  %div.control-group
+    = f.label :cash, :class => "control-label"
+    %div.controls
+      =f.check_box :cash, :class => "input-block-level inline cash-box"
+      =f.text_field :price, :class => "input-block-level inline span1 cash-field", :style => "display:none", :placeholder => "price"
+
+    / %div.span3
+    /   = f.check_box :borrow, :onclick=>"borrow()"
+    /   = f.label :borrow, :class => "checkbox inline"
+    /   / if this is checked, it should hide the tier collection select
+
+
+  %div.control-group
+    =f.label :title, :class => "control-label"
+    %div.controls
+      = f.text_field :title, :class => "input-block-level inline", :placeholder => "Perfectly Functional Dorm Fridge"
+      
+  %div.control-group
+    =f.label :description, :class => "control-label"
+    %div.controls
+      = f.text_area :description, :class => "input-block-level inline", :placeholder => "An Amish father and son are in a mall for the first time. They watch an old, grizzled woman walk into an elevator. Doors close. Minute later, doors open and a buxom blonde saunters out. The man turns to his son and says, 'Zebediah, get your mother, quick!'. This fridge is the same. It works magic.", :rows => "8"
+      
+  %div.control-group
+    %div.controls
+      //insert tag form field here
+      =f.label :tag_tokens
+      =f.text_field :tag_tokens, data: {:load => @post.tags}
+  %div.control-group
+    =f.label :email, :class => "control-label"
+    %div.controls
+      = f.text_field :email, :class => "input-block-level inline", :placeholder =>"brian@chyeah.com"
+      //Put opt password field in here as well to make user object on post submit
+  %div.random-form-elements
+    -if @message
+      %div.row.message
+        =@message
+        /make a button to join groups in modal window
+    %div.row.group-row
+      =f.fields_for :assignments do |ff|
+        =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
+          =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box"}, '0','1'
+          =ff.object.group.name.humanize
+        
+          =ff.hidden_field :group_id
+      /STRIPE INTEGRATION FOR CREATING A CUSTOMER      
+      %div#modalCredit{:style=>"display:none"}      
+        =render 'modal_credit', user: @user
+    %div.row
+
+    / .field
+    /   = f.label :premium
+    /   = f.check_box :premium
+    %div.row
+      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
+    
+%div#tier_explanation_wrapper
+  %div#tier_explanation
+    %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
+  %div#tier_arrow

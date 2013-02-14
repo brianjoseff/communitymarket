@@ -1,0 +1,29 @@
+%h1 Listing posts
+
+%table
+  %tr
+    %th Title
+    %th Borrow
+    %th Description
+    %th User
+    %th Post category
+    %th Premium
+    %th
+    %th
+    %th
+
+  - @posts.each do |post|
+    %tr
+      %td= post.title
+      %td= post.borrow
+      %td= post.description
+      %td= post.user_id
+      %td= post.post_category_id
+      %td= post.premium
+      %td= link_to 'Show', post
+      %td= link_to 'Edit', edit_post_path(post)
+      %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_post_path
