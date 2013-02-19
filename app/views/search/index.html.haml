@@ -1,9 +1,11 @@
-
-%h1 Stuff:
-%p search returned #{pluralize(@posts_results.count, 'post')}
-=render @posts_results
-
-%h1 Groups:
-%p search returned #{pluralize(@group_count, 'group')}
-=render @groups
-=render :partial => 'shared/side_nav'
+%div.row-fluid
+  =render :partial => "search_form"
+%div.row-fluid
+  %div.span6
+    %h1 Stuff:
+    %p search returned #{pluralize(@posts_results.count, 'post')}
+    =render @posts_results
+  %div.span6
+    %h1 Groups:
+    %p search returned #{pluralize(@group_count, 'group')}
+    =render @groups

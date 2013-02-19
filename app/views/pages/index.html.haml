@@ -15,9 +15,7 @@
       =link_to "Post  a Post", new_post_path, :class => "btn", :role => "button"
     %div.span9
       /search bar
-      =search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "form-inline"} do |f|
-        =f.text_field :name_cont, :class => "search-bar-field", :placeholder => "search for stuff or groups...type it here"
-        =f.submit 'search', :class => "btn"
+      =render :partial => "search/search_form"
 
   %div.row
     %div.span6
