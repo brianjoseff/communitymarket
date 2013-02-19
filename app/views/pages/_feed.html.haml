@@ -1,5 +1,4 @@
 %ol
-  %p #{local_assigns[:feed_items]}
   -if feed_items.first.is_a?(Post)
     =render :partial => 'post_feed_item', :collection => feed_items, :as => :feed_item
   -else

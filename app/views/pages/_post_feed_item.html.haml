@@ -9,11 +9,10 @@
       %span.description
         = truncate(feed_item.description, 25)
     %div.row-fluid
-      %div.span8
-        -feed_item.tags.each do |tag|
-          .tag=link_to tag.name, tag_url(tag)
-      %div.span4.timestamp
-        Posted #{time_ago_in_words(feed_item.created_at)} ago.
+      -feed_item.tags.each do |tag|
+        =link_to tag.name, tag_url(tag), :class => "tag"
+    %div.row-fluid.timestamp
+      Posted #{time_ago_in_words(feed_item.created_at)} ago.
   %div.span3
     /buy button:
     /IF: signed_in and no c#, THEN: user_credit_modal
