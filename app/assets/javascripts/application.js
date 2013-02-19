@@ -83,7 +83,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	$('.group_box').mousedown(function(){
-		$('div#modalCredit').toggle("slide", { direction: "right" }, 800);
+		$('div#post_credit_fields').toggle("slide", { direction: "right" }, 800);
 		         return false;
 	});
 });

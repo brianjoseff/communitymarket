@@ -21,6 +21,7 @@ gem 'chosen-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'will_paginate'
 gem 'rails_tokeninput'
 gem 'stripe'
 gem 'forgery'
@@ -32,6 +33,7 @@ gem 'jquery-rails'
 gem 'ransack'
 gem 'clearance'
 gem 'paperclip'
+gem 'aws-sdk'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -14,6 +14,9 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     @tag = Tag.find(params[:id])
+    unless @tag.posts.empty?
+		  @posts = @tag.posts.paginate(:per_page => 5, :page => params[:page])
+		end
 
     respond_to do |format|
       format.html # show.html.erb

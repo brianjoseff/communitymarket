@@ -14,10 +14,52 @@
  *= require chosen
  *= require_tree .
  */
+.tag{
+	background-color:#b9b9b9;
+}
+input.btn {
+	font-size:150%;
+	height: 50px;
+}
+a.btn{
+	font-size:150%;
+	padding-top:12px;
+	padding-bottom:12px;
+	
+	box-sizing: content-box;
+}
+input[type="text"].search-bar-field{
+	height:40px;
+	font-size:150%;
+	width: 400px;
+}
+
+.search-bar{
+	padding-top: 10px;
+} 
+
+.feed-title{
+	font-size: 125%;
+	font-weight: bold;
+}
+
+
 #postModal{
 	padding:10px;
 	width: 400px;
 	margin: -250px 0 0 -200px;
+}
+#modalCredit{
+	width: 300px;
+}
+input.credit-number{
+	width:300px;
+}
+.credit-expiry{
+	width:70px;
+}
+.credit-cvv{
+	width:40px;
 }
 .row{
 	margin-left:-10px;

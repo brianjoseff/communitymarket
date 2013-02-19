@@ -6,14 +6,16 @@ jQuery ->
     queryParam: "t"
     theme: "facebook"
     prePopulate: $("#post_tag_tokens").data("load")
-
+  $("ul.token-input-list-facebook").addClass("input-block-level")
+  $("ul.token-input-list-facebook").addClass("inline")
+  $("ul.token-input-list-facebook").addClass("negative-padding")
 $(document).ready ->
 	$("input.cash-box").change ->
 		$('input.cash-box').append "<p>$</p>"
 		$('div#tier_explanation_wrapper').toggle "slide",
 			direction: "top"
 		, 800
-		$('.cash-field').toggle "slide",
+		$('.cash-field-cloak').toggle "slide", 1
 			direction: "right"
 		
 
@@ -21,7 +23,7 @@ $(document).ready ->
 
 $(document).ready ->
   $(".group-box").change ->
-    $("div#modalCredit").toggle "slide",
+    $("div#post-credit-fields").toggle "slide",
       direction: "right"
     , 100
     false

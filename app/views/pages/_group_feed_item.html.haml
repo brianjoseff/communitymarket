@@ -1,0 +1,33 @@
+%li.feed_item.row-fluid
+  %div.image.span3
+    =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.name), group_url(feed_item)
+  %div.span6
+    %div.row-fluid
+      %span.feed-title
+        = link_to feed_item.name, group_url(feed_item)
+    %div.row-fluid
+      %span.description
+        = truncate(feed_item.description, 25)
+
+  %div.span3
+    /join button:
+    /IF: signed_in and no c#, THEN: user_credit_modal
+    /IF: signed_in and yes c# THEN: user_you_sure_modal
+    /IF: not signed_in THEN: non_user_credit_modal
+    / %a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+    / %div#buy_modal{:style=>"display:none"}
+    /   -if signed_in? && current_user.stripe_customer_id.nil? == false
+    /     =render 'user_you_sure_modal'
+    /   -elsif signed_in? && current_user.stripe_customer_id.nil?
+    /     =render 'user_credit_modal'
+    /   -else
+    /     =render 'non_user_credit_modal'
+
+
+/ "data-toggle" => "modal",
+
+
+
+
+/ - if current_user?(feed_item.user)
+/   = link_to "delete", feed_item, method:  :delete, confirm: "You sure?",title:   feed_item.content

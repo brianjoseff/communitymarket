@@ -19,6 +19,9 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   match '/search', :to => 'search#index'
+  match '/about', :to => 'pages#about'
+  match '/signout', :to => 'sessions#destroy'
+  match '/signin', :to => 'sessions#new'
 
   root :to => 'pages#index'
   

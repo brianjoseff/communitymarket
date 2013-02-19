@@ -1,0 +1,9 @@
+%ul.nav.nav-pills.pull-right
+  %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path 
+  %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
+  %li{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
+  %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
+  -if signed_in?
+    %li=link_to "Sign out", signin_path, :class => "#{'active' if current_page?(root_path)}"    
+  -else
+    %li=link_to "Sign In", signout_path, :class => "#{'active' if current_page?(root_path)}"

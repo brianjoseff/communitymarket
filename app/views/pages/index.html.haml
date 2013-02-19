@@ -1,77 +1,30 @@
 %div.container
-  /post something button
-  /=link_to "Post Something", new_post_path, :class => "btn-large"
-  / =link_to_modal "Post Something", new_post_path, :remote => true, :class=>"button"
   %div.row
-    #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-      / %p.validateTips All form fields are required.
-      .modal-header
-        %h1 Post Something
-      .model-body
-        =form_for @post, :remote => true do |f|
-          =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
-          =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
-          =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
-          .model-footer
-            = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
-
-    / =form_for @post do |f|
-    /   - if @post.errors.any?
-    /     #error_explanation
-    /       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-    /       %ul
-    /         - @post.errors.full_messages.each do |msg|
-    /           %li= msg
-    /   =field_set_tag
-    /     .field
-    /       = f.label :title, :for => "title"
-    /       = f.text_field :title, :id => "title", :class=>"text ui-widget-content ui-corner-all"
-    /     .field
-    /       =f.label :email, :for => "email"
-    /       =f.text_field :email, :id => "email", :class=>"text ui-widget-content ui-corner-all"
-    /     .field
-    /       = f.label :description, :for => "description"
-    /       = f.text_area :description, :id => "description", :class=>"text ui-widget-content" 
-    / =button_tag "Create new post", :id => "create-post"
-    /
-  / %div.row  
-  /   =button_tag "Create new post", :id => "create-post"
+    %h1 People and Stuff
+    %p post things for sale, or make postings to ask for things
+    %p when posting, you can also send targeted notifications to certain groups, or make your posting visible only to select groups
+    %p in-person cash transaction, or assign your post to a tier and get a gift-card or coupon of commensurate value to your post
   %div.row
-    %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal
-    =link_to "Post  a Post", new_post_path, :class => "btn", :role => "button"
-  / %div#postModal
-  /   = form_for @post, :remote => true, :id => 'post-form' do |f|
-  /     =f.label :email
-  /     =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
-  /     =f.label :title
-  /     =f.text_field :title
-  /     =f.label :description
-  /     =f.text_area :description, :class => "input-block-level", :placeholder => "Description"
-  /     = submit_tag "Create new post", :value=>"Post", :id => "submit-post-1"
+    %div.span3
+      /new post button
+      =link_to "Post  a Post", new_post_path, :class => "btn", :role => "button"
+    %div.span9
+      /search bar
+      =search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "form-inline"} do |f|
+        =f.text_field :name_cont, :class => "search-bar-field", :placeholder => "search for stuff or groups...type it here"
+        =f.submit 'search', :class => "btn"
+
+  %div.row
+    %div.span6
+      %h1 Posts 
+      /Post feed
+      =render :partial => 'feed',:locals => {:feed_items => @posts}
+    %div.span6
+      %h1 Groups
+      /Group feed
+      =render :partial => 'feed', :locals => {:feed_items => @groups}
 
 
-  %h2 Recipe for Rum Cake:
-  %h2
-    Add
-    %span#dynamic-text-wrapper
-      %span#old-text all the ingredients
-      %span#new-text all the ingredients
-    %br/
-    to the cake batter.
-  %br/
-  / <span id="debug">Debug:</span>
-  / #email.text.ui-widget-content.ui-corner-all
-  / #title.text.ui-widget-content.ui-corner-all
-  / #description.text.ui-widget-content.ui-corner-all
-
-  /discover button
-  / =link_to "Discover", groups_path, :class => "btn-large"
-
-
-  /search bar
-  =search_form_for @q, :url => { :controller => "search", :action => "index" }do |f|
-    =f.text_field :name_cont
-    =f.submit 'search'
 
   /group feed and create group button
   ////render group
@@ -81,3 +34,33 @@
   ////render post
   ///////tags
   ////buy button
+  
+  
+  
+////PLAYING WITH JQUERY
+/ %h2 Recipe for Rum Cake:
+/ %h2
+/   Add
+/   %span#dynamic-text-wrapper
+/     %span#old-text all the ingredients
+/     %span#new-text all the ingredients
+/   %br/
+/   to the cake batter.
+/ %br/
+/ 
+////PLAYING WITH MODAL WINDOWDS
+/ %div.row
+/   #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+/     / %p.validateTips All form fields are required.
+/     .modal-header
+/       %h1 Post Something
+/     .model-body
+/       =form_for @post, :remote => true do |f|
+/         =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
+/         =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
+/         =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
+/         .model-footer
+/           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
+/ 
+/ %div.row
+/   %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal

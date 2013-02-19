@@ -1,12 +1,44 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.nonuser-post input, select, textarea{
+	font-size: 120%;
+}
+#post-credit-fields{
+	margin-bottom: 10px;
+}
 .underline{
 	text-decoration:underline;
-	margin-right:15px;
+	margin-right:5px;
+	margin-left: 20px;
 	font-size: 14px;
 	font-weight:bold;
+	padding-top:5px;
+}
+.cash-field{
+	display:inline-block;
+	float:right;
 }
 .cash-box{
 	margin-right:20px;
+	float:left;
+	padding-top:5px;
+}
+#cash-box{
+	padding-top:5px;
+	margin-right: 5px;
+}
+input[type="checkbox"]#post_cash{
+	margin-right:20px;
+	padding-top:10px;
+}
+.cash{
+	display:inline-block;
+}
+#token-field{
+	float:left;
+	margin-left:20px;
+}
+.token-label{
+	float:left;
 }

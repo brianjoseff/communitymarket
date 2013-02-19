@@ -4,7 +4,7 @@ namespace :db do
     require 'faker'
     require 'forgery'
     
-    [User, Group, Membership, Assignment, Post, PostCategory, GroupCategory].each(&:delete_all)
+    [User, Group, Membership, Assignment, Post, PostCategory, GroupCategory, Tier].each(&:delete_all)
     User.create!(:name => "Brian",
                  :email => "b@b.edu",
                  :password => "000000")
@@ -47,10 +47,12 @@ namespace :db do
     GroupCategory.create!(:name => "Region")
     
     #tiers
-    Tier.create!(:name => "$1-10 Value")
-    Tier.create!(:name => "$10-50 Value")
-    Tier.create!(:name => "$50-100 Value")
-    Tier.create!(:name => "$100+ Value")
+    Tier.create!(:name => "$1-5")
+    Tier.create!(:name => "$6-10")
+    Tier.create!(:name => "$11-25")
+    Tier.create!(:name => "$26-50")
+    Tier.create!(:name => "$51-99")
+    Tier.create!(:name => "$100+")
     
     
     #posts

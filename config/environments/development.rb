@@ -34,4 +34,14 @@ Communitymarket::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  #PAPERCLIP AND AMAZON S3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['AWS_BUCKET'],
+      :access_key_id => ENV['S3_KEY'],
+      :secret_access_key => ENV['S3_SECRET']
+    }
+  }
 end

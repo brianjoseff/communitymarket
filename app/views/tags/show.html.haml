@@ -6,6 +6,10 @@
 %p
   %b Description:
   = @tag.description
+-unless @tag.posts.empty?
+  =will_paginate @posts
+  =render @posts
+  =will_paginate @posts
 
 = link_to 'Edit', edit_tag_path(@tag)
 \|
