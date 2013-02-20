@@ -19,9 +19,10 @@
 
   %div.row
     %div.span7
-      %h1 Posts 
-      /Post feed
-      =render :partial => 'feed',:locals => {:feed_items => @posts}
+      %div.post-feed
+        %h1 Posts 
+        /Post feed
+        =render :partial => 'feed',:locals => {:feed_items => @posts}
     %div.span5
       %div.row-fluid
         %div.span7

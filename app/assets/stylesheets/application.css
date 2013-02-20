@@ -16,6 +16,9 @@
 .tag{
 	background-color:#b9b9b9;
 }
+.post-feed{
+	border-right: solid 1px #000;
+}
 input.btn-primary {
 	font-size:150%;
 	height: 50px;
