@@ -18,11 +18,11 @@
       =render :partial => "search/search_form"
 
   %div.row
-    %div.span6
+    %div.span7
       %h1 Posts 
       /Post feed
       =render :partial => 'feed',:locals => {:feed_items => @posts}
-    %div.span6
+    %div.span5
       %h1 Groups
       /Group feed
       =render :partial => 'feed', :locals => {:feed_items => @groups}
