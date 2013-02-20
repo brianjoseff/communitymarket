@@ -12,7 +12,7 @@
   %div.row
     %div.span3
       /new post button
-      =link_to "Post  a Post", new_post_path, :class => "btn", :role => "button"
+      =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
     %div.span9
       /search bar
       =render :partial => "search/search_form"
@@ -23,7 +23,11 @@
       /Post feed
       =render :partial => 'feed',:locals => {:feed_items => @posts}
     %div.span5
-      %h1 Groups
+      %div.row-fluid
+        %div.span7
+          %h1 Groups
+        %div.span5
+          =link_to "Create a group", new_group_path, :class => "btn", :role => "button"
       /Group feed
       =render :partial => 'feed', :locals => {:feed_items => @groups}
 

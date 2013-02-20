@@ -16,16 +16,19 @@
 .tag{
 	background-color:#b9b9b9;
 }
-input.btn {
+input.btn-primary {
 	font-size:150%;
 	height: 50px;
 }
-a.btn{
+a.btn-primary{
 	font-size:150%;
 	padding-top:12px;
 	padding-bottom:12px;
 	
 	box-sizing: content-box;
+}
+a:visited.btn-primary{
+	color: #fff;
 }
 input[type="text"].search-bar-field{
 	height:40px;
