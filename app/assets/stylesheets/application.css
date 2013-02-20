@@ -14,7 +14,10 @@
  *= require_tree .
  */
 .tag{
-	background-color:#b9b9b9;
+	background-color:#CDECFA;
+	border-bottom: solid 1px #69B0CF;
+	border-right: solid 1px #69B0CF;
+	padding: 2px;
 }
 .post-feed{
 	border-right: solid 1px #000;
