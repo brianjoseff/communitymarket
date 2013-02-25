@@ -67,5 +67,14 @@ module Communitymarket
     config.generators do |g|
     	g.template_engine :haml
     end
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      if instance.error_message.kind_of?(Array)
+        %(<span class="validation-error">#{html_tag}</span>).html_safe
+      else
+        %(#{html_tag}<span class="validation-error">&nbsp;</span>).html_safe
+      end
+    end
+    
+    
   end
 end

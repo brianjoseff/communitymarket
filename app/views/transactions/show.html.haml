@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Price:
+  = @transaction.price
+%p
+  %b Tier:
+  = @transaction.tier_id
+%p
+  %b Premium:
+  = @transaction.premium
+%p
+  %b Notify premium:
+  = @transaction.notify_premium
+%p
+  %b User:
+  = @transaction.user_id
+%p
+  %b Customer:
+  = @transaction.customer_id
+
+= link_to 'Edit', edit_transaction_path(@transaction)
+\|
+= link_to 'Back', transactions_path

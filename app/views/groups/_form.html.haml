@@ -1,21 +1,22 @@
-= form_for @group do |f|
-  - if @group.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
-      %ul
-        - @group.errors.full_messages.each do |msg|
-          %li= msg
+%div.span7
+  = form_for @group do |f|
+    - if @group.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@group.errors.count, "error")} prohibited this group from being saved:"
+        %ul
+          - @group.errors.full_messages.each do |msg|
+            %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-    %div.container     
-      -@categories.each do |c|
-        =f.label :group_category, :class => "radio" do
-          =f.radio_button :group_category_id, c.id
-          =c.name.humanize
-  .actions
-    = f.submit 'Save'
+    %div.row   
+      = f.label :name
+      = f.text_field :name
+    %div.row
+      = f.label :description
+      = f.text_area :description, :rows => "10"
+
+    -@categories.each do |c|
+      =f.label :group_category, :class => "radio" do
+        =f.radio_button :group_category_id, c.id
+        =c.name.humanize
+
+    = f.submit 'Save', :class => "btn btn-primary"

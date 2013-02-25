@@ -44,6 +44,7 @@ GEM
     clearance (0.15.0)
       diesel (~> 0.1.5)
       rails (>= 3.0)
+    client_side_validations (3.1.4)
     cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -181,6 +182,7 @@ DEPENDENCIES
   bootstrap-sass
   chosen-rails
   clearance
+  client_side_validations
   coffee-rails (~> 3.2.1)
   faker
   forgery

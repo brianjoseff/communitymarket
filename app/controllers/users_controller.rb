@@ -20,7 +20,37 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
+  
+  def new_modal
+    @user = User.new(params[:user])
+    
+    if params[:user][:password].nil?
+      # charge card
 
+      # get the credit card details submitted by the form
+      token = params[:stripeToken]
+
+      # create the charge on Stripe's servers - this will charge the user's card
+      charge = Stripe::Charge.create(
+        :amount => 1000, # amount in cents, again
+        :currency => "usd",
+        :card => token,
+        :description => params[:email]
+      )
+      
+    else
+      # create user
+      token = params[:stripeToken]
+      if @user.save_with_payment(token)
+        @user.payment()
+      else
+        #error message
+      end
+      #create customer and charge
+    end
+  end
+  
+  
   # GET /users/new
   # GET /users/new.json
   def new
@@ -41,16 +71,45 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    # AJAX efforts
+    # respond_to do |format|
+    #       if params[:user][:password].empty?
+    #         # Charge the card and don't make a user
+    #         # get the credit card details submitted by the form
+    #         token = params[:stripeToken]
+    # 
+    #         # create the charge on Stripe's servers - this will charge the user's card
+    #         charge = Stripe::Charge.create(
+    #           :amount => 1000, # amount in cents, again
+    #           :currency => "usd",
+    #           :card => token,
+    #           :description => params[:email]
+    #         )
+    #         
+    #       else
+    #         # create user, customer, and charge them
+    #         token = params[:stripeToken]
+    #         if @user.save_with_payment(token)
+    #           charge = 100
+    #           @user.payment(charge)
+    #           format.html { redirect_to @user, notice: 'User was successfully created.' }
+    #           format.json { render json: @user, status: :created, location: @user }
+    #           format.js
+    #         else
+    #           #error message
+    #           format.html { render action: "new" }
+    #           format.json { render json: @user.errors, status: :unprocessable_entity }
+    #           format.js
+    #         end
+    #       end
+    @user = User.new(params[:user])
+   if @user.save_with_payment
+     @user.payment()
+     #SignupMailer.new_subscriber(@subscriber).deliver
+     redirect_to @user, :notice => "Thank you for signing up!"      
+   else
+     render :new
+   end
   end
 
   # PUT /users/1

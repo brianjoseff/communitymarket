@@ -25,6 +25,7 @@ gem 'chosen-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'client_side_validations'
 gem 'will_paginate'
 gem 'rails_tokeninput'
 gem 'stripe'

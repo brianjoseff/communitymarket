@@ -1,4 +1,19 @@
-%div
+/ %div.row
+/   #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+/     / %p.validateTips All form fields are required.
+/     .modal-header
+/       %h1 Post Something
+/     .model-body
+/       =form_for @post, :remote => true do |f|
+/         =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
+/         =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
+/         =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
+/         .model-footer
+/           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
+/
+.modal-header
+  %h2 You need to add a credit card
+.modal-body
   -if @user.stripe_customer_id
     #change-card.clearfix
       %label Card

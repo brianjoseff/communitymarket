@@ -1,26 +1,31 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @post.title
-%p
-  %b Borrow:
-  = @post.borrow
-/ %p
-/   %b Tier:
-/   = @post.tier
-%p
-  %b Description:
-  = @post.description
-%p
-  %b User:
-  = @post.user_id
-%p
-  %b Post category:
-  = @post.post_category_id
-%p
-  %b Premium:
-  = @post.premium
+%div.row-fluid
+  %div.span2
+    =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:small), :alt => @post.title), post_url(@post)
+    -if @post.price
+      $#{@post.price}
+    -else
+      %p Tiered item
+    /buy button
+    %a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+    %div#buy_modal{:style=>"display:none"}
+      -if signed_in? && current_user.stripe_customer_id.nil? == false
+        =render 'user_you_sure_modal'
+      -elsif signed_in? && current_user.stripe_customer_id.nil?
+        =render :partial => 'pages/user_credit_modal'
+      -else
+        =render :partial => 'pages/non_user_credit_modal'
+  %div.span8
+    %div.row-fluid
+      %h1 #{@post.title}
+      -@post.tags.each do |tag|
+        =link_to tag.name, tag_url(tag), :class => "tag"
+    %div.row-fluid
+      %p #{@post.description}
+
+
+
 
 = link_to 'Edit', edit_post_path(@post)
 \|

@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   # skip_before_filter :authorize
   def index
     @post = Post.new
+    @transaction = Transaction.new
     if !signed_in?
       @user = User.new
     else

@@ -14,7 +14,11 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-
+    if !signed_in?
+      @user = User.new
+    else
+      @user = current_user
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

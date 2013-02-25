@@ -1,10 +1,18 @@
-= form_for(@user, :validate => true) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+= form_for @transaction, :validate => true do |f|
+  / - if @transaction.errors.any?
+  /   #error_explanation
+  /     %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
+  /     %ul
+  /       - @transaction.errors.full_messages.each do |msg|
+  /         %li= msg
+
+  = f.hidden_field :stripe_card_token
+  = f.hidden_field :price
+  = f.hidden_field :tier_id
+  = f.hidden_field :premium
+  = f.hidden_field :notify_premium
+  = f.hidden_field :user_id
+  = f.hidden_field :customer_id
   %noscript
     %p This form requires Javascript to use
   #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
@@ -23,14 +31,10 @@
     %div.span3.credit-cvv
       = label_tag :cvv, "CVV"
       = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
-  =f.label :email
-  =f.text_field :email
-  =f.label :password
-  =f.text_field :password
+  %div.row-fluid
+    =f.label :email
+    =f.text_field :email, :validate => true
+  %div.row-fluid
+    =text_field_tag :password, params[:password]
   .actions
     = f.submit 'Save'
-    
-
-/ empty
-%span.note
-Your credit card details will be sent directly to our payment processor
