@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224231035) do
+ActiveRecord::Schema.define(:version => 20130226202543) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20130224231035) do
     t.string   "confirmation_token", :limit => 128
     t.string   "remember_token",     :limit => 128
     t.string   "stripe_customer_id"
+    t.string   "password"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
