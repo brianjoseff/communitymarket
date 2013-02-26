@@ -6,6 +6,7 @@
     = javascript_include_tag "application"
     = javascript_include_tag params[:controller]
     = csrf_meta_tags
+    = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body
     =render 'layouts/header'
     %div.container
