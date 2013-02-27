@@ -1,14 +1,14 @@
 # $(document).ready ->
-#   
+#
 #   # Style the buttons
 #   $("button, input:submit, input:button, a#jql, input:radio").button()
-#   
+#
 #   # Hook up form validation
 #   #$('#emailPost2').validate();
-#   
+#
 #   # Make the form a modal dialog and create a button
 #   $("#postModal").dialog
-# 	
+#
 #     modal: true
 #     autoOpen: false
 #     title: "Enter your information"
@@ -16,8 +16,8 @@
 #       Post: ->
 #         $("#submit-post").submit()
 #         $(this).dialog "close"
-# 
-#   
+#
+#
 #   # Show the modal form when clicked.
 #   $("#create-post").click ->
 #     $("#postModal").dialog "open"
