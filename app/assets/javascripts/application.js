@@ -15,71 +15,72 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require bootstrap
-//= require_tree .
 //= require rails.validations
+//= require_tree .
 
-$(document).ready(function(){
+
+$(document).ready(function () {
 	$('.form').enableClientSideValidations();
-    $('.form').on('shown', function() {
+    $('.form').on('shown', function () {
       $(ClientSideValidations.selectors.forms).validate();
     });
-};
+});
 
-$(document).ready(function(){
+$(document).ready(function () {
 	//any radio button but "for sale" selected deactivates cash/tier fields and puts
 	//grey transparent box over it
-	$('radio_button#').click(function(){
+	$('radio_button#').click(function () {
 		$('cash_check_box').hide();
 		$('tier_select').hide();
 		$('sale_objects').toggleClass('grey_overlay');
-	})
+	});
 });
 
 //if a user checks the premium box, make the credit card fields visible
 //if a user checks more than 2 groups to make it visible to then
 //make the credit card fields visible as well
-$(document).ready(function(){
+$(document).ready(function () {
 	//count the number of group checkboxes checked
-	$('')
+	// $('');
 	$('input.group:checkbox:checked').size();
-	$('#premium_check_box').click(function(){
+	$('#premium_check_box').click(function (){
 		var counter = $('form#posts').find('input.group_boxes:checked').length;
 		$('credit_card_fields').show();
 		$('sale_objects').toggleClass('grey_overlay');
-	})
+	});
 });
 
-$(document).ready(function(){
-	$('.group_box').mousedown(function(){
+$(document).ready(function () {
+	$('.group_box').mousedown(function () {
 		$('div#post_credit_fields').toggle("slide", { direction: "right" }, 800);
 		         return false;
 	});
 });
 
 // click the buy button: various modals
-$(document).ready(function() {
+$(document).ready(function () {
   var $buy_dialog = $('#buy_modal').dialog({ 
     autoOpen: false, 
     title: 'Edit',
     modal: true,
     draggable: false,
 	buttons: {
-	            "Save": function() {
-	                    $("#new_transaction").submit(function(){
+	            "Save": function () {
+	                    $("#new_transaction").submit(function () {
 						    var valuesToSubmit = $(this).serialize();
 						    $.ajax({
 						        url: $(this).attr('action'), //sumbits it to the given url of the form
 						        data: valuesToSubmit,
 								type: 'POST',
 						        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-						    }).success(function(json){
+						    }).success(function (json) {
 						        //act on result.
 						    });
 						    return false;
 						});
 	                    $('#buy_modal').dialog( "close" );
 	            },
-	            Cancel: function() {
+	            Cancel: function () {
 	                $( this ).dialog( "close" );
 	            }
 	        }
@@ -88,7 +89,7 @@ $(document).ready(function() {
 	// $('.buy-button').bind('ajax:before', function() {
 	//         $(this).data('params', { post_id: 'post_feed_item.id', tier_id: 'post_feed_item.tier_id', price: 'post_feed_item.price' });
 	//     });
-	$('.buy-button').click(function(){
+	$('.buy-button').click(function () {
 	    $buy_dialog.dialog('open');
   });
 });

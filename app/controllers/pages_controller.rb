@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     @transaction = Transaction.new
     if !signed_in?
       @user = User.new
+      
     else
       @user = current_user
     end
