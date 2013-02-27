@@ -9,17 +9,15 @@ jQuery ->
   $("ul.token-input-list-facebook").addClass("input-block-level")
   $("ul.token-input-list-facebook").addClass("inline")
   $("ul.token-input-list-facebook").addClass("negative-padding")
+
 $(document).ready ->
 	$("input.cash-box").change ->
 		$('input.cash-box').append "<p>$</p>"
 		$('div#tier_explanation_wrapper').toggle "slide",
 			direction: "top"
-		, 800
+			, 800
 		$('.cash-field-cloak').toggle "slide", 1
 			direction: "right"
-		
-
-
 
 $(document).ready ->
   $(".group-box").change ->
