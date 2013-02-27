@@ -16,6 +16,7 @@
 //= require jquery.tokeninput
 //= require bootstrap
 //= require pages.js
+//=require posts.js
 //= require rails.validations
 //= require_tree .
 
