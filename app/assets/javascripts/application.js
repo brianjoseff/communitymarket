@@ -15,24 +15,22 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require bootstrap
-//= require_tree .
-//= require rails.validations
 
-$(document).ready(function(){
-	$('.form').enableClientSideValidations();
-    $('.form').on('shown', function() {
-      $(ClientSideValidations.selectors.forms).validate();
-    });
-};
+//$(document).ready(function(){
+//	$('.form').enableClientSideValidations();
+//    $('.form').on('shown', function() {
+//      $(ClientSideValidations.selectors.forms).validate();
+//    });
+//};
 
 $(document).ready(function(){
 	//any radio button but "for sale" selected deactivates cash/tier fields and puts
 	//grey transparent box over it
-	$('radio_button#').click(function(){
+	/*$('radio_button#').click(function(){
 		$('cash_check_box').hide();
 		$('tier_select').hide();
 		$('sale_objects').toggleClass('grey_overlay');
-	})
+	})*/
 });
 
 //if a user checks the premium box, make the credit card fields visible

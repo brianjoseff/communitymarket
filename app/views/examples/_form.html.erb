@@ -1,0 +1,9 @@
+<%= simple_form_for @example, :format => "js", :remote => true, :html => {:novalidate => true} do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :description %>
+
+  <%= f.submit %>
+
+<% end %>
+

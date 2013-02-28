@@ -21,7 +21,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'chosen-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -60,3 +60,5 @@ gem 'aws-sdk'
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+
+gem "simple_form"

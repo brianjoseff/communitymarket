@@ -1,0 +1,6 @@
+<% if @example.errors.any? %>
+  $('#dialog-modal').html("<%= escape_javascript(render :partial => "form") %>");
+<% else %>
+  alert("success");
+  $('#dialog-modal').dialog('close');
+<% end %>

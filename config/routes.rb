@@ -26,6 +26,8 @@ Communitymarket::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'
 
+  resources :examples
+
   root :to => 'pages#index'
   
   # The priority is based upon order of creation:

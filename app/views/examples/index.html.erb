@@ -1,0 +1,14 @@
+<a id="open_dialog" href="">
+  Click here to open the dialog
+</a>
+
+<div id="dialog-modal" title="Basic modal dialog" style="display:none">
+  <%= render :partial => "form" %>
+</div>
+
+<script>
+$('#open_dialog').click(function() {
+  $('#dialog-modal').dialog({modal:true}).dialog('open');
+  return false;
+});
+</script>
