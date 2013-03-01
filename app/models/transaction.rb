@@ -1,13 +1,13 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :customer_id, :notify_premium, :premium, :price, :tier_id, :user_id, :email,:stripe_card_token
-  validates_presence_of :email
-  validate :email, :presence => true
+  validates :email, :presence => true, :uniqueness => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  #validate :email, :presence => true
   
   attr_accessor :stripe_card_token
   
   def payment(tier, price, premium, notify_premium)
     if valid?
-      if tier
+      if tier.present?
         if tier == 1
           amount = 500
         elsif tier == 2
@@ -17,7 +17,7 @@ class Transaction < ActiveRecord::Base
         elsif tier == 4
           amount = 5000
         end
-      elsif price
+      elsif price.present?
         amount = price*100
       else
         return

@@ -1,4 +1,7 @@
-= form_for @transaction, :validate => true do |f|
+.modal-header
+  %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+  %h2#myModalLabel You need to add a credit card
+= simple_form_for @transaction, :validate => true, :remote => true, :form => { "data-type" => "js" } do |f|
   - if @transaction.errors.any?
     #error_explanation
       %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
@@ -7,12 +10,12 @@
           %li= msg
 
   = f.hidden_field :stripe_card_token
-  = f.hidden_field :price
   = f.hidden_field :tier_id
   = f.hidden_field :premium
   = f.hidden_field :notify_premium
   = f.hidden_field :user_id
   = f.hidden_field :customer_id
+  = hidden_field_tag 'post_id'
   %noscript
     %p This form requires Javascript to use
   #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}

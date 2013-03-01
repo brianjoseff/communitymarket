@@ -41,13 +41,14 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(params[:transaction])
+    @price = Post.find_by_id(params[:post_id]).price
+    @transaction = Transaction.new(params[:transaction].merge(:price => @price))
     @user = User.new(:email => params[:transaction][:email], :password => params[:password])
-    
+
     respond_to do |format|
-      if params[:password]
+      if params[:password].present?
         if @transaction.save
-          @transaction.payment(params[:transaction][:tier_id],params[:transaction][:price],params[:transaction][:premium],params[:transaction][:premium_notify])
+          @transaction.payment(params[:transaction][:tier_id], @price, params[:transaction][:premium],params[:transaction][:premium_notify])
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -55,9 +56,9 @@ class TransactionsController < ApplicationController
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
       else
-        if @transaction.save && @user.save_with_payment
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-          format.json { render json: @transaction, status: :created, location: @transaction }
+        #if @transaction.save && @user.save_with_payment
+        if @transaction.save
+          format.js { render }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
