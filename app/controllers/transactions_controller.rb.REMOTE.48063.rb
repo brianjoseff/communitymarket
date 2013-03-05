@@ -48,7 +48,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if params[:password].present?
         if @transaction.save
-          @user.save_with_payment
+          @transaction.payment(params[:transaction][:tier_id], @price, params[:transaction][:premium],params[:transaction][:premium_notify])
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else

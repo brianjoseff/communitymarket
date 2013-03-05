@@ -46,9 +46,15 @@ class TransactionsController < ApplicationController
     @user = User.new(:email => params[:transaction][:email], :password => params[:password])
 
     respond_to do |format|
-      if params[:password].present?
+<<<<<<< HEAD
+      if params[:password] 
         if @transaction.save
           @user.save_with_payment
+=======
+      if params[:password].present?
+        if @transaction.save
+          @transaction.payment(params[:transaction][:tier_id], @price, params[:transaction][:premium],params[:transaction][:premium_notify])
+>>>>>>> origin/modal_form
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -56,9 +62,16 @@ class TransactionsController < ApplicationController
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
       else
+<<<<<<< HEAD
+        if @transaction.save
+          @transaction.payment(params[:transaction][:tier_id],params[:transaction][:price],params[:transaction][:premium],params[:transaction][:premium_notify])
+          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.json { render json: @transaction, status: :created, location: @transaction }
+=======
         #if @transaction.save && @user.save_with_payment
         if @transaction.save
           format.js { render }
+>>>>>>> origin/modal_form
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }

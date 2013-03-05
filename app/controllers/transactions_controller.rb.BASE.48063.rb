@@ -41,14 +41,13 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @price = Post.find_by_id(params[:post_id]).price
-    @transaction = Transaction.new(params[:transaction].merge(:price => @price))
+    @transaction = Transaction.new(params[:transaction])
     @user = User.new(:email => params[:transaction][:email], :password => params[:password])
-
+    
     respond_to do |format|
-      if params[:password].present?
+      if params[:password]
         if @transaction.save
-          @user.save_with_payment
+          @transaction.payment(params[:transaction][:tier_id],params[:transaction][:price],params[:transaction][:premium],params[:transaction][:premium_notify])
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -56,9 +55,9 @@ class TransactionsController < ApplicationController
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
       else
-        #if @transaction.save && @user.save_with_payment
-        if @transaction.save
-          format.js { render }
+        if @transaction.save && @user.save_with_payment
+          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          format.json { render json: @transaction, status: :created, location: @transaction }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
