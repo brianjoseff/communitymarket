@@ -15,11 +15,11 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require bootstrap
-//= require rails.validations
 //= require_tree .
 
 
 $(document).ready(function () {
+  alert("hello");
 	$('.form').enableClientSideValidations();
     $('.form').on('shown', function () {
       $(ClientSideValidations.selectors.forms).validate();
