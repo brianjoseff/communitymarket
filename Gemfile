@@ -7,8 +7,8 @@ gem 'rails', '3.2.9'
 
 
 group :development do
-  gem 'mysql2'
-  #gem 'sqlite3'
+  #gem 'mysql2'
+  gem 'sqlite3'
 end
 #group :production do
 #  gem 'pg'
