@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     else
       @user = current_user
     end
-    if signed_in? && current_user.feed.empty? == false
+    if signed_in? && current_user.post_feed.empty? == false
       @posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
     else

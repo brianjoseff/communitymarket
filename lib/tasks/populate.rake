@@ -59,7 +59,7 @@ namespace :db do
     40.times do |x|
       title = Forgery(:LoremIpsum).word(:random => true)
       tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 4)
-      price = Forgery(:Basic).number(:random => true)
+      price = Forgery(:Basic).number(:at_least=> 1, :at_most => 40)
       description = Forgery(:LoremIpsum).paragraph(:random => true)
       user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)

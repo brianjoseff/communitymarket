@@ -42,27 +42,52 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @price = Post.find_by_id(params[:post_id]).price
-    @transaction = Transaction.new(params[:transaction].merge(:price => @price))
-    @user = User.new(:email => params[:transaction][:email], :password => params[:password])
-
+    if current_user
+      @user = current_user
+      @transaction = @user.transactions.build(params[:transaction].merge(:price => @price).merge(:email => @user.email))
+    else
+      @transaction = Transaction.new(params[:transaction].merge(:price => @price))
+      @user = User.new(:email => params[:transaction][:email], :password => params[:password])
+    end
     respond_to do |format|
+      #non-user encountered form and entered credit details AND password- signing up and paying
       if params[:password].present?
-        if @transaction.save
-          @transaction.payment(params[:transaction][:tier_id], @price, params[:transaction][:premium],params[:transaction][:premium_notify])
+        if @transaction.save && @user.save_with_payment
+          @user.payment(@price)
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
-      else
-        #if @transaction.save && @user.save_with_payment
+      elsif current_user
+        #current_user without credit details encountered form
         if @transaction.save
+            @user.save_with_payment
+          
           format.js { render }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
+      else
+        #non-user encountered form and didn't enter password
+        if @transaction.save
+          begin
+            charge = Stripe::Charge.create(
+              :amount => @price*100, # amount in cents, again
+              :currency => "usd",
+              :card => params[:transaction][:stripe_card_token],
+              :description => params[:transaction][:email]
+            )
+          rescue Stripe::CardError => e
+            # The card has been declined
+          end 
+          format.js { render }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        end      
       end
     end
   end
