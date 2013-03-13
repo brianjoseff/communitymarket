@@ -1,76 +1,113 @@
-%div.span7
-  = form_for (defined?(editing) ? @post : setup_post(@post), :html => { :multipart => true})  do |f|
-    - if @post.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-        %ul
-          - @post.errors.full_messages.each do |msg|
-            %li= msg
+/USER FORM:
+/only needs to enter these fields:
+/post category
+/title
+/tier or cash
+/description
+/tags
+/.....NO email field
+= form_for @post.new_record? ? setup_post(@post, @groups) : @post, :html => { :multipart => true, :class => "form-horizontal user-post"} do |f|
+  - if @post.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
+      %ul
+        - @post.errors.full_messages.each do |msg|
+          %li= msg
+          
+  %div.control-group
+    %div.controls.random-form-elements.form-inline
+      %div.span2
+        %h4 Category
+        -@categories.each do |c|
+          %div.row
+            =f.radio_button :post_category_id, c.id, :onclick => ("wanted()" if c.id==32)
+            =c.name.humanize
+      %div.span2
+        -@assets.each do |asset|
+          =f.fields_for :assets, asset do |asset_fields|
+            -if asset_fields.object.image_file_name.nil?
+              =asset_fields.label "image"
+              =asset_fields.file_field :image
+            -else
+              =image_tag(asset_fields.object.image.url(:post))
+              =asset_fields.label  "delete image"
+              =asset_fields.check_box :_destroy
+              
+  %div.row-fluid
+    %div.span7
+      %div.control-group
+        =f.label :tier, "Value tier", :class=>"control-label"
+        %div.controls#tier_field
+          = f.collection_select(:tier_id, Tier.all, :id, :name, :prompt => "Choose a value for your post", :class => "inline")
+      / %div.random-form-elements
+      /   %p.underline or
+      / %div.control-group
+      /   = f.label :cash, :class => "control-label"
+      /   %div.controls
+      /     =f.check_box :cash, :class => "input-block-level inline cash-box"
+      /     %div.cash-field{:style=>"display:none"}
+      /       $
+      /       =f.text_field :price, :class => "input-block-level inline span1", :placeholder => "price"
+    %div.span5
+      %div.span1
+        %p.underline or
+      %div.span11
+        %div.control-group.span7.padding5
+          = f.label :cash, :class=>"control-label"
+          %div.controls#cash-box
+            =f.check_box :cash, :class => "input-block-level inline cash-box"
+        %div.cash-field-cloak{:style=>"display:none"}
+          %div.span5.cash-field
+            $
+            =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
 
-    = f.text_field :title, :class => "input-block-level inline", :placeholder => "Post Title"
-    .field
-      = f.label :borrow
-      = f.check_box :borrow
-    .field
-      = f.label :tier
-      = f.collection_select(:tier_id, Tier.all, :id, :name, :prompt => true)
-    .field
-      = f.label :cash
-      =f.check_box :cash
+    / %div.span3
+    /   = f.check_box :borrow, :onclick=>"borrow()"
+    /   = f.label :borrow, :class => "checkbox inline"
+    /   / if this is checked, it should hide the tier collection select
 
-    = f.text_area :description, :class => "input-block-level inline", :placeholder => "Post  Description", :rows => "10"
-    .field
-      = f.text_field :email, :class => "input-block-level inline", :placeholder => "Email"
-    %div.container     
-      -@categories.each do |c|
-        =f.label :post_category, :class => "radio" do
-          =f.radio_button :post_category_id, c.id
-          =c.name.humanize
-    -@assets.each do |asset|
-      =f.fields_for :assets, asset do |asset_fields|
-        -if asset_fields.object.image_file_name.nil?
-          .field
-            =asset_fields.label "image"
-            =asset_fields.file_field :image
-        -else
-          .field
-            =image_tag(asset_fields.object.image.url(:article))
-            =asset_fields.label  "delete image"
-            =asset_fields.check_box :_destroy
+
+  %div.control-group
+    =f.label :title, :class => "control-label"
+    %div.controls
+      = f.text_field :title, :class => "input-block-level inline", :placeholder => "Perfectly Functional Dorm Fridge"
+      
+  %div.control-group
+    =f.label :description, :class => "control-label"
+    %div.controls
+      = f.text_area :description, :class => "input-block-level inline", :placeholder => "An Amish father and son are in a mall for the first time. They watch an old, grizzled woman walk into an elevator. Doors close. Minute later, doors open and a buxom blonde saunters out. The man turns to his son and says, 'Zebediah, get your mother, quick!'. This fridge is the same. It works magic.", :rows => "8"
+      
+  %div.control-group
+    =f.label :tag_tokens, "Categories", :class => "control-label token-label"
+    %div.controls#token-field
+      //insert tag form field here
+      =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "input-block-level inline"
+
+      //Put opt password field in here as well to make user object on post submit
+  %div.random-form-elements
+    -if @message
+      %div.row.message
+        =@message
+        /make a button to join groups in modal window
+    %div.row.group-row
+      =f.fields_for :assignments do |ff|
+        =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
+          =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box"}, '0','1'
+          =ff.object.group.name.humanize
+        
+          =ff.hidden_field :group_id
+  /STRIPE INTEGRATION FOR CREATING A CUSTOMER      
+  %div#post-credit-fields{:style=>"display:none"}      
+    =render 'modal_credit', user: @user
+    %div.row
+
     / .field
     /   = f.label :premium
     /   = f.check_box :premium
-    .actions
-      = f.submit 'Save'
-      
-/STRIPE INTEGRATION FOR CREATING A CUSTOMER      
-      
-/ - if user.last_4_digits
-/   #change-card.clearfix
-/     %label Card
-/     .input
-/       %span
-/         Using card ending with
-/         \#{user.last_4_digits}
-/         \#{link_to "(change)", "#"}
-/ %noscript
-/   %p This form requires Javascript to use
-/ #credit-card{:style => user.last_4_digits ? "display:none" : "display:block"}
-/   #credit-card-errors{:style => "display:none"}
-/     #stripe-error-message.alert-message.block-message.error
-/   / these fields are disabled before submission and are never transmitted back to rails
-/   .clearfix
-/     = label_tag :credit_card_number
-/     .input
-/       = text_field_tag :credit_card_number, params[:credit_card_number], :class => "field", :disabled => true
-/   .clearfix
-/     = label_tag :cvv, "Security code (CVV)"
-/     .input
-/       = text_field_tag :cvv, params[:cvv], :class => "small", :disabled => true
-/   .clearfix
-/     = label_tag :expiry_date
-/     .input
-/       = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25, :disabled => true}, {:class => "small"}
-/     / empty
-/   %span.note
-/     Your credit card details will be sent directly to our payment processor
+  %div.control-group
+    = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
+    
+%div#tier_explanation_wrapper
+  %div#tier_explanation
+    %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
+  %div#tier_arrow

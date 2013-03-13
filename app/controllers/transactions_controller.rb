@@ -54,6 +54,7 @@ class TransactionsController < ApplicationController
       if params[:password].present?
         if @transaction.save && @user.save_with_payment
           @user.payment(@price)
+          sign_in @user
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -63,8 +64,8 @@ class TransactionsController < ApplicationController
       elsif current_user
         #current_user without credit details encountered form
         if @transaction.save
-            @user.save_with_payment
-          
+          @user.save_with_payment
+          @user.payment(@price)
           format.js { render }
         else
           format.html { render action: "new" }

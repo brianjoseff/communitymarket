@@ -64,6 +64,8 @@ GEM
       multi_json (~> 1.0)
     faker (1.0.1)
       i18n (~> 0.4)
+    figaro (0.5.0)
+      rails (~> 3.0)
     forgery (0.3.12)
       nokogiri (~> 1.4)
     haml (3.1.7)
@@ -194,8 +196,9 @@ DEPENDENCIES
   clearance
   client_side_validations (~> 3.2.0)
   client_side_validations-simple_form
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   faker
+  figaro
   forgery
   haml (>= 3.0.0)
   haml-rails

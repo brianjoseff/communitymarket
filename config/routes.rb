@@ -1,7 +1,7 @@
 Communitymarket::Application.routes.draw do
 
   resources :transactions
-
+  resources :memberships
 
   resources :tags
 

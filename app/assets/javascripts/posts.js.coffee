@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
 jQuery ->
   $("#post_tag_tokens").tokenInput "/tags.json",
     queryParam: "t"
@@ -11,6 +12,7 @@ jQuery ->
   $("ul.token-input-list-facebook").addClass("negative-padding")
 $(document).ready ->
 	$("input.cash-box").change ->
+		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled")
 		$('input.cash-box').append "<p>$</p>"
 		$('div#tier_explanation_wrapper').toggle "slide",
 			direction: "top"

@@ -1,3 +1,11 @@
+/NON-USER FORM:
+/only needs to enter these fields:
+/post category
+/title
+/tier or cash
+/description
+/tags
+/email field
 = form_for @post.new_record? ? setup_post(@post, @group) : @post, :html => { :multipart => true, :class => "form-horizontal nonuser-post"} do |f|
   - if @post.errors.any?
     #error_explanation

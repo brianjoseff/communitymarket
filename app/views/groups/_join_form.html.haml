@@ -1,24 +1,24 @@
 -if current_user
-  -if @group.members.include?(current_user)
+  -if group.members.include?(current_user)
     /=render :partial => "leave"
-    =link_to "Leave this group", membership_url(current_user.memberships.find_by_group_id(@group)), :method => :delete, :confirm => "Are you sure?"
+    =link_to "Leave this group", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
   -else
     / =render :partial => "join"
-    =form_for @group do |f|
+    =form_for group do |f|
       =hidden_field_tag('group[member_ids][]', current_user.id)
       .action=f.submit "Join Group"
 -else
   %a.btn{"data-toggle" => "modal", :href => "#auth", :role => "button"} Join!
 
-
-/MODAL SIGN UP SIGN IN
-%div#auth{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
-  =render :partial => 'sessions/form'
-  =render :partial => 'users/form'
-
+/ 
+/ /MODAL SIGN UP SIGN IN
+/ %div#auth{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+/   =render :partial => 'sessions/form'
+/   =render :partial => 'users/form'
+/ 
+/   
   
-  
-/ -if @group.owner == current_user
+/ -if group.owner == current_user
 /   %p Fuck yeah
 /   =link_to "Edit Group", edit_group_path(@group)
 / -els

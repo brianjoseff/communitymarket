@@ -32,3 +32,6 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 >>>>>>> ada8565983d68ebac565f52e33a7aad804a60319
+
+# Ignore application configuration
+/config/application.yml

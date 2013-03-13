@@ -43,5 +43,10 @@ class User < ActiveRecord::Base
     groups_as_owner = self.groups_as_owner
     groups_member = self.groups_as_member
     groups = groups_as_owner + groups_member
+    # if groups.empty?
+    #   return Group.first
+    # else
+    #   return groups
+    # end
   end
 end
