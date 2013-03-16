@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while charging cardr: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
-    
+  
   end
   
   def post_feed

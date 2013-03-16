@@ -8,15 +8,12 @@
       =hidden_field_tag('group[member_ids][]', current_user.id)
       .action=f.submit "Join Group"
 -else
-  %a.btn{"data-toggle" => "modal", :href => "#auth", :role => "button"} Join!
-
-/ 
-/ /MODAL SIGN UP SIGN IN
-/ %div#auth{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
-/   =render :partial => 'sessions/form'
-/   =render :partial => 'users/form'
-/ 
-/   
+  %a.btn{"data-target" => "#auth","data-toggle" => "modal", 'data-remote' => "/users/new", :href => "#auth", :role => "button"} Join!
+  / /MODAL SIGN UP SIGN IN
+  %div#auth.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog",:style=>"display:none"}
+    =render :partial => 'pages/join_modal'
+  
+  
   
 / -if group.owner == current_user
 /   %p Fuck yeah

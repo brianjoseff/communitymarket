@@ -48,19 +48,35 @@ namespace :db do
     GroupCategory.create!(:name => "Region")
     
     #tiers
-    Tier.create!(:name => "$1-5")
-    Tier.create!(:name => "$6-10")
-    Tier.create!(:name => "$11-25")
-    Tier.create!(:name => "$26-50")
-    Tier.create!(:name => "$51-99")
-    Tier.create!(:name => "$100+")
+    Tier.create!(:name => "$1-5", :id => "1")
+    Tier.create!(:name => "$6-10", :id => "2")
+    Tier.create!(:name => "$11-25", :id => "3")
+    Tier.create!(:name => "$26-50", :id => "4")
+    Tier.create!(:name => "$51-99", :id => "5")
+    Tier.create!(:name => "$100+", :id => "6")
     
     
     #posts
-    40.times do |x|
+    20.times do |x|
       title = Forgery(:LoremIpsum).word(:random => true)
-      tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 4)
+      tier_id = nil
       price = Forgery(:Basic).number(:at_least=> 1, :at_most => 40)
+      description = Forgery(:LoremIpsum).paragraph(:random => true)
+      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
+      post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
+      
+      Post.create!(:title => title,
+                   :price => price,
+                   :tier_id => tier_id,
+                   :description => description,
+                   :user_id => user_id,
+                   :post_category_id => post_category_id)
+    
+    end
+    20.times do |x|
+      title = Forgery(:LoremIpsum).word(:random => true)
+      tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 6)
+      price = nil
       description = Forgery(:LoremIpsum).paragraph(:random => true)
       user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)

@@ -41,7 +41,9 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @price = Post.find_by_id(params[:post_id]).price
+    @post = Post.find_by_id(params[:post_id])
+    @price = @post.price
+    @tier_id = @post.tier_id
     if current_user
       @user = current_user
       @transaction = @user.transactions.build(params[:transaction].merge(:price => @price).merge(:email => @user.email))
@@ -51,10 +53,12 @@ class TransactionsController < ApplicationController
     end
     respond_to do |format|
       #non-user encountered form and entered credit details AND password- signing up and paying
-      if params[:password].present?
-        if @transaction.save && @user.save_with_payment
-          @user.payment(@price)
+      if !current_user && params[:password].present?
+        if @transaction.save! && @user.save_with_payment
+          #@user.payment(@price)
+          @transaction.payment(params[:transaction][:tier_id], @price, params[:transaction][:premium],params[:transaction][:premium_notify])
           sign_in @user
+          format.js {render}
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -63,9 +67,10 @@ class TransactionsController < ApplicationController
         end
       elsif current_user
         #current_user without credit details encountered form
+        @user.stripe_customer_id = @transaction.save_with_payment
         if @transaction.save
           @user.save_with_payment
-          @user.payment(@price)
+          #@transaction.payment(@price)
           format.js { render }
         else
           format.html { render action: "new" }

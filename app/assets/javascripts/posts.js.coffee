@@ -11,6 +11,8 @@ jQuery ->
   $("ul.token-input-list-facebook").addClass("inline")
   $("ul.token-input-list-facebook").addClass("negative-padding")
 $(document).ready ->
+	$("#post_tier_id}").change ->
+		$("input.cash-box").prop "disabled", not $("input.cash-box").prop("disabled")
 	$("input.cash-box").change ->
 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled")
 		$('input.cash-box').append "<p>$</p>"
