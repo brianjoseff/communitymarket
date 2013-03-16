@@ -7,7 +7,7 @@ module FormHelper
           post.assignments.build(:group_id => group.id)
         end
         post.assignments.sort_by {|x| x.group.name }
-        asset = post.assets.build
+        # asset = post.assets.build
         post
       else
         post.errors_message("you aren't signed up to any groups")

@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @transaction = Transaction.new
     @post = Post.find(params[:id])
     if !signed_in?
       @user = User.new
@@ -30,14 +31,22 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @categories = PostCategory.all
-    @post.assets.build
+    
     @assets = @post.assets
     if !signed_in?
+      @post.assets.build
       @user = User.new
       @group = Group.first
       @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
+    else
+      @post.assets.build
+      @user = current_user
+      @groups = @user.group_feed
+      if @groups.empty?
+        @groups = Group.first
+        @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
+      end
     end
-
   end
 
   # GET /posts/1/edit
@@ -57,14 +66,37 @@ class PostsController < ApplicationController
   def create
     
     if signed_in?
-      current_user.posts.build(params[:post])
-      
+      @user = current_user
+      @post = @user.posts.build(params[:post])
+      if @post.save
+        @groups = @post.groups
+        unless @groups.empty?
+          for group in @groups do
+            members = group.members
+            for member in members do
+              NewPostMailer.notify(@user, @post, @post.post_category.name, member, group).deliver
+            end
+          end
+        end
+        redirect_to @post, notice: "Successfully created post."
+      else
+        render :new
+      end
     else
       @post = Post.new(params[:post])
       #if password field filled out
         #make user
       #end
       if @post.save
+        @groups = @post.groups
+        unless @groups.empty?
+          for group in @groups do
+            members = group.members
+            for member in members do
+              NewPostMailer.new_post(@user, @post, @post.product_category.name, member, group).deliver
+            end
+          end
+        end
         redirect_to @post, notice: "Successfully created post."
       else
         render :new

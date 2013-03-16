@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # $(document).ready ->
 # #
 # #   # Style the buttons
@@ -57,3 +58,34 @@
 #     flipText nextText
 #     index = (if (index is maxIndex) then 0 else index + 1)
 #   ), interval
+=======
+jQuery ->
+  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+  subscription.setupForm()
+
+transaction =
+  setupForm: ->
+    $('#new_transaction').submit ->
+      $('input[type=submit]').attr('disabled', true)
+      if $('#card_number').length
+        transaction.processCard()
+        false
+      else
+        true
+  
+  processCard: ->
+    card =
+      number: $('#card_number').val()
+      cvc: $('#card_code').val()
+      expMonth: $('#card_month').val()
+      expYear: $('#card_year').val()
+    Stripe.createToken(card, transaction.handleStripeResponse)
+  
+  handleStripeResponse: (status, response) ->
+    if status == 200
+      $('#transaction_stripe_card_token').val(response.id)
+      $('#new_transaction')[0].submit()
+    else
+      $('#stripe_error').text(response.error.message)
+      $('input[type=submit]').attr('disabled', false)
+>>>>>>> branch

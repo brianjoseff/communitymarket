@@ -17,8 +17,14 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require_self
+//=require posts.js.coffee
 //= require_tree .
-//
+
+// $(document).ready(function(){
+//   alert("Hello");
+// });
+
 //$(document).ready(function(){
 //	$('.form').enableClientSideValidations();
 //    $('.form').on('shown', function() {

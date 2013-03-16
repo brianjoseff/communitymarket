@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @posts = @group.posts
     if !signed_in?
       @user = User.new
     else
@@ -65,8 +66,10 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to root_path }
+        format.js
+        # format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        #         format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @group.errors, status: :unprocessable_entity }

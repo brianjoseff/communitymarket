@@ -17,18 +17,22 @@
     %div.row-fluid.timestamp
       Posted #{time_ago_in_words(feed_item.created_at)} ago.
   %div.span3
-    /buy button:
-    /IF: signed_in and no c#, THEN: user_credit_modal
-    /IF: signed_in and yes c# THEN: user_you_sure_modal
-    /IF: not signed_in THEN: non_user_credit_modal
-    %a.btn.buy-button{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
-    %div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
-      -if signed_in? && current_user.stripe_customer_id.nil? == false
-        =render 'user_you_sure_modal'
-      -elsif signed_in? && current_user.stripe_customer_id.nil?
-        =render 'user_credit_modal'
-      -else
-        =render :partial => 'transactions/form'
+    -if feed_item.price?
+      /email button
+      %a.btn{ :href => "mailto:#{User.find(feed_item.user_id).email}", :role => "button"}$ #{feed_item.price} | Email
+    -else
+      /buy button:
+      /IF: signed_in and no c#, THEN: user_credit_modal
+      /IF: signed_in and yes c# THEN: user_you_sure_modal
+      /IF: not signed_in THEN: non_user_credit_modal
+      %a.btn.buy-button{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+      %div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
+        -if signed_in? && current_user.stripe_customer_id.nil? == false
+          =render 'user_you_sure_modal'
+        -elsif signed_in? && current_user.stripe_customer_id.nil?
+          =render 'user_credit_modal'
+        -else
+          =render :partial => 'transactions/form'
     
     / =link_to "Buy", new_transaction_path(:post_id => feed_item.id, :tier_id => feed_item.tier_id, :price => feed_item.price, :premium => feed_item.premium?, :notify_premium => nil)
     

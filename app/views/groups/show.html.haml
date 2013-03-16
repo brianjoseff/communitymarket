@@ -11,7 +11,9 @@
   = @group.group_category
 
 
-=render :partial => "join_form"
+=render "join_form", :group => @group
+%h2 Posts
+=render @posts
   
 = link_to 'Edit', edit_group_path(@group)
 \|

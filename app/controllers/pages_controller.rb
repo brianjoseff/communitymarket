@@ -4,16 +4,22 @@ class PagesController < ApplicationController
   def index
     @post = Post.new
     @transaction = Transaction.new
+<<<<<<< HEAD
     if !signed_in?
       @user = User.new
       
     else
+=======
+
+    if signed_in? && current_user.post_feed.is_a?(Array)
+>>>>>>> branch
       @user = current_user
-    end
-    if signed_in? && current_user.feed.empty? == false
-      @posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @random_groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "RANDOM()")
     else
+      @user = User.new
       @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
     end

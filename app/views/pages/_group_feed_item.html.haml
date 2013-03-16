@@ -8,6 +8,7 @@
     %div.row-fluid
       %span.description
         = truncate(feed_item.description, 25)
+      = render "groups/join_form", :group => feed_item
 
   %div.span3
     /join button:
