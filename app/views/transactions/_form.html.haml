@@ -28,8 +28,11 @@
     = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12"
   %div.row-fluid
     %div.span6
-      = label_tag :expiry_date
-      = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+      / = label_tag :expiry_date
+      / = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+      = label_tag :card_month, "Card Expiration"
+      = select_month nil, {:add_month_numbers => true}, {:name => nil, :id => "card_month"}
+      = select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => "card_year"}
     %div.span3
     %div.span3.credit-cvv
       = label_tag :cvv, "CVV"

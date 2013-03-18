@@ -11,9 +11,19 @@ class User < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
   
-  def save_with_payment
+  def save_customer
+    p stripe_card_token
     if valid?
       customer = Stripe::Customer.create( :description => email, :card => stripe_card_token )
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+  def save_with_payment
+    if valid?
+      customer = Stripe::Customer.create( :description => email, :card => stripe_card_token)
       self.stripe_customer_id = customer.id
       save!
     end
@@ -22,12 +32,38 @@ class User < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
     false
   end
+  def save_customer_with_payment(tier,price)
+    p stripe_card_token
+    if valid?
+      customer = Stripe::Customer.create( :description => email, :card => stripe_card_token )
+      if tier.present?
+        if tier == 1
+          amount = 500
+        elsif tier == 2
+          amount = 1000
+        elsif tier == 3
+          amount = 2000
+        elsif tier == 4
+          amount = 5000
+        end
+      elsif price.present?
+        amount = price*100
+      else
+        return
+      end
+      Stripe::Charge.create(:amount => amount, :currency => "usd", :card => customer)
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error with payment: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
   
   def payment(amount)
     customer = Stripe::Customer.retrieve(self.stripe_customer_id)     
-    Stripe::Charge.create(:amount => amount*100, :currency => "usd", :customer => customer)
+    Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => customer)
   rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while charging cardr: #{e.message}"
+    logger.error "Stripe error while charging card: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
   
   end

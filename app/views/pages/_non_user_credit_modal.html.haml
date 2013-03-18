@@ -30,7 +30,12 @@
     /         Using card ending with
     /         \#{@user.stripe_customer_id}
     /         \#{link_to "(change)", "#"}
-        
+    = f.hidden_field :stripe_card_token
+    = f.hidden_field :tier_id
+    = f.hidden_field :premium
+    = f.hidden_field :notify_premium
+    = f.hidden_field :user_id
+    = f.hidden_field :customer_id
     %noscript
       %p This form requires Javascript to use
     #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}

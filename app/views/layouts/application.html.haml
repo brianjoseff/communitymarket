@@ -4,11 +4,7 @@
     %title Communitymarket
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
-<<<<<<< HEAD
-    / = javascript_include_tag params[:controller]
-=======
     /= javascript_include_tag params[:controller]
->>>>>>> branch
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body

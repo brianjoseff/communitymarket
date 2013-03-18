@@ -6,7 +6,7 @@ class Transaction < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
   
-  def payment(tier, price, premium, notify_premium)
+  def payment(tier, price, premium, notify_premium,user)
     if valid?
       if tier.present?
         if tier == 1
@@ -28,18 +28,17 @@ class Transaction < ActiveRecord::Base
       elsif notify_premium
         amount += notify_premium*100
       end
-      Stripe::Charge.create(:amount => amount, :currency => "usd", :card => stripe_card_token)
+      Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => user.stripe_customer_id)
     end
   rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}"
+    logger.error "Stripe error while charging: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
   end
-  #misnomer, where is the paymenet? When does that occur?
-  def save_with_payment
+  def save_with_payment(token)
     p stripe_card_token
     if valid?
-      customer = Stripe::Customer.create( :description => email, :card => stripe_card_token )
+      customer = Stripe::Customer.create( :description => email, :card => token )
       customer.id
     end
   rescue Stripe::InvalidRequestError => e
@@ -48,4 +47,36 @@ class Transaction < ActiveRecord::Base
     false
   end
   
+  #misnomer, where is the paymenet? When does that occur?
+  # def save_customer_with_payment(tier,price)
+  #     p stripe_card_token
+  #     if valid?
+  #       customer = Stripe::Customer.create( :description => email, :card => stripe_card_token )
+  #       if tier.present?
+  #         if tier == 1
+  #           amount = 500
+  #         elsif tier == 2
+  #           amount = 1000
+  #         elsif tier == 3
+  #           amount = 2000
+  #         elsif tier == 4
+  #           amount = 5000
+  #         end
+  #       elsif price.present?
+  #         amount = price*100
+  #       else
+  #         return
+  #       end
+  #     end
+  #   rescue Stripe::InvalidRequestError => e
+  #     logger.error "Stripe error while creating customer: #{e.message}"
+  #     errors.add :base, "There was a problem with your credit card."
+  # 
+  #     Stripe::Charge.create(:amount => amount, :currency => "usd", :card => customer.id)
+  #   rescue Stripe::InvalidRequestError => e
+  #     logger.error "Stripe error while charging: #{e.message}"
+  #     errors.add :base, "There was a problem with your credit card."
+  #     false
+  #   end
+
 end
