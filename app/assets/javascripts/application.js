@@ -55,6 +55,45 @@
 //   });
 // });
 
+// var transaction;
+// 
+// jQuery(function() {
+//   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+//   return transaction.setupForm();
+// });
+// 
+// transaction = {
+//   setupForm: function() {
+//     return $('#new_transaction').submit(function() {
+//       $('input[type=submit]').attr('disabled', true);
+//       if ($('input#credit_card_number').length) {
+//         transaction.processCard();
+//         return false;
+//       } else {
+//         return true;
+//       }
+//     });
+//   },
+//   processCard: function() {
+//     var card;
+//     card = {
+//       number: $('#card_number').val(),
+//       cvc: $('#card_code').val(),
+//       exp_month: $('#card_month').val(),
+//       exp_year: $('#card_year').val()
+//     };
+//     return Stripe.createToken(card, transaction.handleStripeResponse);
+//   },
+//   handleStripeResponse: function(status, response) {
+//     if (status === 200) {
+//       $('#transaction_stripe_card_token').val(response.id);
+//       return $('#new_transaction')[0].submit();
+//     } else {
+//       $('#stripe_error').text(response.error.message);
+//       return $('input[type=submit]').attr('disabled', false);
+//     }
+//   }
+// };
 
 
 

@@ -6,7 +6,7 @@ transaction =
   setupForm: ->
     $('#new_transaction').submit ->
       $('input[type=submit]').attr('disabled', true)
-      if $('#credit_card_number').length
+      if $('input#credit_card_number').length
         transaction.processCard()
         false
       else
@@ -16,8 +16,10 @@ transaction =
     card =
       number: $('#card_number').val()
       cvc: $('#card_code').val()
-      expMonth: $('#card_month').val()
-      expYear: $('#card_year').val()
+      exp_month: $('#card_month').val()
+      exp_year: $('#card_year').val()
+			# exp_month: $('#card_month').options[this.selectedIndex].value()
+			# exp_year: $('#card_year').options[this.selectedIndex].value()
     Stripe.createToken(card, transaction.handleStripeResponse)
   
   handleStripeResponse: (status, response) ->

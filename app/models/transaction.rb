@@ -6,7 +6,7 @@ class Transaction < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
   
-  def payment(tier, price, premium, notify_premium,user)
+  def payment(tier, price, user)
     if valid?
       if tier.present?
         if tier == 1
@@ -23,11 +23,11 @@ class Transaction < ActiveRecord::Base
       else
         return
       end
-      if premium
-        amount += 200
-      elsif notify_premium
-        amount += notify_premium*100
-      end
+      # if premium
+      #         amount += 200
+      #       elsif notify_premium
+      #         amount += notify_premium*100
+      #       end
       Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => user.stripe_customer_id)
     end
   rescue Stripe::InvalidRequestError => e

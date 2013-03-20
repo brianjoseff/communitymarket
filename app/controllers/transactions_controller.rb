@@ -60,7 +60,7 @@ class TransactionsController < ApplicationController
         #if @user.stripe_customer_id = @transaction.save_with_payment(@token)
           #@user.save_customer
           #@user.payment(@price)
-          @user.payment(@amount)
+          @transaction.payment(@tier_id, @price, @user)
           sign_in @user
           format.js {render}
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }

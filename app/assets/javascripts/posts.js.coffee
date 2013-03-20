@@ -1,6 +1,16 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+countChecked = ->
+  n = $("input:checked").length
+	if n > 2
+	  # $("div").text n + ((if n is 1 then " is" else " are")) + " checked!"
+		# make div tht pops up the credit modal
+	else
+		#make modal disappear
+
+countChecked()
+$("input[type=checkbox].checkbox").on "click", countChecked
 
 jQuery ->
   $("#post_tag_tokens").tokenInput "/tags.json",
