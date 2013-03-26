@@ -2,6 +2,7 @@
   %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
   %h2#myModalLabel You need to add a credit card
 = simple_form_for @transaction, :validate => true, :remote => true, :form => { "data-type" => "js" } do |f|
+  #stripe_error
   - if @transaction.errors.any?
     #error_explanation
       %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
@@ -25,15 +26,17 @@
 
   %div.row-fluid
     = label_tag :credit_card_number
-    = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12"
+    = text_field_tag :card_number, params[:card_number], :class=>"credit-number span12"
   %div.row-fluid
     %div.span6
       = label_tag :expiry_date
-      = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+      = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+      = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+      -#= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
     %div.span3
     %div.span3.credit-cvv
       = label_tag :cvv, "CVV"
-      = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
+      = text_field_tag :card_code, nil, name: nil, :class=>"credit-cvv input-block-level"
   %div.row-fluid
     =f.label :email
     =f.text_field :email, :validate => true
@@ -41,3 +44,48 @@
     =text_field_tag :password, params[:password]
   .actions
     = f.submit 'Save'
+
+:javascript
+  var subscription;
+
+  jQuery(function() {
+    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
+    subscription.setupForm();
+  });
+
+  subscription = {
+    setupForm: function() {
+      return $('input[type=submit]').click(function() {
+        //$('input[type=submit]').attr('disabled', true);
+        if ($('#card_number').length) {
+          subscription.processCard();
+          //return false;
+        } else {
+          //return true;
+        }
+      });
+    },
+    processCard: function() {
+      var card;
+      card = {
+        number: $('#card_number').val(),
+        cvc: $('#card_code').val(),
+        expMonth: $('#card_month').val(),
+        expYear: $('#card_year').val()
+      };
+      return Stripe.createToken(card, subscription.handleStripeResponse);
+    },
+    handleStripeResponse: function(status, response) {
+      if (status === 200) {
+        console.log(response.id);
+        $('#transaction_stripe_card_token').val(response.id);
+        //return $('#new_transaction')[0].submit();
+        return true;
+      } else {
+        $('#stripe_error').text(response.error.message);
+        console.log(response.error.message);
+        //return $('input[type=submit]').attr('disabled', false);
+        return true;
+      }
+    }
+  };

@@ -52,13 +52,12 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       #non-user encountered form and entered credit details AND password- signing up and paying
       if params[:password].present?
-        if @transaction.save && @user.save_with_payment
+        @user.stripe_customer_id = @transaction.save_with_payment
+        if @transaction.save! && @user.save!
           @user.payment(@price)
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-          format.json { render json: @transaction, status: :created, location: @transaction }
+          format.js { render }
         else
-          format.html { render action: "new" }
-          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+          format.js { render }
         end
       elsif current_user
         #current_user without credit details encountered form
@@ -67,8 +66,7 @@ class TransactionsController < ApplicationController
           
           format.js { render }
         else
-          format.html { render action: "new" }
-          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+          format.js { render }
         end
       else
         #non-user encountered form and didn't enter password
@@ -85,8 +83,7 @@ class TransactionsController < ApplicationController
           end 
           format.js { render }
         else
-          format.html { render action: "new" }
-          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+          format.js { render }
         end      
       end
     end
