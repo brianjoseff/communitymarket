@@ -22,7 +22,7 @@
   %div.span3
     -if feed_item.price?
       /email button
-      %a.btn{ :href => "mailto:#{User.find(feed_item.user_id).email}", :role => "button"}$ #{feed_item.price} | Email
+      %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"}$ #{feed_item.price} | Email
     -else
       /buy button:
       /IF: signed_in and no c#, THEN: user_credit_modal
