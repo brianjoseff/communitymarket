@@ -6,6 +6,7 @@
 /description
 /tags
 /.....NO email field
+
 = form_for @post.new_record? ? setup_post(@post, @groups) : @post, :html => { :multipart => true, :class => "form-horizontal user-post"} do |f|
   - if @post.errors.any?
     #error_explanation

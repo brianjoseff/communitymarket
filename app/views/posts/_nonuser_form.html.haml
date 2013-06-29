@@ -29,7 +29,8 @@
               =asset_fields.label "image"
               =asset_fields.file_field :image
             -else
-              =image_tag(asset_fields.object.image.url(:article))
+              /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
+              =image_tag(asset_fields.object.image.url(:post))
               =asset_fields.label  "delete image"
               =asset_fields.check_box :_destroy
               
@@ -87,18 +88,23 @@
     %div.controls
       = f.text_field :email, :class => "input-block-level inline", :placeholder =>"brian@chyeah.com"
       //Put opt password field in here as well to make user object on post submit
-  %div.random-form-elements
-    -if @message
-      %div.row.message
-        =@message
-        /make a button to join groups in modal window
-    %div.row.group-row
-      =f.fields_for :assignments do |ff|
-        =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
-          =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box"}, '0','1'
-          =ff.object.group.name.humanize
-        
-          =ff.hidden_field :group_id
+
+
+  /THIS IS THE GROUPS/ASSIGNMENTS SECTION...suck it
+  / %div.random-form-elements
+  /   -if @message
+  /     %div.row.message
+  /       =@message
+  /       /make a button to join groups in modal window
+  /   %div.row.group-row
+  /     =f.fields_for :assignments do |ff|
+  /       =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
+  /         =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box"}, '0','1'
+  /         =ff.object.group.name.humanize
+  /       
+  /         =ff.hidden_field :group_id
+
+
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER      
   %div#post-credit-fields{:style=>"display:none"}      
     =render 'modal_credit', user: @user

@@ -102,7 +102,7 @@ class UsersController < ApplicationController
     #           format.js
     #         end
     #       end
-    @user = User.new(params[:user])
+    #@user = User.new(params[:user])
    if @user.save
      #SignupMailer.new_subscriber(@subscriber).deliver
      sign_in @user

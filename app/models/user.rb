@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :password, :email
   validates :email, :email_format => true, :presence => true
   
-  attr_accessor :stripe_card_token
+  # attr_accessor :stripe_card_token
   
   def save_customer
     p stripe_card_token
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
     false
   end
-  def save_with_payment
+  def save_as_customer
     if valid?
       customer = Stripe::Customer.create( :description => email, :card => stripe_card_token)
       self.stripe_customer_id = customer.id

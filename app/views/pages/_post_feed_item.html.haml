@@ -1,3 +1,6 @@
+/THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
+/OK?
+/GOOD.
 %li.feed_item.row-fluid
   %div.image.span3
     =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.title), post_url(feed_item)
@@ -26,6 +29,7 @@
       /IF: signed_in and yes c# THEN: user_you_sure_modal
       /IF: not signed_in THEN: non_user_credit_modal
       %a.btn.buy-button{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+      %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
       %div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
         -if signed_in? && current_user.stripe_customer_id.nil? == false
           =render 'user_you_sure_modal'

@@ -35,8 +35,8 @@ class Transaction < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
     false
   end
-  def save_with_payment(token)
-    p stripe_card_token
+  def save_customer(token)
+    # p stripe_card_token
     if valid?
       customer = Stripe::Customer.create( :description => email, :card => token )
       customer.id

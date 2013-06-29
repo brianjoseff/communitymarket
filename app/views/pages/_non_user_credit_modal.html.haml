@@ -11,56 +11,57 @@
 /         .model-footer
 /           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
 /
-.modal-header
-  %h2 Enter credit card and sign up
-.modal-body
-  =form_for @user, :validate => true, :remote => true, :html => {:class => "form"} do |f|
-    =yield(:user_validators)
-    - if @user.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this group from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |msg|
-            %li= msg
-    / -if @user.stripe_customer_id
-    /   #change-card.clearfix
-    /     %label Card
-    /     .input
-    /       %span
-    /         Using card ending with
-    /         \#{@user.stripe_customer_id}
-    /         \#{link_to "(change)", "#"}
-    = f.hidden_field :stripe_card_token
-    = f.hidden_field :tier_id
-    = f.hidden_field :premium
-    = f.hidden_field :notify_premium
-    = f.hidden_field :user_id
-    = f.hidden_field :customer_id
-    %noscript
-      %p This form requires Javascript to use
-    #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
-      #credit-card-errors{:style => "display:none"}
-        #stripe-error-message.alert-message.block-message.error
-      / these fields are disabled before submission and are never transmitted back to rails
+-if current_user
+  .modal-header
+    %h2 Enter credit card and sign up
+  .modal-body
+    =form_for @user, :validate => true, :remote => true, :html => {:class => "form"} do |f|
+      =yield(:user_validators)
+      - if @user.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@user.errors.count, "error")} prohibited this group from being saved:"
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      / -if @user.stripe_customer_id
+      /   #change-card.clearfix
+      /     %label Card
+      /     .input
+      /       %span
+      /         Using card ending with
+      /         \#{@user.stripe_customer_id}
+      /         \#{link_to "(change)", "#"}
+      = f.hidden_field :stripe_card_token
+      = f.hidden_field :tier_id
+      = f.hidden_field :premium
+      = f.hidden_field :notify_premium
+      = f.hidden_field :user_id
+      = f.hidden_field :customer_id
+      %noscript
+        %p This form requires Javascript to use
+      #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
+        #credit-card-errors{:style => "display:none"}
+          #stripe-error-message.alert-message.block-message.error
+        / these fields are disabled before submission and are never transmitted back to rails
 
-    %div.row-fluid
-      = label_tag :credit_card_number
-      = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12"
-    %div.row-fluid
-      %div.span6
-        = label_tag :expiry_date
-        = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
-      %div.span3
-      %div.span3.credit-cvv
-        = label_tag :cvv, "CVV"
-        = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
-    =f.label :email
-    =f.text_field :email
-    =f.label :password
-    =f.text_field :password
-    .modal-footer
-      =f.submit "sign up and purchase"
+      %div.row-fluid
+        = label_tag :credit_card_number
+        = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12"
+      %div.row-fluid
+        %div.span6
+          = label_tag :expiry_date
+          = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+        %div.span3
+        %div.span3.credit-cvv
+          = label_tag :cvv, "CVV"
+          = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
+      =f.label :email
+      =f.text_field :email
+      =f.label :password
+      =f.text_field :password
+      .modal-footer
+        =f.submit "sign up and purchase"
   
-    / empty
-    %span.note
-    Your credit card details will be sent directly to our payment processor
+      / empty
+      %span.note
+      Your credit card details will be sent directly to our payment processor

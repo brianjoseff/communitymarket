@@ -64,10 +64,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @categories = PostCategory.all
     
     if signed_in?
       @user = current_user
       @post = @user.posts.build(params[:post])
+      @assets = @post.assets
       if @post.save
         @groups = @post.groups
         unless @groups.empty?
@@ -84,6 +86,7 @@ class PostsController < ApplicationController
       end
     else
       @post = Post.new(params[:post])
+      @assets = @post.assets
       #if password field filled out
         #make user
       #end

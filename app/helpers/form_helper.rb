@@ -14,7 +14,8 @@ module FormHelper
         post
       end
     else
-      post.assignments.build(:group_id => first_group.id)
+      # post.assignments.build(:group_id => first_group.id)
+      # post.assets.build
       post
     end
   end

@@ -56,11 +56,13 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       #non-user encountered form and entered credit details AND password- signing up and paying
       if !current_user && params[:password].present?
-        if @transaction.save && @user.save_with_payment
+        if @transaction.save!
+          @user.stripe_customer_id = @transaction.save_customer(@token)
+          @user.payment(@amount)
         #if @user.stripe_customer_id = @transaction.save_with_payment(@token)
           #@user.save_customer
           #@user.payment(@price)
-          @transaction.payment(@tier_id, @price, @user)
+          # @transaction.payment(@tier_id, @price, @user)
           sign_in @user
           format.js {render}
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
