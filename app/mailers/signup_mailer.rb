@@ -1,7 +1,7 @@
 class SignupMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "no-reply@peopleandstuff.com"
   def new_subscriber(subscriber)
     @subscriber = subscriber
-    mail(:to => subscriber.email, :subject => "welcome to ")
+    mail(:to => subscriber.email, :subject => "welcome amigo/a")
   end
 end
