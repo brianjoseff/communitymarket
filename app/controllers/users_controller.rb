@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     #       end
     #@user = User.new(params[:user])
    if @user.save
-     #SignupMailer.new_subscriber(@subscriber).deliver
+     SignupMailer.new_subscriber(@user).deliver
      sign_in @user
      redirect_to @user, :notice => "Thank you for signing up!"      
    else

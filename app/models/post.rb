@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   has_many :groups, :through => :assignments
   has_many :taggings
   has_many :tags, :through=> :taggings
-  validates :description, :presence => true
+  validates :description , :title, :email, :presence => true
 
   
   accepts_nested_attributes_for :assets#, :reject_if => lambda { |t| t[:post_image].nil?}, :allow_destroy => true
