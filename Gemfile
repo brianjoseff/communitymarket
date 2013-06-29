@@ -44,6 +44,7 @@ gem 'clearance'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'pg'
+gem 'mandrill-api'
 
 
 # To use ActiveModel has_secure_password
