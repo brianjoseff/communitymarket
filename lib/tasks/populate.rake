@@ -35,17 +35,11 @@ namespace :db do
     #post_categories
     PostCategory.create!(:name => "For Sale")
     PostCategory.create!(:name => "Wanted")
-<<<<<<< HEAD
-    PostCategory.create!(:name => "Other")
-    # PostCategory.create!(:name => "Jobs/Internships")
-    # PostCategory.create!(:name => "Free Stuff")
-    # PostCategory.create!(:name => "Housing")
-=======
     # PostCategory.create!(:name => "Jobs/Internships")
     # PostCategory.create!(:name => "Free Stuff")
     # PostCategory.create!(:name => "Housing")
     PostCategory.create!(:name => "Other")    
->>>>>>> branch
+
     
     #group_categories
     GroupCategory.create!(:name => "Interest")

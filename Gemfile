@@ -43,6 +43,7 @@ gem 'ransack'
 gem 'clearance'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'pg'
 
 
 # To use ActiveModel has_secure_password
