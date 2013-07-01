@@ -21,6 +21,7 @@ Communitymarket::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   resources :groups
 
+  resource :session, controller: 'sessions'
 
   resources :posts do
     resources :assignments
@@ -28,6 +29,7 @@ Communitymarket::Application.routes.draw do
   match '/search', :to => 'search#index'
   match '/about', :to => 'pages#about'
   match '/signout', :to => 'sessions#destroy'
+  match '/sign_in', :to => 'sessions#new'
   match '/signin', :to => 'sessions#new'
 
   root :to => 'pages#index'
