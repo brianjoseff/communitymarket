@@ -83,6 +83,12 @@
     %div.controls#token-field
       //insert tag form field here
       =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "input-block-level inline"
+  
+  %div.control-group
+    -unless current_user
+      =f.label :email, :class => "control-label"
+      %div.controls
+        =f.text_field :email, :class => "input-block-level inline", :placeholder => "brian@chyeah.com" 
 
       //Put opt password field in here as well to make user object on post submit
   %div.random-form-elements

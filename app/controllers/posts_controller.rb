@@ -69,6 +69,7 @@ class PostsController < ApplicationController
     if signed_in?
       @user = current_user
       @post = @user.posts.build(params[:post])
+      @post.email = @user.email
       @assets = @post.assets
       if @post.save
         @groups = @post.groups
