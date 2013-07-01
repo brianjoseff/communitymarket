@@ -1,5 +1,8 @@
 Communitymarket::Application.routes.draw do
 
+
+
+
   resources :transactions
   resources :memberships
 
@@ -10,8 +13,9 @@ Communitymarket::Application.routes.draw do
   resources :users do
     resources :posts
     resources :groups
+    resources :images
   end
-  
+  resources :images
   resources :group_categories
   resources :post_categories
   resources :sessions, :only => [:new, :create, :destroy]

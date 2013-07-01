@@ -1,0 +1,20 @@
+= form_for @image , :html => { :multipart => true, :class => "form-horizontal user-post"} do |f|
+  - if @image.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
+      %ul
+        - @image.errors.full_messages.each do |msg|
+          %li= msg
+
+
+  -@assets.each do |asset|
+    =f.fields_for :assets, asset do |asset_fields|
+      -if asset_fields.object.image_file_name.nil?
+        =asset_fields.label "image"
+        =asset_fields.file_field :image
+      -else
+        =image_tag(asset_fields.object.image.url(:post))
+        =asset_fields.label  "delete image"
+        =asset_fields.check_box :_destroy
+  .actions
+    = f.submit 'Save'

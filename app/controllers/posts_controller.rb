@@ -145,6 +145,8 @@ class PostsController < ApplicationController
     end
   end
   
+
+  
   def setup_post(post)
     if current_user
       if post.groups
