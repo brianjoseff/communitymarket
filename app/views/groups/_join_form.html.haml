@@ -1,17 +1,36 @@
+/ -if group.members.include?(current_user)
+/   /=render :partial => "leave"
+/   =link_to "Leave this group", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
+/ -else
+/   / =render :partial => "join"
+/   =form_for group do |f|
+/     =hidden_field_tag('group[member_ids][]', current_user.id)
+/     .action=f.submit "Join Group"
+/ 
+/ 
+
+
+
+/MODAL ATTEMPT
+
 -if current_user
   -if group.members.include?(current_user)
     /=render :partial => "leave"
-    =link_to "Leave this group", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
+    =link_to "Leave", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
   -else
     / =render :partial => "join"
     =form_for group do |f|
       =hidden_field_tag('group[member_ids][]', current_user.id)
-      .action=f.submit "Join Group"
+      .action=f.submit "Join"
 -else
-  %a.btn{"data-target" => "#auth","data-toggle" => "modal", 'data-remote' => "/users/new", :href => "#auth", :role => "button"} Join!
-  / /MODAL SIGN UP SIGN IN
-  %div#auth.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog",:style=>"display:none"}
-    =render :partial => 'pages/join_modal'
+  =link_to "Join", new_user_path, :class => "btn btn-mini"
+  / =form_for group do |f|
+  /     =hidden_field_tag('group[member_ids][]', @user.id)
+  /     .action=f.submit "Join Group"
+  / %a.btn{"data-target" => "#auth","data-toggle" => "modal", 'data-remote' => "/users/new", :href => "#auth", :role => "button"} Join!
+  /   / /MODAL SIGN UP SIGN IN
+  /   %div#auth.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog",:style=>"display:none"}
+  /     =render :partial => 'pages/join_modal'
   
   
   

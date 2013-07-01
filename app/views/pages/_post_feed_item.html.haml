@@ -28,8 +28,8 @@
       /IF: signed_in and no c#, THEN: user_credit_modal
       /IF: signed_in and yes c# THEN: user_you_sure_modal
       /IF: not signed_in THEN: non_user_credit_modal
-      %a.btn.buy-button{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
-      %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+      %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+      %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
       %div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
         -if signed_in? && current_user.stripe_customer_id.nil? == false
           =render 'user_you_sure_modal'

@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
+    @posts = @user.posts
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -71,6 +72,18 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    respond_to do |format|
+      if @user.save
+        SignupMailer.new_subscriber(@user).deliver
+        sign_in @user
+        format.html { redirect_to root_path, notice: "Thank you for signing up!" }
+        
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
     # AJAX efforts
     # respond_to do |format|
     #       if params[:user][:password].empty?
@@ -103,13 +116,6 @@ class UsersController < ApplicationController
     #         end
     #       end
     #@user = User.new(params[:user])
-   if @user.save
-     SignupMailer.new_subscriber(@user).deliver
-     sign_in @user
-     redirect_to @user, :notice => "Thank you for signing up!"      
-   else
-     render :new
-   end
   end
 
   # PUT /users/1

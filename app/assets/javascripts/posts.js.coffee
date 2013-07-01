@@ -1,6 +1,22 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$(document).ready ->
+  $("#post_title").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "title is required."
+
+  $("#post_description").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "Description is required."
+    
+  # $("#car_year").validate
+  #   expression: "if(VAL != '') return true; else return false;"
+  #   message: "Year is required."
+  #   
+  # $("#car_year").validate
+  #   expression: "if(VAL.match(/^\\d\\d\\d\\d$/)) return true; else return false;"
+  #   message: "Invalid format."
 
 countChecked = ->
   n = $("input:checked").length

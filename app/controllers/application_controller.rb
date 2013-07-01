@@ -1,7 +1,15 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
   protect_from_forgery
-  before_filter :get_search_object
+  before_filter :get_search_object, :set_user
+  
+  def set_user
+    if !current_user
+      @user = User.new
+    end
+  end
+  
+
   
   def get_search_object
     @q = Post.search(params[:q])

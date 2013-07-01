@@ -30,3 +30,22 @@
 #       $('#stripe_error').text(response.error.message)
 #       $('input[type=submit]').attr('disabled', false)
 # 
+# $ ()->
+#   $("form.new_user").on "ajax:success", (event, data, status, xhr) ->
+#     $("form.new_user")[0].reset()
+#     $('#sign_up_modal').modal('hide')
+#     $('#error_explanation').hide()
+# 
+#   $("form.new_user").on "ajax:error", (event, xhr, status, error) ->
+#     errors = jQuery.parseJSON(xhr.responseText)
+#     errorcount = errors.length
+#     $('#error_explanation').empty()
+#     if errorcount > 1
+#       $('#error_explanation').append('<div class="alert alert-error">Il form contiene ' + errorcount + ' errori.</div>')
+#     else
+#       $('#error_explanation').append('<div class="alert alert-error">Il form contiene 1 errore.</div>')
+#     $('#error_explanation').append('<ul>')
+#     for e in errors
+#       $('#error_explanation').append('<li>' + e + '</li>')
+#     $('#error_explanation').append('</ul>')
+#     $('#error_explanation').show()

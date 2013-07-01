@@ -4,7 +4,12 @@
   %li{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
   %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
   -if signed_in?
+    %li{:class => "#{'active' if current_page?(user_path(current_user))}"}=link_to "Your page", user_path(current_user)
     %li=link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)}"    
   -else
     %li=link_to "Sign up", new_user_path
+    /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
+    / %a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up
+    /     %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
+    /       =render :partial => 'users/form'
     %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"

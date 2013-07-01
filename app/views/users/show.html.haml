@@ -6,6 +6,22 @@
 %p
   %b Name:
   = @user.name
+=link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
+ 
+%table.table.table-striped
+  %tr
+    %th My posts
+    %th Date posted
+    %th Active?
+    %th Actions
+  -@posts.each do |post|
+    %tr
+      %td #{post.title}
+      %td #{time_ago_in_words(post.created_at)} ago
+      %td 
+      %td
+        = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
+        = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
 = link_to 'Edit', edit_user_path(@user)
 \|
