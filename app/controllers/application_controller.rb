@@ -10,13 +10,17 @@ class ApplicationController < ActionController::Base
   end
   
 
-  
+  #since this is run as an application before_filter,
+  #the search object is available on every page.
+  #Therefore, a search bar may be placed on every page
   def get_search_object
     @q = Post.search(params[:q])
     @posts = @q.result
     @q = Group.search(params[:q])
     @groups = @q.result
   end
+  
+  
   def get_categories
     @categories = PostCategory.all
     @other_categories = GroupCategory.all

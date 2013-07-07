@@ -72,6 +72,7 @@
             var self = jQuery(id).attr("id");
             var expression = 'function Validate(){' + options['expression'].replace(/VAL/g, 'jQuery(\'#' + self + '\').val()') + '} Validate()';
             var validation_state = eval(expression);
+            var success = "Success";
             if (!validation_state) {
                 jQueryObjectBeforeErrorMessage = getjQueryObjectBeforeErrorMessage(jQuery(id));
                 
@@ -90,6 +91,7 @@
                 for (var i = 0; i < ValidationErrors[FormID].length; i++) {
                     if (ValidationErrors[FormID][i] == id) 
                         ValidationErrors[FormID].splice(i, 1);
+
                 }
                 return true;
             }

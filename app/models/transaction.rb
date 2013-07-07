@@ -1,10 +1,29 @@
 class Transaction < ActiveRecord::Base
-  attr_accessible :customer_id, :notify_premium, :premium, :price, :tier_id, :user_id, :email,:stripe_card_token
+  attr_accessible :customer_id, :notify_premium, :premium, :price, :tier_id, :user_id, :email,:stripe_card_token, :post_id
   validates :email, :presence => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
   #validate :email, :presence => true
   belongs_to :user
   
   attr_accessor :stripe_card_token
+  
+  def save_customer(user)
+    if valid?
+      customer = Stripe::Customer.create( :description => email, :card => stripe_card_token)
+      user.stripe_customer_id = customer.id
+      save!
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+  
+  def charge(amount, token, email)
+    Stripe::Charge.create(:amount => amount, :currency => "usd", :card => token, :description => email)
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while charging card: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+  end
   
   def payment(tier, price, user)
     if valid?

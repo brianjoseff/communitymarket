@@ -1,10 +1,20 @@
-<%- if @user.errors.any? %>
-  console.log('Error');
-  $('#buy_modal').html('<%= escape_javascript(render('form')) %>');
-<%- else %>
-  console.log('Created');
-  $('#buy_modal').dialog('close');
-  $('#buy_modal').remove();
-  // change landing page somehow
-  // $('table').append('<%= escape_javascript(render(@article)) %>');
-<%- end %>
+//<%- if @user.errors.any? %>
+//  console.log('Error');
+//  $('#buy_modal').html('<%= escape_javascript(render('form')) %>');
+//<%- else %>
+//  console.log('Created');
+//  $('#buy_modal').dialog('close');
+//  $('#buy_modal').remove();
+//  // change landing page somehow
+//  // $('table').append('<%= escape_javascript(render(@article)) %>');
+//<%- end %>
+// <%- if @user.errors.any? %>
+// $('#signup_modal').html('<%= escape_javascript(render :partial => "form") %>');
+// <%- else %>
+// $('#signup_modal').modal('hide').empty();
+// 
+// <%- end %>
+
+$('#nav').html('<%= j render :partial => "layouts/header" %>');
+
+// post_<=@post.id>.btn.disable

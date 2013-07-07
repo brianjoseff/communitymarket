@@ -1,0 +1,16 @@
+/ %h2#myModalLabel You need to add a credit card
+= simple_form_for @transaction, :validate => true, :remote => true, :form => { "data-type" => "json" } do |f|
+  %div.modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    - if @transaction.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
+        %ul
+          - @transaction.errors.full_messages.each do |msg|
+            %li= msg
+
+  %div.modal-body
+    =hidden_field_tag :post_id
+    =render 'form', f: f
+  %div.modal-footer
+    = f.button :submit, name: 'Get It', class: "btn-primary", id: "new_transaction_button"

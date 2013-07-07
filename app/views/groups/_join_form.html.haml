@@ -23,7 +23,7 @@
       =hidden_field_tag('group[member_ids][]', current_user.id)
       .action=f.submit "Join"
 -else
-  =link_to "Join", new_user_path, :class => "btn btn-mini"
+  =link_to_modal "Join", new_user_path, :class => "btn btn-mini", :remote => true
   / =form_for group do |f|
   /     =hidden_field_tag('group[member_ids][]', @user.id)
   /     .action=f.submit "Join Group"

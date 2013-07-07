@@ -88,10 +88,13 @@ class PostsController < ApplicationController
     else
       @post = Post.new(params[:post])
       @assets = @post.assets
+      @user = User.new(:email => @post.email, :password => params[:password])
       #if password field filled out
         #make user
       #end
-      if @post.save
+      if @post.save && @user.save
+        SignupMailer.new_subscriber(@user).deliver
+        sign_in @user
         @groups = @post.groups
         unless @groups.empty?
           for group in @groups do

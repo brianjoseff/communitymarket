@@ -4,36 +4,36 @@ $(document).ready(function(){
         $('#new_transaction').enableClientSideValidations();
         $('#post_id').val($(this).attr('data-postid'));
     });
-    $('#sign_up_modal').on('shown', function() {
-        $('#new_user').enableClientSideValidations();
-        $("#user_email").validate({
-          expression: "if(VAL != '') return true; else return false;",
-          message: "email is required."
-        });
-        $("#user_password").validate({
-          expression: "if(VAL != '') return true; else return false;",
-          message: "password is required."
-        });
-        $('#user_id').val($(this).attr('data-userid'));
-        $('.btn-primary').click(function(e) {
-          $('.btn-primary').click(function(e) {
-            e.preventDefault();
-            var valuesToSubmit = $(this).serialize();
-            $.ajax({
-                type: 'POST',
-                url: "/users",//$(this).attr('action'), //sumbits it to the given url of the form
-                data: valuesToSubmit,
-                dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-            }).success(function(json){
-                $('#sign_up_modal').modal('hide');
-            });
-            return false;
-            
-          });
-            
-        });
-
-    });
+    // $('#sign_up_modal').on('shown', function() {
+    //     $('#new_user').enableClientSideValidations();
+    //     $("#user_email").validate({
+    //       expression: "if(VAL != '') return true; else return false;",
+    //       message: "email is required."
+    //     });
+    //     $("#user_password").validate({
+    //       expression: "if(VAL != '') return true; else return false;",
+    //       message: "password is required."
+    //     });
+    //     $('#user_id').val($(this).attr('data-userid'));
+    //     $('.btn-primary').click(function(e) {
+    //       $('.btn-primary').click(function(e) {
+    //         e.preventDefault();
+    //         var valuesToSubmit = $(this).serialize();
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: "/users",//$(this).attr('action'), //sumbits it to the given url of the form
+    //             data: valuesToSubmit,
+    //             dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+    //         }).success(function(json){
+    //             $('#sign_up_modal').modal('hide');
+    //         });
+    //         return false;
+    //         
+    //       });
+    //         
+    //     });
+    // 
+    // });
     // display validation errors for the "request invitation" form
     // if ($('.alert-error').length > 0) {
     //   $("#request-invite").modal('toggle');

@@ -3,18 +3,28 @@ Communitymarket::Application.routes.draw do
 
 
 
+  resources :posts do
+    resources :transactions
+  end
+  
   resources :transactions
   resources :memberships
 
   resources :tags
 
-  resources :users
+  resources :users do
+    member do
+      put :update_dom
+    end
+  end
 
   resources :users do
     resources :posts
     resources :groups
     resources :images
   end
+  
+  
   resources :images
   resources :group_categories
   resources :post_categories
@@ -26,6 +36,7 @@ Communitymarket::Application.routes.draw do
   resources :posts do
     resources :assignments
   end
+  
   match '/search', :to => 'search#index'
   match '/about', :to => 'pages#about'
   match '/signout', :to => 'sessions#destroy'

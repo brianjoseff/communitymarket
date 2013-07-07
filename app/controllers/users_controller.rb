@@ -58,8 +58,8 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
+      format.html { render 'new_modal', layout: false } if request.xhr?
+      #format.json { render json: @user }
     end
   end
 
@@ -72,18 +72,35 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    #@user.save
+    # if @user.valid?
+    #    flash[:notice] = 'You have successfully signed your soul away.'
+    #  end
     respond_to do |format|
+      # format.js{render 'create'}
+      # format.html {
+      #   if @user.valid?
+      #     #sign_in @user
+      #     redirect_to root_path
+      #     #render partial: 'table', locals: { animal_handbooks: @animal_handbooks }
+      #   else
+      #     render 'new_modal', layout: false
+      #   end
+      # } if request.xhr?
+      
       if @user.save
-        SignupMailer.new_subscriber(@user).deliver
-        sign_in @user
-        format.html { redirect_to root_path, notice: "Thank you for signing up!" }
-        
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+              #SignupMailer.new_subscriber(@user).deliver
+              sign_in @user
+              format.html { redirect_to root_path, notice: "Thank you for signing up!" }
+              format.json { render json: @user, status: :created, location: @user }
+              # format.js {'create'}
+            else
+              format.html { render action: "new" }
+              format.json { render json: @user.errors, status: :unprocessable_entity }
+              #format.js
+            end
     end
+    #flash.discard :notice if request.xhr?
     # AJAX efforts
     # respond_to do |format|
     #       if params[:user][:password].empty?
@@ -118,6 +135,12 @@ class UsersController < ApplicationController
     #@user = User.new(params[:user])
   end
 
+
+  def update_dom
+    #render :template => "layouts/header", :layout => false
+    format.js {"create"}
+  end
+  
   # PUT /users/1
   # PUT /users/1.json
   def update

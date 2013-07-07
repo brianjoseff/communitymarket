@@ -26,10 +26,9 @@ class TransactionsController < ApplicationController
   def new
     @transaction = Transaction.new
     @user = User.new
-
+    flash[:the_post_id] = params[:post_id]
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @transaction }
+      format.html { render 'new_modal', layout: false } if request.xhr?
     end
   end
 
@@ -40,31 +39,25 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   # POST /transactions.json
+  
   def create
-    @post = Post.find_by_id(params[:post_id])
-    @price = @post.price
+    @post = Post.where(:id => flash[:the_post_id]).first
+    #@price = @post.price
     @tier_id = @post.tier_id
     @amount = @tier_id*100
-    @token = params[:stripe_card_token]
-    if current_user
-      @user = current_user
-      @transaction = @user.transactions.build(params[:transaction].merge(:price => @price).merge(:email => @user.email))
-    else
-      @transaction = Transaction.new(params[:transaction].merge(:price => @price))
-      @user = User.new(:email => params[:transaction][:email], :password => params[:password])
-    end
+    #@token = params[:transaction][:stripe_card_token]
     respond_to do |format|
       #non-user encountered form and entered credit details AND password- signing up and paying
-      if !current_user && params[:password].present?
-        if @transaction.save!
-          @user.stripe_customer_id = @transaction.save_customer(@token)
-          @user.payment(@amount)
-        #if @user.stripe_customer_id = @transaction.save_with_payment(@token)
-          #@user.save_customer
-          #@user.payment(@price)
-          # @transaction.payment(@tier_id, @price, @user)
+      if !current_user && params[:password].present?        
+        @user = User.new(:email => params[:transaction][:email], :password => params[:password])
+        #@user.save_as_customer(params[:transaction][:email], @token)
+        # @user.save_as_customer
+        @transaction = @user.transactions.build(params[:transaction].merge(:price => @amount))
+        @transaction.save_customer(@user)
+        if @transaction.save
+          @user.charge_as_customer(@amount)
           sign_in @user
-          format.js {render}
+          format.js { render }
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -72,12 +65,25 @@ class TransactionsController < ApplicationController
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
         
-      elsif current_user
-        #current_user without credit details encountered form
-        @user.stripe_customer_id = @transaction.save_with_payment
+      elsif current_user && current_user.stripe_customer_id
+      #already gots that CC info--- just charge 'em  
+        @user = current_user
+        @transaction = @user.transactions.build(params[:transaction].merge(:price => @amount).merge(:email => @user.email))
         if @transaction.save
-          @user.save_with_payment
-          #@transaction.payment(@price)
+          @user.charge_as_customer(@amount)
+          format.js { render }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        end
+      elsif current_user && !current_user.stripe_customer_id
+        #current_user without credit details encountered form
+        @user = current_user
+        @user.update_payment_details(@user.email, @token)
+        @user.charge_as_customer(@amount)
+        @transaction = @user.transactions.build(params[:transaction].merge(:price => @amount).merge(:email => @user.email))
+        if @transaction.save
+          @user.charge_as_customer(@amount)
           format.js { render }
         else
           format.html { render action: "new" }
@@ -85,19 +91,9 @@ class TransactionsController < ApplicationController
         end
       else
         #non-user encountered form and didn't enter password
+        @transaction = Transaction.new(params[:transaction].merge(:price => @amount))
         if @transaction.save
-          begin
-            # @price_cents = @price*100
-            @cents = @tier_id*100
-            charge = Stripe::Charge.create(
-              :amount => @cents, # amount in cents, again
-              :currency => "usd",
-              :card => params[:transaction][:stripe_card_token],
-              :description => params[:transaction][:email]
-            )
-          rescue Stripe::CardError => e
-            # The card has been declined
-          end 
+          @transaction.charge(amount, @token, email)
           format.js { render }
         else
           format.html { render action: "new" }

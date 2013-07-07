@@ -17,9 +17,12 @@
 //= require bootstrap
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require jquery.ui.all
+//= require jquery.modal
 //= require_self
-//=require posts.js.coffee
+//= require posts.js.coffee
 //= require_tree .
+
 
 // This identifies your website in the createToken call below
 // Stripe.setPublishableKey('meta[name="stripe-key"]').attr('content');

@@ -12,6 +12,8 @@
 
 
 =render "join_form", :group => @group
+-if current_user
+  = render :partial => 'invite', :locals => {:group => @group}
 %h2 Posts
 =render @posts
   

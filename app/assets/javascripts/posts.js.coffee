@@ -2,13 +2,43 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
-  $("#post_title").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "title is required."
-
-  $("#post_description").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "Description is required."
+	$('#new_post').enableClientSideValidations();
+	# $('#new_pos').ClientSideValidations.callbacks.element.pass = function(element, callback, eventData)
+$ ->	
+	clientSideValidations.callbacks.element.pass = ($element, callback) ->
+		console.log "Element passed", $element
+		# Allow clientSideValidations to do it's thing.
+		callback()
+		$element.parent().find(".message").effect "fade", {}, 2000, callback
+		$element.animate
+		  backgroundColor: "#f0f0f0"
+		, 1000, callback
+		# Add a success message to give the user an ego lift.
+		$element.closest("div.control-group").addClass "text-success"
+		
+		$message = $("<span class=\"message\">Great job!</span>")
+		$element.after $message
+	
+# $ ->	
+#   $("#post_title").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "title is required."
+# $ ->
+#   $("#post_description").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "Description is required."
+# $ ->
+#   $("#post_email").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "Email is required."
+# $ ->
+# 	$("#post_email").validate
+# 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
+# 		message: "Email format yo. check it: 'blah@blah.com'"
+# $ ->
+#   $("#password ").validate
+# 		expression: "if(VAL.length > 6) return true; else return false"
+# 		message: "Password should be longer than 6 characters. Rookie."
     
   # $("#car_year").validate
   #   expression: "if(VAL != '') return true; else return false;"
@@ -17,7 +47,11 @@ $(document).ready ->
   # $("#car_year").validate
   #   expression: "if(VAL.match(/^\\d\\d\\d\\d$/)) return true; else return false;"
   #   message: "Invalid format."
-
+$ ->
+	$("input[type=checkbox]#post_cash").click ->
+			$('.cash-field-cloak').toggle "slide", 1
+				direction: "right"
+	
 countChecked = ->
   n = $("input:checked").length
 	if n > 2
@@ -40,12 +74,12 @@ jQuery ->
   $("ul.token-input-list-facebook").addClass("inline")
   $("ul.token-input-list-facebook").addClass("negative-padding")
 
-$(document).ready ->
-	$("#post_tier_id}").change ->
+
+	$("#post_tier_id").change ->
 		$("input.cash-box").prop "disabled", not $("input.cash-box").prop("disabled")
-	$("input.cash-box").change ->
+	$("input#post_cash").change ->
 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled")
-		$('input.cash-box').append "<p>$</p>"
+		$('input#post_cash').append "<p>$</p>"
 		$('div#tier_explanation_wrapper').toggle "slide",
 			direction: "top"
 			, 800
