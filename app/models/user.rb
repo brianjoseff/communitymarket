@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :groups_as_member, :through => :memberships, :source => :group, :class_name => "Group", :foreign_key => :user_id
   has_many :groups_as_owner, :class_name => "Group"
   has_many :memberships, :dependent => :destroy, :foreign_key => :member_id
-  has_many :images
+  #has_many :images
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
   
