@@ -88,25 +88,32 @@ class PostsController < ApplicationController
     else
       @post = Post.new(params[:post])
       @assets = @post.assets
-      @user = User.new(:email => @post.email, :password => params[:password])
-      #if password field filled out
-        #make user
-      #end
-      if @post.save && @user.save
-        SignupMailer.new_subscriber(@user).deliver
-        sign_in @user
-        @groups = @post.groups
-        unless @groups.empty?
-          for group in @groups do
-            members = group.members
-            for member in members do
-              NewPostMailer.new_post(@user, @post, @post.product_category.name, member, group).deliver
+      if params[:password].empty?
+        @post = Post.new(params[:post])
+        if @post.save
+          redirect_to @post, notice: "Successfully created post."
+        else
+          render :new
+        end
+      else
+        @user = User.new(:email => @post.email, :password => params[:password])
+        @post = @user.posts.build(params[:post])
+        if @post.save && @user.save
+          SignupMailer.new_subscriber(@user).deliver
+          sign_in @user
+          @groups = @post.groups
+          unless @groups.empty?
+            for group in @groups do
+              members = group.members
+              for member in members do
+                NewPostMailer.new_post(@user, @post, @post.product_category.name, member, group).deliver
+              end
             end
           end
+          redirect_to @post, notice: "Successfully created post."
+        else
+          render :new
         end
-        redirect_to @post, notice: "Successfully created post."
-      else
-        render :new
       end
     end
     # respond_to do |format|
