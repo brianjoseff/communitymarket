@@ -14,8 +14,8 @@
 
 %div.row-fluid
   %div
-    = label_tag :credit_card_number
-    = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12", :id => "card_number"
+    = label_tag :credit_card_number, nil, :id => "credit_label"
+    = text_field_tag :credit_card_number,nil, :class=>"credit-number span12", :id => "card_number"
 %div.row-fluid
   %div.span4
     / = label_tag :expiry_date
@@ -26,7 +26,7 @@
   %div.span3
   %div.span2.credit-cvv
     = label_tag :cvv, "CVV"
-    = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level", :id => "card_code"
+    = text_field_tag :cvv, nil, :class=>"credit-cvv input-block-level", :id => "card_code"
 %div.row-fluid
   =f.label :email
   =f.text_field :email, :validate => true

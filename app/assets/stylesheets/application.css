@@ -60,6 +60,9 @@ input[type="text"].search-bar-field{
 #modalCredit{
 	width: 300px;
 }
+.form-title{
+	margin-left: 100px;
+}
 input.credit-number{
 	width:300px;
 }
@@ -98,4 +101,21 @@ input.credit-number{
 	width:15px;
 	height:80px;
 	float:right;
+}
+.fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+	width: 300px;
+	margin-left: 100px;
+}
+legend {
+	margin-bottom: 10px;
+}
+div.controls.credit{
+	margin-left: 0px;
+}
+
+#new-post-submit{
+	margin-top: 10px;
+	margin-left: 100px;
 }

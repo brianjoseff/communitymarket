@@ -22,6 +22,7 @@ $ ->
 	  ).success (data, status) ->
 			#update the DOM?
 			
+		false
 
 	# $('#nav')
 	#    .on 'ajax:beforeSend', 'a.modal-open', (event, xhr, settings) ->

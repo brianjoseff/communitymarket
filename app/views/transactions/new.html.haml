@@ -1,4 +1,5 @@
 / %h2#myModalLabel You need to add a credit card
+%h1 Fuck
 = simple_form_for @transaction, html: {class: 'form-horizontal'} do |f|
   - if @transaction.errors.any?
     #error_explanation
@@ -7,6 +8,6 @@
         - @transaction.errors.full_messages.each do |msg|
           %li= msg
 
-    =render 'form', f: f, post_id: :post_id
-    %div.form-actions
-      = f.button :submit, name: 'Get It', class: "btn-primary"
+  =render 'form', f: f, post_id: :post_id
+  %div.form-actions
+    = f.button :submit, name: 'Get It', class: "btn-primary"

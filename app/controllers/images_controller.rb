@@ -1,5 +1,11 @@
 class ImagesController < ApplicationController
   # before_filter :authorize
+  
+  #this is for basic image uploading. This is part of the effort to make image uploading for post creation easier.
+  #In future versions, we want iOS users to be able to take pictures of stuff
+  #and upload those pictures to the web version of People and Stuff, and then click on each image and add
+  #details to make a post.
+  
   # GET /images
   # GET /images.json
   def index

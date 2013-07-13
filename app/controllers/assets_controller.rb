@@ -1,4 +1,5 @@
 class AssetsController < ApplicationController
+  #Assets are the polymorphic object that holds multiple images for Posts, Users, Groups, etc..
   def index
     @imageable = find_imageable
     @images = @imageable.comments

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :get_search_object, :set_user
   
+  #sets user instance variable for the "new user" button in the nav
   def set_user
     if !current_user
       @user = User.new

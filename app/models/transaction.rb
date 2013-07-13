@@ -13,7 +13,7 @@ class Transaction < ActiveRecord::Base
       save!
     end
   rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}"
+    logger.error "Fuck, Stripe error while creating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
   end
@@ -54,17 +54,17 @@ class Transaction < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
     false
   end
-  def save_customer(token)
-    # p stripe_card_token
-    if valid?
-      customer = Stripe::Customer.create( :description => email, :card => token )
-      customer.id
-    end
-  rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}"
-    errors.add :base, "There was a problem with your credit card."
-    false
-  end
+  # def save_customer(token)
+  #   # p stripe_card_token
+  #   if valid?
+  #     customer = Stripe::Customer.create( :description => email, :card => token )
+  #     customer.id
+  #   end
+  # rescue Stripe::InvalidRequestError => e
+  #   logger.error "Stripe error while creating customer: #{e.message}"
+  #   errors.add :base, "There was a problem with your credit card."
+  #   false
+  # end
   
   #misnomer, where is the paymenet? When does that occur?
   # def save_customer_with_payment(tier,price)

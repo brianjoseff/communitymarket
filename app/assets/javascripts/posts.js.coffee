@@ -1,40 +1,40 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-$(document).ready ->
-	$('#new_post').enableClientSideValidations();
-	# $('#new_pos').ClientSideValidations.callbacks.element.pass = function(element, callback, eventData)
-$ ->	
-	clientSideValidations.callbacks.element.pass = ($element, callback) ->
-		console.log "Element passed", $element
-		# Allow clientSideValidations to do it's thing.
-		callback()
-		$element.parent().find(".message").effect "fade", {}, 2000, callback
-		$element.animate
-		  backgroundColor: "#f0f0f0"
-		, 1000, callback
-		# Add a success message to give the user an ego lift.
-		$element.closest("div.control-group").addClass "text-success"
-		
-		$message = $("<span class=\"message\">Great job!</span>")
-		$element.after $message
-	
+# $(document).ready ->
+# 	$('#new_post').enableClientSideValidations();
+# 	# $('#new_pos').ClientSideValidations.callbacks.element.pass = function(element, callback, eventData)
 # $ ->	
-#   $("#post_title").validate
-#     expression: "if(VAL != '') return true; else return false;"
-#     message: "title is required."
-# $ ->
-#   $("#post_description").validate
-#     expression: "if(VAL != '') return true; else return false;"
-#     message: "Description is required."
-# $ ->
-#   $("#post_email").validate
-#     expression: "if(VAL != '') return true; else return false;"
-#     message: "Email is required."
-# $ ->
-# 	$("#post_email").validate
-# 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
-# 		message: "Email format yo. check it: 'blah@blah.com'"
+# 	clientSideValidations.callbacks.element.pass = ($element, callback) ->
+# 		console.log "Element passed", $element
+# 		# Allow clientSideValidations to do it's thing.
+# 		callback()
+# 		$element.parent().find(".message").effect "fade", {}, 2000, callback
+# 		$element.animate
+# 		  backgroundColor: "#f0f0f0"
+# 		, 1000, callback
+# 		# Add a success message to give the user an ego lift.
+# 		$element.closest("div.control-group").addClass "text-success"
+# 		
+# 		$message = $("<span class=\"message\">Great job!</span>")
+# 		$element.after $message
+	
+$ ->	
+  $("#post_title").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "title is required."
+$ ->
+  $("#post_description").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "Description is required."
+$ ->
+  $("#post_email").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "Email is required."
+$ ->
+	$("#post_email").validate
+		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
+		message: "Email format yo. check it: 'blah@blah.com'"
 # $ ->
 #   $("#password ").validate
 # 		expression: "if(VAL.length > 6) return true; else return false"
@@ -51,19 +51,33 @@ $ ->
 	$("input[type=checkbox]#post_cash").click ->
 			$('.cash-field-cloak').toggle "slide", 1
 				direction: "right"
-	
-countChecked = ->
-  n = $("input:checked").length
-	if n > 2
-	  # $("div").text n + ((if n is 1 then " is" else " are")) + " checked!"
-		# make div tht pops up the credit modal
-		$("#dialog-form").dialog "open"
-	else
-		#make modal disappear
-		$("#dialog-form").dialog "close"
 
-countChecked()
-$("input[type=checkbox].checkbox").on "click", countChecked
+
+
+
+
+
+# $("input[type=checkbox].group-box").on "click", countChecked
+# countChecked= ->
+# 	n = $("form#new_post").find("input.group-box:checked").length
+#   #n = $("input:checked").length ? $("input:checked").length : 0
+# 	if n > 2
+# 	  # $("div").text n + ((if n is 1 then " is" else " are")) + " checked!"
+# 		# make div tht pops up the credit modal
+# 		#$("#dialog-form").dialog "open"
+# 		alert "pay up"
+# 	else
+# 		#make modal disappear
+# 		alert "you're good"
+# 		#$("#dialog-form").dialog "close"
+# 	
+
+
+
+
+
+
+
 
 jQuery ->
   $("#post_tag_tokens").tokenInput "/tags.json",
@@ -87,9 +101,44 @@ jQuery ->
 			direction: "right"
 
 $(document).ready ->
-  $(".group-box").change ->
-    $("div#post-credit-fields").toggle "slide",
-      direction: "right"
-    , 100
-    false
+	$(".group-box").click ->		
+		if $("form#new_post").find("input.group-box:checked").length > 2
+			$("div#post-credit-fields").toggle "slide",
+				direction: "right"
+				, 100
+		  $("#card_number").validate
+		    expression: "if(VAL != '') return true; else return false;"
+		    message: "credit card is required if you want to notify more than two groups."
+			jQuery ->	
+				Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+				transaction.setupForm()
+
+			transaction =
+				setupForm: ->
+					$("#new_post").submit ->
+						$('input[type=submit]').attr('disabled', true)
+						if $('#card_number').length
+			        transaction.processCard()
+			        false
+			      else
+			        true
+
+				processCard: ->
+					card =
+						number: $('#card_number').val()
+						cvc: $('#card_code').val()
+						exp_month: $('#card_month').val()
+						exp_year: $('#card_year').val()
+					Stripe.createToken(card, transaction.handleStripeResponse)
+
+				handleStripeResponse: (status, response) ->
+					if status == 200
+						$('#transaction_stripe_card_token').val(response.id)
+						$('#new_transaction')[0].submit()
+					else
+						alert(response.error.message)
+		else
+			$("div#post-credit-fields").hide()
+
+
 

@@ -15,12 +15,13 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require bootstrap
-//= require rails.validations
-//= require rails.validations.simple_form
+//= require groups.js.coffee
+//= require posts.js.coffee
+//= require transactions.js.coffee
+//= require jquery.validate.js
+//= require rails.validations.callbacks.js.coffee
 //= require jquery.ui.all
 //= require jquery.modal
-//= require_self
-//= require posts.js.coffee
 //= require_tree .
 
 

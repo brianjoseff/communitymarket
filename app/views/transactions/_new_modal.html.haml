@@ -14,7 +14,7 @@
     %div.modal-body
       =hidden_field_tag :post_id
     
-      =render 'form', f: f
+      =render 'transactions/form', f: f
     %div.modal-footer
       = f.button :submit, name: 'Get It', class: "btn-primary", id: "new_transaction_button"
       /=link_to "Get It", nil, :class  =>"btn-primary", :id => "new_transaction_button"

@@ -3,9 +3,9 @@ Communitymarket::Application.routes.draw do
 
 
 
-  resources :posts do
-    resources :transactions
-  end
+  # resources :posts do
+  #   resources :transactions
+  # end
   
   resources :transactions
   resources :memberships

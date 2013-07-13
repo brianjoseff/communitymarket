@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  #search implemented with Ransack gem
   def index
     @q = Group.search(params[:q])
     @groups = @q.result

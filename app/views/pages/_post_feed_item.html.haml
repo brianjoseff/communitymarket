@@ -28,35 +28,42 @@
     /BUY button:
     / %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
     -if feed_item.tier_id
-      =link_to_modal 'Buy', new_post_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
-    %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-    /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
+      -if signed_in? && current_user.stripe_customer_id.nil? == false
+        /IF: signed_in and no c#, THEN: user_credit_modal
+        =render 'user_you_sure_modal'
+
+      -elsif signed_in? && current_user.stripe_customer_id.nil?
+        /IF: signed_in and yes c# THEN: user_you_sure_modal
+       
+
+        
+        %div#transaction_modal.modal.hide
+        /=render 'user_credit_modal'
+        /set width fo this somehow
+
+      -else
+        /IF: not signed_in THEN: non_user_credit_modal
+        / %div#transaction_modal.modal.hide
+        /   = render "transactions/new_modal"
+        / %a.btn.btn-mini{"data-target" => "#transaction_modal", "data-toggle" => "modal"}
+        
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+        %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+        /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
+        /=render :partial => 'transactions/form'
+        /NONAJAX THAT WORKS:
+        /=link_to "Buy", new_transaction_path(:post_id => feed_item.id)
+    
 
 
-    -if signed_in? && current_user.stripe_customer_id.nil? == false
-      /IF: signed_in and no c#, THEN: user_credit_modal
-      =render 'user_you_sure_modal'
-    
-    -elsif signed_in? && current_user.stripe_customer_id.nil?
-      /IF: signed_in and yes c# THEN: user_you_sure_modal
-      %div#transaction_modal.modal.hide
-      /=render 'user_credit_modal'
-      /set width fo this somehow
-    
-    -else
-      /IF: not signed_in THEN: non_user_credit_modal
-      %div#transaction_modal.modal.hide
-      /=render :partial => 'transactions/form'
-    
-    / =link_to "Buy", new_transaction_path(:post_id => feed_item.id, :tier_id => feed_item.tier_id, :price => feed_item.price, :premium => feed_item.premium?, :notify_premium => nil)
-    
-    / -if signed_in? && current_user.stripe_customer_id.nil? == false
-    /   %div.buy_modal.modal{:role => "dialog",:style=>"display:none"}
-    /     =render 'user_you_sure_modal'
-    / -elsif signed_in? && current_user.stripe_customer_id.nil?
-    /   =render 'user_credit_modal'
-    / -else
-    /   =render 'non_user_credit_modal'
+
+/ -if signed_in? && current_user.stripe_customer_id.nil? == false
+/   %div.buy_modal.modal{:role => "dialog",:style=>"display:none"}
+/     =render 'user_you_sure_modal'
+/ -elsif signed_in? && current_user.stripe_customer_id.nil?
+/   =render 'user_credit_modal'
+/ -else
+/   =render 'non_user_credit_modal'
 
 
 

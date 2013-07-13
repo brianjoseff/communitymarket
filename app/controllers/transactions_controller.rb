@@ -28,7 +28,14 @@ class TransactionsController < ApplicationController
     @user = User.new
     flash[:the_post_id] = params[:post_id]
     respond_to do |format|
-      format.html { render 'new_modal', layout: false } if request.xhr?
+      format.html # new.html.erb
+      format.json { render json: @transaction }
+      # if request.xhr?
+      #    format.html { render 'new_modal'}
+      #  else
+      #    format.html
+      #    #format.json { render :json => @transaction }
+      #  end
     end
   end
 
@@ -41,10 +48,15 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   
   def create
-    @post = Post.where(:id => flash[:the_post_id]).first
+    if @post = Post.where(:id => flash[:the_post_id]).first
     #@price = @post.price
-    @tier_id = @post.tier_id
-    @amount = @tier_id*100
+      @tier_id = @post.tier_id
+      @amount = @tier_id*100
+    else
+      @amount = 1000
+    end
+    
+    #@token = flash[:token]
     #@token = params[:transaction][:stripe_card_token]
     respond_to do |format|
       #non-user encountered form and entered credit details AND password- signing up and paying
@@ -52,12 +64,14 @@ class TransactionsController < ApplicationController
         @user = User.new(:email => params[:transaction][:email], :password => params[:password])
         #@user.save_as_customer(params[:transaction][:email], @token)
         # @user.save_as_customer
-        @transaction = @user.transactions.build(params[:transaction].merge(:price => @amount))
+        @transaction = @user.transactions.new(params[:transaction].merge(:price => @amount))
         @transaction.save_customer(@user)
-        if @transaction.save
+        # customer = Stripe::Customer.create( :description => email, :card => params[:stripe_card_token])
+        # @user.stripe_customer_id = customer.id
+        if @transaction.save && @user.save
           @user.charge_as_customer(@amount)
-          sign_in @user
-          format.js { render }
+          #sign_in @user
+          #format.js { render }
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -130,4 +144,5 @@ class TransactionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
 end

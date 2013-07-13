@@ -65,7 +65,11 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @categories = PostCategory.all
-    
+    if !current_user && params[:password].present?
+    elsif current_user && current_user.stripe_customer_id
+    elsif current_user && !current_user.stripe_customer_id
+    else
+    end
     if signed_in?
       @user = current_user
       @post = @user.posts.build(params[:post])
@@ -85,6 +89,7 @@ class PostsController < ApplicationController
       else
         render :new
       end
+
     else
       @post = Post.new(params[:post])
       @assets = @post.assets

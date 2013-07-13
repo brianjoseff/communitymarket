@@ -125,7 +125,8 @@
 /     %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
 /   %div#tier_arrow
 / =form_for @post.new_record? ? setup_post(@post, @group) : @post, :validate => true, :html => { :multipart => true, :class => "form-horizontal nonuser-post"} do |f|
-=form_for   @post, :html => { :multipart => true, :class => "form-horizontal nonuser-post"} do |f|
+%h1 fuckers
+=form_for   @post, :validate => true, :html => { :multipart => true, :class => "form-horizontal nonuser-post"}do |f|
   - if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
@@ -137,18 +138,18 @@
   /POST TITLE
   %div.control-group
     =f.label :title, :class => "control-label"
-    %div.controls
+    %div.controls.post-form
       = f.text_field :title, :class => "input-block-level inline", :placeholder => "Perfectly Functional Dorm Fridge"
       
   /DESCRIPTION    
   %div.control-group
     =f.label :description, :class => "control-label"
-    %div.controls
+    %div.controls.post-form
       = f.text_area :description, :class => "input-block-level inline", :placeholder => "An Amish father and son are in a mall for the first time. They watch an old, grizzled woman walk into an elevator. Doors close. Minute later, doors open and a buxom blonde saunters out. The man turns to his son and says, 'Zebediah, get your mother, quick!'.... This fridge is the same. It works magic.", :rows => "8"
   /EMAIL AND PASSWORD FIELDS    
   %div.control-group
     =f.label :email, :class => "control-label"
-    %div.controls
+    %div.controls.post-form
       = f.text_field :email, :class => "input-block-level inline", :placeholder =>"brian@chyeah.com", :validates => :email_format
       
   
@@ -161,7 +162,7 @@
       
   %div.control-group
     =label_tag "password", nil,class: "control-label"
-    %div.controls
+    %div.controls.post-form
       =password_field_tag 'password', nil,:class => "input-block-level inline", :placeholder =>"password" 
       
   /TIER and CASH MONEY FIELDS         
@@ -169,7 +170,7 @@
     %div.span7
       %div.control-group
         =f.label :tier, "Get Paid", :class=>"control-label"
-        %div.controls#tier_field
+        %div.controls.post-form#tier_field
           = f.collection_select(:tier_id, Tier.all, :id, :name, :prompt => "Choose a value for your post", :class => "inline")
     %div.span5
       %div.span1
@@ -201,7 +202,7 @@
           -if asset_fields.object.image_file_name.nil?
             %div.control-group
               =asset_fields.label "image", :class=>"control-label"
-              %div.controls
+              %div.controls.post-form
                 =asset_fields.file_field :image
           -else
             /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'

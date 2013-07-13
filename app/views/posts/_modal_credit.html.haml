@@ -1,33 +1,43 @@
-%div#modalCredit
-  -if @user.stripe_customer_id
-    #change-card.clearfix
-      %label Card
-      .input
-        %span
-          Using card ending with
-          \#{@user.stripe_customer_id}
-          \#{link_to "(change)", "#"}
-        
-  %noscript
-    %p This form requires Javascript to use
-  #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
-    #credit-card-errors{:style => "display:none"}
-      #stripe-error-message.alert-message.block-message.error
-    / these fields are disabled before submission and are never transmitted back to rails
+%div.row-fluid
+  %fieldset.fieldset
+    %legend Credit Card Stuff
+    %div#modalCredit
+      -if @user.stripe_customer_id
+        #change-card.clearfix
+          %label Card
+          .input
+            %span
+              Using card ending with
+              \#{@user.stripe_customer_id}
+              \#{link_to "(change)", "#"}
+      
+      %noscript
+        %p This form requires Javascript to use
+      #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
+        #credit-card-errors{:style => "display:none"}
+          #stripe-error-message.alert-message.block-message.error
+        / these fields are disabled before submission and are never transmitted back to rails
 
-  %div.row-fluid
-    = label_tag :credit_card_number
-    = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12"
-  %div.row-fluid
-    %div.span6
-      = label_tag :expiry_date
-      = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
-    %div.span3
-    %div.span3.credit-cvv
-      = label_tag :cvv, "CVV"
-      = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
+      %div.row-fluid
+        %div.control-group
+    
+          %div.controls.credit
+            = label_tag :credit_card_number
+            = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12", :id => "card_number"
+      %div.row-fluid
+        %div.span9.control-group
+    
+          %div.controls.credit
+            = label_tag :expiry_date
+            = select_month nil, {:add_month_numbers => true}, {:name => nil, :id => "card_month", :class => "credit-expiry inline"}
+            = select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => "card_year", :class => "credit-expiry inline"}
+            /= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+        %div.span3.credit-cvv.control-group
+          = label_tag :cvv, "CVV"
 
-  
-  / empty
-  %span.note
-  Your credit card details will be sent directly to our payment processor
+          = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level"
+
+
+        / empty
+        %span.note
+        Your credit card details will be sent directly to our payment processor

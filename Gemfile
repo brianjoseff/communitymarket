@@ -28,8 +28,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+#ENV variable management
 gem 'figaro'
 
+#form gems- validations etc.
 gem 'simple_form'
 gem 'client_side_validations' , '~> 3.2.0'
 gem 'client_side_validations-simple_form'
@@ -37,16 +39,28 @@ gem 'client_side_validations-simple_form'
 gem 'will_paginate'
 gem 'rails_tokeninput'
 gem 'stripe'
+
+#gems that help with seed files
 gem 'forgery'
 gem 'faker'
-gem 'bootstrap-sass'
 
+gem 'bootstrap-sass'
 gem 'jquery-rails'
+
+#search gem
 gem 'ransack'
+
+#auth gem
 gem 'clearance'
+
+#image uploading
 gem 'paperclip'
 gem 'aws-sdk'
+
+#heroku db compatibility
 gem 'pg'
+
+#transactional email
 gem 'mandrill-api'
 
 
@@ -64,6 +78,7 @@ gem 'mandrill-api'
 
 # To use debugger
 # gem 'debugger'
+
 
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
