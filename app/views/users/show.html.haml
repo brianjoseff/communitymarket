@@ -18,10 +18,14 @@
     %tr
       %td #{post.title}
       %td #{time_ago_in_words(post.created_at)} ago
-      %td 
+      %td #{post.active}
       %td
         = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
         = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+        -if post.active?
+          = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-danger'
+        -else
+          = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
 
 = link_to 'Edit', edit_user_path(@user)
 \|

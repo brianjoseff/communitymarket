@@ -64,72 +64,75 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @categories = PostCategory.all
+    #@categories = PostCategory.all
+    
     if !current_user && params[:password].present?
-    elsif current_user && current_user.stripe_customer_id
-    elsif current_user && !current_user.stripe_customer_id
-    else
-    end
-    if signed_in?
+      @user = User.new(:email => params[:post][:email], :password => params[:password])
+      @post = @user.posts.new(params[:post])
+      if params[:credit_card_number].present?
+        @transaction = @user.transactions.new(:email => @user.email)
+        @post.save_customer(@user)
+        @user.charge_as_customer(@amount)
+      end
+      if @post.save && @user.save
+        SignupMailer.new_subscriber(@user).deliver
+        sign_in @user
+        redirect_to @post, notice: "Successfully created post."
+      else
+        render :new
+      end
+    elsif current_user
       @user = current_user
-      @post = @user.posts.build(params[:post])
+      @post = @user.posts.new(params[:post])
       @post.email = @user.email
-      @assets = @post.assets
-      if @post.save
+      if params[:credit_card_number].present?
+        @amount = 300
+        if @user.stripe_customer_id
+          @transaction = @user.transactions.new(:email => @user.email)
+          @user.charge_as_customer(@amount)
+        else
+          @transaction = @user.transactions.new
+          @transaction.email = @user.email
+          @transaction.price = @amount
+          @post.save_customer(@user)
+          @user.charge_as_customer(@amount)
+        end
+      end
+      if @post.save        
+        #!!!!!!!!!!
+        #need to add a dedupe process here
         @groups = @post.groups
+        #all_members = []
         unless @groups.empty?
           for group in @groups do
             members = group.members
+            #all_members << members
             for member in members do
-              NewPostMailer.notify(@user, @post, @post.post_category.name, member, group).deliver
+              NewPostMailer.notify(@user, @post, member, group).deliver
             end
           end
+          # all_members.uniq
+          # for member in all_members do
+          #   NewPostMailer.notify(@user, @post, member, group).deliver
+          # end
         end
         redirect_to @post, notice: "Successfully created post."
       else
         render :new
       end
-
+    #non-signed in muthafuckas who didn't fill in the password field
     else
       @post = Post.new(params[:post])
-      @assets = @post.assets
-      if params[:password].empty?
-        @post = Post.new(params[:post])
-        if @post.save
-          redirect_to @post, notice: "Successfully created post."
-        else
-          render :new
-        end
+      if params[:credit_card_number].present?
+        @user.save_as_customer
+        @user.charge(@amount)
+      end
+      if @post.save
+        redirect_to @post, notice: "Successfully created post."
       else
-        @user = User.new(:email => @post.email, :password => params[:password])
-        @post = @user.posts.build(params[:post])
-        if @post.save && @user.save
-          SignupMailer.new_subscriber(@user).deliver
-          sign_in @user
-          @groups = @post.groups
-          unless @groups.empty?
-            for group in @groups do
-              members = group.members
-              for member in members do
-                NewPostMailer.new_post(@user, @post, @post.product_category.name, member, group).deliver
-              end
-            end
-          end
-          redirect_to @post, notice: "Successfully created post."
-        else
-          render :new
-        end
+        render :new
       end
     end
-    # respond_to do |format|
-    #       if @post.save
-    #         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-    #         format.json { render json: @post, status: :created, location: @post }
-    #       else
-    #         format.html { render action: "new" }
-    #         format.json { render json: @post.errors, status: :unprocessable_entity }
-    #       end
-    #     end
   end
 
   # PUT /posts/1
@@ -156,6 +159,23 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to posts_url }
+      format.json { head :no_content }
+    end
+  end
+  
+  def deactivate
+    @post = Post.find(params[:id])
+    @post.update_attribute(:active, false)
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
+  def reactivate
+    @post = Post.find(params[:id])
+    @post.update_attribute(:active, true)
+    respond_to do |format|
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

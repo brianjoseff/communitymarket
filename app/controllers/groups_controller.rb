@@ -63,6 +63,7 @@ class GroupsController < ApplicationController
   # PUT /groups/1.json
   def update
     @group = Group.find(params[:id])
+    params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
 
     respond_to do |format|
       if @group.update_attributes(params[:group])

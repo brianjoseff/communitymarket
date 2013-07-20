@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130701050029) do
+ActiveRecord::Schema.define(:version => 20130717234716) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -74,11 +74,12 @@ ActiveRecord::Schema.define(:version => 20130701050029) do
     t.integer  "user_id"
     t.integer  "post_category_id"
     t.boolean  "premium"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "email"
     t.boolean  "cash"
     t.integer  "price"
+    t.boolean  "active",           :default => true
   end
 
   create_table "taggings", :force => true do |t|

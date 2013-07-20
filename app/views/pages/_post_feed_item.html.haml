@@ -27,6 +27,7 @@
     
     /BUY button:
     / %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+    %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
     -if feed_item.tier_id
       -if signed_in? && current_user.stripe_customer_id.nil? == false
         /IF: signed_in and no c#, THEN: user_credit_modal
@@ -48,7 +49,7 @@
         / %a.btn.btn-mini{"data-target" => "#transaction_modal", "data-toggle" => "modal"}
         
         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
-        %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+        /%a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
         /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
         /=render :partial => 'transactions/form'
         /NONAJAX THAT WORKS:

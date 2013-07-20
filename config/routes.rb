@@ -33,6 +33,10 @@ Communitymarket::Application.routes.draw do
   resource :session, controller: 'sessions'
 
   resources :posts do
+    member do
+      get :deactivate
+      get :reactivate
+    end
     resources :assignments
   end
   

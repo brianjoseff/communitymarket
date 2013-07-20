@@ -10,6 +10,11 @@
   %b Group category:
   = @group.group_category
 
+-@group.members.each do |member|
+  %p=member.email
+  
+end
+
 
 =render "join_form", :group => @group
 -if current_user

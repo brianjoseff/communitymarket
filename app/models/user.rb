@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   #   errors.add :base, "There was a problem with your credit card."
   #   false
   # end
-  
+
   def charge_as_customer(amount)
     customer_id = Stripe::Customer.retrieve(self.stripe_customer_id)
     Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => customer_id)

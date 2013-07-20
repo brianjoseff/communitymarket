@@ -99,7 +99,35 @@ jQuery ->
 			, 800
 		$('.cash-field-cloak').toggle "slide", 1
 			direction: "right"
+jQuery ->	
+	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+	transaction.setupForm()
 
+transaction =
+	setupForm: ->
+		$("#new_post").submit ->
+			$('input[type=submit]').attr('disabled', true)
+			if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length
+				transaction.processCard()
+				false
+			else
+				true
+
+	processCard: ->
+		card =
+			number: $('#card_number').val()
+			cvc: $('#card_code').val()
+			exp_month: $('#card_month').val()
+			exp_year: $('#card_year').val()
+		Stripe.createToken(card, transaction.handleStripeResponse)
+
+	handleStripeResponse: (status, response) ->
+		if status == 200
+			$('#post_stripe_card_token').val(response.id)
+			$('#new_post')[0].submit()
+		else
+			alert(response.error.message)
+			$('input[type=submit]').attr('disabled', false)
 $(document).ready ->
 	$(".group-box").click ->		
 		if $("form#new_post").find("input.group-box:checked").length > 2
@@ -109,34 +137,7 @@ $(document).ready ->
 		  $("#card_number").validate
 		    expression: "if(VAL != '') return true; else return false;"
 		    message: "credit card is required if you want to notify more than two groups."
-			jQuery ->	
-				Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-				transaction.setupForm()
 
-			transaction =
-				setupForm: ->
-					$("#new_post").submit ->
-						$('input[type=submit]').attr('disabled', true)
-						if $('#card_number').length
-			        transaction.processCard()
-			        false
-			      else
-			        true
-
-				processCard: ->
-					card =
-						number: $('#card_number').val()
-						cvc: $('#card_code').val()
-						exp_month: $('#card_month').val()
-						exp_year: $('#card_year').val()
-					Stripe.createToken(card, transaction.handleStripeResponse)
-
-				handleStripeResponse: (status, response) ->
-					if status == 200
-						$('#transaction_stripe_card_token').val(response.id)
-						$('#new_transaction')[0].submit()
-					else
-						alert(response.error.message)
 		else
 			$("div#post-credit-fields").hide()
 

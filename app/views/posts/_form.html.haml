@@ -129,7 +129,7 @@
         - @post.errors.full_messages.each do |msg|
           %li= msg
 
-
+  =f.hidden_field :stripe_card_token
   /POST TITLE
   %div.control-group
     =f.label :title, :class => "control-label"
@@ -206,17 +206,18 @@
         =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
           =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box checkbox"}, '0','1'
           =ff.object.group.name.humanize
+          (#{ff.object.group.members.count} members) 
         
           =ff.hidden_field :group_id
             
-  /STRIPE INTEGRATION FOR CREATING A CUSTOMER      
-  %div#post-credit-fields{:style=>"display:none"}      
-    =render 'modal_credit', user: @user
-    %div.row
-
-    / .field
-    /   = f.label :premium
-    /   = f.check_box :premium
+  /STRIPE INTEGRATION FOR CREATING A CUSTOMER
+  -unless @user.stripe_customer_id      
+    %div#post-credit-fields{:style=>"display:none"}      
+      =render 'modal_credit', user: @user
+      %div.row
+      / .field
+      /   = f.label :premium
+      /   = f.check_box :premium
   %div.control-group#new-post-submit
     = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
 
