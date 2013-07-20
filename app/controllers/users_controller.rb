@@ -22,34 +22,34 @@ class UsersController < ApplicationController
     end
   end
   
-  def new_modal
-    @user = User.new(params[:user])
-    
-    if params[:user][:password].nil?
-      # charge card
-
-      # get the credit card details submitted by the form
-      token = params[:stripeToken]
-
-      # create the charge on Stripe's servers - this will charge the user's card
-      charge = Stripe::Charge.create(
-        :amount => 1000, # amount in cents, again
-        :currency => "usd",
-        :card => token,
-        :description => params[:email]
-      )
-      
-    else
-      # create user
-      token = params[:stripeToken]
-      if @user.save_with_payment(token)
-        @user.payment()
-      else
-        #error message
-      end
-      #create customer and charge
-    end
-  end
+  # def new_modal
+  #   @user = User.new(params[:user])
+  #   
+  #   if params[:user][:password].nil?
+  #     # charge card
+  # 
+  #     # get the credit card details submitted by the form
+  #     token = params[:stripeToken]
+  # 
+  #     # create the charge on Stripe's servers - this will charge the user's card
+  #     charge = Stripe::Charge.create(
+  #       :amount => 1000, # amount in cents, again
+  #       :currency => "usd",
+  #       :card => token,
+  #       :description => params[:email]
+  #     )
+  #     
+  #   else
+  #     # create user
+  #     token = params[:stripeToken]
+  #     if @user.save_with_payment(token)
+  #       @user.payment()
+  #     else
+  #       #error message
+  #     end
+  #     #create customer and charge
+  #   end
+  # end
   
   
   # GET /users/new
@@ -58,10 +58,23 @@ class UsersController < ApplicationController
     @user = User.new
 
     respond_to do |format|
-      format.html { render 'new_modal', layout: false } if request.xhr?
+      #format.html { render 'new_modal', layout: false } if request.xhr?
+      format.html
+      format.js
       #format.json { render json: @user }
     end
   end
+  
+  def new_modal
+    @user = User.new
+
+    respond_to do |format|
+      format.html { render 'new_modal', layout: false } if request.xhr?
+      #format.js
+      format.json { render json: @user }
+    end
+  end
+  
 
   # GET /users/1/edit
   def edit

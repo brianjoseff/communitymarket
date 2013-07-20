@@ -13,16 +13,18 @@ Communitymarket::Application.routes.draw do
   resources :tags
 
   resources :users do
-    member do
-      put :update_dom
+    collection do
+      get :new_modal
     end
-  end
-
-  resources :users do
     resources :posts
     resources :groups
   end
   
+  get 'users/new_modal'
+  
+  # member do
+  #   get :new_modal
+  # end
   
   resources :images
   resources :group_categories
