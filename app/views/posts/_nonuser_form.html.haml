@@ -1,4 +1,6 @@
-/NON-USER FORM:
+//////////////////////////////
+/////// NON-USER FORM  ///////
+//////////////////////////////
 /only needs to enter these fields:
 /post category
 /title
@@ -6,6 +8,10 @@
 /description
 /tags
 /email field
+
+/opt: password field...signs them up on successful post creation
+
+
 / = form_for @post.new_record? ? setup_post(@post, @group) : @post, :html => { :multipart => true, :class => "form-horizontal nonuser-post"} do |f|
 /   - if @post.errors.any?
 /     #error_explanation
@@ -181,7 +187,7 @@
           %div.controls#cash-box
             =f.check_box :cash, :class => "input-block-level inline cash-box"
         %div.cash-field-cloak{:style=>"display:none"}
-          %div.span5.cash-field
+          %div.cash-field
             $
             =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
 
@@ -221,7 +227,4 @@
   %div.control-group
     = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
     
-%div#tier_explanation_wrapper
-  %div#tier_explanation
-    %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
-  %div#tier_arrow
+

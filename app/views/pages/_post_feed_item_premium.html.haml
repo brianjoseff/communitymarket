@@ -1,0 +1,148 @@
+/ /THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
+/ /OK?
+/ /GOOD.
+/ %div.feed-item.row-fluid
+/   %div.image.span2
+/     =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.title), post_url(feed_item)
+/   %div.span8
+/     %div.row-fluid
+/       /price
+/       /make price a variable that can be passed into the modal partials below so
+/       /that on credit card charge, we know how much to charge
+/       %span.feed-title
+/         .feed-title= link_to feed_item.title, post_url(feed_item)
+/     %div.row-fluid.description-row
+/       %span.description
+/         = truncate(feed_item.description, 25)
+/     %div.row-fluid.tag-row
+/       -feed_item.tags.each do |tag|
+/         =link_to tag.name, tag_url(tag), :class => "tag"
+/       %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+/   %div.span2
+/     / -if feed_item.price?
+/     /   /email button
+/     /   %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"}$ #{feed_item.price} | Email
+/     / -else
+/   
+/     /BUY button:
+/     / %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+/     %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+/     -if feed_item.tier_id
+/       -if signed_in? && current_user.stripe_customer_id.nil? == false
+/         /IF: signed_in and no c#, THEN: user_credit_modal
+/         =render 'user_you_sure_modal'
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/       -elsif signed_in? && current_user.stripe_customer_id.nil?
+/         /IF: signed_in and yes c# THEN: user_you_sure_modal
+/      
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/       
+/         %div#transaction_modal.modal.hide
+/         /=render 'user_credit_modal'
+/         /set width fo this somehow
+/ 
+/       -else
+/         /IF: not signed_in THEN: non_user_credit_modal
+/         / %div#transaction_modal.modal.hide
+/         /   = render "transactions/new_modal"
+/         / %a.btn.btn-mini{"data-target" => "#transaction_modal", "data-toggle" => "modal"}
+/       
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+/         /%a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+/         /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
+/         /=render :partial => 'transactions/form'
+/         /NONAJAX THAT WORKS:
+/         /=link_to "Buy", new_transaction_path(:post_id => feed_item.id)
+/     
+/ 
+/ 
+/ 
+/ / -if signed_in? && current_user.stripe_customer_id.nil? == false
+/ /   %div.buy_modal.modal{:role => "dialog",:style=>"display:none"}
+/ /     =render 'user_you_sure_modal'
+/ / -elsif signed_in? && current_user.stripe_customer_id.nil?
+/ /   =render 'user_credit_modal'
+/ / -else
+/ /   =render 'non_user_credit_modal'
+/ 
+/ 
+/ 
+/ 
+/ 
+/ 
+/ / - if current_user?(feed_item.user)
+/ /   = link_to "delete", feed_item, method:  :delete, confirm: "You sure?",title:   feed_item.content
+/THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
+/OK?
+/GOOD.
+%div.feed-item.row-fluid
+  %div.row-fluid
+    %div.image.span2
+      =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.title), post_url(feed_item)
+    %div.span8
+      %div.row-fluid
+        /price
+        /make price a variable that can be passed into the modal partials below so
+        /that on credit card charge, we know how much to charge
+        %span.feed-title
+          .feed-title= link_to feed_item.title, post_url(feed_item)
+      %div.row-fluid.description-row
+        %span.description
+          = truncate(feed_item.description, 25)
+    %div.span2
+      / -if feed_item.price?
+      /   /email button
+      /   %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"}$ #{feed_item.price} | Email
+      / -else
+  
+      /BUY button:
+      / %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
+      %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+      -if feed_item.tier_id
+        -if signed_in? && current_user.stripe_customer_id.nil? == false
+          /IF: signed_in and no c#, THEN: user_credit_modal
+          =render 'user_you_sure_modal'
+          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+        -elsif signed_in? && current_user.stripe_customer_id.nil?
+          /IF: signed_in and yes c# THEN: user_you_sure_modal
+     
+          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+      
+          %div#transaction_modal.modal.hide
+          /=render 'user_credit_modal'
+          /set width fo this somehow
+
+        -else
+          /IF: not signed_in THEN: non_user_credit_modal
+          / %div#transaction_modal.modal.hide
+          /   = render "transactions/new_modal"
+          / %a.btn.btn-mini{"data-target" => "#transaction_modal", "data-toggle" => "modal"}
+      
+          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+          /%a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+          /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
+          /=render :partial => 'transactions/form'
+          /NONAJAX THAT WORKS:
+          /=link_to "Buy", new_transaction_path(:post_id => feed_item.id)
+    
+
+
+
+  / -if signed_in? && current_user.stripe_customer_id.nil? == false
+  /   %div.buy_modal.modal{:role => "dialog",:style=>"display:none"}
+  /     =render 'user_you_sure_modal'
+  / -elsif signed_in? && current_user.stripe_customer_id.nil?
+  /   =render 'user_credit_modal'
+  / -else
+  /   =render 'non_user_credit_modal'
+
+  %div.row-fluid.tag-row
+    -feed_item.tags.each do |tag|
+      =link_to tag.name, tag_url(tag), :class => "tag"
+    %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+
+
+
+
+  / - if current_user?(feed_item.user)
+  /   = link_to "delete", feed_item, method:  :delete, confirm: "You sure?",title:   feed_item.content

@@ -29,7 +29,7 @@
     
           %div.controls.credit
             = label_tag :expiry_date
-            = select_month nil, {:add_month_numbers => true}, {:name => nil, :id => "card_month", :class => "credit-expiry inline"}
+            = select_month nil, {:add_month_numbers => true, :use_short_month => true}, {:name => nil, :id => "card_month", :class => "credit-expiry inline span6"}
             = select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => "card_year", :class => "credit-expiry inline"}
             /= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
         %div.span3.credit-cvv.control-group

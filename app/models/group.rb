@@ -10,4 +10,6 @@ class Group < ActiveRecord::Base
   belongs_to :group_category
   has_many :assignments
   has_many :posts,      :through => :assignments
+  
+  validates :name, :presence => true
 end

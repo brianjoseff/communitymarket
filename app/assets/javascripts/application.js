@@ -12,17 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require jquery.tokeninput
+//= require jquery.ui.all
+//= require jquery-ui
 //= require bootstrap
 //= require groups.js.coffee
 //= require posts.js.coffee
 //= require transactions.js.coffee
 //= require jquery.validate.js
 //= require rails.validations.callbacks.js.coffee
-//= require jquery.ui.all
 //= require jquery.modal
 //= require_tree .
+
+//dont include these
+
 
 
 // This identifies your website in the createToken call below

@@ -79,6 +79,8 @@ gem 'mandrill-api'
 # To use debugger
 # gem 'debugger'
 
+gem "localtunnel"
+
 
 gem "haml", ">= 3.0.0"
 gem "haml-rails"

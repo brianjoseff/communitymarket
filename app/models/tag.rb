@@ -1,7 +1,9 @@
 class Tag < ActiveRecord::Base
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :follower_ids
   has_many :taggings
   has_many :posts, :through=> :taggings
+  has_many :followships, :foreign_key => :followed_id
+  has_many :followers, through: :followships, source: :follower, :foreign_key => :follower_id
   
   
   def self.tokens(query)

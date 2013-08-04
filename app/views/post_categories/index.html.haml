@@ -1,0 +1,19 @@
+%h1 Listing Post Categories
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @post_categories.each do |post_category|
+    %tr
+      %td= post_category.name
+      %td= link_to 'Show', post_category
+      %td= link_to 'Edit', edit_post_category_path(post_category)
+      %td= link_to 'Destroy', post_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New post_category', new_post_category_path

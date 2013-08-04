@@ -1,10 +1,32 @@
-%ol
-  -if feed_items
-    -if feed_items.first.is_a?(Post)
-      =render :partial => 'post_feed_item', :collection => feed_items, :as => :feed_item
-    -else
-      =render :partial => 'group_feed_item', :collection => feed_items, :as => :feed_item
-    
-    =will_paginate feed_items
+/ %ul
+/   -if feed_items
+/     -if feed_items.first.is_a?(Post)
+/       =render :partial => 'post_feed_item', :collection => feed_items, :as => :feed_item
+/     -else
+/       =render :partial => 'group_feed_item', :collection => feed_items, :as => :feed_item
+/     
+/     =will_paginate feed_items
+/   -else
+/     %p no array
+
+/ -if feed_items
+/   -if feed_items.first.is_a?(Post)
+/     =render :partial => 'post_feed_item', :collection => feed_items, :as => :feed_item
+/   -else
+/     =render :partial => 'group_feed_item', :collection => feed_items, :as => :feed_item
+/   
+/   =will_paginate feed_items
+/ -else
+/   %p no array
+  
+  
+  
+-if feed_items
+  -if feed_items.first.is_a?(Post)
+    =render :partial => 'post_feed', :collection => feed_items, :as => :feed_item
   -else
-    %p no array
+    =render :partial => 'group_feed_item', :collection => feed_items, :as => :feed_item
+
+  =will_paginate feed_items
+-else
+  %p no array

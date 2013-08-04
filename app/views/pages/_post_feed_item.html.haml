@@ -1,7 +1,7 @@
 /THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
 /OK?
 /GOOD.
-%li.feed_item.row-fluid
+%div.feed-item.row-fluid
   %div.image.span3
     =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.title), post_url(feed_item)
   %div.span6
@@ -11,10 +11,10 @@
       /that on credit card charge, we know how much to charge
       %span.feed-title
         = link_to feed_item.title, post_url(feed_item)
-    %div.row-fluid
+    %div.row-fluid.description-row
       %span.description
         = truncate(feed_item.description, 25)
-    %div.row-fluid
+    %div.row-fluid.tag-row
       -feed_item.tags.each do |tag|
         =link_to tag.name, tag_url(tag), :class => "tag"
     %div.row-fluid.timestamp
@@ -32,11 +32,11 @@
       -if signed_in? && current_user.stripe_customer_id.nil? == false
         /IF: signed_in and no c#, THEN: user_credit_modal
         =render 'user_you_sure_modal'
-
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
       -elsif signed_in? && current_user.stripe_customer_id.nil?
         /IF: signed_in and yes c# THEN: user_you_sure_modal
        
-
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
         
         %div#transaction_modal.modal.hide
         /=render 'user_credit_modal'

@@ -1,4 +1,6 @@
 @import "bootstrap";
+$baseFontFamily: "Open Sans", sans-serif !default;
+
 .form-horizontal .control-label{
 	width: 80px;
 }
@@ -34,4 +36,11 @@
 
 .group-buttons{
 	padding-top:10px;
+}
+
+.nav-pills > .active > a{
+	background-color: #f98275;
+}
+.nav-pills > li > a:hover{
+	background-color: #ffc0b9;
 }

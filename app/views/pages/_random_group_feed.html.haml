@@ -1,0 +1,12 @@
+%div.row-fluid
+  -feed_items.each do |feed_item|
+    %div.feed_item
+      %div.span10
+        %div.row-fluid
+          %span.feed-title
+            = link_to feed_item.name, group_url(feed_item)
+        %div.row-fluid
+          %span.description
+            = truncate(feed_item.description, 10)
+      %div.span2
+        = render "groups/join_form", :group => feed_item

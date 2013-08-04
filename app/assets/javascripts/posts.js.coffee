@@ -1,24 +1,88 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+# monify = ->
+# 	if $("form#new_post").find("input.group-box:checked").length > 2
+# 		$("div#post-credit-fields").show "slide",
+# 			direction: "right"
+# 			, 100
+# 		$("#card_number").validate
+# 	    expression: "if(VAL != '') return true; else return false;"
+# 	    message: "credit card is required if you want to notify more than two groups."
+# 	else
+# 		$("div#post-credit-fields").hide
+
 # $(document).ready ->
-# 	$('#new_post').enableClientSideValidations();
-# 	# $('#new_pos').ClientSideValidations.callbacks.element.pass = function(element, callback, eventData)
-# $ ->	
-# 	clientSideValidations.callbacks.element.pass = ($element, callback) ->
-# 		console.log "Element passed", $element
-# 		# Allow clientSideValidations to do it's thing.
-# 		callback()
-# 		$element.parent().find(".message").effect "fade", {}, 2000, callback
-# 		$element.animate
-# 		  backgroundColor: "#f0f0f0"
-# 		, 1000, callback
-# 		# Add a success message to give the user an ego lift.
-# 		$element.closest("div.control-group").addClass "text-success"
-# 		
-# 		$message = $("<span class=\"message\">Great job!</span>")
-# 		$element.after $message
+#   $checkboxes = $("input[type=\"checkbox\"].group-box")
+#   $checkboxes.change ->
+#     countCheckedCheckboxes = $checkboxes.filter(":checked").length
+# 		if countCheckedCheckboxes > 2
+# 			$("div#post-credit-fields").show "slide",
+# 				direction: "right"
+# 				, 100
+# 			$("#card_number").validate
+# 		    expression: "if(VAL != '') return true; else return false;"
+# 		    message: "credit card is required if you want to notify more than two groups."
+# 		else
+# 			$("div#post-credit-fields").hide
+countChecked = ->
+	n = $("input.group-box:checked").length
+	if n > 2
+		$("div#post-credit-fields").show()
+	else
+		$("div#post-credit-fields").hide()
 	
+
+
+$ ->
+	$("input.group-box").on "click", countChecked
+
+
+$ ->
+	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
+	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
+	  $this = $(this)
+	  if $(this).attr("class-toggle") isnt `undefined` and not $(this).hasClass("disabled")
+	    btnGroup = $this.parent(".btn-group")
+	    btnToggleClass = $this.attr("class-toggle")
+	    btnCurrentClass = $this.hasAnyClass(buttonClasses)
+	    if btnGroup.attr("data-toggle") is "buttons-radio"
+	      return false  if $this.hasClass("active")
+	      activeButton = btnGroup.find(".btn.active")
+	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
+	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
+	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
+
+	$.fn.hasAnyClass = (classesToCheck) ->
+	  i = 0
+
+	  while i < classesToCheck.length
+	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
+	    i++
+	  false
+
+$ ->
+	$(".switch").click (e) ->
+		e.preventDefault()
+		$("#post_cateogry_button_value").val $(this).data "id"
+			
+# $ ->
+# 	$("input.group-box").change ->
+# 	  monify()
+
+# $ ->
+# 	$("input.group-box").change ->		
+# 		if $("form#new_post").find("input.group-box:checked").length > 2
+# 			$("div#post-credit-fields").show "slide",
+# 				direction: "right"
+# 				, 100
+# 		  $("#card_number").validate
+# 		    expression: "if(VAL != '') return true; else return false;"
+# 		    message: "credit card is required if you want to notify more than two groups."
+# 		else
+# 			$("div#post-credit-fields").hide
+			
 $ ->	
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
@@ -47,10 +111,13 @@ $ ->
   # $("#car_year").validate
   #   expression: "if(VAL.match(/^\\d\\d\\d\\d$/)) return true; else return false;"
   #   message: "Invalid format."
-$ ->
-	$("input[type=checkbox]#post_cash").click ->
-			$('.cash-field-cloak').toggle "slide", 1
-				direction: "right"
+
+
+
+# $ ->
+# 	$("input[type=checkbox]#post_cash").click ->
+# 			$('.cash-field-cloak').toggle "slide", 1
+# 				direction: "right"
 
 
 
@@ -72,13 +139,21 @@ $ ->
 # 		#$("#dialog-form").dialog "close"
 # 	
 
+## TOOL TIPS
+$ ->
+	$("#get_paid_stuff").tooltip
+		trigger: "hover"
+		placement: "left"
+		title: "Assign your post to a value tier. The instant someone clicks 'buy' on your post, an email with a coupon or giftcard will arrive in your inbox."
 
+## SHOW THE PRICE FIELD ON CASH BOX Check
+jQuery ->
+	$("input#post_cash").change ->
+		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$("div.cash-field-cloak").toggle()		
+		
 
-
-
-
-
-
+## POST TAGS TOKEN INPUT
 jQuery ->
   $("#post_tag_tokens").tokenInput "/tags.json",
     queryParam: "t"
@@ -89,16 +164,15 @@ jQuery ->
   $("ul.token-input-list-facebook").addClass("negative-padding")
 
 
-	$("#post_tier_id").change ->
-		$("input.cash-box").prop "disabled", not $("input.cash-box").prop("disabled")
-	$("input#post_cash").change ->
-		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled")
-		$('input#post_cash').append "<p>$</p>"
-		$('div#tier_explanation_wrapper').toggle "slide",
-			direction: "top"
-			, 800
-		$('.cash-field-cloak').toggle "slide", 1
-			direction: "right"
+# jQuery ->
+# 	$("input#post_cash").change ->
+# 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled")
+# 		$('input#post_cash').append "<p>$</p>"
+# 		$('.cash-field-cloak').toggle "slide", 1
+# 			direction: "right"
+#$(document).ready ->
+
+		
 jQuery ->	
 	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 	transaction.setupForm()
@@ -128,18 +202,9 @@ transaction =
 		else
 			alert(response.error.message)
 			$('input[type=submit]').attr('disabled', false)
-$(document).ready ->
-	$(".group-box").click ->		
-		if $("form#new_post").find("input.group-box:checked").length > 2
-			$("div#post-credit-fields").toggle "slide",
-				direction: "right"
-				, 100
-		  $("#card_number").validate
-		    expression: "if(VAL != '') return true; else return false;"
-		    message: "credit card is required if you want to notify more than two groups."
 
-		else
-			$("div#post-credit-fields").hide()
+
+
 
 
 

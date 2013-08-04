@@ -30,7 +30,7 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-    @categories = PostCategory.all
+    @post_categories = PostCategory.all
     
     @assets = @post.assets
     if !signed_in?
@@ -54,6 +54,8 @@ class PostsController < ApplicationController
     @categories = PostCategory.all
     @post = Post.find(params[:id])
     @assets = @post.assets
+    @user = current_user
+    @post.assets.build
     if !signed_in?
       @user = User.new
       @group = Group.first
@@ -64,7 +66,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    #@categories = PostCategory.all
+    @post_categories = PostCategory.all
     
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])
@@ -167,7 +169,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update_attribute(:active, false)
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end
@@ -175,12 +177,30 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update_attribute(:active, true)
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end
   
-
+  def sort_name
+    @post = Post.new
+    @transaction = Transaction.new
+    @sort_posts = Post.search()
+    @sorted_posts = @sort_posts.result
+    if signed_in? && current_user.post_feed.is_a?(Array)
+      @user = current_user
+      @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "name DESC")
+      #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @random_groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "RANDOM()")
+    else
+      @user = User.new
+      @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "name DESC")
+      
+      @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+    end
+    redirect_to root_path
+  end
   
   def setup_post(post)
     if current_user

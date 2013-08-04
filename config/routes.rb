@@ -9,7 +9,7 @@ Communitymarket::Application.routes.draw do
   
   resources :transactions
   resources :memberships
-
+  resources :followships
   resources :tags
 
   resources :users do
@@ -35,6 +35,9 @@ Communitymarket::Application.routes.draw do
   resource :session, controller: 'sessions'
 
   resources :posts do
+    collection do
+      get :sort_name
+    end
     member do
       get :deactivate
       get :reactivate

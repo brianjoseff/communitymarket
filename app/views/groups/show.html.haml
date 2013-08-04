@@ -21,7 +21,5 @@ end
   = render :partial => 'invite', :locals => {:group => @group}
 %h2 Posts
 =render @posts
-  
-= link_to 'Edit', edit_group_path(@group)
-\|
-= link_to 'Back', groups_path
+-if current_user.groups_as_owner 
+  = link_to 'Edit', edit_group_path(@group)

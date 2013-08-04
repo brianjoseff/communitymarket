@@ -1,0 +1,11 @@
+-if current_user
+  -if tag.followers.include?(current_user)
+    /=render :partial => "leave"
+    =link_to "Unfollow", (current_user.followships.find_by_followed_id(tag)), :method => :delete, :confirm => "Are you sure?"
+  -else
+    / =render :partial => "join"
+    =form_for tag do |f|
+      =hidden_field_tag('tag[follower_ids][]', current_user.id)
+      .action=f.submit "Follow"
+-else
+  =link_to_modal "Follow", new_user_path, :class => "btn btn-mini", :remote => true

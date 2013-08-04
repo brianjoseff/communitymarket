@@ -1,0 +1,84 @@
+/ /THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
+/ /OK?
+/ /GOOD.
+/ 
+/ %div.slim-feed-item.row-fluid
+/ 
+/   %div.span10
+/     %div.row-fluid.slim-feed-title-row
+/       /price
+/       /make price a variable that can be passed into the modal partials below so
+/       /that on credit card charge, we know how much to charge      
+/       %span.slim-feed-title
+/         = link_to feed_item.title, post_url(feed_item), :class => "slim-feed-title"
+/       -unless feed_item.assets.first.nil?
+/         %i.icon-medium.icon-camera
+/       -feed_item.tags.each do |tag|
+/         =link_to tag.name, tag_url(tag), :class => "tag"
+/       %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+/ 
+/       
+/ 
+/   %div.span2
+/     %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+/     -if feed_item.tier_id
+/       -if signed_in? && current_user.stripe_customer_id.nil? == false
+/         /IF: signed_in and no c#, THEN: user_credit_modal
+/         =render 'user_you_sure_modal'
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/       -elsif signed_in? && current_user.stripe_customer_id.nil?
+/         /IF: signed_in and yes c# THEN: user_you_sure_modal
+/      
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/       
+/         %div#transaction_modal.modal.hide
+/ 
+/       -else
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+/ 
+/ 
+/ 
+/ 
+/THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
+/OK?
+/GOOD.
+
+%div.slim-feed-item.row-fluid
+
+  %div.span10
+    %div.row-fluid.slim-feed-title-row
+      /price
+      /make price a variable that can be passed into the modal partials below so
+      /that on credit card charge, we know how much to charge      
+      %span.slim-feed-title
+        = link_to feed_item.title, post_url(feed_item), :class => "slim-feed-title"
+      -unless feed_item.assets.first.nil?
+        %i.icon-medium.icon-camera
+      %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+    %div.row-fluid
+      -feed_item.tags.each do |tag|
+        =link_to tag.name, tag_url(tag), :class => "tag"
+
+
+      
+
+  %div.span2
+    %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+    -if feed_item.tier_id
+      -if signed_in? && current_user.stripe_customer_id.nil? == false
+        /IF: signed_in and no c#, THEN: user_credit_modal
+        =render 'user_you_sure_modal'
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+      -elsif signed_in? && current_user.stripe_customer_id.nil?
+        /IF: signed_in and yes c# THEN: user_you_sure_modal
+     
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+      
+        %div#transaction_modal.modal.hide
+
+      -else
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+
+
+
+

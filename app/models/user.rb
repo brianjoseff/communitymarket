@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :groups_as_owner, :class_name => "Group"
   has_many :memberships, :dependent => :destroy, :foreign_key => :member_id
   #has_many :images
+  has_many :followships, :foreign_key => :follower_id
+  has_many :followed_tags, through: :followships, source: :followed, :class_name => "Tag"
+  
+  
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
   

@@ -1,3 +1,5 @@
+%h1 Sign Up
+=link_to "Sign In", signin_path
 = simple_form_for @user,  html: {class: 'form-horizontal'} do |f|
   - if @user.errors.any?
     #error_explanation
@@ -6,7 +8,12 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
           
-    =render 'form', f: f
+  %div.row-fluid.control-group
+    =f.label :email, :class => 'control-label'
+    =f.text_field :email, :validate => true
+  %div.row-fluid.control-group
+    =f.label :password, :class => 'control-label'
+    =f.text_field :password, :validate => true
   %div.form-actions
-    = f.button :submit, name: 'Sign Up', class: "btn-primary"
-  =link_to "Sign In", signin_path
+    =f.submit "Sign Up", class: "btn-primary"
+    /= f.button :submit, name: 'Sign Up', class: "btn-primary"

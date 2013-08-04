@@ -13,7 +13,7 @@
     %th My posts
     %th Date posted
     %th Active?
-    %th Actions
+    %th.table-actions Actions
   -@posts.each do |post|
     %tr
       %td #{post.title}
@@ -21,9 +21,9 @@
       %td #{post.active}
       %td
         = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
-        = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+        = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger destroy_region'
         -if post.active?
-          = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-danger'
+          = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-deactivate deactivate_region'
         -else
           = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
 

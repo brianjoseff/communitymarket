@@ -13,15 +13,45 @@
  *= require jquery.ui.all
  *= require_tree .
  */
+
+/************************************************************/
+/*********** TAGS *******************************************/
+/************************************************************/
+
 .tag{
-	background-color:#CDECFA;
-	border-bottom: solid 1px #69B0CF;
-	border-right: solid 1px #69B0CF;
-	padding: 2px;
+	background-color:#c0ffb9;
+	
+/*	#f98275*/
+/*	#e74c3c*/
+/*	background-color:#CDECFA;*/
+	
+	border-bottom: solid 1px #67a461;
+	border-right: solid 1px #67a461;
+/*	border-bottom: solid 1px #69B0CF;
+	border-right: solid 1px #69B0CF;*/
+	padding: 3px;
+	color: #32522f;
+/*	color:#c0392b;*/
+	font-size: 80%;
 }
-.post-feed{
-	border-right: solid 1px #000;
+.tag-row{
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding-bottom: 7px;
 }
+
+a:visited.tag{
+	color:#32522f;
+}
+a:hover.tag{
+	color:#fff;
+}
+
+/************************************************************/
+/*********** Buttons ****************************************/
+/************************************************************/
+
+
 input.btn-primary {
 	font-size:150%;
 	height: 50px;
@@ -33,9 +63,76 @@ a.btn-primary{
 	
 	box-sizing: content-box;
 }
-a:visited.btn-primary{
+a:visited.btn.btn-primary{
 	color: #fff;
 }
+a:visited.btn.btn-danger, a:visited.btn.btn-deactivate{
+	color: #fff;
+}
+a:visited.btn{
+	color: #666;
+}
+
+a.btn-deactivate {
+/*  background-color: hsl(35, 100%, 47%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ef8b00", endColorstr="#ef8b00");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ef8b00), to(#ef8b00));
+  background-image: -moz-linear-gradient(top, #ef8b00, #ef8b00);
+  background-image: -ms-linear-gradient(top, #ef8b00, #ef8b00);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ef8b00), color-stop(100%, #ef8b00));
+  background-image: -webkit-linear-gradient(top, #ef8b00, #ef8b00);
+  background-image: -o-linear-gradient(top, #ef8b00, #ef8b00);
+  background-image: linear-gradient(#ef8b00, #ef8b00);
+  border-color: #ef8b00 #ef8b00 hsl(35, 100%, 47%);
+	color: #fff;*/
+	background-color: hsl(40, 100%, 48%) !important;
+	  background-repeat: repeat-x;
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f4a300", endColorstr="#f4a300");
+	  background-image: -khtml-gradient(linear, left top, left bottom, from(#f4a300), to(#f4a300));
+	  background-image: -moz-linear-gradient(top, #f4a300, #f4a300);
+	  background-image: -ms-linear-gradient(top, #f4a300, #f4a300);
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f4a300), color-stop(100%, #f4a300));
+	  background-image: -webkit-linear-gradient(top, #f4a300, #f4a300);
+	  background-image: -o-linear-gradient(top, #f4a300, #f4a300);
+	  background-image: linear-gradient(#f4a300, #f4a300);
+	  border-color: #f4a300 #f4a300 hsl(40, 100%, 48%);
+	  color: #fff !important;
+			font-weight: bold;
+	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+	  -webkit-font-smoothing: antialiased;
+}
+/*a.btn-deactivate{
+	background-color:#e67e22;
+	border-color:#e67e22;
+	color: #fff;
+	background-image: -webkit-linear-gradient(top, #e09b5d, #e67e22);
+}*/
+
+.switch.active {
+	background-color: hsl(176, 100%, 45%) !important;
+	  background-repeat: repeat-x;
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e5d6", endColorstr="#00e5d6");
+	  background-image: -khtml-gradient(linear, left top, left bottom, from(#00e5d6), to(#00e5d6));
+	  background-image: -moz-linear-gradient(top, #00e5d6, #00e5d6);
+	  background-image: -ms-linear-gradient(top, #00e5d6, #00e5d6);
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00e5d6), color-stop(100%, #00e5d6));
+	  background-image: -webkit-linear-gradient(top, #00e5d6, #00e5d6);
+	  background-image: -o-linear-gradient(top, #00e5d6, #00e5d6);
+	  background-image: linear-gradient(#00e5d6, #00e5d6);
+	  border-color: #00e5d6 #00e5d6 hsl(176, 100%, 45%);
+	  color: #fff !important;
+		font-weight: bold;
+	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+	  -webkit-font-smoothing: antialiased;
+}
+
+
+
+/************************************************************/
+/*********** SEARCH  ****************************************/
+/************************************************************/
+
 input[type="text"].search-bar-field{
 	height:40px;
 	font-size:150%;
@@ -46,9 +143,60 @@ input[type="text"].search-bar-field{
 	padding-top: 10px;
 } 
 
+
+/************************************************************/
+/*********** POST FEED **************************************/
+/************************************************************/
+
+.image{
+	margin-bottom: 5px;
+}
 .feed-title{
 	font-size: 125%;
+	font-weight: bold;	
+}
+span.slim-feed-title a{
+	color: #2980b9;
 	font-weight: bold;
+	font-size: 110%;
+	margin-right: 15px;
+}
+span.feed-title a{
+	color: #2980b9;
+	font-weight: bold;
+}
+
+.feed-item{
+	padding-bottom: 5px;
+	/*border-bottom: solid 1px #696969;*/
+	margin-bottom: 10px;
+	margin-top: 5px;
+	border-bottom: 1px solid #c9c9c9;
+}
+.feed-timestamp{
+	font-size: 80%;
+	margin-left: 10px;
+}
+.description-row{
+	margin-bottom: 3px;
+}
+
+
+.slim-feed-item{
+	border-bottom: 1px solid #c9c9c9;
+	padding-bottom: 7px;
+	margin-bottom: 5px;
+}
+
+.slim-feed-title-row{
+	margin-bottom: 5px;
+}
+.slim-feed-timestamp{
+	font-size: 80%;
+	margin-left: 10px;
+}
+i{
+	margin-right: 10px;
 }
 
 
@@ -60,6 +208,9 @@ input[type="text"].search-bar-field{
 #modalCredit{
 	width: 300px;
 }
+/************************************************************/
+/*********** POST FORM **************************************/
+/************************************************************/
 .form-title{
 	margin-left: 100px;
 }
@@ -118,4 +269,13 @@ div.controls.credit{
 #new-post-submit{
 	margin-top: 10px;
 	margin-left: 100px;
+}
+
+.table-actions{
+	width: 200px;
+}
+
+#front_page_new_group{
+	margin-top: 16px;
+	color: #696969;
 }
