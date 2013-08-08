@@ -63,6 +63,8 @@ gem 'pg'
 #transactional email
 gem 'mandrill-api'
 
+#GEOCODER GEM...gets location of IP address and stores in cookie, also manages our location based Group searching and interaction
+gem 'geocoder'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -2,14 +2,32 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
-
+    if params[:zipcode]
+      zipcode = params[:zipcode]
+      @groups = Group.near(zipcode,20)
+    else
+      @groups = Group.all
+    end
+    @g_categories = GroupCategory.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @groups }
     end
   end
-
+  
+  # def nearby
+  #     zipcode = 
+  #     
+  #     
+  #     @g_categories = GroupCategory.all
+  #     respond_to do |format|
+  #       #format.html
+  #       format.json  { render :json => @groups }
+  #       #format.json { render :json => {:bathrooms => @bathrooms} }
+  #       format.js   { render :nothing => true } 
+  #      end        
+  #   end
+    
   # GET /groups/1
   # GET /groups/1.json
   def show

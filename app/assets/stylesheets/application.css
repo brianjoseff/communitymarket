@@ -66,7 +66,7 @@ a.btn-primary{
 a:visited.btn.btn-primary{
 	color: #fff;
 }
-a:visited.btn.btn-danger, a:visited.btn.btn-deactivate{
+a:visited.btn.btn-danger, a:visited.btn.btn-deactivate, a:visited.btn.btn-success{
 	color: #fff;
 }
 a:visited.btn{
@@ -184,7 +184,7 @@ span.feed-title a{
 
 .slim-feed-item{
 	border-bottom: 1px solid #c9c9c9;
-	padding-bottom: 7px;
+/*	padding-bottom: 7px;*/
 	margin-bottom: 5px;
 }
 
@@ -207,6 +207,18 @@ i{
 }
 #modalCredit{
 	width: 300px;
+}
+.thumbnail {
+display: block;
+padding: 4px;
+line-height: 20px;
+border: 1px solid #ddd;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 }
 /************************************************************/
 /*********** POST FORM **************************************/

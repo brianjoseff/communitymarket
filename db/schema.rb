@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803045230) do
+ActiveRecord::Schema.define(:version => 20130808013010) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -52,6 +52,10 @@ ActiveRecord::Schema.define(:version => 20130803045230) do
     t.datetime "updated_at",        :null => false
     t.integer  "user_id"
     t.integer  "group_category_id"
+    t.boolean  "private"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "zipcode"
   end
 
   create_table "images", :force => true do |t|

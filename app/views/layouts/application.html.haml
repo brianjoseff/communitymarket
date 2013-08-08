@@ -9,8 +9,9 @@
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body
-    %div#nav
-      =render 'layouts/header'
+    %div.container
+      %div#nav
+        =render 'layouts/header'
     %div.container
       = yield
       = debug(params) if Rails.env.development?

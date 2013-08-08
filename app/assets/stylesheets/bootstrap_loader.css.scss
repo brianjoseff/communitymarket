@@ -39,8 +39,21 @@ $baseFontFamily: "Open Sans", sans-serif !default;
 }
 
 .nav-pills > .active > a{
-	background-color: #f98275;
+			background-color: #ff91af;
+	/*	background-color: #ffc0b9;*/
 }
 .nav-pills > li > a:hover{
-	background-color: #ffc0b9;
+		background-color: #ff91af;
+/*	background-color: #ffc0b9;*/
+}
+
+ul.nav{
+	padding: 10px 0 0;
+
+}
+.nav-area{
+	border-bottom: 6px solid #ff91af;
+}
+.nav{
+	margin-bottom: 10px;
 }

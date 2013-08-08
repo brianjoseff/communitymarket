@@ -45,12 +45,13 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   
+  match '/groups/nearby', :to => "groups#nearby"
   match '/search', :to => 'search#index'
   match '/about', :to => 'pages#about'
   match '/signout', :to => 'sessions#destroy'
   match '/sign_in', :to => 'sessions#new'
   match '/signin', :to => 'sessions#new'
-
+  match '/invites', :to => 'invites#new'
   root :to => 'pages#index'
   
   # The priority is based upon order of creation:

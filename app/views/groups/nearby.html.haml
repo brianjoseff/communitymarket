@@ -2,17 +2,11 @@
   %div.span3
     %h3 Categories
     /put region search bar here
-    =form_tag(groups_path, method: :get) do
-      .input-group
-        =text_field_tag :zipcode, nil,:class => "form-control", :placeholder =>"Zipcode"
-        %span.input-group-btn
-          =button_tag "Go", name: nil, :class => "btn-default btn", :type => "button"
-      
-    / =form_for '/groups/nearby', :url => nearby_groups_path do |f|
-    /   /=f.hidden_field :zipcode, id: "zipcode", value: "93105"
-    /   =f.label "Zipcode"
-    /   =f.text_field :zipcode
-    /   =f.submit "Search"
+    =form_for :nearby, :remote => true, :url => nearby_groups_path do |f|
+      /=f.hidden_field :zipcode, id: "zipcode", value: "93105"
+      =f.label "Zipcode"
+      =f.text_field :zipcode
+      =f.submit "Search"
     %ul.nav
       -@g_categories.each do |gcat|
         =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
@@ -27,6 +21,7 @@
     /     =link_to "All", groups_path
     /   %li
     /     =link_to @group_category, group_category_path(@group_category)
+    %p search returned #{pluralize(@group_count, 'group')}
     =render @groups, :as => "group_feed_item"
 / %table
 /   %tr

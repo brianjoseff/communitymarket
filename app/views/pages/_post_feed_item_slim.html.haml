@@ -55,9 +55,9 @@
       -unless feed_item.assets.first.nil?
         %i.icon-medium.icon-camera
       %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
-    %div.row-fluid
-      -feed_item.tags.each do |tag|
-        =link_to tag.name, tag_url(tag), :class => "tag"
+    / %div.row-fluid
+    /   -feed_item.tags.each do |tag|
+    /     =link_to tag.name, tag_url(tag), :class => "tag"
 
 
       
@@ -67,17 +67,17 @@
     -if feed_item.tier_id
       -if signed_in? && current_user.stripe_customer_id.nil? == false
         /IF: signed_in and no c#, THEN: user_credit_modal
-        =render 'user_you_sure_modal'
-        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+        /=render 'user_you_sure_modal'
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
       -elsif signed_in? && current_user.stripe_customer_id.nil?
         /IF: signed_in and yes c# THEN: user_you_sure_modal
      
-        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
       
         %div#transaction_modal.modal.hide
 
       -else
-        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+        =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id    
 
 
 

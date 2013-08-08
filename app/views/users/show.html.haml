@@ -1,5 +1,9 @@
 %p#notice= notice
 
+-unless @groups.empty?
+  %h3 Recommended Groups:
+  /=render "groups/group", :collection => @groups, :as => :group
+  =@groups
 %p
   %b Email:
   = @user.email

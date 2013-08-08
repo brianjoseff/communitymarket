@@ -61,6 +61,10 @@ $ ->
 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
 	    i++
 	  false
+# $ ->
+# 	$("#zipcode_submit").click (e) -?
+# 	e.preventDefault(e)
+# 	$("#zipcode").val $(this).parent.data "search_param"
 
 $ ->
 	$(".switch").click (e) ->

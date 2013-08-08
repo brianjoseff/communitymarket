@@ -28,9 +28,9 @@ $ ->
 	$(".destroy_region").tooltip
 		trigger: "hover"
 		placement: "top"
-		title: "permanently destroys post. Deactivate is recommeneded"
+		title: "Permanently destroys post. Deactivate is recommeneded"
 $ ->
 	$(".deactivate_region").tooltip
 		trigger: "hover"
 		placement: "top"
-		title: "Recommended option. Makes your post invisible to everyone except you. Makes it easier for the item to be readded to the market"
+		title: "Recommended option. Makes your post invisible to everyone except you. Makes it easier for the item to be re-added to the market"

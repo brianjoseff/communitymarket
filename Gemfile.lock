@@ -69,6 +69,7 @@ GEM
       rails (~> 3.0)
     forgery (0.3.12)
       nokogiri (~> 1.4)
+    geocoder (1.1.8)
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -212,6 +213,7 @@ DEPENDENCIES
   faker
   figaro
   forgery
+  geocoder
   haml (>= 3.0.0)
   haml-rails
   jquery-modal-rails

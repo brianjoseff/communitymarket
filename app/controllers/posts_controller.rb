@@ -15,6 +15,9 @@ class PostsController < ApplicationController
   def show
     @transaction = Transaction.new
     @post = Post.find(params[:id])
+    if @post.tier_id?
+      @tier = Tier.find(@post.tier_id)
+    end
     if !signed_in?
       @user = User.new
     else

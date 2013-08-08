@@ -131,7 +131,7 @@
 /     %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
 /   %div#tier_arrow
 / =form_for @post.new_record? ? setup_post(@post, @group) : @post, :validate => true, :html => { :multipart => true, :class => "form-horizontal nonuser-post"} do |f|
-%h1 fuckers
+
 =form_for   @post, :validate => true, :html => { :multipart => true, :class => "form-horizontal nonuser-post"}do |f|
   - if @post.errors.any?
     #error_explanation
