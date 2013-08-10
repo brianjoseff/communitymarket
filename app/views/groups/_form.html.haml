@@ -10,15 +10,18 @@
     = f.label :name, :class => "control-label"
     %div.controls
       = f.text_field :name, :class => "input-block-level inline", :placeholder => "Group Name"
-  %div.control-group
-    =f.label :zipcode, :class => "control-label"
-    %div.controls
-      =f.text_field :zipcode, :class => "input-block-level inline", :placeholder => "03755"
+
   %div.control-group   
     = f.label :description, :class => "control-label"
     %div.controls
       = f.text_area :description, :rows => "5", :class => "input-block-level inline", :placeholder => "Description of Group"
   = f.label :private, :class => "checkbox" do
     = f.check_box :private, :class => "checkbox"
-    =label_tag "Private"       
+    =label_tag "Private"
+  %div.row
+    %div.span1
+      %div.control-group
+        =f.label :zipcode, :class => "control-label"
+        %div.controls
+          =f.text_field :zipcode, :class => "input-block-level inline", :placeholder => "03755" 
   = f.submit 'Save', :class => "btn btn-primary"

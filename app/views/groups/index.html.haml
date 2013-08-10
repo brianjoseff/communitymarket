@@ -17,7 +17,11 @@
       -@g_categories.each do |gcat|
         =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
   %div.span9
-    %h3 Groups
+    %div.row
+      %div.span3
+        %h3 Groups
+      %div.span4
+        =link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
     / %div.span9
     /   %ul.nav-tabs
     /     %li 

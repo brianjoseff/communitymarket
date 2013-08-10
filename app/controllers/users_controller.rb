@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if (7.days.ago..Time.now).cover?(@user.created_at)
-      location = request.remote_ip
+      location = request.ip
       @groups = Group.near(location, 20)
     end
     

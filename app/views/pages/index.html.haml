@@ -44,6 +44,8 @@
       %div.span6
         -if current_user
           =link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
+        -else
+          =link_to_modal "Join", new_user_path, :class => "btn btn-mini", :remote => true
         
     %div.row-fluid
       %p join groups to get notifications from them. Manage your notifications on your profile page
