@@ -17,10 +17,11 @@ namespace :db do
     
     #memberships
     users = User.last(30)
-    group = Group.find(7)
+    group = Group.find(8)
     users.each { |user|
       Membership.create(:group_id => group.id,
-                           :member_id => user.id)
+                           :member_id => user.id,
+                           :email_setting_id => Forgery(:Basic).number(:at_least => 1, :at_most => 6))
     }
 
     

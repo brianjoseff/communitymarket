@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808013010) do
+ActiveRecord::Schema.define(:version => 20130820014619) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(:version => 20130808013010) do
   create_table "assignments", :force => true do |t|
     t.integer  "post_id"
     t.integer  "group_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "daily_queues", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "group_id"
+    t.integer  "sender_id"
+  end
+
+  create_table "email_settings", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -67,8 +82,9 @@ ActiveRecord::Schema.define(:version => 20130808013010) do
   create_table "memberships", :force => true do |t|
     t.integer  "group_id"
     t.integer  "member_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "email_setting_id"
   end
 
   create_table "post_categories", :force => true do |t|
@@ -141,5 +157,14 @@ ActiveRecord::Schema.define(:version => 20130808013010) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "weekly_queues", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "group_id"
+    t.integer  "sender_id"
+  end
 
 end

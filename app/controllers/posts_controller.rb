@@ -107,19 +107,82 @@ class PostsController < ApplicationController
         #!!!!!!!!!!
         #need to add a dedupe process here
         @groups = @post.groups
-        #all_members = []
+        all_members = []
+        #dedupe
+        #divide up members based on membership type
         unless @groups.empty?
+          all_memberships = []
           for group in @groups do
-            members = group.members
-            #all_members << members
-            for member in members do
-              NewPostMailer.notify(@user, @post, member, group).deliver
+            Membership.where(:group_id => group.id).each do |membership|
+              all_memberships << membership
             end
           end
+          all_memberships = all_memberships.uniq
+          every_posts = []
+          every_posts = all_memberships.select{|membership| membership.email_setting_id == 1}
+          no_email_settings = []
+          no_email_settings = all_memberships.select{|membership| membership.email_setting_id == nil}
+          daily_memberships = []
+          daily_memberships = all_memberships.select{|membership| membership.email_setting_id == 2}
+          weekly_memberships = []
+          weekly_memberships = all_memberships.select{|membership| membership.email_setting_id == 3}
+          daily_aggs = []
+          daily_aggs = all_memberships.select{|membership| membership.email_setting_id == 4}
+          weekly_aggs = []
+          weekly_aggs = all_memberships.select{|membership| membership.email_setting_id == 5}
+          off = []
+          off = all_memberships.select{|membership| membership.email_setting_id == 6}
+          #*************************************************************************************
+          
+          for every_post in every_posts do
+            user = User.find(every_post.member_id)
+            NewPostMailer.notify(@user, @post, user, group).deliver
+          end
+          for daily_membership in daily_memberships do
+            user = User.find(daily_membership.member_id)
+            group = Group.find(daily_membership.group_id)
+            DailyQueue.create(:sender_id => @user.id, :post_id => @post.id, :user_id => user.id, :group_id => group.id)
+          end
+          for weekly_membership in weekly_memberships do
+            user = User.find(weekly_membership.member_id)
+            group = Group.find(daily_membership.group_id)
+            WeeklyQueue.create(:sender_id => @user.id, :post_id => @post.id, :user_id => user.id, :group_id => group.id)
+          end
+          # for daily_agg in daily_aggs do
+          #   user = User.find(daily_agg.user_id)
+          #   DailyAggQueue.create(@user, @post, user, group)
+          # end
+          # for weekly_agg in weekly_aggs do
+          #   user = User.find(weekly_agg.user_id)
+          #   WeeklyAggQueue.create(@user, @post, user, group)
+          # end
+          # 
+          
+          # for group in @groups do
+          #             members = group.members.where( :email_setting_id => 1)
+          #             daily_members = group.members.where( :email_setting_id => 2)
+          #             weekly_members = group.members.where( :email_setting_id => 3)
+          #             off_members = group.members.where( :email_setting_id => 6)
+          #             #all_members << members
+          #             for member in members do
+          #               NewPostMailer.notify(@user, @post, member, group).deliver
+          #             end
+          #             for daily_member in daily_members do
+          #               #make dailyQueue object
+          #               daily_member
+          #             end
+          #             for weekly_member in weekly_members do
+          #               #make weeklyqueue object
+          #               weekly_member
+          #             end
+          #             
+          #end
+          # DEDUPE EFFORTS **************************************
           # all_members.uniq
           # for member in all_members do
           #   NewPostMailer.notify(@user, @post, member, group).deliver
           # end
+          # DEDUPE EFFORTS **************************************
         end
         redirect_to @post, notice: "Successfully created post."
       else

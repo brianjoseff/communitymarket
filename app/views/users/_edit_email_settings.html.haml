@@ -1,0 +1,17 @@
+%table
+  %tr
+    %th
+    -@email_settings[0..2].each do |email_setting|
+      %th=email_setting.name
+  =form_tag update_individual_memberships_path, :method => :put do
+    -for membership in @memberships
+      %tr
+        %td
+          =Group.find(membership.group_id).name
+        =fields_for "memberships[]", membership do |f|
+          -@email_settings[0..2].each do |c|
+            %td
+              =f.label :email_setting do
+                =f.radio_button :email_setting_id, c.id
+
+    =submit_tag "Update Email Settings"

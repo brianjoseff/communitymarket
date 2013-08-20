@@ -14,9 +14,12 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @memberships = @user.memberships
+    @email_settings = EmailSetting.all
+    @groups = @user.groups_as_member
     if (7.days.ago..Time.now).cover?(@user.created_at)
       location = request.ip
-      @groups = Group.near(location, 20)
+      @rec_groups = Group.near(location, 20)
     end
     
     @posts = @user.posts

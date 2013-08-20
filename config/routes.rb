@@ -3,12 +3,19 @@ Communitymarket::Application.routes.draw do
 
 
 
+  resources :email_settings
+
+
   # resources :posts do
   #   resources :transactions
   # end
   
   resources :transactions
-  resources :memberships
+  resources :memberships do
+    collection do
+      put :update_individual
+    end
+  end
   resources :followships
   resources :tags
 

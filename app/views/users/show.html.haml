@@ -3,6 +3,7 @@
 
 /=render "groups/group", :collection => @groups, :as => :group
 /=@groups
+=render "edit_email_settings"
 %p
   %b Email:
   = @user.email
@@ -10,9 +11,9 @@
   %b Name:
   = @user.name
 =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
--if @groups.first.is_a?(Group)
+-if !@rec_groups.nil? && first.is_a?(Group)
   %h3 Recommended Groups:
-  -@groups.each do |group|
+  -@rec_groups.each do |group|
     %div.row-fluid
       %div.image.span2
         =link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)

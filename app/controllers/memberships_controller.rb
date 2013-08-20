@@ -4,6 +4,24 @@ class MembershipsController < ApplicationController
   end
 
   def update
+
+  end
+  def update_individual
+    @user = current_user
+    #@membership = Membership.find(params[:id])
+    @email_settings = EmailSetting.all
+    Membership.update(params[:memberships].keys, params[:memberships].values)
+    flash[:notice] = "Emails Settings succesfully updated"
+    redirect_to @user
+    # respond_to do |format|
+    #       if @membership.update_attributes(params[:membership])
+    #         format.html { redirect_to @user, notice: 'Email setting was successfully updated.' }
+    #         format.json { head :no_content }
+    #       else
+    #         format.html { render action: "edit" }
+    #         format.json { render json: @membership.errors, status: :unprocessable_entity }
+    #       end
+    #     end
   end
   
   def destroy
