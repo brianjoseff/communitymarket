@@ -38,9 +38,27 @@ div {
   }
 }
 
+/**********************************************************/
+/*TOP OF THE PAGE NOTICES**********************************/
+/**********************************************************/
+
 #notice {
   color: green;
 }
+#wrong_password{
+	color: red;
+	font-size: 20px;
+	font-weight: bold;
+}
+.success{
+	color: green;
+	font-size: 15px;
+	background: rgba(97, 196, 104, .2);
+	background-opacity: 0.1;
+	padding: 10px;
+}
+/**********************************************************/
+/**********************************************************/
 
 .control-group.error input{
 	border-color: #b94a48;

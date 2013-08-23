@@ -65,6 +65,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(params[:group])
+    params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
 
     respond_to do |format|
       if @group.save
@@ -95,7 +96,29 @@ class GroupsController < ApplicationController
       end
     end
   end
-
+  
+  # NEEDS SUCCESS MESSAGE
+  def private
+    @group = Group.find(params[:group_id])
+    params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
+    
+    respond_to do |format|
+      if params[:password] == @group.password && @group.update_attributes(params[:group])
+        flash[:success] = "Successfully joined #{@group.name}"
+        format.html { redirect_to root_path }
+        format.js
+        # format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        #         format.json { head :no_content }
+      else
+        if params[:password] != @group.password
+          flash.now[:wrong_password] = "Wrong Password"
+        end
+        format.html { render action: "show"}
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy

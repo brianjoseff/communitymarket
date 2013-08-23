@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     @sorted_posts = @sort_posts.result
     if signed_in? && current_user.post_feed.is_a?(Array)
       @user = current_user
-      @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @posts = Post.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       
@@ -16,7 +16,7 @@ class PagesController < ApplicationController
       @followed_tags = @user.followed_tags
     else
       @user = User.new
-      @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @posts = Post.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
     end
   end

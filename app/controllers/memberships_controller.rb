@@ -28,7 +28,7 @@ class MembershipsController < ApplicationController
     @membership = Membership.find(params[:id])
     if @membership.destroy
       redirect_to @membership.group
-      flash[:success] = "member removed"
+      flash[:success] = "You left #{@membership.group.name}"
     end
   end
   

@@ -10,8 +10,10 @@ class DailyQueue < ActiveRecord::Base
       post = Post.find(item.post_id)
       group = Group.find(item.group_id)
       DailyQueueMailer.notify(sender, post, recipient, group).deliver
-      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-        return
+      
+      # if ActionMailer::Base.deliveries.last.to != recipient.email
+      #   return
+      # end
       item.destroy
     end
   end

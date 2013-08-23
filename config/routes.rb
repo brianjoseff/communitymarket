@@ -37,7 +37,11 @@ Communitymarket::Application.routes.draw do
   resources :group_categories
   resources :post_categories
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :groups
+  resources :groups do
+    collection do
+      put :private
+    end
+  end
 
   resource :session, controller: 'sessions'
 

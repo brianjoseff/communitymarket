@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820014619) do
+ActiveRecord::Schema.define(:version => 20130820112655) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20130820014619) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "zipcode"
+    t.string   "password"
   end
 
   create_table "images", :force => true do |t|

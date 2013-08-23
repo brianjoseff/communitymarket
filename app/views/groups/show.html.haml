@@ -15,7 +15,8 @@
   
 end
 
-
+-if flash[:wrong_password]
+  %p#wrong_password= "Wrong password homie"
 =render "join_form", :group => @group
 -if current_user
   = render :partial => 'invite', :locals => {:group => @group}
