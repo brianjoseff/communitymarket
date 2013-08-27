@@ -1,19 +1,25 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @group.name
-%p
-  %b Description:
-  = @group.description
-%p
-  %b Group category:
-  = @group.group_category
-
--@group.members.each do |member|
-  %p=member.email
+%div.row-fluid
+  %h1 #{@group.name}
+  / -@group.tags.each do |tag|
+  /   =link_to tag.name, tag_url(tag), :class => "tag"
+%div.row-fluid
+  %p #{@group.description}
+/ %p
+/   %b Name:
+/   = @group.name
+/ %p
+/   %b Description:
+/   = @group.description
+/ %p
+/   %b Group category:
+/   = @group.group_category
+-if @group.private?
+  -@group.members.each do |member|
+    %p=member.email
   
-end
+
 
 -if flash[:wrong_password]
   %p#wrong_password= "Wrong password homie"
@@ -22,5 +28,5 @@ end
   = render :partial => 'invite', :locals => {:group => @group}
 %h2 Posts
 =render @posts
--if current_user.groups_as_owner 
+-if current_user && current_user.groups_as_owner
   = link_to 'Edit', edit_group_path(@group)

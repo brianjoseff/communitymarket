@@ -6,7 +6,18 @@ body {
   font-size: 13px;
   line-height: 18px;
 }
-
+/*h1{
+	color: #008cf0;
+}*/
+a.header-title{
+	color: #333;
+}
+a:visited.header-title{
+	color:#333;
+}
+a:hover.header-title{
+	color:#fff;
+}
 p, ol, ul, td {
   /*font-family: verdana, arial, helvetica, sans-serif;*/
   font-size: 14px;

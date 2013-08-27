@@ -2,7 +2,7 @@
 -flash.each do |name, msg|
   =content_tag :div, msg, class: name
 %div.row-fluid.nav-area
-  %h2.pull-left People and Stuff
+  %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
   %label.credit_card_label
   %ul.nav.nav-pills.pull-right.colored-pills
     %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path 

@@ -17,6 +17,23 @@ $baseFontFamily: "Open Sans", sans-serif !default;
 .random-form-elements{
 	margin-left: 120px;
 }
+.btn-primary{
+	  background-color: hsl(333, 100%, 85%) !important;
+	  background-repeat: repeat-x;
+	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffbcda", endColorstr="#ff91af");
+	  background-image: -khtml-gradient(linear, left top, left bottom, from(#ffbcda), to(#ff91af));
+	  background-image: -moz-linear-gradient(top, #ffbcda, #ff91af);
+	  background-image: -ms-linear-gradient(top, #ffbcda, #ff91af);
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffbcda), color-stop(100%, #ff91af));
+	  background-image: -webkit-linear-gradient(top, #ffbcda, #ff91af);
+	  background-image: -o-linear-gradient(top, #ffbcda, #ff91af);
+	  background-image: linear-gradient(#ffbcda, #ff91af);
+	  border-color: #ffb2d4 #ff91af hsl(333, 100%, 84.5%);
+	  color: #fff !important;
+		font-weight: bold;
+	  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.03);
+	  -webkit-font-smoothing: antialiased;
+}
 .btn-custom {
   background-color: hsl(205, 100%, 47%) !important;
   background-repeat: repeat-x;

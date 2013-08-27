@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
   protect_from_forgery
-  before_filter :get_search_object, :set_user
+  before_filter :get_search_object, :set_user, :get_location
+  
   
   #sets user instance variable for the "new user" button in the nav
   def set_user
@@ -10,7 +11,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
-
+  def get_location
+    @location = request.location.city
+  end
+  
   #since this is run as an application before_filter,
   #the search object is available on every page.
   #Therefore, a search bar may be placed on every page

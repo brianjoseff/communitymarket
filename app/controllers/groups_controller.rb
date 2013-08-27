@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   def index
     if params[:zipcode]
       zipcode = params[:zipcode]
-      @groups = Group.near(zipcode,20)
+      @groups = Group.near(zipcode, 1000)
     else
       @groups = Group.all
     end
@@ -47,6 +47,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.json
   def new
+    
     @group = Group.new
     @categories = GroupCategory.all
 
@@ -64,6 +65,7 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
+    ip = request.location
     @group = Group.new(params[:group])
     params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
 

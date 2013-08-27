@@ -3,7 +3,7 @@
 
 /=render "groups/group", :collection => @groups, :as => :group
 /=@groups
-=render "edit_email_settings"
+
 %p
   %b Email:
   = @user.email
@@ -35,7 +35,7 @@
     %th.table-actions Actions
   -@posts.each do |post|
     %tr
-      %td #{post.title}
+      %td #{link_to post.title, post_url(post)}
       %td #{time_ago_in_words(post.created_at)} ago
       %td #{post.active}
       %td
@@ -45,6 +45,11 @@
           = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-deactivate deactivate_region'
         -else
           = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
+
+/%a.btn{ :href => "mailto:#{@post.email}", :role => "button"}
+=link_to "Edit Email Settings", "#", :id => "email_settings_link"
+%div.email-settings-cloak{:style=>"display:none"}
+  =render "edit_email_settings"
 
 = link_to 'Edit', edit_user_path(@user)
 \|

@@ -228,9 +228,11 @@
           (#{ff.object.group.members.count} members) 
         
           =ff.hidden_field :group_id
-          
-      = f.label :premium
-      = f.check_box :premium
+    %div.row
+      %p Make your post premium?
+      = f.label :premium, class: "checkbox" do
+        = f.check_box :premium, class: "checkbox"
+        =label_tag "Premium"
      
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER
   -unless @user.stripe_customer_id      
@@ -240,8 +242,9 @@
       / .field
       /   = f.label :premium
       /   = f.check_box :premium
-  %div.control-group#new-post-submit
-    = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
+  %div.control-group
+    %div.controls
+      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
 
 / %div#tier_explanation_wrapper
 /   %div#tier_explanation

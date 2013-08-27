@@ -1,6 +1,6 @@
 %script{:src => "https://js.stripe.com/v2/", :type => "text/javascript"}
 = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
-%h1 SDFSF
+%h1 sdfsdf
 = simple_form_for @user, remote: true, html: {data: {type: 'html'}, class: 'form-horizontal'} do |f|
   %div.modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×

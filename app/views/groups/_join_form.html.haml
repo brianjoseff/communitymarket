@@ -30,4 +30,5 @@
         =hidden_field_tag('group[member_ids][]', current_user.id)
         =f.submit "Join", :class => "btn btn-medium"
 -else
-  =link_to_modal "Join", new_user_path, :class => "btn btn-mini", :remote => true
+  =link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true 
+  

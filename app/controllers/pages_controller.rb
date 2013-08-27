@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   # skip_before_filter :require_login
   # skip_before_filter :authorize
   def index
+
     @post = Post.new
     @transaction = Transaction.new
     @sort_posts = Post.search()

@@ -14,6 +14,10 @@ class SearchController < ApplicationController
     #@q2 = Post.search(params[:q])
     @posts_results = @q2.result
     @post_count = @posts_results.count
-
+    
+    
+    #Add search array for tags
+    
+    
   end
 end

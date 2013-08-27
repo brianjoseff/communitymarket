@@ -15,6 +15,7 @@ class GroupCategoriesController < ApplicationController
   def show
     @group_category = GroupCategory.find(params[:id])
     @group_categories = GroupCategory.all
+    @groups = @group_category.groups
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @group_category }

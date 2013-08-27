@@ -64,7 +64,9 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-
+    if params[:group_id]
+      @group = Group.find(params[:group_id])
+    end
     respond_to do |format|
       #format.html { render 'new_modal', layout: false } if request.xhr?
       format.html
@@ -93,7 +95,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+
     @user = User.new(params[:user])
+    if params[:group_id]
+      @group = Group.find(params[:group_id])
+
+      @group.member_ids << @user.id
+    end
     #@user.save
     # if @user.valid?
     #    flash[:notice] = 'You have successfully signed your soul away.'
@@ -111,16 +119,19 @@ class UsersController < ApplicationController
       # } if request.xhr?
       
       if @user.save
-              #SignupMailer.new_subscriber(@user).deliver
-              sign_in @user
-              format.html { redirect_to root_path, notice: "Thank you for signing up!" }
-              format.json { render json: @user, status: :created, location: @user }
-              # format.js {'create'}
-            else
-              format.html { render action: "new" }
-              format.json { render json: @user.errors, status: :unprocessable_entity }
-              #format.js
-            end
+        if @group
+          @group.update_attributes(params[:group])
+        end
+        #SignupMailer.new_subscriber(@user).deliver
+        sign_in @user
+        format.html { redirect_to root_path, notice: "Thank you for signing up!" }
+        format.json { render json: @user, status: :created, location: @user }
+        # format.js {'create'}
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        #format.js
+      end
     end
     #flash.discard :notice if request.xhr?
     # AJAX efforts
