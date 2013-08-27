@@ -7,7 +7,7 @@
       %li get rid of stuff
       %li ask for stuff
       %li notify certain groups of people
-    =@location.first.zipcode
+    =@location.first.city
     
 %div.row
   %div.span3
@@ -56,6 +56,9 @@
     %div.row-fluid
       %h3 Random Groups
       =render :partial => 'random_group_feed', :locals => {:feed_items => @random_groups}
+    %div.row-fluid
+      %h3 Close Groups
+      =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups}
 
 
 

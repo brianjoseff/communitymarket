@@ -12,9 +12,9 @@ class PagesController < ApplicationController
       @posts = Post.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
-      # unless @location.nil?
-      #   @near_groups = Group.near(location, 1000)
-      # end
+      unless @location.nil?
+        @near_groups = Group.near(@location.first.city, 1000)
+      end
       @random_groups = Group.all - @user.groups_as_member
       @followed_tags = @user.followed_tags
     else
