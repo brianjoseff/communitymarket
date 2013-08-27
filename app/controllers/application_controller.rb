@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
   
   def get_location
-    @location = request.location.city
+    ip = request.ip
+    @location = Geocoder.search(ip)
   end
   
   #since this is run as an application before_filter,
