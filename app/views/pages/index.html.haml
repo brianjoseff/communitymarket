@@ -39,12 +39,13 @@
         =link_to "More tags...", tags_path
       / -else
       /   /popular tags?
-    %div.row-fluid
+    -unless @near_groups.nil?
       %div.row-fluid
-        %h3 Groups Close to You
+        %div.row-fluid
+          %h3 Groups Close to You
 
-      %p join groups to get notifications from them. Manage your notifications on your profile page
-      =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+        %p join groups to get notifications from them. Manage your notifications on your profile page
+        =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
     %div.row-fluid
       %div.span8
         %h3 Your Groups
