@@ -1,6 +1,6 @@
 namespace :db do
-  desc "erase and fill database"
-  task :populate => :environment do
+  desc "add bunch of stuff"
+  task :burst_of_activity => :environment do
     require 'faker'
     require 'forgery'
 
@@ -34,7 +34,7 @@ namespace :db do
     10.times do |x|
       name = Forgery(:LoremIpsum).word(:random => true) + " PRIVATE group"
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
+      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
       group_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       zip_code = Faker::Address.zip_code
       password = Forgery(:basic).password
@@ -46,7 +46,6 @@ namespace :db do
                     :password => password,
                     :private => true)
     end
-    end
     
     
     
@@ -56,11 +55,13 @@ namespace :db do
       tier_id = nil
       price = Forgery(:Basic).number(:at_least=> 1, :at_most => 40)
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
+      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      email = User.find(user_id).email
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       
       Post.create!(:title => title,
                    :price => price,
+                   :email => email,
                    :tier_id => tier_id,
                    :description => description,
                    :user_id => user_id,
@@ -72,11 +73,13 @@ namespace :db do
       tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 6)
       price = nil
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 40)
+      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      email = User.find(user_id).email
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 3)
       
       Post.create!(:title => title,
                    :price => price,
+                   :email => email,
                    :tier_id => tier_id,
                    :description => description,
                    :user_id => user_id,
@@ -104,7 +107,6 @@ namespace :db do
                          :group_id => group_id)
     end
     
-    
   end
-end 
+end
     
