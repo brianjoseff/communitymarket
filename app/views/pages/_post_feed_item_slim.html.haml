@@ -64,6 +64,7 @@
 
   %div.span2
     %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+    / %i.icon-large.icon-envelope
     -if feed_item.tier_id
       -if signed_in? && current_user.stripe_customer_id.nil? == false
         /IF: signed_in and no c#, THEN: user_credit_modal

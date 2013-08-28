@@ -19,15 +19,18 @@
 /************************************************************/
 
 .tag{
-	background-color:#ffeaf0;
+/*	ffeaf0*/
+	background-color:#b9ffef;
 	
 	/*c0ffb9*/
 /*	#f98275*/
 /*	#e74c3c*/
 /*	background-color:#CDECFA;*/
 	
-	border-bottom: solid 1px #ffb1c7;
-	border-right: solid 1px #ffb1c7;
+	
+/*	ffb1c7*/
+	border-bottom: solid 1px #0acba0;
+	border-right: solid 1px #0acba0;
 /*	border-bottom: solid 1px #67a461;
 	border-right: solid 1px #67a461;*/
 /*	border-bottom: solid 1px #69B0CF;
@@ -177,13 +180,21 @@ input[type="text"].search-bar-field{
 }
 span.slim-feed-title a{
 /*	color: #2980b9;*/
-	color: #008cf0;
+	color: #005b9b;
 	font-weight: bold;
 	font-size: 110%;
 	margin-right: 15px;
 }
+span.slim-feed-title a:visited{
+	color: #7f8c8d;
+}
 span.feed-title a{
-	color: #2980b9;
+	color: #005b9b;
+	font-weight: bold;
+}
+
+span.feed-title a:visited{
+	color: #7f8c8d;
 	font-weight: bold;
 }
 
