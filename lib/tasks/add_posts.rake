@@ -25,8 +25,18 @@ namespace :db do
                    :post_category_id => post_category_id)
     
     end
-    
-    
+    40.times do |y|
+      post_id =Post.last(30).sample.id
+      user_id = User.last(30).sample.id
+      group_id = Group.last(30).sample.id
+      sender_id = User.last(30).sample.id
+      
+      DailyQueue.create!(:post_id => post_id,
+                         :user_id => user_id,
+                         :group_id => group_id,
+                         :sender_id => sender_id)
+    end
+
     #assignments
     100.times do |x|
       post_id = Post.last(40).sample.id
