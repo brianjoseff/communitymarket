@@ -30,3 +30,5 @@
 =render @posts
 -if current_user && current_user.groups_as_owner
   = link_to 'Edit', edit_group_path(@group)
+  |
+  = link_to 'Destroy!', @group, method: :delete, data: { confirm: 'Are you sure?' }

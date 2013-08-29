@@ -11,7 +11,7 @@
 %div.row
   %div.span3
     /new post button
-    =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
+    =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
   %div.span9
     /search bar
     =render :partial => "search/search_form"
@@ -48,11 +48,8 @@
         =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
     %div.row-fluid
       %div.span8
-        %h3 Your Groups
-
-        
-    %div.row-fluid
-      
+        %h3 Your Groups      
+    %div.row-fluid      
       /Group feed
       =render :partial => 'feed', :locals => {:feed_items => @groups}
     %div.row-fluid

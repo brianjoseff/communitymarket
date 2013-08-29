@@ -23,11 +23,13 @@ namespace :db do
       user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 15)
       group_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       zip_code = Faker::Address.zip_code
-      Group.create!(:name => name,
+      email_setting_id = 1
+      group = Group.create!(:name => name,
                     :description => description,
                     :user_id => user_id,
                     :group_category_id => group_category_id,
                     :zipcode => zip_code)
+      Membership.create!(:group_id => group.id, :user_id => user_id, :email_setting_id => email_setting_id)
     end
     
     #private groups    
@@ -38,13 +40,15 @@ namespace :db do
       group_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       zip_code = Faker::Address.zip_code
       password = Forgery(:basic).password
-      Group.create!(:name => name,
+      email_setting_id = 1
+      group = Group.create!(:name => name,
                     :description => description,
                     :user_id => user_id,
                     :group_category_id => group_category_id,
                     :zipcode => zip_code,
                     :password => password,
                     :private => true)
+      Membership.create!(:group_id => group.id, :user_id => user_id, :email_setting_id => email_setting_id)
     end
     
     
@@ -92,9 +96,10 @@ namespace :db do
     users.each { |user|
       2.times do |x|
         begin 
+          email_setting_id = Forgery(:basic).number(:at_least=> 1, :at_most => 3)
           group_id = Forgery(:Basic).number(:at_least => 1, :at_most => 30)
         end until Membership.create(:group_id => group_id,
-                           :member_id => user.id)
+                           :member_id => user.id, :email_setting_id => email_setting_id)
       end
     }
     
