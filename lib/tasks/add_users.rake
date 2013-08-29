@@ -1,6 +1,6 @@
 namespace :db do
-  desc "erase and fill database"
-  task :populate => :environment do
+  desc "add thirty users"
+  task :add_users => :environment do
     require 'faker'
     require 'forgery'
 
