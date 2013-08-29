@@ -29,8 +29,8 @@ namespace :db do
     
     #assignments
     100.times do |x|
-      post_id = Forgery(:Basic).number(:at_least => 50, :at_most => 100)
-      group_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      post_id = Post.last(40).sample.id
+      group_id = Group.last(30).sample.id
       Assignment.create!(:post_id => post_id,
                          :group_id => group_id)
     end
