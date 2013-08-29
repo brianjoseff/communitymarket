@@ -36,7 +36,7 @@ namespace :db do
     10.times do |x|
       name = Forgery(:LoremIpsum).word(:random => true) + " PRIVATE group"
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      user_id = Forgery(:Basic).number(:at_least => 20, :at_most => 40)
       group_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       zip_code = Faker::Address.zip_code
       password = Forgery(:basic).password
@@ -59,7 +59,7 @@ namespace :db do
       tier_id = nil
       price = Forgery(:Basic).number(:at_least=> 1, :at_most => 40)
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      user_id = Forgery(:Basic).number(:at_least => 20, :at_most => 40)
       email = User.find(user_id).email
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 5)
       
@@ -77,7 +77,7 @@ namespace :db do
       tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 6)
       price = nil
       description = Forgery(:LoremIpsum).paragraph(:random => true)
-      user_id = Forgery(:Basic).number(:at_least => 1, :at_most => 20)
+      user_id = Forgery(:Basic).number(:at_least => 20, :at_most => 40)
       email = User.find(user_id).email
       post_category_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 3)
       
