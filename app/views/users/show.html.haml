@@ -17,7 +17,7 @@
 %div.row-fluid
   =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
 %div.row-fluid  
-  -if !@rec_groups.nil? && first.is_a?(Group)
+  -if !@rec_groups.nil? && @rec_groups.first.is_a?(Group)
     %h3 Recommended Groups:
     -@rec_groups.each do |group|
       %div.row-fluid
