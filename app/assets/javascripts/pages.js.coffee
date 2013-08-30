@@ -1,4 +1,38 @@
 
+$ ->
+  
+  #    var debug = $("#debug");
+
+  flipText = (newText) ->
+    (if flipUp is true then ($("#new-text").text(newText)
+    $("#old-text").hide("drop",
+      direction: "down"
+    , 300)
+    $("#new-text").show("drop",
+      direction: "up"
+    , 300)
+    ) else ($("#old-text").text(newText)
+    $("#old-text").show("drop",
+      direction: "up"
+    , 300)
+    $("#new-text").hide("drop",
+      direction: "down"
+    , 300)
+    ))
+    flipUp = not flipUp # Alternating flipping direction
+  window.ingredients = ["Sell","Lend", "Give", "Get"]
+  interval = 2e3 # 2 seconds
+  flipUp = true
+  index = 0
+  maxIndex = window.ingredients.length - 1
+  setInterval (->
+    nextText = window.ingredients[index]
+    
+    #        debug.append("<p>"+window.ingredients[index]+"</p>");
+    flipText nextText
+    index = (if (index is maxIndex) then 0 else index + 1)
+  ), interval
+
 
 # jQuery ->
 #   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))

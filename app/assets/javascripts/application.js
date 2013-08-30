@@ -10,11 +10,13 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require_self
 //= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
-//= require jquery.ui.all
 //= require jquery-ui
+//= require jquery.ui.all
+//=require pages.js.coffee
+//= require jquery.tokeninput
 //= require bootstrap
 //= require groups.js.coffee
 //= require posts.js.coffee
@@ -25,3 +27,38 @@
 //= require_tree .
 
 
+// document.ready(function() {
+//   var flipText, flipUp, index, interval, maxIndex;
+//   flipText = function(newText) {
+//     var flipUp;
+//     if (flipUp === true) {
+//       $("#new-text").text(newText);
+//       $("#old-text").hide("drop", {
+//         direction: "down"
+//       }, 300);
+//       $("#new-text").show("drop", {
+//         direction: "up"
+//       }, 300);
+//     } else {
+//       $("#old-text").text(newText);
+//       $("#old-text").show("drop", {
+//         direction: "up"
+//       }, 300);
+//       $("#new-text").hide("drop", {
+//         direction: "down"
+//       }, 300);
+//     }
+//     return flipUp = !flipUp;
+//   };
+//   window.ingredients = ["Lend", "Give", "Get"];
+//   interval = 2e3;
+//   flipUp = true;
+//   index = 0;
+//   maxIndex = window.ingredients.length - 1;
+//   return setInterval((function() {
+//     var nextText;
+//     nextText = window.ingredients[index];
+//     flipText(nextText);
+//     return index = (index === maxIndex ? 0 : index + 1);
+//   }), interval);
+// });

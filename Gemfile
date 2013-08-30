@@ -20,7 +20,8 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails'
-  gem 'chosen-rails'
+  #gem 'chosen-rails'
+  gem 'jquery-rails'
   gem 'jquery-ui-rails'
   gem 'jquery-modal-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -37,7 +38,9 @@ gem 'client_side_validations' , '~> 3.2.0'
 gem 'client_side_validations-simple_form'
 
 gem 'will_paginate'
+gem 'kaminari'
 gem 'rails_tokeninput'
+
 gem 'stripe'
 
 #gems that help with seed files
@@ -45,7 +48,8 @@ gem 'forgery'
 gem 'faker'
 
 gem 'bootstrap-sass'
-gem 'jquery-rails'
+# gem 'jquery-rails'
+# gem 'jquery-ui-rails'
 
 #search gem
 gem 'ransack'
@@ -87,3 +91,4 @@ gem "localtunnel"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+gem 'jquery-ui-rails'

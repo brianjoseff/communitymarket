@@ -27,9 +27,10 @@
   %div.span2.credit-cvv
     = label_tag :cvv, "CVV"
     = text_field_tag :cvv, nil, :class=>"credit-cvv input-block-level", :id => "card_code"
+
 %div.row-fluid
   =f.label :email
-  =f.text_field :email, :validate => true
+  =f.text_field :email, :validate => true, :value => (current_user ? current_user.email : "")
 -unless current_user
   %div.row-fluid
     =label_tag :password

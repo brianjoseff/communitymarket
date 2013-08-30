@@ -70,7 +70,7 @@ class TransactionsController < ApplicationController
         # @user.stripe_customer_id = customer.id
         if @transaction.save && @user.save
           @user.charge_as_customer(@amount)
-          #sign_in @user
+          sign_in @user
           #format.js { render }
           format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
           format.json { render json: @transaction, status: :created, location: @transaction }

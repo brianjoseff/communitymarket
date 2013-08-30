@@ -2,6 +2,9 @@ class WeeklyQueue < ActiveRecord::Base
   attr_accessible :post_id, :user_id, :sender_id, :group_id
   def self.send_email
     #add time range restraint as well
+    unless Date.today.wday == 5
+      break
+    end
     WeeklyQueue.all.each do |item|
       sender = User.find(item.user_id)
       recipient = User.find(item.sender_id)

@@ -16,7 +16,7 @@
     -else
       /=link_to_open_modal('Sign up', new_user_path, '#signup_modal', {class: 'action'})
       /%li=link_to "Sign up", new_user_path
-      %li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
+      /%li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
       %li{:class => "#{'active' if current_page?(new_user_path)}"}= link_to "Sign Up", new_user_path
       /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
       /%a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up

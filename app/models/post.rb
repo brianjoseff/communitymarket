@@ -17,7 +17,7 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   attr_reader :tag_tokens
   attr_accessor :stripe_card_token
-  
+
   
   def tag_tokens=(tokens)
     self.tag_ids = Tag.ids_from_tokens(tokens)
@@ -30,6 +30,11 @@ class Post < ActiveRecord::Base
     end
     return posts
   end
+  
+  def deactivate
+    self.active = false
+  end
+    
   
   def save_customer(user)
     if valid?
