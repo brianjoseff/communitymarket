@@ -1,5 +1,5 @@
 
-$ ->
+jQuery ($) ->
   
   #    var debug = $("#debug");
 

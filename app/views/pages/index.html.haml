@@ -1,19 +1,27 @@
 
-%div.row
-
+/ %div.row
+/ 
+/ %div.row
+/   %div.span12
+/     %ul 
+/       %li get rid of stuff
+/       %li ask for stuff
+/       %li notify certain groups of people
 %div.row
   %div.span12
-    %ul 
-      %li get rid of stuff
-      %li ask for stuff
-      %li notify certain groups of people
-    %h2
-      %div.like-span#dynamic-text-wrapper
-        %div.like-span#old-text Lend
-        %div.like-span#new-text Give
-        / %span#newest-text Get
-        #stuff_header Stuff
-      %br/
+    %h1
+      %span#chkWidth{:style => "display: none;"}
+    %h1#changingtext.toggle
+      %span Sell
+      Stuff
+%div.row
+  %div.span12
+    %h1
+      %span#chkWidth2{:style => "display: none;"}
+    %h1#changingtext2.toggle
+      Notify
+      %span groups of people
+%br/
 %div.row
   %div.span3
     /new post button
