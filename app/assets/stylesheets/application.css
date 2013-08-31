@@ -18,7 +18,7 @@
   height: 100px;
   background: #696969;
 }
-h1.toggle {
+span.toggle {
     
     font-weight:700;
     color:lighten(#0E8DBC, 10);
