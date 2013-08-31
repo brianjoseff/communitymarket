@@ -11,7 +11,9 @@ class PagesController < ApplicationController
     @sorted_posts = @sort_posts.result
     if signed_in? && current_user.post_feed.is_a?(Array)
       @user = current_user
-      @posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
+      #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
+      @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       unless @location.nil?
