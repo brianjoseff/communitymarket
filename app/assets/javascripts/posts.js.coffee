@@ -38,7 +38,17 @@ countChecked = ->
 $ ->
 	$("input.group-box").on "click", countChecked
 
-
+## DISABLE PRICE AREA WHEN FREE or REQUEST post type is chosen
+		
+checkType = ->
+	n = $(this).data "id"
+	if n > 1
+		$("div#get_paid_stuff").hide()
+	else
+		$("div#get_paid_stuff").show()
+$ ->
+	$("button.switch").on "click", checkType
+	
 $ ->
 	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
 	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
@@ -54,6 +64,7 @@ $ ->
 	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
 	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
 
+		
 	$.fn.hasAnyClass = (classesToCheck) ->
 	  i = 0
 
@@ -61,6 +72,8 @@ $ ->
 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
 	    i++
 	  false
+	
+
 # $ ->
 # 	$("#zipcode_submit").click (e) -?
 # 	e.preventDefault(e)
@@ -155,7 +168,14 @@ jQuery ->
 	$("input#post_cash").change ->
 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
 		$("div.cash-field-cloak").toggle()		
+
+
+
+
+#the function is getting called before the active button gets changed...so has old button id
+
 		
+
 
 ## POST TAGS TOKEN INPUT
 jQuery ->

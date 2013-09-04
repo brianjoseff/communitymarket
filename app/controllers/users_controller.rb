@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  
+  skip_before_filter :require_admin_login, :except => [:index]
   def index
     @users = User.all
 
@@ -102,6 +104,8 @@ class UsersController < ApplicationController
 
       @group.member_ids << @user.id
     end
+    
+
     #@user.save
     # if @user.valid?
     #    flash[:notice] = 'You have successfully signed your soul away.'
@@ -122,9 +126,13 @@ class UsersController < ApplicationController
         if @group
           @group.update_attributes(params[:group])
         end
+        # if session[:followed_tag]
+        #   @tag = Tag.find(session[:followed_tag])
+        #   @user.follow!(@tag)
+        # end
         #SignupMailer.new_subscriber(@user).deliver
         sign_in @user
-        format.html { redirect_to root_path, notice: "Thank you for signing up!" }
+        format.html { redirect_back_or root_path, "Thank you for signing up!" }
         format.json { render json: @user, status: :created, location: @user }
         # format.js {'create'}
       else
@@ -208,4 +216,26 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+    def redirect_back_or(default, notice)
+      flash[:notice] = notice
+      if session[:followed_tag]
+        @tag = Tag.find(session[:followed_tag])
+        current_user.follow!(@tag)
+        session.delete(:followed_tag)
+      end
+      if session[:return_to]
+        redirect_to session[:return_to]
+        session.delete(:return_to)
+      else
+        redirect_to default
+      end
+      
+    end
+  
+    def store_location
+      session[:return_to] = request.fullpath
+    end
+  
+  
 end

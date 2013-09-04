@@ -116,4 +116,20 @@ class User < ActiveRecord::Base
     #   return groups
     # end
   end
+  
+  def following?(tag)
+    followships.find_by_followed_id(tag.id)
+  end
+
+  def follow!(tag)
+    followships.create!(followed_id: tag.id)
+  end
+
+  def unfollow!(tag)
+    followships.find_by_followed_id(tag.id).destroy
+  end
+  
+  
+  
+  
 end

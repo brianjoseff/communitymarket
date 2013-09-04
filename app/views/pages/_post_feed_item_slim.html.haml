@@ -47,6 +47,13 @@
 
   %div.span10
     %div.row-fluid.slim-feed-title-row
+      -if feed_item.post_category_id == 1
+        %div.for-sale-marker
+      -elsif feed_item.post_category_id == 2
+        %div.wanted-marker
+      -else
+        %div.free-marker
+      
       /price
       /make price a variable that can be passed into the modal partials below so
       /that on credit card charge, we know how much to charge      

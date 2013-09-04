@@ -11,6 +11,6 @@
               = truncate(feed_item.description, 10)
         %div.span2
           -if feed_item.private?
-            =link_to "Join", group_url(feed_item), class: "btn btn-medium"
+            =link_to "Join", group_url(feed_item), class: "btn btn-mini"
           -else
             = render "groups/join_form", :group => feed_item

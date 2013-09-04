@@ -9,13 +9,13 @@ class PagesController < ApplicationController
     @transaction = Transaction.new
     @sort_posts = Post.search()
     @sorted_posts = @sort_posts.result
-    if signed_in? && current_user.post_feed.is_a?(Array)
+    if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
-      @groups = current_user.group_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      @your_groups = current_user.group_feed
       unless @location.nil?
         @near_groups = Group.near(@location.first.city, 10000)
       end
@@ -39,9 +39,11 @@ class PagesController < ApplicationController
       #   end
       # end
       @user = User.new
-      
+      unless @location.nil?
+        @near_groups = Group.near(@location.first.city, 10000)
+      end
       #@posts = @entries.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
-      @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      #@groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @random_groups = Group.last(20) - @user.groups_as_member
     end
   end

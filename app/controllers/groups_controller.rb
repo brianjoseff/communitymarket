@@ -33,6 +33,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @posts = @group.posts
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+    
     if !signed_in?
       @user = User.new
     else
@@ -50,7 +52,8 @@ class GroupsController < ApplicationController
     
     @group = Group.new
     @categories = GroupCategory.all
-
+    @group.assets.build
+    @assets = @group.assets
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @group }

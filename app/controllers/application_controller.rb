@@ -39,4 +39,12 @@ class ApplicationController < ActionController::Base
     @free = PostCategory.find_by_id(4)
     @housing = PostCategory.find_by_id(5)
   end
+  
+  def require_admin_login
+    unless signed_in? && current_user.admin?
+      flash[:error] = "You must be logged in as an admin to access this section"
+      redirect_to signin_path
+    end
+  end
+  
 end

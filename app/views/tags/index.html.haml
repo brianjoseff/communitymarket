@@ -1,86 +1,44 @@
-%h1 Listing tags
+= link_to 'New Tag', new_tag_path
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th
-    %th
-    %th
+%div.row
+  %div.span3
+    %h3 Categories
+    /put tag search bar here
+    / =form_tag(groups_path, method: :get) do
+    /   .input-group
+    /     =text_field_tag :zipcode, nil,:class => "form-control", :placeholder =>"Zipcode"
+    /     %span.input-group-btn
+    /       =button_tag "Go", name: nil, :class => "btn-default btn", :type => "button"
+      
 
-  - @tags.each do |tag|
-    %tr
-      %td= tag.name
-      %td= tag.description
-      %td= link_to 'Show', tag
-      %td= link_to 'Edit', edit_tag_path(tag)
-      %td= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }
+    /TAG CATEGORIES?
+    / %ul.nav
+    /   -@g_categories.each do |gcat|
+    /     =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
+  %div.span9
+    %div.row
+      %div.span3
+        %h3 Popular Tags
+      %div.span4
+        /=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
+    / %div.span9
+    /   %ul.nav-tabs
+    /     %li 
+    /Sort by: closest, newest, oldest, most popular
+    / %ul.breadcrumb
+    /   %li
+    /     =link_to "All", groups_path
+    /   %li
+    /     =link_to @group_category, group_category_path(@group_category)
+    =render @popular_tags
 
 %br
 
-= link_to 'New Tag', new_tag_path
+/
 
-/ 
-/ %div.row
-/   %div.span3
-/     %h3 Categories
-/     /put region search bar here
-/     =form_tag(groups_path, method: :get) do
-/       .input-group
-/         =text_field_tag :zipcode, nil,:class => "form-control", :placeholder =>"Zipcode"
-/         %span.input-group-btn
-/           =button_tag "Go", name: nil, :class => "btn-default btn", :type => "button"
-/       
-/     / =form_for '/groups/nearby', :url => nearby_groups_path do |f|
-/     /   /=f.hidden_field :zipcode, id: "zipcode", value: "93105"
-/     /   =f.label "Zipcode"
-/     /   =f.text_field :zipcode
-/     /   =f.submit "Search"
-/     %ul.nav
-/       -@g_categories.each do |gcat|
-/         =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
-/   %div.span9
-/     %div.row
-/       %div.span3
-/         %h3 Groups
-/       %div.span4
-/         =link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
-/     / %div.span9
-/     /   %ul.nav-tabs
-/     /     %li 
-/     /Sort by: closest, newest, oldest, most popular
-/     / %ul.breadcrumb
-/     /   %li
-/     /     =link_to "All", groups_path
-/     /   %li
-/     /     =link_to @group_category, group_category_path(@group_category)
-/     =render @groups, :as => "group_feed_item"
-/ / %table
-/ /   %tr
-/ /     %th Name
-/ /     %th Description
-/ /     %th Group category
-/ /     %th
-/ /     %th
-/ /     %th
-/ /     %th # of members
-/ / 
-/ /   - @groups.each do |group|
-/ /     %tr
-/ /       %td= group.name
-/ /       %td= group.description
-/ /       %td= group.group_category
-/ /       %td= link_to 'Show', group
-/ /       %td= link_to 'Edit', edit_group_path(group)
-/ /       %td= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }
-/ /       %td #{group.members.count} 
-/ %br
-/ 
-/ = link_to 'New Group', new_group_path
-/ 
-/ 
-/ 
-/ /Categories side bar
-/ /Content area
-/ //tab nav bar: alphabetical, newest, most popular
-/ //groups: image, name, description, join button
+
+
+/Categories side bar
+/Content area
+//tab nav bar: alphabetical, newest, most popular
+//groups: image, name, description, join button

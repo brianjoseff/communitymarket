@@ -1,20 +1,23 @@
 %p#notice= notice
 
+
 %div.row-fluid
-  %h1 #{@group.name}
-  / -@group.tags.each do |tag|
-  /   =link_to tag.name, tag_url(tag), :class => "tag"
-%div.row-fluid
-  %p #{@group.description}
-/ %p
-/   %b Name:
-/   = @group.name
-/ %p
-/   %b Description:
-/   = @group.description
-/ %p
-/   %b Group category:
-/   = @group.group_category
+  -unless @group.assets.empty?
+    %div.span3
+      =link_to image_tag(@group.assets.empty?  ? '/assets/small.png': @group.assets.first.image.url(:medium), :alt => @group.name), group_url(@group), :class => "thumbnail"
+  %div.span9
+    %h1 #{@group.name}
+    %div.row-fluid
+      %p #{@group.description}
+    / %p
+    /   %b Name:
+    /   = @group.name
+    / %p
+    /   %b Description:
+    /   = @group.description
+    / %p
+    /   %b Group category:
+    /   = @group.group_category
 -if @group.private?
   -@group.members.each do |member|
     %p=member.email
@@ -27,7 +30,7 @@
 -if current_user
   = render :partial => 'invite', :locals => {:group => @group}
 %h2 Posts
-=render @posts
+=render :partial => 'shared/feed',:locals => {:feed_items => @posts}
 -if current_user && current_user.groups_as_owner
   = link_to 'Edit', edit_group_path(@group)
   |

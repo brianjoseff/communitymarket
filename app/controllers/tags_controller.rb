@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     @tags = Tag.order(:name)
-
+    @popular_tags = get_popular_tags
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tags.tokens(params[:t]) }
@@ -83,4 +83,12 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  private
+  def get_popular_tags
+    Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+  end
+      
+      
 end

@@ -13,4 +13,13 @@ module ApplicationHelper
     default_options = { remote: true, data: { target: modal_id, toggle: 'modal', type: 'html' }, class: 'btn modal-open' }
     link_to_edit url, default_options
   end
+  
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+  
+  def store_location
+    session[:return_to] = request.fullpath
+  end
 end

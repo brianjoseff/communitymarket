@@ -5,33 +5,53 @@
 = f.hidden_field :user_id
 = f.hidden_field :customer_id
 
-%noscript
-  %p This form requires Javascript to use
-#credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
-  #credit-card-errors{:style => "display:none"}
-    #stripe-error-message.alert-message.block-message.error
-  / these fields are disabled before submission and are never transmitted back to rails
+%div.row-fluid
+  %fieldset
+    %legend Credit Card Stuff
+    %div
+      -if @user.stripe_customer_id
+        #change-card.clearfix
+          %label Card
+          .input
+            %span
+              Using card ending with
+              \#{@user.stripe_customer_id}
+              \#{link_to "(change)", "#"}
 
-%div.row-fluid
-  %div
-    = label_tag :credit_card_number, nil, :id => "credit_label"
-    = text_field_tag :credit_card_number,nil, :class=>"credit-number span12", :id => "card_number"
-%div.row-fluid
-  %div.span4
-    / = label_tag :expiry_date
-    / = date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
-    = label_tag :card_month, "Card Expiration"
-    = select_month nil, {:add_month_numbers => true}, {:name => nil, :id => "card_month"}
-    = select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => "card_year"}
-  %div.span3
-  %div.span2.credit-cvv
-    = label_tag :cvv, "CVV"
-    = text_field_tag :cvv, nil, :class=>"credit-cvv input-block-level", :id => "card_code"
+      %noscript
+        %p This form requires Javascript to use
+      #credit-card{:style => @user.stripe_customer_id ? "display:none" : "display:block"}
+        #credit-card-errors{:style => "display:none"}
+          #stripe-error-message.alert-message.block-message.error
+        / these fields are disabled before submission and are never transmitted back to rails
 
-%div.row-fluid
-  =f.label :email
-  =f.text_field :email, :validate => true, :value => (current_user ? current_user.email : "")
--unless current_user
-  %div.row-fluid
-    =label_tag :password
-    =text_field_tag :password, params[:password]
+      %div.row-fluid
+        %div.control-group
+
+          %div.controls.credit
+            = label_tag :credit_card_number
+            = text_field_tag :credit_card_number, params[:credit_card_number], :class=>"credit-number span12", :id => "card_number"
+      %div.row-fluid
+        %div.span9.control-group
+
+          %div.controls.credit
+            = label_tag :expiry_date
+            = select_month nil, {:add_month_numbers => true, :use_short_month => true}, {:name => nil, :id => "card_month", :class => "credit-expiry inline span6"}
+            = select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => "card_year", :class => "credit-expiry inline"}
+            /= date_select "", :expiry_date, {:discard_day => true, :order => [:month, :year], :use_month_numbers => true, :start_year => Date.today.year, :end_year => Date.today.year + 25}, {:class =>"credit-expiry inline"}
+        %div.span3.credit-cvv.control-group
+          = label_tag :cvv, "CVV"
+
+          = text_field_tag :cvv, params[:cvv], :class=>"credit-cvv input-block-level", :id => "card_code"
+
+      %div.row-fluid
+        =f.label :email
+        =f.text_field :email, :validate => true, :value => (current_user ? current_user.email : "")
+      -unless current_user
+        %div.row-fluid
+          =label_tag :password
+          =text_field_tag :password, params[:password]
+
+        / empty
+        %span.note
+        Your credit card details will be sent directly to our payment processor

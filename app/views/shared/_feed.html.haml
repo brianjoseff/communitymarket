@@ -1,0 +1,11 @@
+-if feed_items
+  -if feed_items.first.is_a?(Post)
+    =render :partial => 'shared/post_feed', :collection => feed_items, :as => :feed_item
+  -else
+    =render :partial => 'shared/group_feed_item', :collection => feed_items, :as => :feed_item
+
+  / =will_paginate feed_items
+  /=will_paginate @page_results
+  =paginate @posts
+-else
+  %p no array

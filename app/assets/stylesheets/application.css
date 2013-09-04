@@ -13,21 +13,42 @@
  *= require token-input-facebook
  *= require_tree .
  */
+.hide-this{
+	display: none;
+}
+div.for-sale-marker{
+	width: 20px;
+	height: 20px;
+	background: #FF91AF;
+	float:left;
+	margin-right: 5px;
+}
+div.wanted-marker{
+	width: 20px;
+	height: 20px;
+	background: #f1c40f;
+	float:left;
+	margin-right: 5px;
+}
+div.free-marker{
+	width: 20px;
+	height: 20px;
+	background: #00e5d6;
+	float:left;
+	margin-right: 5px;
+}
 #toggle{
 	width: 100px;
   height: 100px;
   background: #696969;
 }
-/*span.toggle {
-    
-    font-weight:700;
-    color: lighten(#0E8DBC, 10);
-    margin-top:20px;
-    margin-left:20px;
-    
-    text-shadow:0 1px 1px #ccc,
-                0 1px 2px rgba(0,0,0,.1);
-}*/
+
+.the_post_id{
+	display:none;
+}
+.notice{
+	
+}
 /*#changingtext span{
 	height: 53px;
 }
@@ -206,7 +227,7 @@ span.slim-feed-title a{
 	margin-right: 15px;
 }
 span.slim-feed-title a:visited{
-	color: #7f8c8d;
+	/*color: #7f8c8d;*/
 }
 span.feed-title a{
 	color: #005b9b;
@@ -214,7 +235,7 @@ span.feed-title a{
 }
 
 span.feed-title a:visited{
-	color: #7f8c8d;
+	/*color: #7f8c8d;*/
 	font-weight: bold;
 }
 

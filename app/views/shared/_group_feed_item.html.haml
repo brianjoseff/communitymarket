@@ -1,0 +1,7 @@
+%div.row-fluid
+  %div.span10
+    %div.row-fluid
+      %span.feed-title
+        = link_to feed_item.name, group_url(feed_item)
+  %div.span2
+    = render "groups/join_form", :group => feed_item

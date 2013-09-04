@@ -4,7 +4,7 @@ Communitymarket::Application.routes.draw do
 
 
   resources :email_settings
-
+  resources :followships
 
   # resources :posts do
   #   resources :transactions
@@ -64,7 +64,6 @@ Communitymarket::Application.routes.draw do
   match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new'
   root :to => 'pages#index'
-  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -16,7 +16,7 @@
             function() {
                 $("#changingtext span").animate({'opacity': 0}, 1000, function () {
                   $(this).text(t1[i]);
-                  width = $('#chkWidth').text(t1[i]).width() + 10;
+                  width = $('#chkWidth').text(t1[i]).width();
                   console.log(t1[i], width);
                   $(this).animate({'opacity': 1, 'width': width}, 1000);
               });
