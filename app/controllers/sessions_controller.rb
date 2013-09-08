@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     else
       #sign the user in and redirect to the user's show page.
       sign_in @user
-      redirect_back_or @user
+      redirect_back_or @user, nil
     end
   end
   
@@ -27,4 +27,26 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_path
   end
+  
+  private
+    def redirect_back_or(default, notice)
+      flash[:notice] = notice
+      if session[:followed_tag]
+        @tag = Tag.find(session[:followed_tag])
+        current_user.follow!(@tag)
+        session.delete(:followed_tag)
+      end
+      if session[:return_to]
+        redirect_to session[:return_to]
+        session.delete(:return_to)
+      else
+        redirect_to default
+      end
+      
+    end
+  
+    def store_location
+      session[:return_to] = request.fullpath
+    end
+  
 end

@@ -10,7 +10,7 @@ class Transaction < ActiveRecord::Base
     if valid?
       customer = Stripe::Customer.create( :description => email, :card => stripe_card_token)
       user.stripe_customer_id = customer.id
-      save!
+      user.save!
     end
   rescue Stripe::InvalidRequestError => e
     logger.error "Fuck, Stripe error while creating customer: #{e.message}"

@@ -7,22 +7,23 @@
 /       %li get rid of stuff
 /       %li ask for stuff
 /       %li notify certain groups of people
-%div.banner
-  %div.row
-    %div.span12
-      %h1
-        %span#chkWidth{:style => "display: none;"}
-      %h1#changingtext
-        %span.toggle Sell
-        Stuff
-  %div.row
-    %div.span12
-      %h1
-        %span#chkWidth2{:style => "display: none;"}
-      %h1#changingtext2
-        Notify
-        %span.toggle groups of people
-  %br/
+/ %div.banner
+/   %div.row
+/     %div.span12
+/       %h1
+/         %span#chkWidth{:style => "display: none;"}
+/       %h1#changingtext
+/         %span.toggle Sell
+/         Stuff
+/   %div.row
+/     %div.span12
+/       %h1
+/         %span#chkWidth2{:style => "display: none;"}
+/       %h1#changingtext2
+/         Notify
+/         %span.toggle groups of people
+/   %br/
+%br/
 %div.row
   %div.span3
     /new post button
@@ -37,7 +38,7 @@
       %div.row-fluid
         %div.span2
           %h2 Posts
-        %div.span4
+        %div.span6.posts-nav
           %span
             =link_to "For Sale", for_sale_path, id: 'for_sale_link'
           %span 

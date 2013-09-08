@@ -10,7 +10,11 @@ Communitymarket::Application.routes.draw do
   #   resources :transactions
   # end
   
-  resources :transactions
+  resources :transactions do
+    collection do
+      post :customer_purchase
+    end
+  end
   resources :memberships do
     collection do
       put :update_individual
@@ -56,6 +60,11 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   
+  
+  match '/for_sale', :to => "pages#for_sale"
+  match '/borrow_rent', :to => "pages#borrow_rent"
+  match '/wanted', :to => "pages#wanted"
+  match '/transactions/customer_purchase', :to => "transactions#customer_purchase"
   match '/groups/nearby', :to => "groups#nearby"
   match '/search', :to => 'search#index'
   match '/about', :to => 'pages#about'

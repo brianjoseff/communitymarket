@@ -50,6 +50,12 @@ transaction =
 		else
 			alert(response.error.message)
 
+# $('#stripe_error').text(response.error.message)
+
+
+
+
+
 # $ ->
 # 	$("#transaction").on "loaded", () ->
 # 		jQuery ->	

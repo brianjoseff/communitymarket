@@ -18,7 +18,7 @@
     /   =hidden_field_tag('tag[follower_ids][]', current_user.id)
     /   .action=f.submit "Follow"
 -else
-  = form_for @user.followships.build(:followed_id => tag.id), remote: true  do |f|                                          
+  = form_for @user.followships.build(:followed_id => tag.id)  do |f|                                          
     = f.hidden_field :followed_id
     = f.submit "Follow", class: "btn btn-large btn-primary"
   /=link_to "Follow", new_user_path, :class => "btn btn-mini"

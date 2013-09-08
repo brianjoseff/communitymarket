@@ -14,16 +14,28 @@
         Tier: #{@tier.name}
     /buy button
     /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-    -if @post.tier_id
-      =link_to_modal 'Buy', new_transaction_path(:post_id => @post.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-success"
     %a.btn{ :href => "mailto:#{@post.email}", :role => "button"} Email
-    %div#buy_modal{:style=>"display:none"}
+    -if @post.tier_id
+      /=link_to_modal 'Buy', new_transaction_path(:post_id => @post.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-success"
       -if signed_in? && current_user.stripe_customer_id
-        =render 'user_you_sure_modal'
+        /=render 'user_you_sure_modal'
+        /=link_to 'Buy', @transaction, method: :create, :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id, data: { confirm: 'Are you sure?' }
+        /=link_to 'Buy', customer_purchase_transaction_path( :post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => @post.id
+        = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
+          - if @transaction.errors.any?
+            .error_messages
+              %h2
+                = pluralize(@transaction.errors.count, "error")
+                prohibited this transaction from being saved:
+              %ul
+                - @transaction.errors.full_messages.each do |msg|
+                  %li= msg                                          
+          =f.hidden_field :post_id, :value => @post.id
+          =f.submit "Buy", class: "btn btn-mini btn-success"
       -elsif signed_in? && current_user.stripe_customer_id.nil?
-        =render :partial => 'pages/user_credit_modal'
+        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => @post.id 
       -else
-        =render :partial => 'pages/non_user_credit_modal'
+        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => @post.id 
   %div.span8
     %div.row-fluid
       %h1 #{@post.title}

@@ -4,7 +4,9 @@
   %div.span6
     %h1 Stuff:
     %p search returned #{pluralize(@posts_results.count, 'post')}
-    =render @posts_results
+    /Post feed
+    =render :partial => 'shared/feed',:locals => {:feed_items => @posts_results}
+    
   %div.span6
     %h1 Groups:
     %p search returned #{pluralize(@group_count, 'group')}

@@ -150,7 +150,7 @@
   /DESCRIPTION    
   %div.control-group
     =f.label :description, :class => "control-label"
-    %div.controls.post-form
+    %div.controls
       = f.text_area :description, :class => "input-block-level inline", :placeholder => "An Amish father and son are in a mall for the first time. They watch an old, grizzled woman walk into an elevator. Doors close. Minute later, doors open and a buxom blonde saunters out. The man turns to his son and says, 'Zebediah, get your mother, quick!'.... This fridge is the same. It works magic.", :rows => "8"
   /EMAIL AND PASSWORD FIELDS    
   %div.control-group
@@ -225,6 +225,7 @@
     /   = f.label :premium
     /   = f.check_box :premium
   %div.control-group
-    = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
+    %div.controls
+      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
     
 

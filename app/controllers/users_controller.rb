@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   
-  skip_before_filter :require_admin_login, :except => [:index]
+  before_filter :require_admin_login, :only => [:index]
   def index
     @users = User.all
 
@@ -224,6 +224,11 @@ class UsersController < ApplicationController
         current_user.follow!(@tag)
         session.delete(:followed_tag)
       end
+      if session[:joined_group]
+        @group = Group.find(session[:joined_group])
+        current_user.join!(@group)
+        session.delete(:joined_group)
+      end
       if session[:return_to]
         redirect_to session[:return_to]
         session.delete(:return_to)
@@ -236,6 +241,11 @@ class UsersController < ApplicationController
     def store_location
       session[:return_to] = request.fullpath
     end
-  
+    def require_admin_login
+      unless current_user.admin?
+        flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
+        redirect_to signin_path
+      end
+    end
   
 end

@@ -73,11 +73,21 @@
     %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
     / %i.icon-large.icon-envelope
     -if feed_item.tier_id
-      -if signed_in? && current_user.stripe_customer_id.nil? == false
+      -if signed_in? && current_user.stripe_customer_id
         /IF: signed_in and no c#, THEN: user_credit_modal
         /=render 'user_you_sure_modal'
         / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-        =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+        = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
+          - if @transaction.errors.any?
+            .error_messages
+              %h2
+                = pluralize(@transaction.errors.count, "error")
+                prohibited this transaction from being saved:
+              %ul
+                - @transaction.errors.full_messages.each do |msg|
+                  %li= msg                                          
+          =f.hidden_field :post_id, :value => feed_item.id
+          =f.submit "Buy", class: "btn btn-mini btn-success"
       -elsif signed_in? && current_user.stripe_customer_id.nil?
         /IF: signed_in and yes c# THEN: user_you_sure_modal
      

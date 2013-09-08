@@ -31,10 +31,10 @@ class Post < ActiveRecord::Base
     return posts
   end
   
-  def deactivate
+  def deactivate!
     self.active = false
+    self.save!
   end
-    
   
   def save_customer(user)
     if valid?

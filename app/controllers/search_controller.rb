@@ -13,8 +13,9 @@ class SearchController < ApplicationController
     @q2 = Post.search({:title_cont => params[:q][:name_cont]})
     #@q2 = Post.search(params[:q])
     @posts_results = @q2.result
+    @posts_results = Kaminari.paginate_array(@posts_results).page(params[:page]).per(35)
     @post_count = @posts_results.count
-    
+    @posts = @posts_results
     
     #Add search array for tags
     

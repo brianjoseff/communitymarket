@@ -1,0 +1,3 @@
+
+$("#group_<%=@group.id%>").toggle()
+$("#your_groups").html("<%= escape_javascript(render :partial => 'pages/your_group_feed_item', :collection => current_user.group_feed, :as => :group) %>")

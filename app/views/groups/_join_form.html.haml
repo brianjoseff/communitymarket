@@ -9,26 +9,57 @@
 / 
 / 
 
-
+/ -if current_user
+/   -if tag.followers.include?(current_user)
+/     /=render :partial => "leave"
+/     / =link_to "Unfollow", (current_user.followships.find_by_followed_id(tag)), :method => :delete, :confirm => "Are you sure?"
+/     
+/     = form_for current_user.followships.find_by_followed_id(tag), html: { :method => :delete }, remote: true do |f|                                            
+/       = f.submit "Unfollow", class: "btn btn-large"
+/     
+/     
+/   -else
+/     / =render :partial => "join"
+/     
+/     = form_for current_user.followships.build(:followed_id => tag.id), remote: true  do |f|                                          
+/       = f.hidden_field :followed_id
+/       = f.submit "Follow", class: "btn btn-large btn-primary"
+/     
+/     / =form_for tag do |f|
+/     /   =hidden_field_tag('tag[follower_ids][]', current_user.id)
+/     /   .action=f.submit "Follow"
+/ -else
+/   = form_for @user.followships.build(:followed_id => tag.id)  do |f|                                          
+/     = f.hidden_field :followed_id
+/     = f.submit "Follow", class: "btn btn-large btn-primary"
+/   /=link_to "Follow", new_user_path, :class => "btn btn-mini"
 
 /MODAL ATTEMPT
 
 -if current_user
   -if group.members.include?(current_user)
     /=render :partial => "leave"
-    =link_to "Leave", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
+    = form_for current_user.memberships.find_by_group_id(group), html: { :method => :delete }, remote: true do |f|                                            
+      = f.submit "Leave", class: "btn btn-mini"
+    /=link_to "Leave", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"
   -else
+
     -if group.private?
       =form_tag(private_groups_path,  method: :put) do
         =hidden_field_tag :group_id, group.id
         =hidden_field_tag('group[member_ids][]', current_user.id)
         %div.span3
           =text_field_tag :password, nil, :class => "input-block-level inline", :placeholder => "Password", :id => "join_private_group"
-        =submit_tag "Join", :class => "btn btn-medium"
+        =submit_tag "Join", :class => "btn btn-mini"
     -else
-      =form_for group do |f|
-        =hidden_field_tag('group[member_ids][]', current_user.id)
-        =f.submit "Join", :class => "btn btn-mini"
+      = form_for current_user.memberships.build(:group_id => group.id), remote: true  do |f|                                          
+        = f.hidden_field :group_id
+        = f.submit "Join", class: "btn btn-mini"
+      / =form_for group do |f|
+      /   =hidden_field_tag('group[member_ids][]', current_user.id)
+      /   =f.submit "Join", :class => "btn btn-mini"
 -else
-  =link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true 
-  
+  /=link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true 
+  = form_for @user.memberships.build(:group_id => group.id)  do |f|                                          
+    = f.hidden_field :group_id
+    = f.submit "Join", class: "btn btn-mini"

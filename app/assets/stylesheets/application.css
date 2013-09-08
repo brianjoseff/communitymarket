@@ -16,6 +16,14 @@
 .hide-this{
 	display: none;
 }
+.posts-nav{
+	margin-top: 22px;
+}
+#for_sale_link{
+	background:#FF91AF;
+	padding: 2px;
+	text-decoration: underline;
+}
 div.for-sale-marker{
 	width: 20px;
 	height: 20px;
@@ -23,12 +31,22 @@ div.for-sale-marker{
 	float:left;
 	margin-right: 5px;
 }
+#wanted_link{
+	background:#f1c40f;
+	padding: 2px;
+	text-decoration: underline;
+}
 div.wanted-marker{
 	width: 20px;
 	height: 20px;
 	background: #f1c40f;
 	float:left;
 	margin-right: 5px;
+}
+#borrow_rent_link{
+	background:#00e5d6;
+	padding: 2px;
+	text-decoration: underline;
 }
 div.free-marker{
 	width: 20px;
@@ -320,6 +338,9 @@ input.credit-number{
 	left:50px;
 	top:200px;
 
+}
+.post-form{
+	
 }
 #tier_explanation{
 	/*margin: 2px;*/

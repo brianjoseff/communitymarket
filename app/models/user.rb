@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
     Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => customer_id)
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while charging card: #{e.message}"
-    errors.add :base, "There was a problem with your credit card."   
+    errors.add :base, "There was a problem with your credit card."
+    false   
   end
   
   def update_payment_details(email, token)
@@ -128,8 +129,12 @@ class User < ActiveRecord::Base
   def unfollow!(tag)
     followships.find_by_followed_id(tag.id).destroy
   end
-  
-  
+  def join!(group)
+    memberships.create!(group_id: group.id)
+  end
+  def leave!(group)
+    memberships.find_by_followed_id(tag.id).destroy
+  end
   
   
 end

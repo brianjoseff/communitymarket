@@ -13,8 +13,9 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @transaction = Transaction.new
+    
     @post = Post.find(params[:id])
+    @transaction = Transaction.new(:post_id => @post.id)
     if @post.tier_id?
       @tier = Tier.find(@post.tier_id)
     end
