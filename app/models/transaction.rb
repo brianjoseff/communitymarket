@@ -23,6 +23,7 @@ class Transaction < ActiveRecord::Base
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while charging card: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
+    false
   end
   
   def payment(tier, price, user)

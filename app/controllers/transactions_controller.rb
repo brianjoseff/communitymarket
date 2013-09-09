@@ -76,8 +76,10 @@ class TransactionsController < ApplicationController
           @user.charge_as_customer(@amount)
           sign_in @user
           #format.js { render }
-          @post.deactivate
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          @post.deactivate!
+          @post.user_id = @user.id
+          @post.save!
+          format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
           format.html { render action: "new" }
@@ -95,8 +97,10 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-          format.json { render json: @transaction, status: :created, location: @transaction }
+          @post.user_id = @user.id
+          @post.save!
+          format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
+          format.json { render json: @user, status: :created, location: @transaction }
           
         else
           format.html { render action: "new" }
@@ -115,17 +119,23 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
-          format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+          @post.user_id = @user.id
+          @post.save!
+          format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
+      #-------------------------------------------------------------------------------------------#
+      #---- Non-User and Non-Customer... [working]------------------------------------------------#
+      #-------------------------------------------------------------------------------------------#
       else
         #non-user encountered form and didn't enter password
         @transaction = Transaction.new(params[:transaction].merge(:price => @amount))
         if @transaction.save
-          @transaction.charge(amount, @token, email)
-          format.js { render }
+          @post.deactivate!
+          @transaction.charge(@amount, params[:transaction][:stripe_card_token], params[:transaction][:email])
+          format.html { redirect_to root_path, notice: 'You have succesfully acquired some stuff.' }
         else
           format.html { render action: "new" }
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -141,7 +151,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
+        format.html { redirect_to @transaction, notice: 'You have succesfully acquired some stuff.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -169,9 +179,10 @@ class TransactionsController < ApplicationController
       if @transaction.save
         @user.charge_as_customer(@amount)
         @post.deactivate!
-      
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render json: @transaction, status: :created, location: @transaction }
+        @post.user_id = @user.id
+        @post.save!
+        format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff' }
+        format.json { render json: @user, status: :created, location: @transaction }
       
       else
         format.html { render action: "new" }

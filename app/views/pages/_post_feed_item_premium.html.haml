@@ -90,41 +90,34 @@
         %span.description
           = truncate(feed_item.description, 25)
     %div.span2
-      / -if feed_item.price?
-      /   /email button
-      /   %a.btn{ :href => "mailto:#{feed_item.email}", :role => "button"}$ #{feed_item.price} | Email
-      / -else
-  
-      /BUY button:
-      / %a.btn.buy-button.btn-mini{ "data-target" => "#buy_modal", "data-toggle" => "modal", 'data-remote' => "/transactions/new", :href => "/transactions/new", :role => "button"} Buy
-      %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-      -if feed_item.tier_id
-        -if signed_in? && current_user.stripe_customer_id.nil? == false
-          /IF: signed_in and no c#, THEN: user_credit_modal
-          =render 'user_you_sure_modal'
-          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
-        -elsif signed_in? && current_user.stripe_customer_id.nil?
-          /IF: signed_in and yes c# THEN: user_you_sure_modal
+    %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+    / %i.icon-large.icon-envelope
+    -if feed_item.tier_id
+      -if signed_in? && current_user.stripe_customer_id
+        /IF: signed_in and no c#, THEN: user_credit_modal
+        /=render 'user_you_sure_modal'
+        / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
+        = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
+          - if @transaction.errors.any?
+            .error_messages
+              %h2
+                = pluralize(@transaction.errors.count, "error")
+                prohibited this transaction from being saved:
+              %ul
+                - @transaction.errors.full_messages.each do |msg|
+                  %li= msg                                          
+          =f.hidden_field :post_id, :value => feed_item.id
+          =f.submit "Buy", class: "btn btn-mini btn-success"
+      -elsif signed_in? && current_user.stripe_customer_id.nil?
+        /IF: signed_in and yes c# THEN: user_you_sure_modal
      
-          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
-      
-          %div#transaction_modal.modal.hide
-          /=render 'user_credit_modal'
-          /set width fo this somehow
+        / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+        =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+        %div#transaction_modal.modal.hide
 
-        -else
-          /IF: not signed_in THEN: non_user_credit_modal
-          / %div#transaction_modal.modal.hide
-          /   = render "transactions/new_modal"
-          / %a.btn.btn-mini{"data-target" => "#transaction_modal", "data-toggle" => "modal"}
-      
-          =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id    
-          /%a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-          /%div#buy_modal.modal.fade{ 'data-postid' => "#{feed_item.id}", :role => "dialog",:style=>"display:none"}
-          /=render :partial => 'transactions/form'
-          /NONAJAX THAT WORKS:
-          /=link_to "Buy", new_transaction_path(:post_id => feed_item.id)
-    
+      -else
+        /=link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
+        =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
 
 
 

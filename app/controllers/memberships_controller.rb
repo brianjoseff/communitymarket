@@ -30,7 +30,7 @@ class MembershipsController < ApplicationController
   
   def destroy
     @membership = Membership.find(params[:id])
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:membership][:group_id])
     if @membership.destroy
       respond_with @group
       flash[:success] = "left group"
@@ -45,7 +45,33 @@ class MembershipsController < ApplicationController
     respond_with @group
   end
   
-  
+  def join
+    @group = Group.find(params[:membership][:group_id])
+    current_user.join!(@group)
+    @your_groups = current_user.group_feed
+    respond_with @group
+    
+    # @group = Group.find(params[:group_id])
+    # params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
+    # 
+    # respond_to do |format|
+    #   if params[:password] == @group.password && @group.update_attributes(params[:group])
+    #     flash[:success] = "Successfully joined #{@group.name}"
+    #     format.html { redirect_to root_path }
+    #     format.js
+    #     # format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+    #     #         format.json { head :no_content }
+    #   else
+    #     if params[:password] != @group.password
+    #       flash.now[:wrong_password] = "Wrong Password"
+    #     end
+    #     format.html { render action: "show"}
+    #     format.json { render json: @group.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    
+    
+  end
   
   # def destroy
   #   @membership = Membership.find(params[:id])
@@ -58,8 +84,11 @@ class MembershipsController < ApplicationController
   private
 
     def redirect_to_signup
-      @group = Group.find(params[:membership][:group_id])
+      
       unless signed_in?
+        if params[:membership]
+          @group = Group.find(params[:membership][:group_id])
+        end
         store_location
         store_group(@group)
         redirect_to new_user_path, notice: "Please sign up or in."

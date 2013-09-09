@@ -18,6 +18,7 @@ Communitymarket::Application.routes.draw do
   resources :memberships do
     collection do
       put :update_individual
+      post :join
     end
   end
   resources :followships
@@ -65,6 +66,7 @@ Communitymarket::Application.routes.draw do
   match '/borrow_rent', :to => "pages#borrow_rent"
   match '/wanted', :to => "pages#wanted"
   match '/transactions/customer_purchase', :to => "transactions#customer_purchase"
+  match '/memberships/join', :to => "memberships#join"
   match '/groups/nearby', :to => "groups#nearby"
   match '/search', :to => 'search#index'
   match '/about', :to => 'pages#about'
