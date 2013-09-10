@@ -13,7 +13,16 @@
  *= require token-input-facebook
  *= require_tree .
  */
-
+.advertising{
+	margin-top: 10px;
+	display: block;
+	border: 1px solid #696969;
+	width: 200px;
+	height: 100px;
+	padding-left:75px;
+	padding-top:75px;
+	text-align: justify;
+}
 .anti-button{
 	background:none!important;
 	font-size: 12px;
