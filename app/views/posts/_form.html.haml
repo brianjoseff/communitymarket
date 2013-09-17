@@ -40,33 +40,56 @@
   %div.control-group
     =f.label :description, :class => "control-label"
     %div.controls
-      = f.text_area :description, :class => "input-block-level inline", :placeholder => "An Amish father and son are in a mall for the first time. They watch an old, grizzled woman walk into an elevator. Doors close. Minute later, doors open and a buxom blonde saunters out. The man turns to his son and says, 'Zebediah, get your mother, quick!'.... This fridge is the same. It works magic.", :rows => "8"
-
-
-  /TIER and CASH MONEY FIELDS
-  %div#get_paid_stuff
-    %div.row-fluid
-      %div.span7
-        %div.control-group
-          =f.label :tier, "Get Paid", :class=>"control-label"
-          %div.controls#tier_field
-            = f.collection_select(:tier_id, Tier.all, :id, :name, :class => "inline")
-      %div.span5
-        %div.span1
-          %p.underline or
-        %div.span11
-          %div.control-group.span7.padding5
-            = f.label :cash, :class=>"control-label"
-            %div.controls#cash-box
-              =f.check_box :cash, :class => "input-block-level inline cash-box"
-          %div.cash-field-cloak.span5{:style=>"display:none"}
-            %div.cash-field
-              $
-              =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
-
+      = f.text_area :description, :class => "input-block-level inline", :placeholder => "blah blah blah", :rows => "8"
+  
+  
+  
+  
+  //////////////////////////////
+  ///// WITH COUPON OPTION /////
+  //////////////////////////////
+  
+  / /TIER and CASH MONEY FIELDS
+  / %div#get_paid_stuff
+  /   %div.row-fluid
+  /     %div.span7
+  /       %div.control-group
+  /         =f.label :tier, "Get Paid", :class=>"control-label"
+  /         %div.controls#tier_field
+  /           = f.collection_select(:tier_id, Tier.all, :id, :name, :class => "inline")
+  /     %div.span5
+  /       %div.span1
+  /         %p.underline or
+  /       %div.span11
+  /         %div.control-group.span7.padding5
+  /           = f.label :cash, :class=>"control-label"
+  /           %div.controls#cash-box
+  /             =f.check_box :cash, :class => "input-block-level inline cash-box"
+  /         %div.cash-field-cloak.span5{:style=>"display:none"}
+  /           %div.cash-field
+  /             $
+  /             =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
+  
+  /CASH MONEY FIELDS
+  %div#get_paid_region
+    %div.control-group
+      =f.label :tier, "Get Paid", :class=>"control-label"
+      %div.controls
+        $
+        =f.text_field :price, :class => "input-block-level inline span2", :id => "price_field", :placeholder => "price"
+        
+  %div.control-group
+    %div.controls
+      %p{:style => "font-weight: bold"}
+        %span{:style => "text-decoration: underline"} Premium:
+        Make sure your post gets seen, stays active longer, is more visible to buyers, and looks better than all the other posts
+      = f.label :premium, class: "checkbox" do
+        = f.check_box :premium, class: "checkbox", id: "premium"
+        =label_tag "Premium Please"
+                   
   /CATEGORY/TAGS token input    
   %div.control-group
-    =f.label :tag_tokens, "Categories", :class => "control-label token-label"
+    =f.label :tag_tokens, "Tags", :class => "control-label token-label"
     %div.controls#token-field
       //insert tag form field here
       =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "input-block-level inline"
@@ -104,11 +127,7 @@
           (#{ff.object.group.members.count} members) 
         
           =ff.hidden_field :group_id
-    %div.row
-      %p Make your post premium?
-      = f.label :premium, class: "checkbox" do
-        = f.check_box :premium, class: "checkbox"
-        =label_tag "Premium"
+
      
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER
   -unless @user.stripe_customer_id      
@@ -118,9 +137,10 @@
       / .field
       /   = f.label :premium
       /   = f.check_box :premium
+  
   %div.control-group
     %div.controls
-      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large"
+      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large", :id => "#{current_user.stripe_customer_id ? "customer_upload_post" : "upload_post"}"
 
 / %div#tier_explanation_wrapper
 /   %div#tier_explanation

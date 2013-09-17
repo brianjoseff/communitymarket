@@ -79,6 +79,9 @@ class TransactionsController < ApplicationController
           @post.deactivate!
           @post.user_id = @user.id
           @post.save!
+          if @tier_id
+            SoldPostMailer.notify(@user, @post, user, group).deliver
+          end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
         else
@@ -99,6 +102,9 @@ class TransactionsController < ApplicationController
           @post.deactivate!
           @post.user_id = @user.id
           @post.save!
+          if @tier_id
+            SoldPostMailer.notify(@user, @post, user, group).deliver
+          end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @user, status: :created, location: @transaction }
           
@@ -121,6 +127,9 @@ class TransactionsController < ApplicationController
           @post.deactivate!
           @post.user_id = @user.id
           @post.save!
+          if @tier_id
+            SoldPostMailer.notify(@user, @post, user, group).deliver
+          end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
         else
           format.html { render action: "new" }
@@ -135,6 +144,9 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @post.deactivate!
           @transaction.charge(@amount, params[:transaction][:stripe_card_token], params[:transaction][:email])
+          if @tier_id
+            SoldPostMailer.notify(@user, @post, user, group).deliver
+          end
           format.html { redirect_to root_path, notice: 'You have succesfully acquired some stuff.' }
         else
           format.html { render action: "new" }

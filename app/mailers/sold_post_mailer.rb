@@ -1,6 +1,6 @@
-class NewPostMailer < ActionMailer::Base
-  default :from => "brianjoseff@peopleandstuff.com"
-  def notify(creator, post, recipient, group)
+class SoldPostMailer < ActionMailer::Base
+  default from: "from@example.com"
+  def notify(creator, post)
     @creator = creator
     @group = group
     @recipient = recipient

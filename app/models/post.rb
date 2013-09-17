@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   has_many :groups, :through => :assignments
   has_many :taggings
   has_many :tags, :through=> :taggings
-  validates :description , :title, :email, :presence => true
+  # validates :description , :title, :email, :presence => true
   validates_email :email
   # validates_uniqueness_of :email
   
@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
     if valid?
       customer = Stripe::Customer.create( :description => user.email, :card => stripe_card_token)
       user.stripe_customer_id = customer.id
-      save!
+      user.save!
     end
   rescue Stripe::InvalidRequestError => e
     logger.error "Fuck, Stripe error while creating customer: #{e.message}"

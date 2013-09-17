@@ -65,13 +65,14 @@
         =link_to "More tags...", tags_path
       / -else
       /   /popular tags?
-    %a.advertising{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
+    %div.advertising
+    %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     -unless @near_groups.nil?
       %div.row-fluid
         %div.row-fluid
           %h3 Groups Close to You
 
-        %p Join groups to get notifications from them. Manage your notifications on your profile page
+        %p Join specialized groups to make it easier to share your postings and to get targeted notifications about stuff that matters to you
         =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
     -if current_user
       %div.row-fluid

@@ -98,7 +98,8 @@
       -else
         /=link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
         =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id     
-
+    -elsif feed_item.price
+      %span.non-tier-price$#{feed_item.price}
 
 
 

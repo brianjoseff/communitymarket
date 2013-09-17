@@ -1,2 +1,4 @@
-%p You have been invited to join #{@group.name}
+%p You have been invited to join this group: #{@group.name}
+-if @group.private?
+  %p This is a private group, but you're in now so here's the password: #{@password}
 =group_url(@group, :host => "localhost:3000")

@@ -18,22 +18,24 @@
     / %p
     /   %b Group category:
     /   = @group.group_category
--if @group.private?
+-if @group.private? && @group.members.include?(current_user)
   -@group.members.each do |member|
     %p=member.email
-  
-
+  %p Group password will be included in the invite email
+  = render :partial => 'invite', :locals => {:group => @group}
+  %h2 Posts
+  =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
 
 -if flash[:wrong_password]
   %p#wrong_password= "Wrong password homie"
 
 =render "shared/simple_join", :group => @group  
 /=render "join_form", :group => @group
--if current_user
+-if current_user && !@group.private?
   = render :partial => 'invite', :locals => {:group => @group}
-%h2 Posts
-=render :partial => 'shared/feed',:locals => {:feed_items => @posts}
--if current_user && current_user.groups_as_owner
+  %h2 Posts
+  =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+-if current_user && current_user.groups_as_owner.include?(@group)
   = link_to 'Edit', edit_group_path(@group)
   |
   = link_to 'Destroy!', @group, method: :delete, data: { confirm: 'Are you sure?' }

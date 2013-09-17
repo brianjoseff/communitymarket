@@ -31,11 +31,11 @@
                 - @transaction.errors.full_messages.each do |msg|
                   %li= msg                                          
           =f.hidden_field :post_id, :value => @post.id
-          =f.submit "Buy", class: "btn btn-mini btn-success"
+          =f.submit "Buy", class: "btn btn-medium btn-success"
       -elsif signed_in? && current_user.stripe_customer_id.nil?
-        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => @post.id 
+        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
       -else
-        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => @post.id 
+        =link_to 'Buy', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
   %div.span8
     %div.row-fluid
       %h1 #{@post.title}
@@ -46,7 +46,7 @@
 
 
 
-
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+-if current_user.posts.include?(@post)
+  = link_to 'Edit', edit_post_path(@post)
+  \|
+  = link_to 'Back', posts_path

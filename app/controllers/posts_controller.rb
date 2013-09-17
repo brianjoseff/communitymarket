@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
+  before_filter :require_admin_login, :only => [:index]
   def index
     @posts = Post.all
 
@@ -79,6 +80,9 @@ class PostsController < ApplicationController
         @transaction = @user.transactions.new(:email => @user.email)
         @post.save_customer(@user)
         @user.charge_as_customer(@amount)
+        unless !@transaction.save
+          render :new
+        end
       end
       if @post.save && @user.save
         SignupMailer.new_subscriber(@user).deliver
@@ -91,20 +95,23 @@ class PostsController < ApplicationController
       @user = current_user
       @post = @user.posts.new(params[:post])
       @post.email = @user.email
-      if params[:credit_card_number].present?
-        @amount = 300
-        if @user.stripe_customer_id
-          @transaction = @user.transactions.new(:email => @user.email)
-          @user.charge_as_customer(@amount)
-        else
-          @transaction = @user.transactions.new
-          @transaction.email = @user.email
-          @transaction.price = @amount
-          @post.save_customer(@user)
-          @user.charge_as_customer(@amount)
-        end
+      @amount = 300
+      if @user.stripe_customer_id
+        @transaction = @user.transactions.new(:email => @user.email)
+        @user.charge_as_customer(@amount)
+      elsif params[:credit_card_number].present?
+        @transaction = @user.transactions.new
+        @transaction.email = @user.email
+        @transaction.price = @amount
+        @post.save_customer(@user)
+        @user.charge_as_customer(@amount)
       end
-      if @post.save        
+      
+      if @post.save
+        if !@transaction.save
+          render :new
+        end
+                  
         #!!!!!!!!!!
         #need to add a dedupe process here
         @groups = @post.groups
@@ -193,6 +200,7 @@ class PostsController < ApplicationController
     else
       @post = Post.new(params[:post])
       if params[:credit_card_number].present?
+        #this is wrong
         @user.save_as_customer
         @user.charge(@amount)
       end
@@ -267,6 +275,13 @@ class PostsController < ApplicationController
       @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
     end
     redirect_to root_path
+  end
+  
+  def require_admin_login
+    unless current_user.admin?
+      flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
+      redirect_to signin_path
+    end
   end
   
   def setup_post(post)

@@ -13,15 +13,20 @@
  *= require token-input-facebook
  *= require_tree .
  */
+.non-tier-price{
+	margin: 0px auto;
+}
 .advertising{
 	margin-top: 10px;
 	display: block;
 	border: 1px solid #696969;
-	width: 200px;
-	height: 100px;
-	padding-left:75px;
+	background-image: url('dartmouth-soccer-ad1.png');
+	background-size: 325px 175px;
+	width: 325px;
+	height: 175px;
+/*	padding-left:75px;
 	padding-top:75px;
-	text-align: justify;
+	text-align: justify;*/
 }
 .anti-button{
 	background:none!important;

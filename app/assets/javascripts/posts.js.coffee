@@ -38,14 +38,17 @@ countChecked = ->
 $ ->
 	$("input.group-box").on "click", countChecked
 
+
+
 ## DISABLE PRICE AREA WHEN FREE or REQUEST post type is chosen
 		
 checkType = ->
 	n = $(this).data "id"
 	if n > 1
-		$("div#get_paid_stuff").hide()
+		$("#price_field").val('')
+		$("div#get_paid_region").hide()		
 	else
-		$("div#get_paid_stuff").show()
+		$("div#get_paid_region").show()
 $ ->
 	$("button.switch").on "click", checkType
 	
@@ -104,10 +107,10 @@ $ ->
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
     message: "title is required."
-$ ->
-  $("#post_description").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "Description is required."
+# $ ->
+#   $("#post_description").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "Description is required."
 $ ->
   $("#post_email").validate
     expression: "if(VAL != '') return true; else return false;"
@@ -158,7 +161,7 @@ $ ->
 
 ## TOOL TIPS
 $ ->
-	$("#get_paid_stuff").tooltip
+	$("#get_paid_tooltip_area").tooltip
 		trigger: "hover"
 		placement: "left"
 		title: "Assign your post to a value tier. The instant someone clicks 'buy' on your post, an email with a coupon or giftcard will arrive in your inbox."
@@ -169,7 +172,11 @@ jQuery ->
 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
 		$("div.cash-field-cloak").toggle()		
 
-
+## SHOW CREDIT CARD FIELDS ON PREMIUM CHECK BOX CLICK
+jQuery ->
+	$("input#premium").change ->
+		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$("div#post-credit-fields").toggle()
 
 
 #the function is getting called before the active button gets changed...so has old button id
@@ -203,9 +210,11 @@ jQuery ->
 
 transaction =
 	setupForm: ->
-		$("#new_post").submit ->
+		$("#upload_post").click ->
+			
 			$('input[type=submit]').attr('disabled', true)
-			if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length
+			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
+			if $("#card_number").length
 				transaction.processCard()
 				false
 			else
