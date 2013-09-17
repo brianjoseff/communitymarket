@@ -1,4 +1,4 @@
-=form_tag "/invites",  :method => :get do
+=form_tag "/invites",  :method => :post do
   =hidden_field_tag :from, current_user.id
   =hidden_field_tag :group_id, group.id
   %div.row-fluid

@@ -73,7 +73,7 @@ Communitymarket::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/sign_in', :to => 'sessions#new'
   match '/signin', :to => 'sessions#new'
-  match '/invites', :to => 'invites#new'
+  match '/invites', :to => 'invites#new', via: :post
   root :to => 'pages#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
