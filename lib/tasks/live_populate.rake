@@ -4,8 +4,8 @@ namespace :db do
     require 'faker'
     require 'forgery'
     
-    [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, TaggingTier, EmailSetting].each(&:delete_all)
-    [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, Tier, EmailSetting].each(&:reset_pk_sequence)
+    [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, Tagging, Tier, EmailSetting, Transaction].each(&:delete_all)
+    [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, Tagging, Tier, EmailSetting, Transaction].each(&:reset_pk_sequence)
     User.create!(:name => "Brian Joseff",
                  :email => "brianjoseff123@gmail.com",
                  :password => "090909",

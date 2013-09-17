@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :password, :stripe_customer_id
+  attr_accessible :email, :name, :password, :stripe_customer_id, :admin
   include Clearance::User
   has_many :transactions
   has_many :posts
