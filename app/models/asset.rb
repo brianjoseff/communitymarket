@@ -6,4 +6,14 @@ class Asset < ActiveRecord::Base
                             :storage => :s3, 
                             :s3_credentials => "#{Rails.root}/config/s3.yml", 
                             :path => "/:attachment/:id/:style/:filename"
+                            
+  def to_jq_upload
+    {
+      "name" => read_attribute(:package_file_name),
+      "size" => read_attribute(:package_file_size),
+      "url" => package.url(:original),
+      "delete_url" => submission_path(self),
+      "delete_type" => "DELETE"
+    }
+  end
 end

@@ -26,6 +26,26 @@
 # 		    message: "credit card is required if you want to notify more than two groups."
 # 		else
 # 			$("div#post-credit-fields").hide
+
+# jQuery ->
+#   $('#new_post').fileupload
+#     dataType: "script"
+#     add: (e, data) ->
+#       types = /(\.|\/)(gif|jpe?g|png)$/i
+#       file = data.files[0]
+#       if types.test(file.type) || types.test(file.name)
+#         data.context = $(tmpl("template-upload", file))
+#         $('#new_post').append(data.context)
+#         data.submit()
+#       else
+#         alert("#{file.name} is not a gif, jpeg, or png image file")
+#     progress: (e, data) ->
+#       if data.context
+#         progress = parseInt(data.loaded / data.total * 100, 10)
+#         data.context.find('.bar').css('width', progress + '%')
+
+
+
 countChecked = ->
 	n = $("input.group-box:checked").length
 	if n > 2
@@ -214,10 +234,15 @@ transaction =
 			
 			$('input[type=submit]').attr('disabled', true)
 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
-			if $("#card_number").length
+			n = $("#card_number").length
+			
+			if n > 2
+				
 				transaction.processCard()
 				false
 			else
+				
+				$('#new_post')[0].submit()
 				true
 
 	processCard: ->

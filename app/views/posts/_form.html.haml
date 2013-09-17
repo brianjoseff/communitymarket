@@ -99,6 +99,9 @@
   /PHOTO UPLOAD FIELDS        
   %div.row-fluid
     %div.span8
+      / =f.fields_for :assets do |builder|
+     
+      = link_to_add_fields "Add Another Image", f, :assets
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
@@ -146,3 +149,9 @@
 /   %div#tier_explanation
 /     %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
 /   %div#tier_arrow
+/ %script#template-upload{type: "text/x-tmpl"}
+/   :cdata
+/     <div class="upload">
+/     {%=o.name%}
+/     <div class="progress"><div class="bar" style="width: 0%"></div></div>
+/     </div>

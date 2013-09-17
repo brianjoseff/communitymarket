@@ -79,6 +79,9 @@ GEM
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
+    jquery-fileupload-rails (0.4.1)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     jquery-modal-rails (0.0.3)
       jquery-ui-rails
       railties (>= 3.2.0, < 5.0)
@@ -214,6 +217,7 @@ DEPENDENCIES
   geocoder
   haml (>= 3.0.0)
   haml-rails
+  jquery-fileupload-rails
   jquery-modal-rails
   jquery-rails
   jquery-ui-rails

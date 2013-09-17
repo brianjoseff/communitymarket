@@ -44,7 +44,10 @@
     %div.row-fluid
       %p #{@post.description}
 
-
+%div.row-fluid
+  -unless @post.assets.empty?
+    -@post.assets[1..-1].each do |asset|
+      =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
 
 -if current_user.posts.include?(@post)
   = link_to 'Edit', edit_post_path(@post)

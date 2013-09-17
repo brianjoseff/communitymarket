@@ -229,6 +229,7 @@
   /PHOTO UPLOAD FIELDS        
   %div.row-fluid
     %div.span8
+      
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
@@ -236,6 +237,7 @@
               =asset_fields.label "image", :class=>"control-label"
               %div.controls.post-form
                 =asset_fields.file_field :image
+                =link_to "Sign up to add multiple images", new_user_path  
           -else
             /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
             =image_tag(asset_fields.object.image.url(:post))

@@ -108,7 +108,7 @@ class PostsController < ApplicationController
       end
       
       if @post.save
-        if !@transaction.save
+        if @transaction && !@transaction.save
           render :new
         end
                   

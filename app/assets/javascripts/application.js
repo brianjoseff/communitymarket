@@ -26,6 +26,20 @@
 //= require_tree .
 
 
+// require jquery-fileupload/basic
+// require jquery-fileupload/vendor/tmpl
+
+
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".fields").hide();
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $(link).parent().before(content.replace(regexp, new_id));
+}
 // document.ready(function() {
 //   var flipText, flipUp, index, interval, maxIndex;
 //   flipText = function(newText) {

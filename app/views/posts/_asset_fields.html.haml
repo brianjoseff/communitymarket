@@ -1,0 +1,15 @@
+/ -if asset_fields.object.image_file_name.nil?
+/   %div.control-group
+/     =asset_fields.label "image", :class=>"control-label"
+/     %div.controls
+/       =asset_fields.file_field :image
+/ -else
+/   /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
+/   =image_tag(asset_fields.object.image.url(:post))
+/   =asset_fields.label  "delete image"
+/   =asset_fields.check_box :_destroy
+  
+%div.control-group
+  =f.label "image", :class=>"control-label"
+  %div.controls
+    =f.file_field :image
