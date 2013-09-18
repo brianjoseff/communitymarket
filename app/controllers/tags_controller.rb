@@ -87,7 +87,7 @@ class TagsController < ApplicationController
   
   private
   def get_popular_tags
-    adapter_type = connection.adapter_name.downcase.to_sym
+    adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym
     case adapter_type
     when :mysql
       # do the MySQL part
