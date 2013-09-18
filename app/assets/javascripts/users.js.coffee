@@ -30,6 +30,12 @@ jQuery ->
 # 		false
 
 $ ->
+	$("#name_field").tooltip
+		trigger: "hover"
+		placement: "left"
+		title: "OPTIONAL...your name is only visible to the other members of any private group you are in or if you invite someone to a group via our 'invitation form'"
+
+$ ->
 	$(".destroy_region").tooltip
 		trigger: "hover"
 		placement: "top"

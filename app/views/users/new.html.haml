@@ -10,13 +10,22 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-          
-  %div.row-fluid.control-group
-    =f.label :email, :class => 'control-label'
-    =f.text_field :email, :validate => true
-  %div.row-fluid.control-group
-    =f.label :password, :class => 'control-label'
-    =f.text_field :password, :validate => true
-  %div.form-actions
-    =f.submit "Sign Up", class: "btn-primary"
-    /= f.button :submit, name: 'Sign Up', class: "btn-primary"
+        
+  %div.row-fluid
+    %div.span4
+      %div#name_field.control-group
+        =f.label :name, :class => 'control-label'
+        %div.controls
+          =f.text_field :name, :class => "input-block-level inline", :placeholder => "Thomas More"        
+      %div.control-group
+        =f.label :email, :class => 'control-label'
+        %div.controls
+          =f.text_field :email, :class => "input-block-level inline", :placeholder => "hello@mom.com"  
+      %div.control-group
+        =f.label :password, :class => 'control-label'
+        %div.controls
+          =f.text_field :password, :class => "input-block-level inline", :placeholder => "Password"  
+      %div.control-group
+        %div.controls
+          =f.submit "Sign Up", class: "btn btn-primary"
+        /= f.button :submit, name: 'Sign Up', class: "btn-primary"
