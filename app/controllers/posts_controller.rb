@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @categories = PostCategory.all
+    @post_categories = PostCategory.all
     @post = Post.find(params[:id])
     @assets = @post.assets
     @user = current_user

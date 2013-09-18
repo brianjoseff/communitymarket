@@ -122,7 +122,7 @@
         =@message
         /make a button to join groups in modal window
     %div.row.group-row
-      %p Choose groups to notify. More than 2 groups costs $2.50
+      %p Choose groups to notify
       =f.fields_for :assignments do |ff|
         =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
           =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box checkbox"}, '0','1'
