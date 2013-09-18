@@ -87,7 +87,20 @@ class TagsController < ApplicationController
   
   private
   def get_popular_tags
-    Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+    adapter_type = connection.adapter_name.downcase.to_sym
+    case adapter_type
+    when :mysql
+      # do the MySQL part
+    when :sqlite
+      # do the SQLite3 part
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+    when :postgresql
+      # etc.
+      Tag.joins(:taggings).select('tags, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+    else
+      raise NotImplementedError, "Unknown adapter type '#{adapter_type}'"
+    end
+    
   end
       
       
