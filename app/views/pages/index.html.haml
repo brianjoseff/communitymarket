@@ -54,9 +54,11 @@
       /Post feed
       =render :partial => 'feed',:locals => {:feed_items => @posts}
   %div.span4
+    %div.advertising
+    %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     %div.row-fluid
       -if current_user
-        %h3 Followed Tags
+        %h3 Tags You Follow
         -@followed_tags.each do |tag|
           =link_to tag.name, tag_url(tag), :class => "tag"
         =link_to "More tags...", tags_path
@@ -65,8 +67,6 @@
         =link_to "More tags...", tags_path
       / -else
       /   /popular tags?
-    %div.advertising
-    %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     -unless @near_groups.nil?
       %div.row-fluid
         %div.row-fluid
