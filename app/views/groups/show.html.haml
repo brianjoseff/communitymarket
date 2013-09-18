@@ -7,6 +7,8 @@
       =link_to image_tag(@group.assets.empty?  ? '/assets/small.png': @group.assets.first.image.url(:medium), :alt => @group.name), group_url(@group), :class => "thumbnail"
   %div.span9
     %h1 #{@group.name}
+    -if @group.private?
+      %p (private group)
     %div.row-fluid
       %p #{@group.description}
     / %p
