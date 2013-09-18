@@ -49,7 +49,7 @@
     -@post.assets[1..-1].each do |asset|
       =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
 
--if current_user.posts.include?(@post)
+-if current_user && current_user.posts.include?(@post)
   = link_to 'Edit', edit_post_path(@post)
   \|
   = link_to 'Back', posts_path
