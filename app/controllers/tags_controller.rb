@@ -95,8 +95,8 @@ class TagsController < ApplicationController
       # do the SQLite3 part
       Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
     when :postgresql
-      # etc.
-      Tag.joins(:taggings).select('tag_id, tag_name, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc')
+
     else
       raise NotImplementedError, "Unknown adapter type '#{adapter_type}'"
     end
