@@ -13,6 +13,11 @@
  *= require token-input-facebook
  *= require_tree .
  */
+
+footer{
+	display: block;
+	height: 100px;
+}
 .non-tier-price{
 	margin: 0px auto;
 }
