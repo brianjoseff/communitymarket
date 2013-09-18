@@ -6,7 +6,10 @@
 
 %div.row-fluid
   %div.span2
-    =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+    / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+    =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+    %div#modal_image{:style => "display:none;"}
+      =render 'modal_image', :post => @post
     %div.row-fluid
       -if @post.price
         $#{@post.price}

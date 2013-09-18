@@ -140,11 +140,14 @@
       / .field
       /   = f.label :premium
       /   = f.check_box :premium
-  
-  %div.control-group
-    %div.controls
-      = f.submit 'Upload your post!', :class => "btn btn-custom btn-large", :id => "#{current_user.stripe_customer_id ? "customer_upload_post" : "upload_post"}"
-
+  -if @post.new_record?
+    %div.control-group
+      %div.controls
+        = f.submit 'Upload your post!', :class => "btn btn-custom btn-large", :id => "#{current_user.stripe_customer_id ? "customer_upload_post" : "upload_post"}"
+  -else
+    %div.control-group
+      %div.controls
+        = f.submit 'Edit your post!', :class => "btn btn-custom btn-large"
 / %div#tier_explanation_wrapper
 /   %div#tier_explanation
 /     %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.
