@@ -59,6 +59,7 @@
     %div.row-fluid
       -if current_user
         %h3 Tags You Follow
+        %i.icon-large.icon-tags
         -@followed_tags.each do |tag|
           =link_to tag.name, tag_url(tag), :class => "tag"
         =link_to "More tags...", tags_path

@@ -4,8 +4,8 @@
 %div.row-fluid.nav-area
   %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
   %label.credit_card_label
-  %ul.nav.nav-pills.pull-right.colored-pills
-    %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path 
+  %ul.nav.nav-pills.pull-right.colored-pills 
+    %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path
     %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
     %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
     %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
@@ -23,6 +23,6 @@
       / %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
       /   =render 'users/new_modal'
       %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"
-  
+
 
 

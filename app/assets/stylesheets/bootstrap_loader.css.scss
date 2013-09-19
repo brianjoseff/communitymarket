@@ -128,7 +128,17 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 .group-buttons{
 	padding-top:10px;
 }
-
+i.nav-icon{
+	margin:0;
+	margin-top: 3px;
+	color: #7f8c8d;
+}
+a:hover > .nav-icon{
+	color: #fff;
+}
+.nav-pills > .nav-icon{
+	color: #7f8c8d;
+}
 .nav-pills > .active > a{
 	
 				background-color: #7f8c8d; /*asbestos grey*/

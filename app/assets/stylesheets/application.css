@@ -65,6 +65,15 @@ div.for-sale-marker{
 	float:left;
 	margin-right: 5px;
 }
+span.pink{
+	color:#FF91AF;
+}
+span.yellow{
+	color:#f1c40f;
+}
+span.blue{
+	color:#00e5d6;
+}
 #wanted_link{
 	background:#f1c40f;
 	padding: 2px;
