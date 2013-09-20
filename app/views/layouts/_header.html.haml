@@ -2,27 +2,43 @@
 -flash.each do |name, msg|
   =content_tag :div, msg, class: name
 %div.row-fluid.nav-area
-  %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
-  %label.credit_card_label
-  %ul.nav.nav-pills.pull-right.colored-pills 
-    %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path
-    %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
-    %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
-    %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
-    -if signed_in?
-      %li#nav-pill-yellow{:class => "#{'active' if current_page?(user_path(current_user))}"}=link_to "Your page", user_path(current_user)
-      %li=link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)}"
-      /%li=link_to "Add Image", new_image_path, :class => "#{'active' if current_page?(root_path)}"    
-    -else
-      /=link_to_open_modal('Sign up', new_user_path, '#signup_modal', {class: 'action'})
-      /%li=link_to "Sign up", new_user_path
-      /%li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
-      %li{:class => "#{'active' if current_page?(new_user_path)}"}= link_to "Sign Up", new_user_path
-      /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
-      /%a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up
-      / %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
-      /   =render 'users/new_modal'
-      %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"
+  %div.span4
+    %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
+    /%label.credit_card_label
+  %div.span8
+    %div.row-fluid
+      %span.user-nav.pull-right
+      
+        
+        -if signed_in?
+          =link_to current_user.name , user_path(current_user)
+          %i.icon.icon-user.nav-icon
+          =link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+        -else
+          %i.icon.icon-user.nav-icon
+          = link_to "Sign Up", new_user_path, :class => "nav-user-link"
+          or
+          =link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
+    %div.row-fluid
+      %ul#nav_pill_section.nav.nav-pills.pull-right.colored-pills 
+        %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path
+        %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
+        %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
+        %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
+        / -if signed_in?
+        /   %li#nav-pill-yellow{:class => "#{'active' if current_page?(user_path(current_user))}"}=link_to "Your page", user_path(current_user)
+        /   %li=link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)}"
+        /   /%li=link_to "Add Image", new_image_path, :class => "#{'active' if current_page?(root_path)}"    
+        / -else
+        /   /=link_to_open_modal('Sign up', new_user_path, '#signup_modal', {class: 'action'})
+        /   /%li=link_to "Sign up", new_user_path
+        /   /%li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
+        /   %li{:class => "#{'active' if current_page?(new_user_path)}"}= link_to "Sign Up", new_user_path
+        /   /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
+        /   /%a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up
+        /   / %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
+        /   /   =render 'users/new_modal'
+        /   %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"
 
 
 
