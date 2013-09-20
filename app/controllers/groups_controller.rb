@@ -69,7 +69,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     ip = request.location
-    @group = Group.new(params[:group])
+    @user = current_user
+    @group = @user.groups_as_owner.new(params[:group])
     params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
 
     respond_to do |format|
