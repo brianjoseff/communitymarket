@@ -61,7 +61,9 @@
         %h3 Tags You Follow
         %i.icon-large.icon-tags
         -@followed_tags.each do |tag|
-          =link_to tag.name, tag_url(tag), :class => "tag"
+          %div#whole_tag
+            %span#span-tag
+            =link_to tag.name, tag_url(tag), :class => "tag"
         =link_to "More tags...", tags_path
       -else
         %h3 Tags
