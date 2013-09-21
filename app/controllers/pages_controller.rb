@@ -15,7 +15,7 @@ class PagesController < ApplicationController
       @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
-      @your_groups = current_user.group_feed
+      @your_groups = current_user.groups_as_member
       unless @location.nil?
         @near_groups = Group.near(@location.first.city, 10000)
       end
