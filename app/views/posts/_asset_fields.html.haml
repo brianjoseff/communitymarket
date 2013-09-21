@@ -9,7 +9,9 @@
 /   =asset_fields.label  "delete image"
 /   =asset_fields.check_box :_destroy
   
-%div.control-group
+%div.control-group.image-control-group
   =f.label "image", :class=>"control-label"
   %div.controls
+    = link_to_remove_fields "remove", f
     =f.file_field :image
+    

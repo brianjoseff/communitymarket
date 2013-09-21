@@ -25,7 +25,7 @@ class PagesController < ApplicationController
       #must sort them in opposite order because of the way the partials are rendered?
       @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
-      
+      @random_tags = Tag.last(5)
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
       #   result = Post.find(:all, :order => "created_at DESC", :limit => pager.per_page, :offset => pager.offset)

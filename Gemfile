@@ -63,6 +63,12 @@ gem 'clearance'
 gem 'paperclip'
 gem 'aws-sdk'
 
+# gem 'fog'
+# gem 'carrierwave'
+# gem 'rmagick'
+# gem 'carrierwave_direct'
+# gem 'sidekiq'
+
 #heroku db compatibility
 gem 'pg'
 

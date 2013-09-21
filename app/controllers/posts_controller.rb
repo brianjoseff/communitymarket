@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   before_filter :require_admin_login, :only => [:index]
+  before_filter :redirect_to_signup, :only => [:new]
   def index
     @posts = Post.all
 
@@ -46,7 +47,8 @@ class PostsController < ApplicationController
     else
       @post.assets.build
       @user = current_user
-      @groups = @user.group_feed
+      # @groups = @user.group_feed
+      @groups = @user.groups_as_member
       if @groups.empty?
         @groups = Group.first
         @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
@@ -282,6 +284,21 @@ class PostsController < ApplicationController
       flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
       redirect_to signin_path
     end
+  end
+  def redirect_to_signup
+    
+    unless signed_in?
+      store_location
+      
+      redirect_to new_user_path, notice: "Please sign up or in."
+    end
+  end
+  
+  def store_location
+    session[:return_to] = request.url
+    #session[:return_to] = root_path
+    #setting to root here because it redirects to sign up when the user tries to access /followships
+    
   end
   
   def setup_post(post)

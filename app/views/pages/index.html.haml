@@ -64,7 +64,9 @@
           =link_to tag.name, tag_url(tag), :class => "tag"
         =link_to "More tags...", tags_path
       -else
-        %h3 Followed Tags
+        %h3 Tags
+        -@random_tags.each do |tag|
+          =link_to tag.name, tag_url(tag), :class => "tag"
         =link_to "More tags...", tags_path
       / -else
       /   /popular tags?

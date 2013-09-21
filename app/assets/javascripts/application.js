@@ -14,8 +14,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//=require pages.js.coffee
 //= require jquery.tokeninput
+//= require pages.js.coffee
 //= require bootstrap
 //= require groups.js.coffee
 //= require posts.js.coffee
@@ -26,13 +26,10 @@
 //= require_tree .
 
 
-// require jquery-fileupload/basic
-// require jquery-fileupload/vendor/tmpl
-
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
+  $(link).closest(".image-control-group").hide();
 }
 
 function add_fields(link, association, content) {

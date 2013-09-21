@@ -26,7 +26,7 @@
 # 		    message: "credit card is required if you want to notify more than two groups."
 # 		else
 # 			$("div#post-credit-fields").hide
-
+# 
 # jQuery ->
 #   $('#new_post').fileupload
 #     dataType: "script"

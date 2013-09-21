@@ -2,7 +2,8 @@ module FormHelper
   def setup_post(post, first_group)
     if signed_in?
       if post.groups
-        groups = current_user.groups_as_owner + current_user.groups_as_member 
+        # groups = current_user.groups_as_owner + current_user.groups_as_member
+        groups = current_user.groups_as_member 
         (groups - post.groups).each do |group|
           post.assignments.build(:group_id => group.id)
         end

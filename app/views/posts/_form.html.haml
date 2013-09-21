@@ -9,7 +9,6 @@
 /tags
 /.....NO email field
 
-  
 = form_for @post.new_record? ? setup_post(@post, @groups) : @post, :html => { :multipart => true, :class => "form-horizontal user-post"} do |f|
   - if @post.errors.any?
     #error_explanation
@@ -101,13 +100,15 @@
     %div.span8
       / =f.fields_for :assets do |builder|
      
-      = link_to_add_fields "Add Another Image", f, :assets
+      
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
+            = link_to_add_fields "Add Another Image", f, :assets
             %div.control-group
               =asset_fields.label "image", :class=>"control-label"
               %div.controls
+                
                 =asset_fields.file_field :image
           -else
             /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
@@ -140,6 +141,53 @@
       / .field
       /   = f.label :premium
       /   = f.check_box :premium
+      
+      
+      
+      
+      
+      
+      
+  /IMAGES
+  / 
+  / = f.label :image, "Upload images:"
+  / = f.file_field :image, multiple: true, name: "post[image]"
+  / %script#template-upload{type: "text/x-tmpl"}
+  /   :cdata
+  /     <div class="upload">
+  /     {%=o.name%}
+  /     <div class="progress"><div class="bar" style="width: 0%"></div></div>
+  /     </div>
+  / .row.fileupload-buttonbar
+  /   .span7
+  /     / The fileinput-button span is used to style the file input field as button
+  /     %span.btn.btn-success.fileinput-button
+  /       %i.icon-plus.icon-white
+  /       %span Add files...
+  /       = f.file_field :image
+  /     %button.btn.btn-primary.start
+  /       %i.icon-upload.icon-white
+  /       %span Start upload
+  /     %button.btn.btn-warning.cancel{type: "reset"}
+  /       %i.icon-ban-circle.icon-white
+  /       %span Cancel upload
+  /     %button.btn.btn-danger.delete{type: "button"}
+  /       %i.icon-trash.icon-white
+  /       %span Delete
+  /     %input.toggle{type: "checkbox"}/
+  /   .span5
+  /     / The global progress bar
+  /     .progress.progress-success.progress-striped.active.fade
+  /       .bar{style: "width:0%;"}
+  / / The loading indicator is shown during image processing
+  / .fileupload-loading
+  / %br/
+  / / The table listing the files available for upload/download
+  / %table.table.table-striped
+  /   %tbody.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
+  /   
+    
+        
   -if @post.new_record?
     %div.control-group
       %div.controls

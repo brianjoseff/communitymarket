@@ -28,7 +28,18 @@ jQuery ->
 # 			#update the DOM?
 # 			
 # 		false
-
+jQuery ->
+	$(".sign-in-link").click ->
+		$(".sign-up").toggle()
+		$(".sign-in").toggle()
+		$(".sign-in-link").toggle()
+		$(".sign-up-link").show()
+jQuery ->
+	$(".sign-up-link").click ->
+		$(".sign-up").toggle()
+		$(".sign-in").toggle()
+		$(".sign-in-link").toggle()
+		$(".sign-up-link").hide()
 $ ->
 	$("#name_field").tooltip
 		trigger: "hover"

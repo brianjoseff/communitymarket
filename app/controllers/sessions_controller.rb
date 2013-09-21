@@ -33,8 +33,17 @@ class SessionsController < ApplicationController
       flash[:notice] = notice
       if session[:followed_tag]
         @tag = Tag.find(session[:followed_tag])
-        current_user.follow!(@tag)
+        unless current_user.followed_tags.include?(@group)
+          current_user.follow!(@tag)
+        end
         session.delete(:followed_tag)
+      end
+      if session[:joined_group]
+        @group = Group.find(session[:joined_group])
+        unless current_user.groups_as_member.include?(@group)
+          current_user.join!(@group)
+        end
+        session.delete(:joined_group)
       end
       if session[:return_to]
         redirect_to session[:return_to]
