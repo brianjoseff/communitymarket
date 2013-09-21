@@ -63,6 +63,9 @@ class GroupsController < ApplicationController
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
+    @group.assets.build
+    @assets = @group.assets
+    @categories = GroupCategory.all
   end
 
   # POST /groups

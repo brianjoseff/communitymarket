@@ -23,6 +23,9 @@
   
 %div.row-fluid
   =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
+%div.row-fluid
+  %h4 Your Groups
+  =render :partial => 'shared/your_group_feed', :collection => @groups, :as => :group
 %div.row-fluid  
   -if !@rec_groups.nil? && @rec_groups.first.is_a?(Group)
     %h3 Recommended Groups:
