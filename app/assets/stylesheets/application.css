@@ -132,11 +132,25 @@ div.free-marker{
 /************************************************************/
 /*********** TAGS *******************************************/
 /************************************************************/
-
+span#span-tag{
+	background-image: url('span-tag.png');
+	display:inline-block !important;
+	/*padding-top: 15px;
+	margin-right: -5px;*/
+	width: 16px !important;
+	height:25px !important;
+	float:left;
+}
+#whole_tag{
+	display:inline-block !important;
+}
 .tag{
 /*	ffeaf0*/
 	background-color:#b9ffef;
-	
+	width: auto;
+	height: auto;
+	display:inline-block;
+	margin-bottom:5px;
 	/*c0ffb9*/
 /*	#f98275*/
 /*	#e74c3c*/

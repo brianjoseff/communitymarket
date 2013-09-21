@@ -66,8 +66,12 @@
       -else
         %h3 Tags
         -@random_tags.each do |tag|
-          =link_to tag.name, tag_url(tag), :class => "tag"
-        =link_to "More tags...", tags_path
+          %div#whole_tag
+            %span#span-tag
+            =link_to tag.name, tag_url(tag), :class => "tag"
+        %div.row-fluid
+          %i.icon-large.icon-tags
+          =link_to "More tags...", tags_path
       / -else
       /   /popular tags?
     -unless @near_groups.nil?
