@@ -3,7 +3,14 @@
 
 /=render "groups/group", :collection => @groups, :as => :group
 /=@groups
-
+-if current_user && current_user.admin?
+  %div.row-fluid
+    %p Users count: #{@users_count}
+    %p Super Users:
+    %ul
+      -@users_with_5_posts.each do |x|
+        %li #{x.name}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+    %p Posts count: #{@posts_count}
 %div.row-fluid
   %p
     %b Email:
