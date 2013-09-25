@@ -5,7 +5,7 @@
     %h3 Search
     =search_form_for @q, :url => { :controller => "tags", :action => "search"}, :html => { :class => "form-inline"} do |f|
       =f.text_field :name_cont, :class => "", :placeholder => "search for tags"
-      =f.submit 'Search', :class => "btn btn-primary"
+      =f.submit 'Search', :class => "btn btn-small"
     /put tag search bar here
     / =form_tag(groups_path, method: :get) do
     /   .input-group
@@ -21,7 +21,7 @@
   %div.span9
     %div.row
       %div.span3
-        %h3 Popular Tags
+        %h3 Results
       %div.span4
         /=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
     / %div.span9
@@ -33,7 +33,7 @@
     /     =link_to "All", groups_path
     /   %li
     /     =link_to @group_category, group_category_path(@group_category)
-    =render @popular_tags
+    /=render @popular_tags
     =render @tags
 %br
 

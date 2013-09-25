@@ -83,6 +83,12 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def search
+    @q = Tag.search(params[:q])
+    @tags = @q.result
+    @tags_count = @tags.count
+    
+  end
   
   
   private

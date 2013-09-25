@@ -15,12 +15,13 @@ var DEFAULT_SETTINGS = {
     method: "GET",
     contentType: "json",
     queryParam: "q",
-    searchDelay: 300,
+    searchDelay: 100,
     minChars: 1,
     propertyToSearch: "name",
     jsonContainer: null,
 
 	// Display settings
+	  placeHolderText: 'furniture, desks, Louis XIV',
     hintText: "Type in a search term",
     noResultsText: "No results",
     searchingText: "Searching...",
@@ -189,6 +190,7 @@ $.TokenList = function (input, url_or_data, settings) {
         .css({
             outline: "none"
         })
+        .attr("placeholder", settings.placeHolderText)
         .attr("id", settings.idPrefix + input.id)
         .focus(function () {
             if (settings.tokenLimit === null || settings.tokenLimit !== token_count) {

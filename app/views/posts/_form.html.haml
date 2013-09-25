@@ -91,7 +91,7 @@
     =f.label :tag_tokens, "Tags", :class => "control-label token-label"
     %div.controls#token-field
       //insert tag form field here
-      =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "input-block-level inline"
+      =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "input-block-level inline", :placeholder => "furniture"
 
 
 

@@ -1,6 +1,8 @@
 %div.row-fluid
   %span
-    =link_to tag.name, tag_url(tag), :class => "tag"
+    %div#whole_tag
+      %span#span-tag
+      =link_to tag.name, tag_url(tag), :class => "tag"
     #{pluralize(tag.posts.count, 'post')} 
 %br/
     

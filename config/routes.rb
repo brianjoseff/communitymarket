@@ -69,6 +69,7 @@ Communitymarket::Application.routes.draw do
   match '/memberships/join', :to => "memberships#join"
   match '/groups/nearby', :to => "groups#nearby"
   match '/search', :to => 'search#index'
+  match '/search_tags', :to => 'tags#search'
   match '/about', :to => 'pages#about'
   match '/signout', :to => 'sessions#destroy'
   match '/sign_in', :to => 'sessions#new'

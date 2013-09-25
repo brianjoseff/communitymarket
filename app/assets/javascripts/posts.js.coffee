@@ -210,6 +210,7 @@ jQuery ->
     queryParam: "t"
     theme: "facebook"
     prePopulate: $("#post_tag_tokens").data("load")
+		placeHolderText: 'furniture'
   $("ul.token-input-list-facebook").addClass("input-block-level")
   $("ul.token-input-list-facebook").addClass("inline")
   $("ul.token-input-list-facebook").addClass("negative-padding")

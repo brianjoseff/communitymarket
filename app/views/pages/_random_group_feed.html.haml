@@ -16,7 +16,9 @@
               -if !current_user
                 
                 /= render "groups/join_form", :group => feed_item
-              -elsif current_user.groups_as_member.include?(feed_item)
-                =link_to "Join", group_url(feed_item), class: "btn btn-mini"
+              -else
+                -unless current_user.groups_as_member.include?(feed_item)
+                  =link_to "Join", group_url(feed_item), class: "btn btn-mini"
             -else
-              = render "groups/join_form", :group => feed_item
+              -unless current_user.groups_as_member.include?(feed_item)
+                = render "groups/join_form", :group => feed_item
