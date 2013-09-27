@@ -1,14 +1,14 @@
 class SoldPostMailer < ActionMailer::Base
-  default from: "from@example.com"
-  def notify(creator, post)
-    @creator = creator
-    @group = group
-    @recipient = recipient
+  default from: "sold@peopleandstuff.com"
+  def notify(buyer, post, seller)
+    @seller = seller
+    @buyer = buyer
     @post = post
     # @category = category
     @post_name = post.title
     @post_desc  = post.description
     #attachments[""]
-    mail(:to => recipient.email, :subject => "#{@post.post_category.name} | #{@post_name}", :reply_to => creator.email)
+    attachments["morano.png"] = File.read("#{Rails.root}/app/assets/images/morano.png")
+    mail(:to => @seller.email,:bcc => [ENV["GMAIL_USERNAME"], ENV["MORANO_EMAIL"]], :subject => "Sold | #{@post_name}", :reply_to => @buyer.email)
   end
 end

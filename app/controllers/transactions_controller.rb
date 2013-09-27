@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
+  before_filter :require_admin_login, :only => [:index]
   def index
     @transactions = Transaction.all
 
@@ -51,7 +52,8 @@ class TransactionsController < ApplicationController
     if @post = Post.where(:id => flash[:the_post_id]).first
     #@price = @post.price
       @tier_id = @post.tier_id
-      @amount = @tier_id*100
+      @amount = amount_to_charge_for(@tier_id)
+
     else
       @amount = 1000
     end
@@ -80,7 +82,8 @@ class TransactionsController < ApplicationController
           @post.user_id = @user.id
           @post.save!
           if @tier_id
-            SoldPostMailer.notify(@user, @post, user, group).deliver
+            @seller = User.find(@post.user_id)
+            SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @transaction, status: :created, location: @transaction }
@@ -96,14 +99,15 @@ class TransactionsController < ApplicationController
       #already gots that CC info--- just charge 'em  
         @user = current_user
         @transaction = @user.transactions.new(params[:transaction].merge(:price => @amount).merge(:email => @user.email))
-        @transaction.save_customer(@user)
+        # @transaction.save_customer(@user)
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
           @post.user_id = @user.id
           @post.save!
           if @tier_id
-            SoldPostMailer.notify(@user, @post, user, group).deliver
+            @seller = User.find(@post.user_id)
+            SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @user, status: :created, location: @transaction }
@@ -128,7 +132,8 @@ class TransactionsController < ApplicationController
           @post.user_id = @user.id
           @post.save!
           if @tier_id
-            SoldPostMailer.notify(@user, @post, user, group).deliver
+            @seller = User.find(@post.user_id)
+            SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
         else
@@ -145,7 +150,7 @@ class TransactionsController < ApplicationController
           @post.deactivate!
           @transaction.charge(@amount, params[:transaction][:stripe_card_token], params[:transaction][:email])
           if @tier_id
-            SoldPostMailer.notify(@user, @post, user, group).deliver
+            # SoldPostMailer.notify(@user, @post, user, group).deliver
           end
           format.html { redirect_to root_path, notice: 'You have succesfully acquired some stuff.' }
         else
@@ -179,7 +184,7 @@ class TransactionsController < ApplicationController
     if @post = Post.find(params[:transaction][:post_id])
     #@price = @post.price
       @tier_id = @post.tier_id
-      @amount = @tier_id*100
+      @amount = amount_to_charge_for(@tier_id)
     else
       @notify_premium = params[:notify_premium]
       @premium = params[:premium]
@@ -193,6 +198,10 @@ class TransactionsController < ApplicationController
         @post.deactivate!
         @post.user_id = @user.id
         @post.save!
+        if @tier_id
+          @seller = User.find(@post.user_id)
+          SoldPostMailer.notify(@user, @post, @seller).deliver
+        end
         format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff' }
         format.json { render json: @user, status: :created, location: @transaction }
       
@@ -215,4 +224,20 @@ class TransactionsController < ApplicationController
     end
   end
   
+  def amount_to_charge_for(tier_id)
+    case tier_id
+      when 1 then return 250
+      when 2 then return 600
+      when 3 then return 1200
+      when 4 then return 3000
+      when 5 then return 6000
+      when 6 then return 11000
+    end    
+  end
+  def require_admin_login
+    unless current_user.admin?
+      flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
+      redirect_to signin_path
+    end
+  end
 end

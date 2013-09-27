@@ -49,33 +49,33 @@
   //////////////////////////////
   
   / /TIER and CASH MONEY FIELDS
-  / %div#get_paid_stuff
-  /   %div.row-fluid
-  /     %div.span7
-  /       %div.control-group
-  /         =f.label :tier, "Get Paid", :class=>"control-label"
-  /         %div.controls#tier_field
-  /           = f.collection_select(:tier_id, Tier.all, :id, :name, :class => "inline")
-  /     %div.span5
-  /       %div.span1
-  /         %p.underline or
-  /       %div.span11
-  /         %div.control-group.span7.padding5
-  /           = f.label :cash, :class=>"control-label"
-  /           %div.controls#cash-box
-  /             =f.check_box :cash, :class => "input-block-level inline cash-box"
-  /         %div.cash-field-cloak.span5{:style=>"display:none"}
-  /           %div.cash-field
-  /             $
-  /             =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
+  %div#get_paid_stuff
+    %div.row-fluid
+      %div.span7
+        %div.control-group
+          =f.label :tier, "Get Paid", :class=>"control-label"
+          %div.controls#tier_field
+            = f.collection_select(:tier_id, Tier.all, :id, :name, :class => "inline")
+      %div.span5
+        %div.span1
+          %p.underline or
+        %div.span11
+          %div.control-group.span7.padding5
+            = f.label :cash, :class=>"control-label"
+            %div.controls#cash-box
+              =f.check_box :cash, :class => "input-block-level inline cash-box"
+          %div.cash-field-cloak.span5{:style=>"display:none"}
+            %div.cash-field
+              $
+              =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
   
   /CASH MONEY FIELDS
-  %div#get_paid_region
-    %div.control-group
-      =f.label :tier, "Get Paid", :class=>"control-label"
-      %div.controls
-        $
-        =f.text_field :price, :class => "input-block-level inline span2", :id => "price_field", :placeholder => "price"
+  / %div#get_paid_region
+  /   %div.control-group
+  /     =f.label :tier, "Get Paid", :class=>"control-label"
+  /     %div.controls
+  /       $
+  /       =f.text_field :price, :class => "input-block-level inline span2", :id => "price_field", :placeholder => "price"
         
   %div.control-group
     %div.controls
