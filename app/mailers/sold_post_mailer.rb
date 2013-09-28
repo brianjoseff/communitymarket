@@ -9,6 +9,7 @@ class SoldPostMailer < ActionMailer::Base
     @post_desc  = post.description
     #attachments[""]
     attachments["morano.png"] = File.read("#{Rails.root}/app/assets/images/morano.png")
-    mail(:to => @seller.email,:bcc => [ENV["GMAIL_USERNAME"], ENV["MORANO_EMAIL"]], :subject => "Sold | #{@post_name}", :reply_to => @buyer.email)
+    #mail(:to => @seller.email,:bcc => [ENV["GMAIL_USERNAME"], ENV["MORANO_EMAIL"]], :subject => "Sold | #{@post_name}", :reply_to => @buyer.email)
+    mail(:to => @seller.email,:bcc => [ENV["GMAIL_USERNAME"]], :subject => "Sold | #{@post_name}", :reply_to => @buyer.email)
   end
 end
