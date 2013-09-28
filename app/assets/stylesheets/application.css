@@ -13,7 +13,13 @@
  *= require token-input-facebook
  *= require_tree .
  */
-
+.slim-button-row{
+ display: inline-block;
+ float:right;
+}
+.buy{
+	margin-right: 5px;
+}
 span.user-nav{
 	margin-right: 10px;
 }

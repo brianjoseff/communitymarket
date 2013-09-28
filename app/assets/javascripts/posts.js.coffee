@@ -181,7 +181,7 @@ $ ->
 
 ## TOOL TIPS
 $ ->
-	$("#get_paid_tooltip_area").tooltip
+	$("#get_paid_stuff").tooltip
 		trigger: "hover"
 		placement: "left"
 		title: "Assign your post to a value tier. The instant someone clicks 'buy' on your post, an email with a coupon or giftcard will arrive in your inbox."

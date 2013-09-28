@@ -14,7 +14,8 @@
       -if @post.price
         $#{@post.price}
       -elsif @tier
-        Tier: #{@tier.name}
+        #{@tier.name}
+        %p sells for: $#{@tier.price/100}
     /buy button
     /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
     %a.btn{ :href => "mailto:#{@post.email}", :role => "button"} Email
@@ -43,7 +44,9 @@
     %div.row-fluid
       %h1 #{@post.title}
       -@post.tags.each do |tag|
-        =link_to tag.name, tag_url(tag), :class => "tag"
+        %div#whole_tag
+          %span#span-tag
+          =link_to tag.name, tag_url(tag), :class => "tag"
     %div.row-fluid
       %p #{@post.description}
 
