@@ -88,7 +88,7 @@
                     - @transaction.errors.full_messages.each do |msg|
                       %li= msg                                          
               =f.hidden_field :post_id, :value => feed_item.id
-              =f.submit "Buy | Tier #{feed_item.tier_id}", class: "btn btn-mini btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
+              =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-mini btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
           -elsif signed_in? && current_user.stripe_customer_id.nil?
             =link_to "Buy", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
             %div#transaction_modal.modal.hide
