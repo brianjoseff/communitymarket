@@ -13,6 +13,10 @@
  *= require token-input-facebook
  *= require_tree .
  */
+#show_post_buy{
+	display:inline-block;
+	width: 90px;
+}
 .slim-button-row{
  display: inline-block;
  float:right;
