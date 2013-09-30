@@ -66,9 +66,9 @@ checkType = ->
 	n = $(this).data "id"
 	if n > 1
 		$("#price_field").val('')
-		$("div#get_paid_region").hide()		
+		$("div#get_paid_stuff").hide()		
 	else
-		$("div#get_paid_region").show()
+		$("div#get_paid_stuff").show()
 $ ->
 	$("button.switch").on "click", checkType
 	

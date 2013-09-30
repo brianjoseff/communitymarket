@@ -289,7 +289,7 @@ button#category1.switch.active {
   -webkit-font-smoothing: antialiased;
 }
 
-button#category4.switch.active{
+button#category3.switch.active{
 	background-color: hsl(176, 100%, 45%) !important;
 	  background-repeat: repeat-x;
 	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00e5d6", endColorstr="#00e5d6");
