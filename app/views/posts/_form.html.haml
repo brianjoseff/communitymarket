@@ -55,7 +55,8 @@
         %div.control-group
           =f.label :tier, "Get Paid", :class=>"control-label"
           %div.controls#tier_field
-            = f.collection_select(:tier_id, Tier.all, :id, :name, :class => "inline")
+            %p InstaPayment
+            = f.collection_select(:tier_id, Tier.all, :id, :name, {:prompt => 'Value of your post'},:class => "inline")
       %div.span5
         %div.span1
           %p.underline or

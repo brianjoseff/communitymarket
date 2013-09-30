@@ -437,6 +437,19 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 /************************************************************/
 /*********** POST FORM **************************************/
 /************************************************************/
+#tier_field{
+	padding-top:2px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 25px;
+	width: 200px;
+	background-color: #baf4b1;
+
+}
+#tier_field p{
+	margin: 0px;
+	color: #289417;
+}
 .form-title{
 	margin-left: 100px;
 }
