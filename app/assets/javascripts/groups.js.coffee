@@ -12,3 +12,17 @@ $ ->
   $("#join_private_group").validate
     expression: "if(VAL != '') return true; else return false;"
     message: "password is required."
+
+
+
+
+jQuery ->
+	$(".show-members-link").click ->
+		$(".hide-link").toggle()
+		$(".private-user-list").toggle()
+		$(".show-members-link").toggle()
+jQuery ->
+	$(".hide-link").click ->
+		$(".private-user-list").toggle()
+		$(".hide-link").toggle()
+		$(".show-members-link").toggle()

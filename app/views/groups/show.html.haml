@@ -21,12 +21,16 @@
     /   %b Group category:
     /   = @group.group_category
 -if @group.private? && @group.members.include?(current_user)
-  -@group.members.each do |member|
-    %p=member.email
+  =link_to "Show Members","#", :class => "show-members-link"
+  =link_to "Hide", "#", :class => "hide-link",:style => "display:none;"
+  %div.private-user-list{:style => "display:none;"}
+    -@group.members.each do |member|
+      %p #{member.name ? member.name : member.email}
   %p Group password will be included in the invite email
   = render :partial => 'invite', :locals => {:group => @group}
-  %h2 Posts
-  =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+  -unless @group.posts.empty?
+    %h2 Posts
+    =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
 
 -if flash[:wrong_password]
   %p#wrong_password= "Wrong password homie"
