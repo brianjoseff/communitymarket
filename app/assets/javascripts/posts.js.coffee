@@ -10,7 +10,7 @@ getGiftCard = ->
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$2.50</span>")
 		
 	else if x==2
-		alert "else if works"
+		
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$6</span>")
 		
 	else if x==3
@@ -175,17 +175,17 @@ jQuery ->
 transaction =
 	setupForm: ->
 		$("#upload_post").click ->
-			alert "CLICK READ"
+			
 			$('input[type=submit]').attr('disabled', true)
 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
 			n = $("#card_number").val().length
 			alert n
 			if n > 2
-				alert "NUMBER DETECTED"
+				
 				transaction.processCard()
 				false
 			else
-				alert "NO NUMBER"
+				
 				$('#new_post')[0].submit()
 				true
 
@@ -199,11 +199,11 @@ transaction =
 
 	handleStripeResponse: (status, response) ->
 		if status == 200
-			alert "WORKS"
+			
 			$('#post_stripe_card_token').val(response.id)
 			$('#new_post')[0].submit()
 		else
-			alert "Doesnt Work"
+			
 			alert(response.error.message)
 			$('input[type=submit]').attr('disabled', false)
 

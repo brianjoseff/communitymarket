@@ -137,8 +137,7 @@
           =ff.hidden_field :group_id
 
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER
-  -if current_user && current_user.stripe_customer_id == nil
-    %p MUTHAFUCKA    
+  -if current_user && current_user.stripe_customer_id == nil   
     %div#post_credit_fields{:style=>"display:none"}      
       =render 'modal_credit', user: current_user
       %div.row
