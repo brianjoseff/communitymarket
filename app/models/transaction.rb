@@ -13,7 +13,7 @@ class Transaction < ActiveRecord::Base
       user.save!
     end
   rescue Stripe::InvalidRequestError => e
-    logger.error "Fuck, Stripe error while creating customer: #{e.message}"
+    logger.error "NO MAMES, Stripe error while creating customer: #{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
   end

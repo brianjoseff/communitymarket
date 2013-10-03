@@ -2,6 +2,33 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+getGiftCard = ->
+	
+	y = $("#post_tier_id option:selected").val()
+	x = parseInt(y)
+	if x ==1
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$2.50</span>")
+		
+	else if x==2
+		alert "else if works"
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$6</span>")
+		
+	else if x==3
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$12</span>")
+			
+	else if x==4
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$30</span>")
+		
+	else if x==5
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$60</span>")
+		
+	else if x==6
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$110</span>")
+		
+		
+$ ->
+	$("#post_tier_id").on "change", getGiftCard
+		
 # monify = ->
 # 	if $("form#new_post").find("input.group-box:checked").length > 2
 # 		$("div#post-credit-fields").show "slide",
@@ -139,26 +166,46 @@ $ ->
 	$("#post_email").validate
 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
 		message: "Email format yo. check it: 'blah@blah.com'"
-# $ ->
-#   $("#password ").validate
-# 		expression: "if(VAL.length > 6) return true; else return false"
-# 		message: "Password should be longer than 6 characters. Rookie."
-    
-  # $("#car_year").validate
-  #   expression: "if(VAL != '') return true; else return false;"
-  #   message: "Year is required."
-  #   
-  # $("#car_year").validate
-  #   expression: "if(VAL.match(/^\\d\\d\\d\\d$/)) return true; else return false;"
-  #   message: "Invalid format."
+		
 
+jQuery ->	
+	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+	transaction.setupForm()
 
+transaction =
+	setupForm: ->
+		$("#upload_post").click ->
+			alert "CLICK READ"
+			$('input[type=submit]').attr('disabled', true)
+			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
+			n = $("#card_number").val().length
+			alert n
+			if n > 2
+				alert "NUMBER DETECTED"
+				transaction.processCard()
+				false
+			else
+				alert "NO NUMBER"
+				$('#new_post')[0].submit()
+				true
 
-# $ ->
-# 	$("input[type=checkbox]#post_cash").click ->
-# 			$('.cash-field-cloak').toggle "slide", 1
-# 				direction: "right"
+	processCard: ->
+		card =
+			number: $('#card_number').val()
+			cvc: $('#card_code').val()
+			exp_month: $('#card_month').val()
+			exp_year: $('#card_year').val()
+		Stripe.createToken(card, transaction.handleStripeResponse)
 
+	handleStripeResponse: (status, response) ->
+		if status == 200
+			alert "WORKS"
+			$('#post_stripe_card_token').val(response.id)
+			$('#new_post')[0].submit()
+		else
+			alert "Doesnt Work"
+			alert(response.error.message)
+			$('input[type=submit]').attr('disabled', false)
 
 
 
@@ -196,7 +243,7 @@ jQuery ->
 jQuery ->
 	$("input#premium").change ->
 		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
-		$("div#post-credit-fields").toggle()
+		$("div#post_credit_fields").toggle()
 
 
 #the function is getting called before the active button gets changed...so has old button id
@@ -225,42 +272,7 @@ jQuery ->
 #$(document).ready ->
 
 		
-jQuery ->	
-	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-	transaction.setupForm()
 
-transaction =
-	setupForm: ->
-		$("#upload_post").click ->
-			
-			$('input[type=submit]').attr('disabled', true)
-			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
-			n = $("#card_number").length
-			
-			if n > 2
-				
-				transaction.processCard()
-				false
-			else
-				
-				$('#new_post')[0].submit()
-				true
-
-	processCard: ->
-		card =
-			number: $('#card_number').val()
-			cvc: $('#card_code').val()
-			exp_month: $('#card_month').val()
-			exp_year: $('#card_year').val()
-		Stripe.createToken(card, transaction.handleStripeResponse)
-
-	handleStripeResponse: (status, response) ->
-		if status == 200
-			$('#post_stripe_card_token').val(response.id)
-			$('#new_post')[0].submit()
-		else
-			alert(response.error.message)
-			$('input[type=submit]').attr('disabled', false)
 
 
 

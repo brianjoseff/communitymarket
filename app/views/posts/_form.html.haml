@@ -53,10 +53,13 @@
     %div.row-fluid
       %div.span7
         %div.control-group
-          =f.label :tier, "Get Paid", :class=>"control-label"
+          =f.label :tier, "Payment method", :class=>"control-label"
           %div.controls#tier_field
             %p InstaPayment
             = f.collection_select(:tier_id, Tier.all, :id, :name, {:prompt => 'Value of your post'},:class => "inline")
+            %p.helper
+              %span#gift_card_value
+              giftcard sent to your inbox upon sale
       %div.span5
         %div.span1
           %p.underline or
@@ -133,11 +136,11 @@
         
           =ff.hidden_field :group_id
 
-     
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER
-  -unless @user.stripe_customer_id      
-    %div#post-credit-fields{:style=>"display:none"}      
-      =render 'modal_credit', user: @user
+  -if current_user && current_user.stripe_customer_id == nil
+    %p MUTHAFUCKA    
+    %div#post_credit_fields{:style=>"display:none"}      
+      =render 'modal_credit', user: current_user
       %div.row
       / .field
       /   = f.label :premium
