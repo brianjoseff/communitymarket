@@ -179,7 +179,7 @@ transaction =
 			$('input[type=submit]').attr('disabled', true)
 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
 			n = $("#card_number").val().length
-			alert n
+			
 			if n > 2
 				
 				transaction.processCard()
