@@ -11,7 +11,8 @@
 -unless @tag.posts.empty?
   =will_paginate @posts
   /=render @posts
-  =render 'shared/post_feed', :collection => @posts
+  
+  =render :partial => 'shared/post_feed', :collection => @posts, :as => :post
   =will_paginate @posts
 
 = link_to 'Edit', edit_tag_path(@tag)

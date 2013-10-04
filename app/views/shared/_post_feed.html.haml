@@ -1,4 +1,4 @@
--if feed_item.premium?
-  =render 'shared/post_feed_item_premium', :feed_item => feed_item
+-if post.premium?
+  =render 'shared/post_feed_item_premium', :feed_item => post
 -else
-  =render 'shared/post_feed_item_slim', :feed_item => feed_item
+  =render 'shared/post_feed_item_slim', :feed_item => post
