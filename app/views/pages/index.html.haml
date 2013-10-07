@@ -58,13 +58,22 @@
     %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     %div.row-fluid
       -if current_user
-        %h3 Tags You Follow
-        %i.icon-large.icon-tags
+        %h4 Popular Tags
+        -@popular_tags.each do |tag|
+          %div#whole_tag
+            %span#span-tag
+            =link_to tag.name, tag_url(tag), :class => "tag"
+        %div.row-fluid
+          %i.icon-large.icon-tags
+          =link_to "More tags...", tags_path
+        %h4 Tags You Follow
         -@followed_tags.each do |tag|
           %div#whole_tag
             %span#span-tag
             =link_to tag.name, tag_url(tag), :class => "tag"
-        =link_to "More tags...", tags_path
+        %div.row-fluid
+          %i.icon-large.icon-tags
+          =link_to "More tags...", tags_path
       -else
         %h3 Tags
         -@random_tags.each do |tag|

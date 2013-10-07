@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     @transaction = Transaction.new
     @sort_posts = Post.search()
     @sorted_posts = @sort_posts.result
+    @popular_tags = get_popular_tags
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
@@ -183,7 +184,23 @@ class PagesController < ApplicationController
   
   def about
   end
-  
+  private
+  def get_popular_tags
+    adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym
+    case adapter_type
+    when :mysql
+      # do the MySQL part
+    when :sqlite
+      # do the SQLite3 part
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+    when :postgresql
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc')
+
+    else
+      raise NotImplementedError, "Unknown adapter type '#{adapter_type}'"
+    end
+    
+  end
 end
 
 # Group.paginate(:page => params[:page], :per_page => 15, :order => "RANDOM()")
