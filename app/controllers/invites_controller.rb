@@ -7,6 +7,6 @@ class InvitesController < ApplicationController
     @emails.each do |email|  
       InviteMailer.invite(@user, email, @users_from_address, @group).deliver
     end
-    redirect_to current_user, :notice => "Thanks for inviting people. Sharing is caring."
+    redirect_to @user, :notice => "Thanks for inviting people. Sharing is caring."
   end
 end

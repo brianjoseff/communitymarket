@@ -12,7 +12,7 @@
   =will_paginate @posts
   /=render @posts
   
-  =render :partial => 'shared/post_feed', :collection => @posts, :as => :post
+  =render :partial => 'shared/post_feed', :collection => @posts, :as => :feed_item
   =will_paginate @posts
 
 = link_to 'Edit', edit_tag_path(@tag)
