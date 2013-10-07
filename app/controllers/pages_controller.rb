@@ -192,9 +192,9 @@ class PagesController < ApplicationController
       # do the MySQL part
     when :sqlite
       # do the SQLite3 part
-      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc')
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group(:tag_id).order(' tag_count desc').first(5)
     when :postgresql
-      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc')
+      Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc').first(5)
 
     else
       raise NotImplementedError, "Unknown adapter type '#{adapter_type}'"
