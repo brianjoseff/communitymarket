@@ -10,7 +10,10 @@
     %ul
       -if !@users_with_5_posts.nil?
         -@users_with_5_posts.each do |x|
-          %li #{x.name}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+          -if x.posts.count > 5
+            %li #{x.name}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+          -else
+            %li #{x.name}, with #{x.posts.count}
     %p Posts count: #{@posts_count}
 %div.row-fluid
   %p
