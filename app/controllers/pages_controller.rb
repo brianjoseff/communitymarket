@@ -13,7 +13,7 @@ class PagesController < ApplicationController
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.groups_as_member
       unless @location.nil?
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
     else
       #must sort them in opposite order because of the way the partials are rendered?
       @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       @random_tags = Tag.last(5)
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
@@ -58,7 +58,7 @@ class PagesController < ApplicationController
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.group_feed
       unless @location.nil?
@@ -69,7 +69,7 @@ class PagesController < ApplicationController
     else
       #must sort them in opposite order because of the way the partials are rendered?
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
@@ -102,7 +102,7 @@ class PagesController < ApplicationController
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.group_feed
       unless @location.nil?
@@ -113,7 +113,7 @@ class PagesController < ApplicationController
     else
       #must sort them in opposite order because of the way the partials are rendered?
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
@@ -146,7 +146,7 @@ class PagesController < ApplicationController
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.group_feed
       unless @location.nil?
@@ -157,7 +157,7 @@ class PagesController < ApplicationController
     else
       #must sort them in opposite order because of the way the partials are rendered?
       @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
