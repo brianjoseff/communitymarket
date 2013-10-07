@@ -15,7 +15,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
     unless @tag.posts.empty?
-		  @posts = @tag.posts.paginate(:per_page => 5, :page => params[:page])
+		  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
 		end
 
     respond_to do |format|

@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts
+    @posts = @group.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
     
     if !signed_in?
