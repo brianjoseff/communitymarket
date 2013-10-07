@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       @rec_groups = Group.near(location, 20)
     end
     if current_user.admin?
-      #@users_with_5_posts = User.joins(:posts).select('users.*, count(user_id) as "post_count"').group(:user_id).order(' post_count desc')
+      @users_with_5_posts = User.joins(:posts).select('users.*, count(user_id) as "post_count"').group('users.id').order(' post_count desc')
       @users_count = User.all.count
       @posts_count = Post.all.count
     @posts = @user.posts
