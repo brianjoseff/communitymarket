@@ -13,6 +13,7 @@ class TagsController < ApplicationController
   # GET /tags/1
   # GET /tags/1.json
   def show
+    @transaction = Transaction.new
     @tag = Tag.find(params[:id])
     unless @tag.posts.empty?
 		  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }

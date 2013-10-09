@@ -42,47 +42,61 @@
 /THIS IS THE MODULAR POST THAT IS LISTED/SHOWN in FEEDS
 /OK?
 /GOOD.
-%div.row-fluid
-  %div.span8
-    %div.slim-feed-item.row-fluid
 
-      %div.span10
-        %div.row-fluid.slim-feed-title-row
-          /price
-          /make price a variable that can be passed into the modal partials below so
-          /that on credit card charge, we know how much to charge      
-          %span.slim-feed-title
-            = link_to feed_item.title, post_url(feed_item), :class => "slim-feed-title"
-          -unless feed_item.assets.first.nil?
-            %i.icon-medium.icon-camera
-          %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
-        / %div.row-fluid
-        /   -feed_item.tags.each do |tag|
-        /     =link_to tag.name, tag_url(tag), :class => "tag"
+%div.slim-feed-item.row-fluid
+
+  %div.span9
+    %div.row-fluid.slim-feed-title-row
+      -if feed_item.post_category_id == 1
+        /%div.for-sale-marker
+        %span.pink [For Sale]
+        / %span
+        /          %i.icon-large.icon-usd
+      -elsif feed_item.post_category_id == 2
+        /%div.wanted-marker
+        %span.yellow [Wanted]
+      -else
+        /%div.free-marker
+        %span.blue [For Rent/Borrow]
+      /price
+      /make price a variable that can be passed into the modal partials below so
+      /that on credit card charge, we know how much to charge      
+      %span.slim-feed-title
+        = link_to feed_item.title, post_url(feed_item), :class => "slim-feed-title"
+      -unless feed_item.assets.first.nil?
+        %i.icon-medium.icon-camera
+      %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+    / %div.row-fluid
+    /   -feed_item.tags.each do |tag|
+    /     =link_to tag.name, tag_url(tag), :class => "tag"
 
 
       
 
-      %div.span2
-        %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-        / %i.icon-large.icon-envelope
+  %div.span3
+    %div.slim-button-row
+      %div.buy.pull-left
         -if feed_item.tier_id
-          -if signed_in? && current_user.stripe_customer_id.nil? == false
-            /IF: signed_in and no c#, THEN: user_credit_modal
-            /=render 'user_you_sure_modal'
-            / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-            =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+          -if signed_in? && current_user.stripe_customer_id
+            = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
+              - if @transaction.errors.any?
+                .error_messages
+                  %h2
+                    = pluralize(@transaction.errors.count, "error")
+                    prohibited this transaction from being saved:
+                  %ul
+                    - @transaction.errors.full_messages.each do |msg|
+                      %li= msg                                          
+              =f.hidden_field :post_id, :value => feed_item.id
+              =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-mini btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
           -elsif signed_in? && current_user.stripe_customer_id.nil?
-            /IF: signed_in and yes c# THEN: user_you_sure_modal
-     
-            / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
-            =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
             %div#transaction_modal.modal.hide
-
           -else
-            /=link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-            =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id     
-
-
+            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id     
+        -elsif feed_item.price
+          %span.non-tier-price $#{feed_item.price} [Cash] 
+      %div.email.pull-right
+        %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
 
 
