@@ -13,9 +13,22 @@
  *= require token-input-facebook
  *= require_tree .
  */
-.front-page-create-group-link{
+#top_banner_row{
+	
+}
+.banner{
+	height: 138px;
+}
+h1#changingtext{
+	height: 40px;
+}
+h1#changingtext2{
+	height: 40px;
+}
+#front_page_create_group_link{
 	margin-top: -5px;
 	text-decoration: underline;
+	color: #0000ff !important;
 }
 
 #show_post_buy{

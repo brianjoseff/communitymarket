@@ -8,7 +8,7 @@
 /       %li ask for stuff
 /       %li notify certain groups of people
 %div.banner
-  %div.row
+  %div#top_banner_row.row
     %div.span12
       %h1
         %span#chkWidth{:style => "display: none;"}
@@ -21,8 +21,7 @@
         %span#chkWidth2{:style => "display: none;"}
       %h1#changingtext2
         Notify
-        %span.toggle groups of people
-  %br/
+        %span.toggle Groups of people
 %div.row
   %div.span3
     /new post button
@@ -91,9 +90,9 @@
           %h3 Groups Close to You
           %span
             -if current_user
-              =link_to "Create a group", new_group_path, :class => "front-page-create-group-link"
+              =link_to "Create a group", new_group_path, :id => "front_page_create_group_link"
             -else
-              =link_to "Create a group", new_user_path, :class => "front-page-create-group-link"
+              =link_to "Create a group", new_user_path, :id => "front_page_create_group_link"
 
         %p Join specialized groups to make it easier to share your postings and get targeted notifications about stuff that matters to you
         =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}

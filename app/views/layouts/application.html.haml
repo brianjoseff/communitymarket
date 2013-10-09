@@ -29,21 +29,21 @@
 
       });
       $(function() {
-        var t1 = new Array( "people that care", "Dartmouth Students", "your workplace", "Upper Valley cyclists", "your teammates", "targeted groups" );
-        var i = 0;
+        var t2 = new Array( "people that care", "Dartmouth Students", "your workplace", "Upper Valley cyclists", "your teammates", "targeted groups" );
+        var i2 = 0;
         var width;
-        var tid = setInterval(
+        var tid2 = setInterval(
             function() {
                 $("#changingtext2 span").animate({'opacity': 0}, 1000, function () {
-                  $(this).text(t1[i]);
-                  width = $('#chkWidth2').text(t1[i]).width() +100;
-                  console.log(t1[i], width);
-                  $(this).animate({'opacity': 1, 'width': width}, 1000);
+                  $(this).text(t2[i2]);
+                  width = $('#chkWidth2').text(t2[i2]).width() +100;
+                  console.log(t2[i2], width);
+                  $(this).animate({'opacity': 1, 'width': width, 'height':38.5}, 1000);
               });
 
-              if(i < t1.length -1) 
-                  i++;
-              else i = 0;
+              if(i2 < t2.length -1) 
+                  i2++;
+              else i2 = 0;
 
             }, 3000 );
 
