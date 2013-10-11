@@ -2,6 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+$ ->
+	$("form.form").submit ->
+	  $('input[type=submit]').attr('disabled', 'disabled')
+$ ->
+	$("#new_post").submit ->
+	  $('input[type=submit]').attr('disabled', 'disabled')
+
+
 getGiftCard = ->
 	
 	y = $("#post_tier_id option:selected").val()
@@ -128,6 +136,8 @@ $ ->
 # 	$("#zipcode_submit").click (e) -?
 # 	e.preventDefault(e)
 # 	$("#zipcode").val $(this).parent.data "search_param"
+
+
 
 $ ->
 	$(".switch").click (e) ->

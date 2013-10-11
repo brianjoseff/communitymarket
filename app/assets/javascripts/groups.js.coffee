@@ -2,6 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+
+$ ->
+	$("form.form").submit ->
+	  $('input[type=submit]').attr('disabled', 'disabled')
+
 ## ENABLE THE PASSWORD FIELD ON PRIVATE BOX Check
 jQuery ->
 	$("input#private").change ->
@@ -12,6 +17,8 @@ $ ->
   $("#join_private_group").validate
     expression: "if(VAL != '') return true; else return false;"
     message: "password is required."
+
+
 
 
 

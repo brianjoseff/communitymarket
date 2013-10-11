@@ -2,7 +2,7 @@
   -if current_user
     -if group.members.include?(current_user)
       /=render :partial => "leave"
-      = form_for current_user.memberships.find_by_group_id(group), html: { :method => :delete }, remote: true do |f|
+      = form_for current_user.memberships.find_by_group_id(group), html: { :method => :delete, :class => "form" }, remote: true do |f|
         =f.hidden_field :group_id, :value => group.id                                            
         = f.submit "Leave", class: "anti-button"
       /=link_to "Leave", membership_url(current_user.memberships.find_by_group_id(group)), :method => :delete, :confirm => "Are you sure?"

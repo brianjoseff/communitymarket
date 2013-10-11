@@ -26,6 +26,12 @@
 //= require_tree .
 
 
+// $(function() {
+//   return $("form.form").submit(function() {
+//     return $('input[type=submit]').attr('disabled', 'disabled');
+//   });
+// });
+
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");

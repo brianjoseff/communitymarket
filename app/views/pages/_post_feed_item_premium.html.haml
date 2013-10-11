@@ -79,7 +79,7 @@
   %div.row-fluid
     %div.image.span2
       =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:small), :alt => feed_item.title), post_url(feed_item)
-    %div.span8
+    %div.span7
       %div.row-fluid
         /price
         /make price a variable that can be passed into the modal partials below so
@@ -89,46 +89,32 @@
       %div.row-fluid.description-row
         %span.description
           = truncate(feed_item.description, 25)
-    %div.span2
-    %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-    / %i.icon-large.icon-envelope
-    -if feed_item.tier_id
-      -if signed_in? && current_user.stripe_customer_id
-        /IF: signed_in and no c#, THEN: user_credit_modal
-        /=render 'user_you_sure_modal'
-        / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-        = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
-          - if @transaction.errors.any?
-            .error_messages
-              %h2
-                = pluralize(@transaction.errors.count, "error")
-                prohibited this transaction from being saved:
-              %ul
-                - @transaction.errors.full_messages.each do |msg|
-                  %li= msg                                          
-          =f.hidden_field :post_id, :value => feed_item.id
-          =f.submit "Buy", class: "btn btn-mini btn-success"
-      -elsif signed_in? && current_user.stripe_customer_id.nil?
-        /IF: signed_in and yes c# THEN: user_you_sure_modal
-     
-        / =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
-        =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
-        %div#transaction_modal.modal.hide
-
-      -else
-        /=link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-        =link_to 'Buy', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
-    -elsif feed_item.price
-      %span.non-tier-price$#{feed_item.price}
-
-
-  / -if signed_in? && current_user.stripe_customer_id.nil? == false
-  /   %div.buy_modal.modal{:role => "dialog",:style=>"display:none"}
-  /     =render 'user_you_sure_modal'
-  / -elsif signed_in? && current_user.stripe_customer_id.nil?
-  /   =render 'user_credit_modal'
-  / -else
-  /   =render 'non_user_credit_modal'
+    %div.span3
+      %div.slim-button-row
+        %div.buy.pull-left
+          -if feed_item.tier_id
+            -if signed_in? && current_user.stripe_customer_id
+              = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
+                - if @transaction.errors.any?
+                  .error_messages
+                    %h2
+                      = pluralize(@transaction.errors.count, "error")
+                      prohibited this transaction from being saved:
+                    %ul
+                      - @transaction.errors.full_messages.each do |msg|
+                        %li= msg                                          
+                =f.hidden_field :post_id, :value => feed_item.id
+                =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-mini btn-success"
+            -elsif signed_in? && current_user.stripe_customer_id.nil?
+              =link_to 'Buy | $#{Tier.find(feed_item.tier_id).price/100}', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+              %div#transaction_modal.modal.hide
+            -else
+              =link_to 'Buy | $#{Tier.find(feed_item.tier_id).price/100}', new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id
+          -elsif feed_item.price
+            %span.non-tier-price$#{feed_item.price}
+        %div.email.pull-right
+          %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+    
 
   %div.row-fluid.tag-row
     -feed_item.tags.each do |tag|

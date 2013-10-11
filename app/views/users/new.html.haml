@@ -30,7 +30,7 @@
           =f.password_field :password, :class => "input-block-level inline", :placeholder => "Password"  
       %div.control-group
         %div.controls
-          =f.submit "Sign Up", class: "btn btn-primary"
+          =f.submit "Sign Up", class: "btn btn-primary submit-button"
         /= f.button :submit, name: 'Sign Up', class: "btn-primary"
 %div.row-fluid.sign-in{:style => "display:none;"}
   %div.span4
@@ -43,4 +43,4 @@
 
       =f.password_field :password, :class => "input-block-level", :placeholder => "Password"
 
-      .action=f.submit "Sign in"
+      .action=f.submit "Sign in", :class => "submit-button"
