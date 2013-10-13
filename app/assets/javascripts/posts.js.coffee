@@ -84,10 +84,11 @@ $ ->
 countChecked = ->
 	n = $("input.group-box:checked").length
 	if n > 2
-		$("div#post-credit-fields").show()
+		$("div#post_credit_fields").show()
+		$("div#purchase_message").show()
 	else
-		$("div#post-credit-fields").hide()
-	
+		$("div#post_credit_fields").hide()
+		$("div#purchase_message").hide()	
 
 
 $ ->
@@ -159,7 +160,7 @@ $ ->
 # 		    message: "credit card is required if you want to notify more than two groups."
 # 		else
 # 			$("div#post-credit-fields").hide
-			
+
 $ ->	
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
@@ -252,9 +253,18 @@ jQuery ->
 ## SHOW CREDIT CARD FIELDS ON PREMIUM CHECK BOX CLICK
 jQuery ->
 	$("input#premium").change ->
+		# $("#card_number").validate
+		# 	expression: "if(VAL != '') return true; else return false;"
+		# 	    message: "credit card is required."
 		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$('input[type=submit]').attr('disabled','disabled')
 		$("div#post_credit_fields").toggle()
+		$("div#purchase_message_premium").toggle()
 
+$ ->
+	$("#card_number").validate
+		expression: "if(VAL != '') return true; else return false;"
+		message: "credit card is required."
 
 #the function is getting called before the active button gets changed...so has old button id
 

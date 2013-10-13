@@ -3,16 +3,19 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-$ ->
-	$("form.form").submit ->
-	  $('input[type=submit]').attr('disabled', 'disabled')
+# $ ->
+# 	$("form.form").submit ->
+# 	  $('input[type=submit]').attr('disabled', 'disabled')
 
 ## ENABLE THE PASSWORD FIELD ON PRIVATE BOX Check
 jQuery ->
 	$("input#private").change ->
 		$("#private_group").prop "disabled", not $("#private_group").prop("disabled") && $("input#private").val('')
 		
-
+$ ->	
+  $("#group_name").validate
+    expression: "if(VAL != '') return true; else return false;"
+    message: "group name is required."
 $ ->	
   $("#join_private_group").validate
     expression: "if(VAL != '') return true; else return false;"

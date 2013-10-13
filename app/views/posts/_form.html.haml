@@ -189,8 +189,11 @@
   / %table.table.table-striped
   /   %tbody.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
   /   
-    
-        
+  %div.control-group
+    %div.controls
+      %div#purchase_message_premium{:style => "display:none;"} $2: Premium Post
+      %div#purchase_message{:style => "display:none;"} $3: Notify more than 2 groups or 500+ people
+  
   -if @post.new_record?
     %div.control-group
       %div.controls

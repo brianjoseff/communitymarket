@@ -1,0 +1,19 @@
+-unless groups.nil?
+  -groups.take(6).each do |group|
+    %div.span2
+      %div{:id=>"group_#{group.id}"}
+      %div.row-fluid
+        =link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)
+      %div.row-fluid
+        = link_to group.name, group_url(group)
+      %div.row-fluid
+        -if group.private?
+          -if !current_user
+    
+            /= render "groups/join_form", :group => group
+          -else
+            -unless current_user && current_user.groups_as_member.include?(group)
+              =link_to "Join", group_url(group), class: "btn btn-mini"
+        -else
+          -unless current_user && current_user.groups_as_member.include?(group)
+            = render "groups/join_form", :group => group

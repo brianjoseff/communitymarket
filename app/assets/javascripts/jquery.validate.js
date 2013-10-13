@@ -74,6 +74,7 @@
             var validation_state = eval(expression);
             var success = "Success";
             if (!validation_state) {
+                $('input[type=submit]').attr('disabled','disabled')
                 jQueryObjectBeforeErrorMessage = getjQueryObjectBeforeErrorMessage(jQuery(id));
                 
                 if (jQueryObjectBeforeErrorMessage.next('.' + options['error_message_class']).length == 0) {
@@ -93,6 +94,7 @@
                         ValidationErrors[FormID].splice(i, 1);
 
                 }
+                $('input[type=submit]').removeAttr('disabled')
                 return true;
             }
         }
