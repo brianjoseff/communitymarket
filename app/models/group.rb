@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :assets
-  has_many :memberships
+  has_many :memberships, :dependent => :destroy, :foreign_key => :group_id
   has_many :members,    :through => :memberships, :source => :member, :foreign_key => :member_id
   belongs_to :owner,    :class_name => "User", :foreign_key => :user_id
   belongs_to :group_category

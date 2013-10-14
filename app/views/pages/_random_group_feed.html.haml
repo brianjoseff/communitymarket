@@ -2,6 +2,8 @@
 %div.row-fluid
   -unless feed_items.nil?
     -feed_items.each do |feed_item|
+      %div#joined{:style => "display:none"}
+        Joined!
       %div{:id=>"group_#{feed_item.id}"}
         %div.feed_item
           %div.span10
