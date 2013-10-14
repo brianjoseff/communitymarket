@@ -13,8 +13,11 @@
  *= require token-input-facebook
  *= require_tree .
  */
-#top_banner_row{
-	
+.search-row{
+	background-color: #7f8c8d;
+	height: 60px;
+	padding-top: 10px;
+	padding-left: 10px;
 }
 .tooltip{
 	width: 150px;

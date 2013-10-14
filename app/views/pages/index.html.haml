@@ -31,13 +31,14 @@
         %div.row-fluid
           =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
       
-%div.row
-  %div.span3
-    /new post button
-    =link_to "Post Something", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
-  %div.span9
-    /search bar
-    =render :partial => "search/search_form"
+%div.row-fluid
+  %div.search-row
+    %div.span3
+      /new post button
+      =link_to "Post Something", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
+    %div.span9
+      /search bar
+      =render :partial => "search/search_form"
 
 %div.row
   %div.span8
