@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      #format.json { render json: @users }
+      format.csv { render text: to_csv }
     end
   end
 
@@ -221,6 +222,14 @@ class UsersController < ApplicationController
     end
   end
   private
+    def to_csv
+      CSV.generate do |csv|
+        csv << User.column_names
+        User.all.each do |user|
+          csv << user.attributes.values_at(*User.column_names)
+        end
+      end
+    end
     def redirect_back_or(default, notice)
       flash[:notice] = notice
       if session[:followed_tag]

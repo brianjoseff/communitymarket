@@ -1,5 +1,6 @@
 %h1 Listing users
 %p #{User.all.count} users
+= link_to "CSV", users_path(format: "csv")
 %table
   %tr
     %th Email

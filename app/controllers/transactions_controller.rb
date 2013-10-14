@@ -79,10 +79,11 @@ class TransactionsController < ApplicationController
           sign_in @user
           #format.js { render }
           @post.deactivate!
-          @post.user_id = @user.id
+          @seller = User.find(@post.user_id)
+          # @post.user_id = @user.id
           @post.save!
           if @tier_id
-            @seller = User.find(@post.user_id)
+            
             SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
@@ -103,10 +104,10 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
-          @post.user_id = @user.id
+          @seller=User.find(@post.user_id)
+          # @post.user_id = @user.id
           @post.save!
           if @tier_id
-            @seller = User.find(@post.user_id)
             SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
@@ -117,7 +118,7 @@ class TransactionsController < ApplicationController
           format.json { render json: @transaction.errors, status: :unprocessable_entity }
         end
       #-------------------------------------------------------------------------------------------#
-      #---- Current User and Non-Customer... [not working]--------------------------------------------#
+      #---- Current User and Non-Customer... [working]--------------------------------------------#
       #-------------------------------------------------------------------------------------------#
       elsif current_user && !current_user.stripe_customer_id
         #current_user without credit details encountered form
@@ -129,10 +130,10 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
-          @post.user_id = @user.id
+          @seller=User.find(@post.user_id)
+          # @post.user_id = @user.id
           @post.save!
           if @tier_id
-            @seller = User.find(@post.user_id)
             SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }

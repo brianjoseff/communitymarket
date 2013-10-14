@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
   
+  
+  
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
+    end
+  end
   #attr_accessor :stripe_card_token
   
   # attr_accessor :stripe_card_token
@@ -142,5 +152,6 @@ class User < ActiveRecord::Base
     memberships.find_by_followed_id(tag.id).destroy
   end
   
+
   
 end

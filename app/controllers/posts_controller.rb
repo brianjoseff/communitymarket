@@ -74,10 +74,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post_categories = PostCategory.all
-    
+
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])
       @post = @user.posts.new(params[:post])
+      if !@post.for_sale?
+        @post.tier_id = nil
+        @post.price = nil
+      end
       if params[:credit_card_number].present?
         @transaction = @user.transactions.new(:email => @user.email)
         @post.save_customer(@user)
@@ -96,6 +100,10 @@ class PostsController < ApplicationController
     elsif current_user
       @user = current_user
       @post = @user.posts.new(params[:post])
+      if !@post.for_sale?
+        @post.tier_id = nil
+        @post.price = nil
+      end
       @post.email = @user.email
       @amount = 300
       if @user.stripe_customer_id

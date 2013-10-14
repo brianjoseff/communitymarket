@@ -36,6 +36,10 @@ class Post < ActiveRecord::Base
     self.save!
   end
   
+  def for_sale?
+    return self.post_category_id == 1
+  end
+  
   def save_customer(user)
     if valid?
       customer = Stripe::Customer.create( :description => user.email, :card => stripe_card_token)
