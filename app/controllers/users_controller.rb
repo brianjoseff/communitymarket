@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
+    @user = current_user
     @memberships = @user.memberships
     @email_settings = EmailSetting.all
     @groups = @user.groups_as_member
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
       @rec_groups = Group.near(location, 20)
     end
     if current_user.admin?
+      @posts = Post.all
       @users_with_5_posts = User.joins(:posts).select('users.*, count(user_id) as "post_count"').group('users.id').order(' post_count desc')
       @users_count = User.all.count
       @posts_count = Post.all.count
