@@ -13,12 +13,7 @@
  *= require token-input-facebook
  *= require_tree .
  */
-.search-row{
-	background-color: #7f8c8d;
-	height: 60px;
-	padding-top: 10px;
-	padding-left: 10px;
-}
+
 .tooltip{
 	width: 150px;
 }
@@ -349,6 +344,12 @@ input[type="text"].search-bar-field{
 .search-bar{
 	padding-top: 10px;
 } 
+.search-row{
+	background-color: #7f8c8d;
+	height: 60px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
 
 .btn-search {
   background-color: hsl(333, 100%, 78%) !important;

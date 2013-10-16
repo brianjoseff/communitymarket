@@ -38,25 +38,25 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 }
 
 #btn-post{
-	  background-color: hsl(333, 100%, 85%) !important;
-	  background-repeat: repeat-x;
-		
-	  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffbcda", endColorstr="#ff91af");
-	  background-image: -khtml-gradient(linear, left top, left bottom, from(#ffbcda), to(#ff91af));
-	  background-image: -moz-linear-gradient(top, #ffbcda, #ff91af);
-	  background-image: -ms-linear-gradient(top, #ffbcda, #ff91af);
-	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffbcda), color-stop(100%, #ff91af));
-	  background-image: -webkit-linear-gradient(top, #ffbcda, #ff91af);
-	  background-image: -o-linear-gradient(top, #ffbcda, #ff91af);
-	  background-image: linear-gradient(#ffbcda, #ff91af);
-	  border-color: #ffb2d4 #ff91af hsl(333, 100%, 84.5%);
+  background-color: hsl(303, 100%, 64%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff70f7", endColorstr="#ff47f5");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ff70f7), to(#ff47f5));
+  background-image: -moz-linear-gradient(top, #ff70f7, #ff47f5);
+  background-image: -ms-linear-gradient(top, #ff70f7, #ff47f5);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff70f7), color-stop(100%, #ff47f5));
+  background-image: -webkit-linear-gradient(top, #ff70f7, #ff47f5);
+  background-image: -o-linear-gradient(top, #ff70f7, #ff47f5);
+  background-image: linear-gradient(#ff70f7, #ff47f5);
+  border-color: #ff47f5 #ff47f5 hsl(303, 100%, 62%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);
+  -webkit-font-smoothing: antialiased;
 	  color: #fff !important;
 		font-weight: bold;
-	  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.03);
-	  -webkit-font-smoothing: antialiased;
 }
 
-#btn-post:hover {
+/*#btn-post:hover {
   background-color: hsl(328, 100%, 70%) !important;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#feb7dd", endColorstr="#ff65b7");
@@ -72,7 +72,7 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 	font-weight: bold;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.26);
   -webkit-font-smoothing: antialiased;
-}
+}*/
 /*
 .btn-primary {
   background-color: hsl(166, 100%, 44%) !important;

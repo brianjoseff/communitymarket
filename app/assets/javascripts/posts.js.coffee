@@ -257,7 +257,12 @@ jQuery ->
 		# 	expression: "if(VAL != '') return true; else return false;"
 		# 	    message: "credit card is required."
 		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
-		$('input[type=submit]').attr('disabled','disabled')
+		x = $('input[type=submit]#upload_post').is(':disabled')
+		if $('input[type=submit]#upload_post')
+			if x==true
+				$('input[type=submit]#upload_post').removeAttr('disabled')
+			else
+				$('input[type=submit]#upload_post').attr('disabled','disabled')
 		$("div#post_credit_fields").toggle()
 		$("div#purchase_message_premium").toggle()
 
