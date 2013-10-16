@@ -3,7 +3,7 @@
 =link_to "Sign In","#", :class => "sign-in-link"
 =link_to "Sign Up", "#", :class => "sign-up-link", :style => "display:none;"
 %div.row-fluid.sign-up
-  = simple_form_for @user,  html: {class: 'form-horizontal'} do |f|
+  = simple_form_for @user,  html: {class: 'form-horizontal form'} do |f|
     -if params[:group_id]
       =hidden_field_tag('group[member_ids][]', @user.id)
     - if @user.errors.any?

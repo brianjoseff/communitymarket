@@ -63,11 +63,12 @@ class PostsController < ApplicationController
     @assets = @post.assets
     @user = current_user
     @post.assets.build
-    if !signed_in?
-      @user = User.new
-      @group = Group.first
-      @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
-    end
+    # if !signed_in?
+    #   @user = User.new
+    #   @group = Group.first
+    #   @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
+    # end
+    
   end
 
   # POST /posts
