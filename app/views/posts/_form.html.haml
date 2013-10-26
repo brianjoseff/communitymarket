@@ -9,7 +9,7 @@
 /tags
 /.....NO email field
 
-= form_for @post.new_record? ? setup_post(@post, @groups) : @post, :html => { :multipart => true, :class => "form-horizontal user-post form"} do |f|
+= form_for @post.new_record? ? setup_post(@post, @groups) : @post, :html => { :multipart => true, :class => "form-horizontal user-post #{ @post.new_record? ? "form": "edit-form"}"} do |f|
   - if @post.errors.any?
     #error_explanation
       %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
