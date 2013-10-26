@@ -3,8 +3,8 @@
 %p
   %b Name:
   = @tag.name
-  #follow_form
-    =render 'follow_form', :tag => @tag
+  %div{:id => "follow_button_"+@tag.id.to_s}
+    =render 'shared/simple_follow', :tag => @tag
 %p
   %b Description:
   = @tag.description

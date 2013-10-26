@@ -21,7 +21,11 @@ Communitymarket::Application.routes.draw do
       post :join
     end
   end
-  resources :followships
+  resources :followships do
+    collection do
+      post :follow
+    end
+  end
   resources :tags
 
   resources :users do
@@ -67,6 +71,8 @@ Communitymarket::Application.routes.draw do
   match '/wanted', :to => "pages#wanted"
   match '/transactions/customer_purchase', :to => "transactions#customer_purchase"
   match '/memberships/join', :to => "memberships#join"
+  match '/followships/follow', :to => "followships#join"
+  match '/followships/leave', :to => "followships#leave", :via => :delete
   match '/groups/nearby', :to => "groups#nearby"
   match '/search', :to => 'search#index'
   match '/search_tags', :to => 'tags#search'

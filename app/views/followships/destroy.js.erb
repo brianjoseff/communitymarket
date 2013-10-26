@@ -1,1 +1,2 @@
-$("#follow_form").html("<%= escape_javascript(render('tags/follow_form', :tag => @tag)) %>")
+$("#follow_button_<%=@tag ? @tag.id.to_s : tag.id.to_s%>").html("<%= escape_javascript(render('shared/simple_follow', :tag => @tag ? @tag : tag)) %>")
+// $("#follow_form").html("<%= escape_javascript(render('tags/follow_form', :tag => @tag ? @tag : tag)) %>")

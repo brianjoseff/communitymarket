@@ -3,6 +3,8 @@
     %div#whole_tag
       %span#span-tag
       =link_to tag.name, tag_url(tag), :class => "tag"
-    #{pluralize(tag.posts.count, 'post')} 
+    / #{pluralize(tag.posts.count, 'post')}
+    %div{:id => "follow_button_"+tag.id.to_s}
+      =render 'shared/simple_follow', :tag => tag
 %br/
     

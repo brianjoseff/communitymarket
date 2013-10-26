@@ -14,7 +14,11 @@ end
 #group :production do
 #  gem 'pg'
 #end
-
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -99,4 +103,5 @@ gem "localtunnel"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+gem "guard-rspec", ">= 2.0.1", :group => [:development, :test]
 gem 'jquery-ui-rails'

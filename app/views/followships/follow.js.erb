@@ -1,0 +1,1 @@
+$("#follow_button_<%=@tag ? @tag.id.to_s : tag.id.to_s%>").html("<%= j(render 'shared/simple_follow', :tag => @tag ? @tag: tag) %>")

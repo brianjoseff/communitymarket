@@ -1,0 +1,2 @@
+$("#follow_button_<%=@tag ? @tag.id : tag.id%>").html("<%= j(render 'shared/simple_follow', :tag => @tag ? @tag : tag) %>")
+// $("#follow_button_<%=tag.id%>").html("<%= j(render 'shared/simple_follow', :tag => tag) %>")

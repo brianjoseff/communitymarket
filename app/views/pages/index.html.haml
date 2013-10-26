@@ -35,7 +35,7 @@
   %div.search-row
     %div.span3
       /new post button
-      =link_to "Post Something", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
+      =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
     %div.span9
       /search bar
       =render :partial => "search/search_form"
@@ -63,7 +63,8 @@
       /Post feed
       =render :partial => 'feed',:locals => {:feed_items => @posts}
   %div.span4
-    %div.advertising
+    / %div.advertising
+    %a.advertising{:href => "http://www.moranogelato.com/", :target=>"Morano"}
     %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     %div.row-fluid
       -if current_user

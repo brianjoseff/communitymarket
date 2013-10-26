@@ -1,3 +1,3 @@
 =search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "form-inline"} do |f|
   =f.text_field :name_cont, :class => "search-bar-field", :placeholder => "search for stuff or groups...type it here"
-  =f.submit 'Search', :class => "btn btn-primary"
+  =f.submit 'Search', :class => "btn-flat", :id => "btn_search_flat"

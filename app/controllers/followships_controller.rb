@@ -10,10 +10,10 @@ class FollowshipsController < ApplicationController
   
   def destroy
     @followship = Followship.find(params[:id])
-    @tag = Tag.find(params[:id])
+    @tag = Tag.find(params[:followship][:followed_id])
     if @followship.destroy
       respond_with @tag
-      flash[:success] = "unfollowed tag"
+      # flash[:success] = "unfollowed tag (destroy method)"
     end
   end
   
@@ -31,7 +31,20 @@ class FollowshipsController < ApplicationController
   #   respond_with @user
   # end
   # 
-  
+  def leave
+    @followship = Followship.find(params[:id])
+    @tag = Tag.find(params[:followship][:followed_id])
+    if @followship.destroy
+      respond_with @tag
+      # flash[:success] = "unfollowed tag"
+    end
+  end
+  def follow
+    @tag = Tag.find(params[:followship][:followed_id])
+    current_user.follow!(@tag)
+    # @your_tags = current_user.group_feed
+    respond_with @tag
+  end
   
   private
     def redirect_to_signup
