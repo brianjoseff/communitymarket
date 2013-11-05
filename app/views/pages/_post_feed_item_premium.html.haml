@@ -48,7 +48,8 @@
         %div#whole_tag
           %span#span-tag
           =link_to tag.name, tag_url(tag), :class => "tag"
-    %span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+    /COMMENTED OUT DATE        
+    /%span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
 
 
 
