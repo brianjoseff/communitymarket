@@ -1,6 +1,8 @@
 class Transaction < ActiveRecord::Base
   attr_accessible :customer_id, :notify_premium, :premium, :price, :tier_id, :user_id, :email,:stripe_card_token, :post_id
   validates :email, :presence => true, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  validates :price, :presence => true
+  validates :post_id, :presence => true
   #validate :email, :presence => true
   belongs_to :user
   

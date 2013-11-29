@@ -3,6 +3,13 @@ class UsersController < ApplicationController
   # GET /users.json
   
   before_filter :require_admin_login, :only => [:index]
+  
+  def oauth_failure
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'something broke' }
+    end
+  end
+  
   def index
     @users = User.all
 
