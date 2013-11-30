@@ -25,7 +25,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'jquery-fileupload-rails'
-  gem 'sass-rails', '>= 3.2'
+  gem 'sass-rails', '~> 3.2.6'
   gem 'coffee-rails'
   #gem 'chosen-rails'
   gem 'jquery-rails'
