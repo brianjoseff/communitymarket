@@ -281,7 +281,7 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   clearance
-  client_side_validations (~> 3.2.0)
+  client_side_validations
   client_side_validations-simple_form
   coffee-rails
   database_cleaner
