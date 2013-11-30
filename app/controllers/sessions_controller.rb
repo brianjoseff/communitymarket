@@ -3,9 +3,7 @@ class SessionsController < ApplicationController
   # skip_before_filter :authorize
   
   #sessions implemented using Clearance gem
-  
   def new
-      
   end
   def create_facebook
     # user = User.from_omniauth(env["omniauth.auth"])
@@ -42,12 +40,12 @@ class SessionsController < ApplicationController
       redirect_back_or @user, nil
     end
   end
-  
+
   def destroy
     sign_out
     redirect_to root_path
   end
-  
+
   private
     def redirect_back_or(default, notice)
       flash[:notice] = notice
@@ -71,11 +69,16 @@ class SessionsController < ApplicationController
       else
         redirect_to default
       end
-      
     end
-  
     def store_location
       session[:return_to] = request.fullpath
     end
-  end
+    def stupid_fucking_method
+      fuck_all_the_whitespace = nil
+      fuck_all_the_whitespace2 = nil
+      fuck_all_the_whitespace3 = nil
+      fuck_all_the_whitespace4 = nil
+      fuck_all_the_whitespace5 = nil
+      fuck_all_the_whitespace6 = nil
+    end
 end
