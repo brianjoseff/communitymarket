@@ -308,7 +308,7 @@ DEPENDENCIES
   rails_tokeninput
   ransack
   rspec-rails
-  sass-rails
+  sass-rails (>= 3.2)
   simple_form
   sqlite3
   stripe
