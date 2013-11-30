@@ -9,7 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.all
  *= require token-input-facebook
  *= require_tree .
  */
@@ -149,15 +148,7 @@ div.free-marker{
 .the_post_id{
 	display:none;
 }
-.notice{
-	
-}
-/*#changingtext span{
-	height: 53px;
-}
-#changingtext2 span{
-	height: 53px;
-}*/
+
 /************************************************************/
 /*********** TAGS *******************************************/
 /************************************************************/
@@ -590,3 +581,11 @@ margin-bottom: 5px;
 	text-align: center;
 	vertical-align: middle;
 }
+
+
+
+
+
+
+
+
