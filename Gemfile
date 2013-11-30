@@ -5,7 +5,6 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'omniauth-facebook'
 
 group :development do
   #gem 'mysql2'
@@ -99,13 +98,10 @@ gem 'geocoder'
 # gem 'debugger'
 
 gem "localtunnel"
-group :development, :test do
-  gem "rspec-rails"
-  gem "guard-rspec"
-  gem "factory_girl_rails"
-end
+
 
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
-
+gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+gem "guard-rspec", ">= 2.0.1", :group => [:development, :test]
 gem 'jquery-ui-rails'

@@ -71,15 +71,8 @@ GEM
     erubis (2.7.0)
     excon (0.25.3)
     execjs (2.0.1)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
-      railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
-    faraday (0.8.8)
-      multipart-post (~> 1.2.0)
     ffi (1.9.0)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -103,9 +96,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
-    hashie (2.0.5)
     hike (1.2.3)
-    httpauth (0.2.0)
     i18n (0.6.5)
     journey (1.0.4)
     jquery-fileupload-rails (0.4.1)
@@ -123,8 +114,6 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
-    jwt (0.1.8)
-      multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -150,25 +139,10 @@ GEM
     method_source (0.8.2)
     mime-types (1.25)
     multi_json (1.7.9)
-    multipart-post (1.2.0)
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     nokogiri (1.5.10)
-    oauth2 (0.8.1)
-      faraday (~> 0.8)
-      httpauth (~> 0.1)
-      jwt (~> 0.1.4)
-      multi_json (~> 1.0)
-      rack (~> 1.2)
-    omniauth (1.1.4)
-      hashie (>= 1.2, < 3)
-      rack
-    omniauth-facebook (1.4.1)
-      omniauth-oauth2 (~> 1.1.0)
-    omniauth-oauth2 (1.1.1)
-      oauth2 (~> 0.8.0)
-      omniauth (~> 1.0)
     paperclip (3.5.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -283,12 +257,11 @@ DEPENDENCIES
   client_side_validations-simple_form
   coffee-rails
   database_cleaner
-  factory_girl_rails
   faker
   figaro
   forgery
   geocoder
-  guard-rspec
+  guard-rspec (>= 2.0.1)
   haml (>= 3.0.0)
   haml-rails
   jquery-fileupload-rails
@@ -299,13 +272,12 @@ DEPENDENCIES
   launchy
   localtunnel
   mandrill-api
-  omniauth-facebook
   paperclip
   pg
   rails (= 3.2.9)
   rails_tokeninput
   ransack
-  rspec-rails
+  rspec-rails (>= 2.0.1)
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3

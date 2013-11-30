@@ -17,7 +17,7 @@ class PagesController < ApplicationController
       @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.groups_as_member
-      unless @location.first.nil?
+      unless @location.nil?
         @near_groups = Group.near(@location.first.city, 10000)
       end
       @random_groups = Group.last(20) - @user.groups_as_member
@@ -40,7 +40,7 @@ class PagesController < ApplicationController
       #   end
       # end
       @user = User.new
-      unless @location.first.nil?
+      unless @location.nil?
         @near_groups = Group.near(@location.first.city, 10000)
       end
       #@posts = @entries.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")

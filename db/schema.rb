@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131101195537) do
+ActiveRecord::Schema.define(:version => 20130927042542) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -27,15 +27,6 @@ ActiveRecord::Schema.define(:version => 20131101195537) do
   create_table "assignments", :force => true do |t|
     t.integer  "post_id"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "authentications", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -165,10 +156,6 @@ ActiveRecord::Schema.define(:version => 20131101195537) do
     t.string   "stripe_customer_id"
     t.string   "password"
     t.boolean  "admin"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
