@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '>= 3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,7 +25,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'jquery-fileupload-rails'
-  gem 'sass-rails'# ,   '~> 3.2.3'
+  gem 'sass-rails'
   gem 'coffee-rails'
   #gem 'chosen-rails'
   gem 'jquery-rails'
@@ -41,7 +41,7 @@ gem 'figaro'
 
 #form gems- validations etc.
 gem 'simple_form'
-gem 'client_side_validations' #, '~> 3.2.0'
+gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 
 gem 'will_paginate'
