@@ -304,7 +304,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip
   pg
-  rails (>= 3.2)
+  rails (= 3.2.9)
   rails_tokeninput
   ransack
   rspec-rails
