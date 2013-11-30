@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       end
       sign_in(user)
       redirect_to @next, :notice => @notice
-    end
+    
   end
   def create
     @user = User.authenticate(params[:session][:email],
@@ -72,13 +72,5 @@ class SessionsController < ApplicationController
     end
     def store_location
       session[:return_to] = request.fullpath
-    end
-    def stupid_fucking_method
-      fuck_all_the_whitespace = nil
-      fuck_all_the_whitespace2 = nil
-      fuck_all_the_whitespace3 = nil
-      fuck_all_the_whitespace4 = nil
-      fuck_all_the_whitespace5 = nil
-      fuck_all_the_whitespace6 = nil
     end
 end
