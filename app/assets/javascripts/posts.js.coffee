@@ -1,149 +1,149 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-# 
-# $ ->
-# 	$("form.form").submit ->
-# 	  $('input[type=submit]').attr('disabled', 'disabled')
-# $ ->
-# 	$("#new_post").submit ->
-# 	  $('input[type=submit]').attr('disabled', 'disabled')
-# 
-# 
-# getGiftCard = ->
-# 	
-# 	y = $("#post_tier_id option:selected").val()
-# 	x = parseInt(y)
-# 	if x ==1
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$2.50</span>")
-# 		
-# 	else if x==2
-# 		
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$6</span>")
-# 		
-# 	else if x==3
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$12</span>")
-# 			
-# 	else if x==4
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$30</span>")
-# 		
-# 	else if x==5
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$60</span>")
-# 		
-# 	else if x==6
-# 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$110</span>")
-# 		
-# 		
-# $ ->
-# 	$("#post_tier_id").on "change", getGiftCard
-# 		
-# # monify = ->
-# # 	if $("form#new_post").find("input.group-box:checked").length > 2
-# # 		$("div#post-credit-fields").show "slide",
-# # 			direction: "right"
-# # 			, 100
-# # 		$("#card_number").validate
-# # 	    expression: "if(VAL != '') return true; else return false;"
-# # 	    message: "credit card is required if you want to notify more than two groups."
-# # 	else
-# # 		$("div#post-credit-fields").hide
-# 
-# # $(document).ready ->
-# #   $checkboxes = $("input[type=\"checkbox\"].group-box")
-# #   $checkboxes.change ->
-# #     countCheckedCheckboxes = $checkboxes.filter(":checked").length
-# # 		if countCheckedCheckboxes > 2
-# # 			$("div#post-credit-fields").show "slide",
-# # 				direction: "right"
-# # 				, 100
-# # 			$("#card_number").validate
-# # 		    expression: "if(VAL != '') return true; else return false;"
-# # 		    message: "credit card is required if you want to notify more than two groups."
-# # 		else
-# # 			$("div#post-credit-fields").hide
-# # 
-# # jQuery ->
-# #   $('#new_post').fileupload
-# #     dataType: "script"
-# #     add: (e, data) ->
-# #       types = /(\.|\/)(gif|jpe?g|png)$/i
-# #       file = data.files[0]
-# #       if types.test(file.type) || types.test(file.name)
-# #         data.context = $(tmpl("template-upload", file))
-# #         $('#new_post').append(data.context)
-# #         data.submit()
-# #       else
-# #         alert("#{file.name} is not a gif, jpeg, or png image file")
-# #     progress: (e, data) ->
-# #       if data.context
-# #         progress = parseInt(data.loaded / data.total * 100, 10)
-# #         data.context.find('.bar').css('width', progress + '%')
-# 
-# 
-# 
-# countChecked = ->
-# 	n = $("input.group-box:checked").length
-# 	if n > 2
-# 		$("div#post_credit_fields").show()
-# 		$("div#purchase_message").show()
+
+$ ->
+	$("form.form").submit ->
+	  $('input[type=submit]').attr('disabled', 'disabled')
+$ ->
+	$("#new_post").submit ->
+	  $('input[type=submit]').attr('disabled', 'disabled')
+
+
+getGiftCard = ->
+	
+	y = $("#post_tier_id option:selected").val()
+	x = parseInt(y)
+	if x ==1
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$2.50</span>")
+		
+	else if x==2
+		
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$6</span>")
+		
+	else if x==3
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$12</span>")
+			
+	else if x==4
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$30</span>")
+		
+	else if x==5
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$60</span>")
+		
+	else if x==6
+		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$110</span>")
+		
+		
+$ ->
+	$("#post_tier_id").on "change", getGiftCard
+		
+# monify = ->
+# 	if $("form#new_post").find("input.group-box:checked").length > 2
+# 		$("div#post-credit-fields").show "slide",
+# 			direction: "right"
+# 			, 100
+# 		$("#card_number").validate
+# 	    expression: "if(VAL != '') return true; else return false;"
+# 	    message: "credit card is required if you want to notify more than two groups."
 # 	else
-# 		$("div#post_credit_fields").hide()
-# 		$("div#purchase_message").hide()	
+# 		$("div#post-credit-fields").hide
+
+# $(document).ready ->
+#   $checkboxes = $("input[type=\"checkbox\"].group-box")
+#   $checkboxes.change ->
+#     countCheckedCheckboxes = $checkboxes.filter(":checked").length
+# 		if countCheckedCheckboxes > 2
+# 			$("div#post-credit-fields").show "slide",
+# 				direction: "right"
+# 				, 100
+# 			$("#card_number").validate
+# 		    expression: "if(VAL != '') return true; else return false;"
+# 		    message: "credit card is required if you want to notify more than two groups."
+# 		else
+# 			$("div#post-credit-fields").hide
 # 
-# 
+# jQuery ->
+#   $('#new_post').fileupload
+#     dataType: "script"
+#     add: (e, data) ->
+#       types = /(\.|\/)(gif|jpe?g|png)$/i
+#       file = data.files[0]
+#       if types.test(file.type) || types.test(file.name)
+#         data.context = $(tmpl("template-upload", file))
+#         $('#new_post').append(data.context)
+#         data.submit()
+#       else
+#         alert("#{file.name} is not a gif, jpeg, or png image file")
+#     progress: (e, data) ->
+#       if data.context
+#         progress = parseInt(data.loaded / data.total * 100, 10)
+#         data.context.find('.bar').css('width', progress + '%')
+
+
+
+countChecked = ->
+	n = $("input.group-box:checked").length
+	if n > 2
+		$("div#post_credit_fields").show()
+		$("div#purchase_message").show()
+	else
+		$("div#post_credit_fields").hide()
+		$("div#purchase_message").hide()	
+
+
+$ ->
+	$("input.group-box").on "click", countChecked
+
+
+
+## DISABLE PRICE AREA WHEN FREE or REQUEST post type is chosen
+		
+checkType = ->
+	n = $(this).data "id"
+	if n > 1
+		$("#price_field").val('')
+		$("div#get_paid_stuff").hide()		
+	else
+		$("div#get_paid_stuff").show()
+$ ->
+	$("button.switch").on "click", checkType
+	
+$ ->
+	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
+	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
+	  $this = $(this)
+	  if $(this).attr("class-toggle") isnt `undefined` and not $(this).hasClass("disabled")
+	    btnGroup = $this.parent(".btn-group")
+	    btnToggleClass = $this.attr("class-toggle")
+	    btnCurrentClass = $this.hasAnyClass(buttonClasses)
+	    if btnGroup.attr("data-toggle") is "buttons-radio"
+	      return false  if $this.hasClass("active")
+	      activeButton = btnGroup.find(".btn.active")
+	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
+	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
+	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
+
+		
+	$.fn.hasAnyClass = (classesToCheck) ->
+	  i = 0
+
+	  while i < classesToCheck.length
+	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
+	    i++
+	  false
+	
+
 # $ ->
-# 	$("input.group-box").on "click", countChecked
-# 
-# 
-# 
-# ## DISABLE PRICE AREA WHEN FREE or REQUEST post type is chosen
-# 		
-# checkType = ->
-# 	n = $(this).data "id"
-# 	if n > 1
-# 		$("#price_field").val('')
-# 		$("div#get_paid_stuff").hide()		
-# 	else
-# 		$("div#get_paid_stuff").show()
-# $ ->
-# 	$("button.switch").on "click", checkType
-# 	
-# $ ->
-# 	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
-# 	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
-# 	  $this = $(this)
-# 	  if $(this).attr("class-toggle") isnt `undefined` and not $(this).hasClass("disabled")
-# 	    btnGroup = $this.parent(".btn-group")
-# 	    btnToggleClass = $this.attr("class-toggle")
-# 	    btnCurrentClass = $this.hasAnyClass(buttonClasses)
-# 	    if btnGroup.attr("data-toggle") is "buttons-radio"
-# 	      return false  if $this.hasClass("active")
-# 	      activeButton = btnGroup.find(".btn.active")
-# 	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
-# 	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
-# 	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
-# 
-# 		
-# 	$.fn.hasAnyClass = (classesToCheck) ->
-# 	  i = 0
-# 
-# 	  while i < classesToCheck.length
-# 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
-# 	    i++
-# 	  false
-# 	
-# 
-# # $ ->
-# # 	$("#zipcode_submit").click (e) -?
-# # 	e.preventDefault(e)
-# # 	$("#zipcode").val $(this).parent.data "search_param"
-# 
-# 
-# 
-# $ ->
-# 	$(".switch").click (e) ->
-# 		e.preventDefault()
-# 		$("#post_cateogry_button_value").val $(this).data "id"
+# 	$("#zipcode_submit").click (e) -?
+# 	e.preventDefault(e)
+# 	$("#zipcode").val $(this).parent.data "search_param"
+
+
+
+$ ->
+	$(".switch").click (e) ->
+		e.preventDefault()
+		$("#post_cateogry_button_value").val $(this).data "id"
 			
 # $ ->
 # 	$("input.group-box").change ->
@@ -160,7 +160,9 @@
 # 		    message: "credit card is required if you want to notify more than two groups."
 # 		else
 # 			$("div#post-credit-fields").hide
-
+######################################################################################
+######################################################################################
+######################################################################################
 $ ->	
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
@@ -258,10 +260,10 @@ jQuery ->
 		$("div#post_credit_fields").toggle()
 		$("div#purchase_message_premium").toggle()
 
-$ ->
-	$("#card_number").validate
-		expression: "if(VAL != '') return true; else return false;"
-		message: "credit card is required."
+# $ ->
+# 	$("#card_number").validate
+# 		expression: "if(VAL != '') return true; else return false;"
+# 		message: "credit card is required."
 
 #the function is getting called before the active button gets changed...so has old button id
 
