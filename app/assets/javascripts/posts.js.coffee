@@ -2,12 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$ ->
-	$("form.form").submit ->
-	  $('input[type=submit]').attr('disabled', 'disabled')
-$ ->
-	$("#new_post").submit ->
-	  $('input[type=submit]').attr('disabled', 'disabled')
+# $ ->
+# 	$("form.form").submit ->
+# 	  $('input[type=submit]').attr('disabled', 'disabled')
+# $ ->
+# 	$("#new_post").submit ->
+# 	  $('input[type=submit]').attr('disabled', 'disabled')
 
 
 getGiftCard = ->
