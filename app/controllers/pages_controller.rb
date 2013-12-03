@@ -10,6 +10,13 @@ class PagesController < ApplicationController
     @sort_posts = Post.search()
     @sorted_posts = @sort_posts.result
     @popular_tags = get_popular_tags
+    @appliances = Tag.find(4)
+    @sports = Tag.find(27)
+    @electronics = Tag.find(36)
+    @clothing = Tag.find(40)
+    @books = Tag.find(21)
+    @furniture = Tag.find(3)
+    
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user
       #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
