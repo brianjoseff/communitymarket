@@ -161,54 +161,54 @@ $ ->
 # 		else
 # 			$("div#post-credit-fields").hide
 
-$ ->	
-  $("#post_title").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "title is required."
-# $ ->
-#   $("#post_description").validate
+# $ ->	
+#   $("#post_title").validate
 #     expression: "if(VAL != '') return true; else return false;"
-#     message: "Description is required."
-$ ->
-  $("#post_email").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "Email is required."
-$ ->
-	$("#post_email").validate
-		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
-		message: "Email format yo. check it: 'blah@blah.com'"
-		
+#     message: "title is required."
+# # $ ->
+# #   $("#post_description").validate
+# #     expression: "if(VAL != '') return true; else return false;"
+# #     message: "Description is required."
+# $ ->
+#   $("#post_email").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "Email is required."
+# $ ->
+# 	$("#post_email").validate
+# 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
+# 		message: "Email format yo. check it: 'blah@blah.com'"
+# 		
 
-# jQuery ->	
-# 	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-# 	transaction.setupForm()
-# 
-# transaction =
-# 	setupForm: ->
-# 		$("#upload_post").click ->			
-# 			$('input[type=submit]').attr('disabled', true)
-# 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
-# 			n = $("#card_number").val().length
-# 			if n > 2				
-# 				transaction.processCard()
-# 				false
-# 			else				
-# 				$('#new_post')[0].submit()
-# 				true
-# 	processCard: ->
-# 		card =
-# 			number: $('#card_number').val()
-# 			cvc: $('#card_code').val()
-# 			exp_month: $('#card_month').val()
-# 			exp_year: $('#card_year').val()
-# 		Stripe.createToken(card, transaction.handleStripeResponse)
-# 	handleStripeResponse: (status, response) ->
-# 		if status == 200			
-# 			$('#post_stripe_card_token').val(response.id)
-# 			$('#new_post')[0].submit()
-# 		else			
-# 			alert(response.error.message)
-# 			$('input[type=submit]').attr('disabled', false)
+jQuery ->	
+	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+	transaction.setupForm()
+
+transaction =
+	setupForm: ->
+		$("#upload_post").click ->			
+			$('input[type=submit]').attr('disabled', true)
+			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
+			n = $("#card_number").val().length
+			if n > 2				
+				transaction.processCard()
+				false
+			else				
+				$('#new_post')[0].submit()
+				true
+	processCard: ->
+		card =
+			number: $('#card_number').val()
+			cvc: $('#card_code').val()
+			exp_month: $('#card_month').val()
+			exp_year: $('#card_year').val()
+		Stripe.createToken(card, transaction.handleStripeResponse)
+	handleStripeResponse: (status, response) ->
+		if status == 200			
+			$('#post_stripe_card_token').val(response.id)
+			$('#new_post')[0].submit()
+		else			
+			alert(response.error.message)
+			$('input[type=submit]').attr('disabled', false)
 
 
 
