@@ -36,7 +36,26 @@
     %div.span3
       /new post button
       =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
-    %div.span9
+    %div.span2
+      %li.dropdown
+        %a#shop_by_category.btn.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+          Shop By Category
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{href: ""} Appliances
+          %li
+            %a{href: "#"} Books
+          %li
+            %a{href: "#"} Clothing
+          %li
+            %a{href: "#"} Electronics
+          %li
+            %a{href: "#"} Furniture
+          %li
+            %a{href: "#"} Sporting Goods
+
+    %div.span7
       /search bar
       =render :partial => "search/search_form"
 

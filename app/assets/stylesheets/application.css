@@ -368,6 +368,14 @@ input[type="text"].search-bar-field{
   -webkit-font-smoothing: antialiased;
 }
 
+#shop_by_category{
+	width: 80px;
+	display:block;
+	
+}
+.dropdown{
+	list-style-type:none;
+}
 
 /************************************************************/
 /*********** POST FEED **************************************/

@@ -54,6 +54,7 @@ gem 'forgery'
 gem 'faker'
 
 gem 'bootstrap-sass'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # gem 'jquery-rails'
 # gem 'jquery-ui-rails'
 
@@ -75,6 +76,8 @@ gem 'aws-sdk'
 
 #heroku db compatibility
 gem 'pg'
+gem 'heroku'
+
 
 #transactional email
 gem 'mandrill-api'

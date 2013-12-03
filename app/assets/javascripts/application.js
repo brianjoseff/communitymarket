@@ -13,7 +13,6 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
 //= require jquery.tokeninput
 //= require pages.js.coffee
 //= require bootstrap
@@ -31,7 +30,6 @@
 //     return $('input[type=submit]').attr('disabled', 'disabled');
 //   });
 // });
-
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
