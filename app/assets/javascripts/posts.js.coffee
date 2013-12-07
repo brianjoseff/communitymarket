@@ -171,14 +171,15 @@ $ ->
 #   $("#post_description").validate
 #     expression: "if(VAL != '') return true; else return false;"
 #     message: "Description is required."
-$ ->
-  $("#post_email").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "Email is required."
-$ ->
-	$("#post_email").validate
-		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
-		message: "Email format yo. check it: 'blah@blah.com'"
+
+# $ ->
+#   $("#post_email").validate
+#     expression: "if(VAL != '') return true; else return false;"
+#     message: "Email is required."
+# $ ->
+# 	$("#post_email").validate
+# 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
+# 		message: "Email format yo. check it: 'blah@blah.com'"
 		
 
 jQuery ->	

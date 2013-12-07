@@ -12,8 +12,9 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+
+  #shows the post and creates a transaction object for the "buy" button
+  
   def show
     
     @post = Post.find(params[:id])
@@ -255,7 +256,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update_attribute(:active, false)
     respond_to do |format|
-      format.html { redirect_to current_user }
+      format.html { redirect_to @user }
       format.json { head :no_content }
     end
   end
@@ -263,7 +264,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.update_attribute(:active, true)
     respond_to do |format|
-      format.html { redirect_to current_user }
+      format.html { redirect_to @user }
       format.json { head :no_content }
     end
   end

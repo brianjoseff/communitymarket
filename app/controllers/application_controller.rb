@@ -6,9 +6,14 @@ class ApplicationController < ActionController::Base
   
   #sets user instance variable for the "new user" button in the nav
   def set_user
-    if !current_user
+    if !signed_in?
       @user = User.new
+    else
+      @user = current_user
     end
+    # if !current_user
+    #   @user = User.new
+    # end
   end
   
   def get_location

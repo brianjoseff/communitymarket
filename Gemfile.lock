@@ -81,6 +81,11 @@ GEM
     erubis (2.7.0)
     excon (0.25.3)
     execjs (2.0.1)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
     ffi (1.9.0)
@@ -277,6 +282,8 @@ DEPENDENCIES
   client_side_validations-simple_form
   coffee-rails
   database_cleaner
+  factory_girl
+  factory_girl_rails
   faker
   figaro
   forgery

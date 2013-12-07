@@ -40,7 +40,13 @@ class User < ActiveRecord::Base
   #   errors.add :base, "There was a problem with your credit card."
   #   false
   # end
-
+  def check_if_signed_in
+    if !signed_in?
+      return User.new
+    else
+      return current_user
+    end
+  end
   def charge_as_customer(amount)
     customer_id = Stripe::Customer.retrieve(self.stripe_customer_id)
     Stripe::Charge.create(:amount => amount, :currency => "usd", :customer => customer_id)

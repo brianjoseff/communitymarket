@@ -10,12 +10,12 @@ class PagesController < ApplicationController
     @sort_posts = Post.search()
     @sorted_posts = @sort_posts.result
     @popular_tags = get_popular_tags
-    @appliances = Tag.find(4)
-    @sports = Tag.find(27)
-    @electronics = Tag.find(36)
-    @clothing = Tag.find(40)
-    @books = Tag.find(21)
-    @furniture = Tag.find(3)
+    @appliances = Tag.find_by_id(4)
+    @sports = Tag.find_by_id(27)
+    @electronics = Tag.find_by_id(36)
+    @clothing = Tag.find_by_id(40)
+    @books = Tag.find_by_id(21)
+    @furniture = Tag.find_by_id(3)
     
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user

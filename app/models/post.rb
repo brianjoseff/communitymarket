@@ -2,15 +2,16 @@ class Post < ActiveRecord::Base
   attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token
   has_many :assets, :as => :imageable, :dependent => :destroy
   belongs_to :post_category
+  belongs_to :tier
   belongs_to :user
   has_many :assignments, :dependent => :destroy
   has_many :groups, :through => :assignments
   has_many :taggings
   has_many :tags, :through=> :taggings
   # validates :description , :title, :email, :presence => true
-  validates_email :email
+  #validates_email :email
   # validates_uniqueness_of :email
-  
+  validates :title, :presence => true
   accepts_nested_attributes_for :assets#, :reject_if => lambda { |t| t[:post_image].nil?}, :allow_destroy => true
   accepts_nested_attributes_for :assignments, :allow_destroy => true
   accepts_nested_attributes_for :user
