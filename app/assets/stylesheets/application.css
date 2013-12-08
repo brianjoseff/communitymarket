@@ -13,6 +13,10 @@
  *= require token-input-facebook
  *= require_tree .
  */
+
+.new_followship{
+	margin-right: 5px;
+}
 .center { float: none !important; margin-left: auto!important; margin-right: auto!important; }
 .tooltip{
 	width: 150px;
