@@ -1,12 +1,33 @@
 class ApplicationController < ActionController::Base
-  include Clearance::Authentication
+  #include Clearance::Authentication
   protect_from_forgery
   before_filter :get_search_object, :set_user, :get_location
   
+  def after_sign_in_path_for(resource) 
+    if session[:followed_tag]
+      @tag = Tag.find(session[:followed_tag])
+      current_user.follow!(@tag)
+      session.delete(:followed_tag)
+      flash[:notice] = "You've followed a tag"
+    end
+    if session[:joined_group]
+      @group = Group.find(session[:joined_group])
+      current_user.join!(@group)
+      session.delete(:joined_group)
+      flash[:notice] = "You've joined a group"
+    end
+    if session[:user_return_to]
+      flash[:notice] += " and successfully signed in."
+      session[:user_return_to]
+      session.delete(:user_return_to)    
+    else
+      root_path
+    end
+  end
   
   #sets user instance variable for the "new user" button in the nav
   def set_user
-    if !signed_in?
+    if !user_signed_in?
       @user = User.new
     else
       @user = current_user

@@ -20,6 +20,7 @@ group :test do
   gem 'launchy'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
 
 # Gems used only for assets and not required
@@ -64,7 +65,8 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'ransack'
 
 #auth gem
-gem 'clearance'
+# gem 'clearance'
+gem 'devise'
 
 #image uploading
 gem 'paperclip'

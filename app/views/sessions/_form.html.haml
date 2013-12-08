@@ -1,7 +1,7 @@
 %div.span4
   %h1 Sign in
 
-  =form_for(:session, :url => sessions_path, :class => "form") do |f|
+  =form_for(:session, :url => sessions_path, :html => {:class => "form", id: "session"}) do |f|
     /=render "shared/error_messages", :target => @user
 
     =f.text_field :email, :class => "input-block-level", :placeholder => "Email", :validate => { :presence => true } 

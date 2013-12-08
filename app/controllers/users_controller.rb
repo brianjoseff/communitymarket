@@ -244,9 +244,9 @@ class UsersController < ApplicationController
         current_user.join!(@group)
         session.delete(:joined_group)
       end
-      if session[:return_to]
-        redirect_to session[:return_to]
-        session.delete(:return_to)
+      if session[:user_return_to]
+        redirect_to session[:user_return_to]
+        session.delete(:user_return_to)
       else
         redirect_to default
       end
@@ -254,12 +254,12 @@ class UsersController < ApplicationController
     end
   
     def store_location
-      session[:return_to] = request.fullpath
+      session[:user_return_to] = request.fullpath
     end
     def require_admin_login
-      unless current_user.admin?
-        flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
-        redirect_to signin_path
+      unless current_user.try(:admin?)
+        flash[:error] = "You must be logged in as an admin to access this section" 
+        redirect_to sign_in_path
       end
     end
   

@@ -1,7 +1,13 @@
 Communitymarket::Application.routes.draw do
 
+ 
 
-
+  devise_for :users
+  # devise_scope :user do
+  #   #match '/sessions/user', to: 'devise/sessions#create', via: :post
+  #   get "/sign_in", :to => "devise/sessions#new"
+  #   delete '/sign_out',to: 'devise/sessions#destroy'
+  # end
 
   resources :email_settings
   resources :followships
@@ -45,14 +51,14 @@ Communitymarket::Application.routes.draw do
   resources :images
   resources :group_categories
   resources :post_categories
-  resources :sessions, :only => [:new, :create, :destroy]
+  #resources :sessions, :only => [:new, :create, :destroy]
   resources :groups do
     collection do
       put :private
     end
   end
 
-  resource :session, controller: 'sessions'
+  #resource :session, controller: 'sessions'
 
   resources :posts do
     collection do
@@ -77,11 +83,13 @@ Communitymarket::Application.routes.draw do
   match '/search', :to => 'search#index'
   match '/search_tags', :to => 'tags#search'
   match '/about', :to => 'pages#about'
-  match '/signout', :to => 'sessions#destroy'
-  match '/sign_in', :to => 'sessions#new'
-  match '/signin', :to => 'sessions#new'
+  # match '/signout', :to => 'sessions#destroy'
+  # match '/sign_in', :to => 'sessions#new'
+  # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
   root :to => 'pages#index'
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

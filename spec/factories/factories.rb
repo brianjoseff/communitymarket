@@ -35,21 +35,34 @@ FactoryGirl.define do
     name "MyString"
   end
 end
-
+FactoryGirl.define do 
+  sequence :email do |n|
+    "user#{n}@example.com"
+  end
+  factory :user do
+    email
+    name "Name"
+    password "password"
+  end
+end
 FactoryGirl.define do  
   factory :group do
     name "MyString"
     description "MyText"
-    # group_category_id 1
-    association :group_category
-    association :user_id
-    #user_id 1
+    group_category
+    #user
     private false
     latitude 1.5
     longitude 1.5
     zipcode 1
-    password "MyString"
+    #password "MyString"
+    factory :group_with_members do
+      after(:create) do |group|
+        group.members << create(:user)
+      end
+    end
   end
+  
 end
 
 FactoryGirl.define do  
@@ -105,16 +118,7 @@ end
   
 
   
-FactoryGirl.define do 
-  sequence :email do |n|
-    "joseluis#{n}@powhow.com"
-  end
-  factory :user do
-    email
-    name "Name"
-    password "securepassword"
-  end
-end
+
 
 FactoryGirl.define do
   factory :weekly_queue do

@@ -8,17 +8,37 @@
   %div.span8
     %div.row-fluid
       %span.user-nav.pull-right
-      
-        
-        -if signed_in?
+        / - if user_signed_in?
+        /   Logged in as
+        /   = succeed "." do
+        /     %strong= current_user.email
+        /   = link_to 'Edit profile', edit_user_registration_path
+        /   |
+        /   \#{link_to "Logout", , method: :delete}
+        / - else
+        /   = link_to "Sign up", 
+        /   |
+        /   \#{link_to "Login", }
+          
+        -if user_signed_in?
           =link_to current_user.name , user_path(current_user)
           %i.icon.icon-user.nav-icon
-          =link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+          =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
         -else
           %i.icon.icon-user.nav-icon
-          = link_to "Sign Up", new_user_path, :class => "nav-user-link"
+          = link_to "Sign Up", new_user_registration_path, :class => "nav-user-link"
           or
-          =link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
+          =link_to "Sign In", new_user_session_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
+        
+        / -if signed_in?
+        /   =link_to current_user.name , user_path(current_user)
+        /   %i.icon.icon-user.nav-icon
+        /   =link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+        / -else
+        /   %i.icon.icon-user.nav-icon
+        /   = link_to "Sign Up", new_user_path, :class => "nav-user-link"
+        /   or
+        /   =link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
     %div.row-fluid
       %ul#nav_pill_section.nav.nav-pills.pull-right.colored-pills 
         %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path

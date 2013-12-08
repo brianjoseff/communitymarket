@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable#,:trackable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :email, :name, :password, :stripe_customer_id, :admin
-  include Clearance::User
+  #include Clearance::User
   has_many :transactions
   has_many :posts
   has_many :groups_as_member, :through => :memberships, :source => :group, :class_name => "Group", :foreign_key => :user_id

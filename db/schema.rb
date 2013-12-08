@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131101195537) do
+ActiveRecord::Schema.define(:version => 20131207001908) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -156,12 +156,12 @@ ActiveRecord::Schema.define(:version => 20131101195537) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "name"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.string   "encrypted_password", :limit => 128
-    t.string   "salt",               :limit => 128
-    t.string   "confirmation_token", :limit => 128
-    t.string   "remember_token",     :limit => 128
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.string   "encrypted_password",     :limit => 128
+    t.string   "salt",                   :limit => 128
+    t.string   "confirmation_token",     :limit => 128
+    t.string   "remember_token",         :limit => 128
     t.string   "stripe_customer_id"
     t.string   "password"
     t.boolean  "admin"
@@ -169,10 +169,19 @@ ActiveRecord::Schema.define(:version => 20131101195537) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                         :default => 0, :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "weekly_queues", :force => true do |t|
     t.integer  "post_id"
