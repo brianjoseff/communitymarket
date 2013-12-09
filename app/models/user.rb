@@ -20,13 +20,40 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
-  
+
   
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
   
+  
+  def update_profile_to_facebook(auth)
+      
+      self.update_attributes(name:auth.raw_info.name,
+                           provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           password:Devise.friendly_token[0,20],
+                           oauth_token: auth.credentials.token,
+                           oauth_expires_at: Time.at(auth.credentials.expires_at)
+                           )
+      
+  end
+  def update_external_account(auth)
+     user = User.where(:provider => auth.provider, :uid => auth.uid).first
+
+     if user && user != self
+       return false
+     end
+
+     self.provider = auth.provider
+     self.uid = auth.uid
+     self.oauth_token = auth.credentials.token
+     self.oauth_expires_at = Time.at(auth.credentials.expires_at)
+     self.save!
+   end
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    # do you want to edit your profile to make it facebook enabled?
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create(name:auth.extra.raw_info.name,

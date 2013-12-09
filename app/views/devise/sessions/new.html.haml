@@ -11,7 +11,7 @@
 
 %div.span4
   %h1 Sign in
-
+  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
   =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}) do |f|
     /=render "shared/error_messages", :target => @user
 

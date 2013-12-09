@@ -19,9 +19,13 @@
         /   = link_to "Sign up", 
         /   |
         /   \#{link_to "Login", }
-        = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+        
         -if user_signed_in?
-          =link_to current_user.name , user_path(current_user)
+          -if current_user.name
+            =link_to current_user.name, user_path(current_user)
+          -else
+            =link_to "Your Page", user_path(current_user)
+            
           %i.icon.icon-user.nav-icon
           =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
         -else
@@ -29,7 +33,7 @@
           = link_to "Sign Up", new_user_registration_path, :class => "nav-user-link"
           or
           =link_to "Sign In", new_user_session_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
-        
+          
         / -if signed_in?
         /   =link_to current_user.name , user_path(current_user)
         /   %i.icon.icon-user.nav-icon

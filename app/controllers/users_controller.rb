@@ -205,6 +205,8 @@ class UsersController < ApplicationController
     end
   end
   
+
+  
   def add_image
     @user = current_user
     @image = @user.build(params[:image])

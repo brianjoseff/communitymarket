@@ -1,5 +1,5 @@
 Communitymarket::Application.routes.draw do
-
+  match "/404", to: "exceptions#not_found", via: [:get, :post]
  
 
   devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
@@ -83,10 +83,12 @@ Communitymarket::Application.routes.draw do
   match '/search', :to => 'search#index'
   match '/search_tags', :to => 'tags#search'
   match '/about', :to => 'pages#about'
+ # match '/facebook_update_and_post', :to => "users/omniauth_callbacks#facebook_update_and_post"
   # match '/signout', :to => 'sessions#destroy'
   # match '/sign_in', :to => 'sessions#new'
   # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
+  
   root :to => 'pages#index'
   
   

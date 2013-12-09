@@ -20,8 +20,23 @@ class Post < ActiveRecord::Base
   attr_reader :tag_tokens
   attr_accessor :stripe_card_token
   
+  
+  def after_sign_in_post_to_facebook
+    options = { 
+        :message     => self.title,
+        :description => self.description,
+        :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s, 
+        :picture     => "" 
+      }
+    self.user.facebook.put_object(self.user.uid, 'links',options)
+  end
+  
   def to_facebook
+
     if self.post_to_facebook == true
+      if self.user.oauth_token == nil
+        return
+      end
       options = { 
           :message     => self.title,
           :description => self.description,

@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def nav_user_name
+    current_user.name ? "#{current_user.name}" : "Your Page"
+  end
+  
   def truncate(words, limit)
     string_arr = words.split(' ')
     string_arr.count > limit ? "#{string_arr[0..(limit-1)].join(' ')}..." : words
