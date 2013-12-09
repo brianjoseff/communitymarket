@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token
+  after_create :to_facebook
+  attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook
   has_many :assets, :as => :imageable, :dependent => :destroy
   belongs_to :post_category
   belongs_to :tier
@@ -18,7 +19,18 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   attr_reader :tag_tokens
   attr_accessor :stripe_card_token
-
+  
+  def to_facebook
+    if self.post_to_facebook == true
+      options = { 
+          :message     => self.title,
+          :description => self.description,
+          :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s, 
+          :picture     => "#{}" 
+        }
+      self.user.facebook.put_object(self.user.uid, 'links',options)
+    end
+  end
   
   def tag_tokens=(tokens)
     self.tag_ids = Tag.ids_from_tokens(tokens)

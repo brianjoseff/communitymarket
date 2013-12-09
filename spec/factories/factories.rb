@@ -44,6 +44,7 @@ FactoryGirl.define do
     name "Name"
     password "password"
   end
+  
 end
 FactoryGirl.define do  
   factory :group do

@@ -2,7 +2,7 @@ Communitymarket::Application.routes.draw do
 
  
 
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
   # devise_scope :user do
   #   #match '/sessions/user', to: 'devise/sessions#create', via: :post
   #   get "/sign_in", :to => "devise/sessions#new"

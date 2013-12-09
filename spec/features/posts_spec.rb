@@ -7,8 +7,9 @@ describe 'Posts' do
     before do
       @post = create(:post)
       @group = create(:group_with_members)
-      @user = create(:user)
+      @user = @group.members.first
       login_as(@user, scope: :user)
+      
     end
 
     it "should create a new post, email memberes of that group, and not charge a credit card" do
@@ -16,9 +17,9 @@ describe 'Posts' do
       fill_in "post_title", with: "Name Surname"
       fill_in "post_description", with: "blah blah blah"
       #fill_in "user_password", with: "password1234"
-      # page.check('post_assignments_attributes')
+      page.check('Mystring')
       
-      expect { click_button "Upload your post!" }.to change {Post.count}.by(1)
+      expect { click_button "Upload your post!" }.to change {Post.count && Assignment.count}.by(1)
     end
   end
 end

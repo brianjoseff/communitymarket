@@ -19,7 +19,7 @@
         /   = link_to "Sign up", 
         /   |
         /   \#{link_to "Login", }
-          
+        = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
         -if user_signed_in?
           =link_to current_user.name , user_path(current_user)
           %i.icon.icon-user.nav-icon

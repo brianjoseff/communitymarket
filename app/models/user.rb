@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :validatable#,:trackable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :email, :name, :password, :stripe_customer_id, :admin
+  attr_accessible :email, :name, :password, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at
   #include Clearance::User
   has_many :transactions
   has_many :posts
@@ -22,6 +22,45 @@ class User < ActiveRecord::Base
   validates :email, :email_format => true, :presence => true
   
   
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+  
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(name:auth.extra.raw_info.name,
+                           provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           password:Devise.friendly_token[0,20],
+                           oauth_token: auth.credentials.token,
+                           oauth_expires_at: Time.at(auth.credentials.expires_at)
+                           )
+    end
+    user
+  end
+  # def self.find_or_create_from_auth_hash(auth_hash)
+  #         find_by_auth_hash(auth_hash) || create_from_auth_hash(auth_hash)
+  # end
+  # 
+  # def self.find_by_auth_hash(auth_hash)
+  #         where(
+  #                 provider: auth_hash.provider,
+  #                 uid: auth_hash.uid
+  #                 ).first
+  # end
+  # 
+  # def self.create_from_auth_hash(auth_hash)
+  #         create(
+  #                 provider: auth_hash.provider,
+  #                 uid: auth_hash.uid,
+  #                 email: auth_hash.info.email,
+  #                 name: auth_hash.info.name,
+  #                 oauth_token: auth_hash.credentials.token,
+  #                 oauth_expires_at: Time.at(auth_hash.credentials.expires_at)
+  #                 )
+  # end
   
   def self.to_csv
     CSV.generate do |csv|
