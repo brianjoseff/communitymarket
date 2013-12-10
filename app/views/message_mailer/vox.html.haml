@@ -1,0 +1,6 @@
+%p From: #{@user ? @user.name : 'Anonymous'}
+
+=@content
+
+-if @content.nil?
+  %p content is nil

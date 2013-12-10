@@ -32,8 +32,14 @@
     %p Things began to implode
     %p When he chopped off my hand at the wrist
     =image_tag "PSLogo.png"
-  %div.span4
-    
+  %div.span6
+    %h3 Contact
+    =form_tag "/messages",  :method => :post, :class => "contact-me-submit" do
+      / =hidden_field_tag :from, current_user.id
+      %div.row-fluid
+        %span.area.span7
+          =text_area_tag :content, params[:content], :class => "input-block-level", :placeholder => "Questions, comments, criticisms, and concerns", :rows => "10"
+      =submit_tag "Message Me", :class => "contact-me-submit"
 
 
 //form for user submissions

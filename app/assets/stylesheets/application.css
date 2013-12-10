@@ -571,9 +571,13 @@ div.controls.credit{
 /*********** BANNER GROUPS **********************************/
 /************************************************************/
 
-
+/*.banner-group-image{
+	height: 100px;
+	width: auto;
+}*/
 
 .banner-group-body{
+
 display: block;
 padding: 4px;
 line-height: 20px;

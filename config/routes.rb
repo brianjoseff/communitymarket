@@ -88,6 +88,7 @@ Communitymarket::Application.routes.draw do
   # match '/sign_in', :to => 'sessions#new'
   # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
+  match '/messages', :to => 'messages#new', via: :post
   
   root :to => 'pages#index'
   

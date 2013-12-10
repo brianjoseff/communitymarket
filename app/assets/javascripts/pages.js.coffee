@@ -1,4 +1,8 @@
-
+$ ->
+	$("form.contact-me-submit").submit ->
+	  $('input[type=submit].contact-me-submit').attr('disabled', 'disabled')
+	
+	
 jQuery ($) ->
   
   #    var debug = $("#debug");

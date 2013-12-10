@@ -2,7 +2,7 @@
   -groups.take(6).each do |group|
     %div.span2.banner-group-body
       %div{:id=>"group_#{group.id}"}
-      %div.row-fluid
+      %div.row-fluid.banner-group-image
         =link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)
       %div.row-fluid
         =link_to group.name, group_url(group)
