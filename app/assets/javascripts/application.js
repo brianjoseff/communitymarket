@@ -31,6 +31,25 @@
 //   });
 // });
 
+
+// $(document).ready(function(){
+// 
+//   $('.message-seller-button').click(function() {  
+//     var valuesToSubmit = $("#form_id").serialize();
+//     $(".message-seller-form").modal('hide') ;
+// 
+//     $.ajax({
+//       url: "/message/create",
+//       data: valuesToSubmit,
+//       type: "POST/GET/PUT"
+//       }).success(function(data, status){
+//         $("#id_if_div_where_you_want_to_show_updated_data").html( data );
+//     });
+// 
+//     return false; 
+//   });
+// });
+
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
   $(link).closest(".image-control-group").hide();

@@ -13,7 +13,13 @@
  *= require token-input-facebook
  *= require_tree .
  */
+.sign-up input.sign-up-field{
+	width: 200px !important;
+}
 
+.modal-message-form{
+	padding: 10px;
+}
 .new_followship{
 	margin-right: 5px;
 }

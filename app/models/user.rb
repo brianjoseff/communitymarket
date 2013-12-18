@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -17,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :followships, :foreign_key => :follower_id
   has_many :followed_tags, through: :followships, source: :followed, :class_name => "Tag"
   
+  has_merit
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true

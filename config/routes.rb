@@ -1,4 +1,10 @@
 Communitymarket::Application.routes.draw do
+  resources :messages
+
+
+  # resources :contacts
+
+
   match "/404", to: "exceptions#not_found", via: [:get, :post]
  
 
@@ -88,7 +94,7 @@ Communitymarket::Application.routes.draw do
   # match '/sign_in', :to => 'sessions#new'
   # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
-  match '/messages', :to => 'messages#new', via: :post
+  match '/contacts', :to => 'contacts#new', via: :post
   
   root :to => 'pages#index'
   

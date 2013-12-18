@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       @post.assets.build
       @user = User.new
       @group = Group.first
-      @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
+      @info_message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
     else
       @post.assets.build
       @user = current_user
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
       @groups = @user.groups_as_member
       if @groups.empty?
         @groups = Group.first
-        @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
+        @info_message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
       end
     end
   end

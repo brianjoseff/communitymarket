@@ -12,7 +12,7 @@ describe 'Posts' do
       
     end
 
-    it "should create a new post, email memberes of that group, and not charge a credit card" do
+    it "should create a new post, give user 3 points, email members of that group, and not charge a credit card" do
       visit '/posts/new'
       fill_in "post_title", with: "Name Surname"
       fill_in "post_description", with: "blah blah blah"
@@ -20,9 +20,27 @@ describe 'Posts' do
       page.check('Mystring')
       
       expect { click_button "Upload your post!" }.to change {Post.count && Assignment.count}.by(1)
+      
     end
   end
   
+  describe "create post etc..." do
+    before do
+      @post = create(:post)
+      @group = create(:group_with_members)
+      @user = @group.members.first
+      login_as(@user, scope: :user)
+    
+    end
+    it "should increase user points by 3" do
+      visit '/posts/new'
+      fill_in "post_title", with: "Name Surname"
+      fill_in "post_description", with: "blah blah blah"
+      #fill_in "user_password", with: "password1234"
+      page.check('Mystring')
+      expect { click_button "Upload your post!" }.to change {@user.points}.by(3)
+    end
+  end
   describe "non-facebook user posts and shares via facebook" do
     before do
       @post = create(:post)

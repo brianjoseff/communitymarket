@@ -79,7 +79,9 @@ module Communitymarket
         %(#{html_tag}<span class="validation-error">&nbsp;</span>).html_safe
       end
     end
-    
+    config.to_prepare do
+       DeviseController.respond_to :html, :json
+    end
     
   end
 end

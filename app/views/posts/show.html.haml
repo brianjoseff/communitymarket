@@ -48,7 +48,7 @@
         -else
           =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id
     %div.email.pull-left
-      %a.btn{ :href => "mailto:#{@post.email}", :role => "button"} Email
+      %a.btn.message-seller-button{ :href => "mailto:#{@post.email}", :role => "button"} Email
   %div.row-fluid
   -unless @post.assets.empty?
     -@post.assets[1..-1].each do |asset|

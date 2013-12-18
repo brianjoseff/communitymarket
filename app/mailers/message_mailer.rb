@@ -1,9 +1,11 @@
 class MessageMailer < ActionMailer::Base
-  default :from => "user-input@peopleandstuff.com"
+  default from: "from@example.com"
   
-  def vox(user, content)
+  def send_message(sender, recipient, subject, content)
+    @subject = "[people and stuff] " +  subject
     @content = content
-    @user = user
-    mail(:to => ENV["GMAIL_USERNAME"], :subject => "User Input", :reply_to => @user ? @user.email : "")
+    @sender = sender
+    @recipient = recipient
+    mail(:to => @recipient, :from => @sender, :subject => @subject, :reply_to => @sender)
   end
 end

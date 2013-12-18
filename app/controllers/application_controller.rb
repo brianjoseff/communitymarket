@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
-  before_filter :get_search_object, :set_user, :get_location
+  before_filter :get_search_object, :set_user, :get_location, :set_message
   
   def after_sign_in_path_for(resource) 
     if session[:followed_tag]
@@ -17,12 +17,18 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "You've joined a group"
     end
     if session[:user_return_to]
-      flash[:notice] += " and successfully signed in."
+      if flash[:notice]
+        flash[:notice] += " and successfully signed in."
+      end
       session[:user_return_to]
       session.delete(:user_return_to)    
     else
       root_path
     end
+  end
+  
+  def set_message
+    @message = Message.new
   end
   
   #sets user instance variable for the "new user" button in the nav
