@@ -25,7 +25,11 @@
             =link_to current_user.name, user_path(current_user)
           -else
             =link_to "Your Page", user_path(current_user)
-          =current_user.points
+          %span.points
+            =current_user.points
+            / %i.icon
+            / =current_user.badges.count
+            
             
           %i.icon.icon-user.nav-icon
           =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    

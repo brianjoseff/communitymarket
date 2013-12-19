@@ -1,0 +1,18 @@
+development:
+  cloud_name: people-and-stuff
+  api_key: '174774362949643'
+  api_secret: kBmDxy_TFfKAhuB7R5iGNpdWhbA
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: people-and-stuff
+  api_key: '174774362949643'
+  api_secret: kBmDxy_TFfKAhuB7R5iGNpdWhbA
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: people-and-stuff
+  api_key: '174774362949643'
+  api_secret: kBmDxy_TFfKAhuB7R5iGNpdWhbA
+  enhance_image_tag: true
+  static_image_support: false

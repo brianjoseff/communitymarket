@@ -1,6 +1,104 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/************************************************************/
+/*********** POST FORM **************************************/
+/************************************************************/
+.random-form-elements{
+	margin-left: 120px;
+}
+
+#customer_upload_post{
+	font-weight:bold;
+}
+
+#upload_post{
+	font-weight: bold;
+}
+#tier_field{
+	padding-top:2px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 25px;
+	width: 200px;
+	background-color: #baf4b1;
+}
+p#tier_field{
+	margin-left: 5px;
+}
+p.helper{
+	font-size: 80%;
+	margin-left: 5px;
+}
+#tier_field p{
+	margin: 0px;
+	color: #289417;
+}
+.form-title{
+	margin-left: 100px;
+}
+input.credit-number{
+	width:300px;
+}
+.credit-expiry{
+	width:70px;
+}
+.credit-cvv{
+	width:40px;
+}
+.row{
+	margin-left:-10px;
+}
+.group-row > #modalCredit{
+	float: right;
+}
+#tier_explanation_wrapper{
+	width:170px;
+	position: absolute;
+	left:50px;
+	top:200px;
+
+}
+.post-form{
+	
+}
+#tier_explanation{
+	/*margin: 2px;*/
+	border: 2px solid #696969;
+	padding:5px;
+	width:140px;
+	float:left;
+/*	position: absolute;
+	left:50px;
+	top:200px;
+	width: 160px;*/
+}
+#tier_arrow{
+	background-image: url(/assets/tier_exp_arrow.png);	
+	width:15px;
+	height:80px;
+	float:right;
+}
+.fieldset {
+  border: 1px solid #ccc;
+  padding: 10px;
+	width: 300px;
+	margin-left: 100px;
+}
+legend {
+	margin-bottom: 10px;
+}
+div.controls.credit{
+	margin-left: 0px;
+}
+
+#new-post-submit{
+	margin-top: 10px;
+	margin-left: 100px;
+}
+
 .nonuser-post input, select, textarea{
 	font-size: 120%;
 }

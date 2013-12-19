@@ -22,6 +22,7 @@
 //= require jquery.validate.js
 //= require rails.validations.callbacks.js.coffee
 //= require jquery.modal
+//= require cloudinary
 //= require_tree .
 
 

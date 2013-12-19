@@ -1,0 +1,77 @@
+/************************************************************/
+/*Sign In signout Links above nav bar with icon**************/
+/************************************************************/
+span.user-nav{
+	margin-right: 10px;
+}
+ul#nav_pill_section{
+	padding:0;
+}
+.nav-user-link{
+	text-decoration: underline;
+	color: #0000ff !important;
+}
+.nav-user-signout{
+	text-decoration: underline;
+}
+
+i.nav-icon{
+	margin:0;
+	margin-top: 3px;
+	color: #7f8c8d;
+}
+
+
+/************************************************************/
+/*Actual Nav bar ********************************************/
+/************************************************************/
+
+a:hover > .nav-icon{
+	color: #fff;
+}
+
+.nav-pills > .nav-icon{
+	color: #7f8c8d;
+}
+.nav-pills > .active > a{
+	
+				background-color: #7f8c8d; /*asbestos grey*/
+/*			background-color: #00e0ac;*/
+	/*	background-color: #ffc0b9;*/
+}
+.nav-pills > .active > a:hover{
+	
+				background-color: #7f8c8d; /*asbestos grey*/
+/*			background-color: #00e0ac;*/
+	/*	background-color: #ffc0b9;*/
+}
+.nav-pills > li > a:hover{
+		
+		/*background-color: #ff91af;*/
+		background-color: #7f8c8d;
+/*	background-color: #ffc0b9;*/
+}
+ #nav-pill-pink a:hover{
+		
+		/*background-color: #ff91af;*/
+		background-color: #ff91af;
+/*	background-color: #ffc0b9;*/
+}
+ #nav-pill-yellow a:hover{
+		
+		/*background-color: #ff91af;*/
+		background-color: #f1c40f;
+/*	background-color: #ffc0b9;*/
+}
+
+
+ul.nav{
+	padding: 10px 0 0;
+
+}
+.nav-area{
+	border-bottom: 6px solid #7f8c8d; /*asbestos grey*/
+}
+.nav{
+	margin-bottom: 10px;
+}

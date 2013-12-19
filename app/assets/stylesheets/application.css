@@ -13,13 +13,42 @@
  *= require token-input-facebook
  *= require_tree .
  */
+
+
+/*
+General Styles
+Messages
+Front Page Banner
+Right column on front page
+Tags
+Buttons
+Search
+Post Feed
+Post Form
+Banner Group
+*/
+
+
+
+
+/************************************************************/
+/*General Styles*********************************************/
+/************************************************************/
+
+
+span.points{
+	margin-left: 5px;
+	margin-right: 5px;	
+	font-weight: bold;
+}
+
+
 .sign-up input.sign-up-field{
 	width: 200px !important;
 }
 
-.modal-message-form{
-	padding: 10px;
-}
+
+
 .new_followship{
 	margin-right: 5px;
 }
@@ -27,6 +56,56 @@
 .tooltip{
 	width: 150px;
 }
+
+#show_post_buy{
+	display:inline-block;
+	width: 90px;
+}
+
+.slim-button-row{
+ display: inline-block;
+ float:right;
+}
+
+.buy{
+	margin-right: 5px;
+}
+
+
+footer{
+	display: block;
+	height: 100px;
+}
+.non-tier-price{
+	margin: 0px auto;
+}
+
+.hide-this{
+	display: none;
+}
+
+.table-actions{
+	width: 200px;
+}
+
+
+
+
+
+/************************************************************/
+/* Messages *************************************************/
+/************************************************************/
+
+.modal-message-form{
+	padding: 10px;
+}
+
+
+
+/************************************************************/
+/* Front Page Banner ****************************************/
+/************************************************************/
+
 .banner{
 	height: 138px;
 }
@@ -36,42 +115,26 @@ h1#changingtext{
 h1#changingtext2{
 	height: 40px;
 }
+
+
+
+
+
+
+
+
+
+/************************************************************/
+/*Right column on front page ********************************/
+/************************************************************/
+#front_page_new_group{
+	margin-top: 16px;
+	color: #696969;
+}
 #front_page_create_group_link{
 	margin-top: -5px;
 	text-decoration: underline;
 	color: #0000ff !important;
-}
-
-#show_post_buy{
-	display:inline-block;
-	width: 90px;
-}
-.slim-button-row{
- display: inline-block;
- float:right;
-}
-.buy{
-	margin-right: 5px;
-}
-span.user-nav{
-	margin-right: 10px;
-}
-ul#nav_pill_section{
-	padding:0;
-}
-.nav-user-link{
-	text-decoration: underline;
-	color: #0000ff !important;
-}
-.nav-user-signout{
-	text-decoration: underline;
-}
-footer{
-	display: block;
-	height: 100px;
-}
-.non-tier-price{
-	margin: 0px auto;
 }
 .advertising{
 	margin-top: 10px;
@@ -85,89 +148,21 @@ footer{
 	padding-top:75px;
 	text-align: justify;*/
 }
-.anti-button{
-	background:none!important;
-	font-size: 12px;
-   border:none; 
-   padding:0!important;
-  /*border is optional*/
-   text-decoration:underline;
-}
-.hide-this{
-	display: none;
-}
-.posts-nav{
-	margin-top: 22px;
-}
-#all_link{
-	background:#d9d9d9;
-	
-	padding: 2px;
-	text-decoration: underline;
-}
-#for_sale_link{
-	background:#FF91AF;
-	padding: 2px;
-	text-decoration: underline;
-}
-div.for-sale-marker{
-	width: 20px;
-	height: 20px;
-	background: #FF91AF;
-	float:left;
-	margin-right: 5px;
-}
-span.pink{
-	color:#FF91AF;
-}
-span.yellow{
-	color:#f1c40f;
-}
-span.blue{
-	color:#00e5d6;
-}
-#wanted_link{
-	background:#f1c40f;
-	padding: 2px;
-	text-decoration: underline;
-}
-div.wanted-marker{
-	width: 20px;
-	height: 20px;
-	background: #f1c40f;
-	float:left;
-	margin-right: 5px;
-}
-#borrow_rent_link{
-	background:#00e5d6;
-	padding: 2px;
-	text-decoration: underline;
-}
-div.free-marker{
-	width: 20px;
-	height: 20px;
-	background: #00e5d6;
-	float:left;
-	margin-right: 5px;
-}
-#toggle{
-	width: 100px;
-  height: 100px;
-  background: #696969;
-}
+
+
 
 .the_post_id{
 	display:none;
 }
-.notice{
-	
-}
+
 /*#changingtext span{
 	height: 53px;
 }
 #changingtext2 span{
 	height: 53px;
 }*/
+
+
 /************************************************************/
 /*********** TAGS *******************************************/
 /************************************************************/
@@ -225,6 +220,14 @@ a:hover.tag{
 /*********** Buttons ****************************************/
 /************************************************************/
 
+.anti-button{
+	background:none!important;
+	font-size: 12px;
+   border:none; 
+   padding:0!important;
+  /*border is optional*/
+   text-decoration:underline;
+}
 
 input.btn-primary {
 	font-size:150%;
@@ -390,6 +393,65 @@ input[type="text"].search-bar-field{
 /************************************************************/
 /*********** POST FEED **************************************/
 /************************************************************/
+
+
+#all_link{
+	background:#d9d9d9;
+	
+	padding: 2px;
+	text-decoration: underline;
+}
+#for_sale_link{
+	background:#FF91AF;
+	padding: 2px;
+	text-decoration: underline;
+}
+div.for-sale-marker{
+	width: 20px;
+	height: 20px;
+	background: #FF91AF;
+	float:left;
+	margin-right: 5px;
+}
+span.pink{
+	color:#FF91AF;
+}
+span.yellow{
+	color:#f1c40f;
+}
+span.blue{
+	color:#00e5d6;
+}
+#wanted_link{
+	background:#f1c40f;
+	padding: 2px;
+	text-decoration: underline;
+}
+div.wanted-marker{
+	width: 20px;
+	height: 20px;
+	background: #f1c40f;
+	float:left;
+	margin-right: 5px;
+}
+#borrow_rent_link{
+	background:#00e5d6;
+	padding: 2px;
+	text-decoration: underline;
+}
+div.free-marker{
+	width: 20px;
+	height: 20px;
+	background: #00e5d6;
+	float:left;
+	margin-right: 5px;
+}
+
+
+.posts-nav{
+	margin-top: 22px;
+}
+
 #slim_post_customer_buy_button{
 	display-inline:block;
 	float:right;
@@ -477,99 +539,7 @@ border-radius: 4px;
 -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 }
-/************************************************************/
-/*********** POST FORM **************************************/
-/************************************************************/
-#tier_field{
-	padding-top:2px;
-	padding-bottom: 5px;
-	padding-left: 5px;
-	padding-right: 25px;
-	width: 200px;
-	background-color: #baf4b1;
-}
-p#tier_field{
-	margin-left: 5px;
-}
-p.helper{
-	font-size: 80%;
-	margin-left: 5px;
-}
-#tier_field p{
-	margin: 0px;
-	color: #289417;
-}
-.form-title{
-	margin-left: 100px;
-}
-input.credit-number{
-	width:300px;
-}
-.credit-expiry{
-	width:70px;
-}
-.credit-cvv{
-	width:40px;
-}
-.row{
-	margin-left:-10px;
-}
-.group-row > #modalCredit{
-	float: right;
-}
-#tier_explanation_wrapper{
-	width:170px;
-	position: absolute;
-	left:50px;
-	top:200px;
 
-}
-.post-form{
-	
-}
-#tier_explanation{
-	/*margin: 2px;*/
-	border: 2px solid #696969;
-	padding:5px;
-	width:140px;
-	float:left;
-/*	position: absolute;
-	left:50px;
-	top:200px;
-	width: 160px;*/
-}
-#tier_arrow{
-	background-image: url(/assets/tier_exp_arrow.png);	
-	width:15px;
-	height:80px;
-	float:right;
-}
-.fieldset {
-  border: 1px solid #ccc;
-  padding: 10px;
-	width: 300px;
-	margin-left: 100px;
-}
-legend {
-	margin-bottom: 10px;
-}
-div.controls.credit{
-	margin-left: 0px;
-}
-
-#new-post-submit{
-	margin-top: 10px;
-	margin-left: 100px;
-}
-
-.table-actions{
-	width: 200px;
-}
-
-#front_page_new_group{
-	margin-top: 16px;
-	color: #696969;
-}
 
 
 
@@ -612,3 +582,9 @@ margin-bottom: 5px;
 	text-align: center;
 	vertical-align: middle;
 }
+
+
+
+
+
+

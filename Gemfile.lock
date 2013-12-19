@@ -46,6 +46,7 @@ GEM
       json (~> 1.4)
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
+    aws_cf_signer (0.1.2)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
@@ -62,6 +63,9 @@ GEM
       simple_form (~> 2.1.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    cloudinary (1.0.66)
+      aws_cf_signer
+      rest-client
     cocaine (0.5.1)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
@@ -315,6 +319,7 @@ DEPENDENCIES
   capybara
   client_side_validations (~> 3.2.0)
   client_side_validations-simple_form
+  cloudinary
   coffee-rails
   database_cleaner
   devise
