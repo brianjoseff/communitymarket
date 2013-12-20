@@ -27,8 +27,8 @@
 //= require_tree .
 
 
-jQuery ->
-  $("#s3-uploader").S3Uploader()
+// jQuery ->
+//   $("#s3-uploader").S3Uploader()
 
 // $(function() {
 //   return $("form.form").submit(function() {
