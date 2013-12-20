@@ -94,6 +94,7 @@ gem 'geocoder'
 gem 'merit'
 
 gem 'cloudinary'
+gem 's3_direct_upload'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -26,6 +26,7 @@ Search
 Post Feed
 Post Form
 Banner Group
+About Page
 */
 
 
@@ -583,7 +584,13 @@ margin-bottom: 5px;
 	vertical-align: middle;
 }
 
+/************************************************************/
+/*** About Page *********************************************/
+/************************************************************/
 
+.checkmark{
+	margin-right: 5px;
+}
 
 
 
