@@ -102,23 +102,23 @@
   /PHOTO UPLOAD FIELDS        
   %div.row-fluid
     %div.span8
-      %p S3 Direct:
-      =f.s3_file_field '[assets_attributes][0][image]', :class => 'js-s3_file_field'
-      .progress
-        .meter{ :style => "width: 0%" }
-        
-      -@assets.each do |asset|
-
-        =f.fields_for :assets, asset do |asset_fields|
-          -if asset_fields.object.image_file_name.nil?
-            = link_to_add_fields "Add Another Image", f, :assets
-            %div.control-group
-              =asset_fields.label "image", :class=>"control-label"
-              %div.controls
-                
-                / =asset_fields.s3_file_field :image, :class => 'js-s3_file_field', :key => "/uploads/${timestamp}/${filename}"
-                / .progress
-                /   .meter{ :style => "width: 0%" }
+      / %p S3 Direct:
+      / =f.s3_file_field '[assets_attributes][0][image]', :class => 'js-s3_file_field'
+      / .progress
+      /   .meter{ :style => "width: 0%" }
+      /   
+      / -@assets.each do |asset|
+      / 
+      /   =f.fields_for :assets, asset do |asset_fields|
+      /     -if asset_fields.object.image_file_name.nil?
+      /       = link_to_add_fields "Add Another Image", f, :assets
+      /       %div.control-group
+      /         =asset_fields.label "image", :class=>"control-label"
+      /         %div.controls
+      /           
+      /           / =asset_fields.s3_file_field :image, :class => 'js-s3_file_field', :key => "/uploads/${timestamp}/${filename}"
+      /           / .progress
+      /           /   .meter{ :style => "width: 0%" }
       
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
