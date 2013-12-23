@@ -2,6 +2,36 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+# jQuery.ready ->
+#   $('.js-s3_file_field').S3FileField
+#     done: (e, data) -> console.log(data.result.url)
+
+
+ready = ->
+  $(".js-s3_file_field").each ->
+    id = $(this).attr('id')
+    $this = -> $("##{id}")
+    $progress = $(this).siblings('.progress').hide()
+    $meter = $progress.find('.meter')
+    $(this).S3FileField
+      add: (e, data) ->
+        $progress.show()
+        data.submit()
+      done: (e, data) ->
+        $progress.hide()
+        $this().attr(type: 'text', value: data.result.url, readonly: true)
+      fail: (e, data) ->
+        alert(data.failReason)
+      progress: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        $meter.css(width: "#{progress}%")
+
+$ ->
+	ready
+$(document).on('page:load', ready)
+
+
+
 $ ->
 	$("form.form").submit ->
 	  $('input[type=submit]').attr('disabled', 'disabled')

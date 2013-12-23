@@ -23,12 +23,15 @@
 //= require rails.validations.callbacks.js.coffee
 //= require jquery.modal
 //= require cloudinary
+//= require turbolinks
 //= require s3_direct_upload
+//= require s3_file_field
 //= require_tree .
 
 
-// jQuery ->
-//   $("#s3-uploader").S3Uploader()
+// jQuery(function() {
+//   return $("#s3-uploader").S3Uploader();
+// });
 
 // $(function() {
 //   return $("form.form").submit(function() {

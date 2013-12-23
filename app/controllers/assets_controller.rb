@@ -8,6 +8,7 @@ class AssetsController < ApplicationController
   def create
     @imageable = find_imageable
     @image = @imageable.assets.build(params[:asset])
+
     if @image.save
       flash[:notice] = "Successfully created image."
       redirect_to current_user
@@ -16,7 +17,18 @@ class AssetsController < ApplicationController
     end
   end
   
-
+  def post_create
+    @post = Post.find(params[:parent_id])
+    @image = @post.attachments.create(params[:attachment])
+    if @image.save
+      flash[:notice] = "Successfully created image."
+      redirect_to current_user
+    else
+      render :action => 'new'
+    end
+  end
+  
+  
   private
 
   def find_imageable

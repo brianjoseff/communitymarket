@@ -26,7 +26,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'jquery-fileupload-rails'
+  
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails'
   #gem 'chosen-rails'
@@ -95,6 +95,9 @@ gem 'merit'
 
 gem 'cloudinary'
 gem 's3_direct_upload'
+gem 's3_file_field'
+gem 'turbolinks'
+gem 'jquery-fileupload-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

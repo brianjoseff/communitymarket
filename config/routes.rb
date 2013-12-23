@@ -17,6 +17,14 @@ Communitymarket::Application.routes.draw do
 
   resources :email_settings
   resources :followships
+  
+  
+  # resources :assets do
+  #    collection do
+  #      post :post_create
+  #    end
+  #  end
+  
 
   # resources :posts do
   #   resources :transactions
