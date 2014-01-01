@@ -23,9 +23,21 @@ end
 #   custom_fields: { category: 'fantasy' }
 # })
 
-Merit::Badge.create! ({
+Merit::Badge.create!({
   id: 1,
   name: "First Post",
   description: "beautiful",
+  custom_fields: { difficulty: :bronze }
+})
+Merit::Badge.create!({
+  id: 2,
+  name: "Created A Post",
+  description: "beautiful",
+  custom_fields: { difficulty: :bronze }
+})
+Merit::Badge.create!({
+  id: 3,
+  name: "over 5",
+  description: "child please",
   custom_fields: { difficulty: :bronze }
 })

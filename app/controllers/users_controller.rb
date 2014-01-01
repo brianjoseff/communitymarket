@@ -17,7 +17,13 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     #@user = User.find(params[:id])
+
     @user = current_user
+    @badges = []
+    @user.badges.each do |badge|
+      @badges << badge.name
+    end
+    @badge_hash = Hash.new(0)
     @memberships = @user.memberships
     @email_settings = EmailSetting.all
     @groups = @user.groups_as_member
@@ -106,11 +112,11 @@ class UsersController < ApplicationController
   def create
 
     @user = User.new(params[:user])
-    if params[:group_id]
-      @group = Group.find(params[:group_id])
-
-      @group.member_ids << @user.id
-    end
+    # if params[:group_id]
+    #   @group = Group.find(params[:group_id])
+    # 
+    #   @group.member_ids << @user.id
+    # end
     
 
     #@user.save
@@ -138,7 +144,7 @@ class UsersController < ApplicationController
         #   @user.follow!(@tag)
         # end
         #SignupMailer.new_subscriber(@user).deliver
-        sign_in @user
+        #sign_in @user
         format.html { redirect_back_or root_path, "Thank you for signing up!" }
         format.json { render json: @user, status: :created, location: @user }
         # format.js {'create'}

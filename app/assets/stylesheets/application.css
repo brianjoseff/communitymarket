@@ -28,6 +28,7 @@ Post Feed
 Post Form
 Banner Group
 About Page
+Badges
 */
 
 
@@ -592,6 +593,23 @@ margin-bottom: 5px;
 .checkmark{
 	margin-right: 5px;
 }
+
+/************************************************************/
+/********** BADGES ******************************************/
+/************************************************************/
+
+.badge{
+	background-color: #164f23;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
 
 
 

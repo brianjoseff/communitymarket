@@ -1,4 +1,4 @@
-%div.row
+%div.row-fluid
   %div.span3
     %h3 Categories
     /put region search bar here
@@ -13,11 +13,12 @@
     /   =f.label "Zipcode"
     /   =f.text_field :zipcode
     /   =f.submit "Search"
-    %ul.nav
+    %ul
       -@g_categories.each do |gcat|
-        =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
+        %li.chevron_right
+          =link_to gcat.name, group_category_path(gcat), :class => "chevron_right"
   %div.span9
-    %div.row
+    %div.row-fluid
       %div.span3
         %h3 Groups
       %div.span4
@@ -25,16 +26,17 @@
           =link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
         -else
           =link_to "Create a group", new_user_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
-    / %div.span9
-    /   %ul.nav-tabs
-    /     %li 
-    /Sort by: closest, newest, oldest, most popular
-    / %ul.breadcrumb
-    /   %li
-    /     =link_to "All", groups_path
-    /   %li
-    /     =link_to @group_category, group_category_path(@group_category)
-    =render @groups, :as => "group_feed_item"
+      / %div.span9
+      /   %ul.nav-tabs
+      /     %li 
+      /Sort by: closest, newest, oldest, most popular
+      / %ul.breadcrumb
+      /   %li
+      /     =link_to "All", groups_path
+      /   %li
+      /     =link_to @group_category, group_category_path(@group_category)
+    %div.row-fluid
+      =render @groups, :as => "group_feed_item"
 / %table
 /   %tr
 /     %th Name

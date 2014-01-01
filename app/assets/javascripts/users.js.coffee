@@ -19,6 +19,7 @@ jQuery ->
 	$("#email_settings_link").click ->
 		$("#email_settings").prop "disabled", not $("#email_settings").prop("disabled")
 		$("div.email-settings-cloak").toggle()
+		
 #sign up modal
 # $ ->
 # 	$("#new_user_button").click ->

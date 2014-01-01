@@ -25,15 +25,14 @@ module Merit
       # Should be "current_user" after registration for badge to be granted.
       # grant_on 'users#create', :badge => 'just-registered', :to => :itself
 
-      # If it has 10 posts, grant a badge
-      grant_on 'posts#create', :badge => 'base 10', :level => 10 do |post|
-        post.user.posts.count == 10
-      end
+      # If a user creates a post
+      grant_on 'posts#create', :badge => 'Created A Post', :multiple => true, :to => :user
+      
 
       # If it has 5 votes, grant relevant-commenter badge
-      # grant_on 'comments#vote', :badge => 'relevant-commenter', :to => :user do |comment|
-      #   comment.votes.count == 5
-      # end
+      grant_on 'posts#create', :badge => 'over 5' , :to => :user, :model_name => 'Post' do |post|
+        post.user.posts.count > 5
+      end
 
       # Changes his name by one wider than 4 chars (arbitrary ruby code case)
       # grant_on 'registrations#update', :badge => 'autobiographer', :temporary => true, :model_name => 'User' do |user|

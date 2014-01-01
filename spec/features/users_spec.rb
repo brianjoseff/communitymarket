@@ -20,7 +20,16 @@ describe 'Users' do
       expect { click_button "Sign Up" }.to change {User.count}.by(1)
     end
   end
-  
+  describe "clicking sign up on nav and no memeberships" do
+    it "should take user to devise page and sign them up and not join groups" do
+      visit root_path
+      click_link "Sign Up"
+      fill_in "user_name", with: "Name Surname"
+      fill_in "user_email", with: "name@mail.com"
+      fill_in "user_password", with: "password1234"
+      expect { click_button "Sign Up" }.to change {Membership.count}.by(0)
+    end
+  end
   describe "clicking sign in on nav" do
     it "should take user to devise page and sign them in" do
       visit root_path
