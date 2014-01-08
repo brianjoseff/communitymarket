@@ -13,25 +13,26 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
-//= require pages.js.coffee
 //= require bootstrap
-//= require groups.js.coffee
+//= require jquery.tokeninput
 //= require posts.js.coffee
+//= require pages.js.coffee
+//= require groups.js.coffee
 //= require transactions.js.coffee
 //= require jquery.validate.js
 //= require rails.validations.callbacks.js.coffee
 //= require jquery.modal
-//= require cloudinary
-//= require turbolinks
-//= require s3_direct_upload
-//= require s3_file_field
 //= require_tree .
 
 
 // jQuery(function() {
 //   return $("#s3-uploader").S3Uploader();
 // });
+
+// erequire s3_direct_upload
+// erequire s3_file_field
+// erequire cloudinary
+// erequire turbolinks
 
 // $(function() {
 //   return $("form.form").submit(function() {

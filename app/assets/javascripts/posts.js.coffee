@@ -18,6 +18,17 @@ $ ->
 	$("#new_post").submit ->
 	  $('input[type=submit]').attr('disabled', 'disabled')
 
+## POST TAGS TOKEN INPUT
+jQuery ->
+  $("#post_tag_tokens").tokenInput "/tags.json",
+    queryParam: "t"
+    theme: "facebook"
+    prePopulate: $("#post_tag_tokens").data("load")
+		placeHolderText: 'furniture'
+  $("ul.token-input-list-facebook").addClass("input-block-level")
+  $("ul.token-input-list-facebook").addClass("inline")
+  $("ul.token-input-list-facebook").addClass("negative-padding")
+
 
 getGiftCard = ->
 	
@@ -172,6 +183,8 @@ $ ->
 ######################################################################################
 ######################################################################################
 ######################################################################################
+
+
 $ ->	
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
@@ -280,16 +293,7 @@ jQuery ->
 		
 
 
-## POST TAGS TOKEN INPUT
-jQuery ->
-  $("#post_tag_tokens").tokenInput "/tags.json",
-    queryParam: "t"
-    theme: "facebook"
-    prePopulate: $("#post_tag_tokens").data("load")
-		placeHolderText: 'furniture'
-  $("ul.token-input-list-facebook").addClass("input-block-level")
-  $("ul.token-input-list-facebook").addClass("inline")
-  $("ul.token-input-list-facebook").addClass("negative-padding")
+
 
 
 # jQuery ->
