@@ -2,10 +2,11 @@
 -flash.each do |name, msg|
   =content_tag :div, msg, class: name
 %div.row-fluid.nav-area
-  %div.span4
+  %div.span5
     %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
+    =image_tag "circlelogo1.png", :id => "header_logo"
     /%label.credit_card_label
-  %div.span8
+  %div.span7
     %div.row-fluid
       %span.user-nav.pull-right
         / - if user_signed_in?
