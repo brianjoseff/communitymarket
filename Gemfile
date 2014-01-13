@@ -51,6 +51,7 @@ gem 'kaminari'
 gem 'rails_tokeninput'
 
 gem 'stripe'
+gem 'skeuocard-rails'
 
 #gems that help with seed files
 gem 'forgery'
@@ -98,6 +99,7 @@ gem 's3_direct_upload'
 gem 's3_file_field'
 gem 'turbolinks'
 gem 'jquery-fileupload-rails'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
