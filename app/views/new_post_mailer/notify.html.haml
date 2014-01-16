@@ -7,3 +7,6 @@
 %p #{@post.price}
 
 =post_url(@post, :host => "peopleandstuff.com")
+
+-if @post.post_category.id == 2
+  %p Get points for helping this person out. Then redeem points for giftcards to sustainable merchants or donate them to a local non-profit

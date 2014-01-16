@@ -1,6 +1,6 @@
 %p Your post ( #{@post.title} ) has sold
 
 %p please arrange pick-up with the buyer #{@buyer.name ? @buyer.name : ""}:
-%a{ :href => "mailto:#{@seller.email}"} #{@seller.email}
+%a{ :href => "mailto:#{@buyer.email}"} #{@buyer.email}
 
 %p Thanks for using our "QuickSell" feature. Earn coupons from Morano Gelato for selling stuff online
