@@ -1,7 +1,10 @@
 %h1 Editing group
+-if @group.owner == current_user
+  = render 'form'
 
-= render 'form'
-
-= link_to 'Show', @group
-\|
-= link_to 'Back', groups_path
+  = link_to 'Show', @group
+  \|
+  = link_to 'Back', groups_path
+-else
+  %p you are not the admin for this group
+  =link_to "Go back to group page", group_path(@group)
