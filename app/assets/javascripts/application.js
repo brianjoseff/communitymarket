@@ -22,12 +22,11 @@
 //= require jquery.validate.js
 //= require rails.validations.callbacks.js.coffee
 //= require jquery.modal
-//= require skeuocard
 //= require_tree .
 
-$(document).ready(function(){
-  card = new Skeuocard($("#skeuocard"));
-});
+// $(document).ready(function(){
+//   card = new Skeuocard($("#skeuocard"));
+// });
 
 // jQuery(function() {
 //   return $("#s3-uploader").S3Uploader();
