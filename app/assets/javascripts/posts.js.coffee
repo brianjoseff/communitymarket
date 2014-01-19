@@ -6,17 +6,25 @@
 #   $('.js-s3_file_field').S3FileField
 #     done: (e, data) -> console.log(data.result.url)
 
-
-
-
-
-
-$ ->
-	$("form.form").submit ->
-	  $('input[type=submit]').attr('disabled', 'disabled')
-$ ->
-	$("#new_post").submit ->
-	  $('input[type=submit]').attr('disabled', 'disabled')
+# $(document).ready ->
+#   card = new Skeuocard($("#skeuocard"))
+# 			
+# primeSkeuocard = ->
+# 	card = new Skeuocard($("#skeuocard"))
+# 	card.bind "fieldFillStateWillChange.skeuocard", (e, _card, fieldName, newFillState) ->
+# 		if card.isValid() == true
+# 			alert "valid"
+# 			$('input[type=submit]#upload_post').removeAttr('disabled')
+# 
+# $ ->
+# 	$("input#premium").on "change", primeSkeuocard
+# 
+# $ ->
+# 	$("form.form").submit ->
+# 	  $('input[type=submit]').attr('disabled', 'disabled')
+# $ ->
+# 	$("#new_post").submit ->
+# 	  $('input[type=submit]').attr('disabled', 'disabled')
 
 ## POST TAGS TOKEN INPUT
 jQuery ->
@@ -211,7 +219,7 @@ jQuery ->
 transaction =
 	setupForm: ->
 		$("#upload_post").click ->			
-			$('input[type=submit]').attr('disabled', true)
+			#$('input[type=submit]').attr('disabled', true)
 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
 			n = $("#card_number").val().length
 			if n > 2				
@@ -275,6 +283,7 @@ jQuery ->
 		# 	    message: "credit card is required."
 		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
 		x = $('input[type=submit]#upload_post').is(':disabled')
+		
 		if $('input[type=submit]#upload_post')
 			if x==true
 				$('input[type=submit]#upload_post').removeAttr('disabled')

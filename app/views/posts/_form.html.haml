@@ -99,7 +99,8 @@
 
 
 
-  /PHOTO UPLOAD FIELDS        
+  /PHOTO UPLOAD FIELDS
+         
   %div.row-fluid
     %div.span8
       / %p S3 Direct:
@@ -155,6 +156,7 @@
   -if current_user && current_user.stripe_customer_id == nil   
     %div#post_credit_fields{:style=>"display:none"}      
       =render 'modal_credit', user: current_user
+      / =render 'skeuocard'
       %div.row
       / .field
       /   = f.label :premium

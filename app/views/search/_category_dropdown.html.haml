@@ -1,0 +1,17 @@
+%li.dropdown
+  %a#shop_by_category.btn.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    Shop By Category
+    %b.caret
+  %ul.dropdown-menu
+    %li
+      %a{href: @appliances ? tag_url(@appliances) : "#"} Appliances
+    %li
+      %a{href: @books ?tag_url(@books) : "#"} Books
+    %li
+      %a{href: @clothing ?tag_url(@clothing) : "#"} Clothing
+    %li
+      %a{href: @electronics ?tag_url(@electronics) : "#"} Electronics
+    %li
+      %a{href: @furniture ?tag_url(@furniture) : "#"} Furniture
+    %li
+      %a{href: @sports ?tag_url(@sports) : "#"} Sporting Goods

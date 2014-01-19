@@ -3,6 +3,15 @@
 /////////////////////////////
 /////// SHOW A POST   ///////
 /////////////////////////////
+%div.row-fluid
+  %div.search-row
+    %div.span2
+      =render :partial => "search/category_dropdown"
+
+    %div.span10
+      /search bar
+      =render :partial => "search/search_form"
+
 
 %div.row-fluid
   %div.span2

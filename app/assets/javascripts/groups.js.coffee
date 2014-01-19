@@ -10,7 +10,7 @@
 ## ENABLE THE PASSWORD FIELD ON PRIVATE BOX Check
 jQuery ->
 	$("input#private").change ->
-		$("#private_group").prop "disabled", not $("#private_group").prop("disabled") && $("input#private").val('')
+		$("#private_group").prop "disabled", not $("input#private_group").prop("disabled") && $("input#private").val('')
 		
 $ ->	
   $("#group_name").validate

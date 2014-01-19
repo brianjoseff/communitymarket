@@ -1,134 +1,134 @@
-
-/ %div.row
 / 
-/ %div.row
-/   %div.span12
-/     %ul 
-/       %li get rid of stuff
-/       %li ask for stuff
-/       %li notify certain groups of people
-/ %div.banner
-/   %div.row
-/     %div.span12
-/       %h1
-/         %span#chkWidth{:style => "display: none;"}
-/       %h1#changingtext
-/         %span.toggle Sell
-/         Stuff
-/   %div.row
-/     %div.span12
-/       %h1
-/         %span#chkWidth2{:style => "display: none;"}
-/       %h1#changingtext2
-/         Notify
-/         %span.toggle groups of people
-/   %br/
-%br/
-%div.row
-  %div.span3
-    /new post button
-    =link_to "Post Something", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
-  %div.span9
-    /search bar
-    =render :partial => "search/search_form"
-
-%div.row
-  %div.span8
-    %div.post-feed
-      %div.row-fluid
-        %div.span2
-          %h2 Posts
-        %div.span6.posts-nav
-          %span
-            =link_to "For Sale", for_sale_path, id: 'for_sale_link'
-          %span 
-            =link_to "Wanted", wanted_path, id: 'wanted_link'
-          %span
-            =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
-          %span
-            =link_to "All Categories", root_path, id: "all_link"
-      /Should put these buttons on a "search result page"
-      /Sorting buttons
-      /=sort_link @sort_posts, :name, "Name"
-      /=sort_link @sort_posts, :released_on, "release date"
-      
-      / =link_to "Name", sort_name_posts_path
-      
-      /Post feed
-      =render :partial => 'feed',:locals => {:feed_items => @posts}
-  %div.span4
-    %div.row-fluid
-      -if current_user
-        %h3 Followed Tags
-        -@followed_tags.each do |tag|
-          =link_to tag.name, tag_url(tag), :class => "tag"
-        =link_to "More tags...", tags_path
-      -else
-        %h3 Followed Tags
-        =link_to "More tags...", tags_path
-      / -else
-      /   /popular tags?
-    -unless @near_groups.nil?
-      %div.row-fluid
-        %div.row-fluid
-          %h3 Groups Close to You
-
-        %p Join groups to get notifications from them. Manage your notifications on your profile page
-        =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
-    -if current_user
-      %div.row-fluid
-        %div.span8
-          %h3 Your Groups      
-      %div.row-fluid      
-        /Group feed
-        #your_groups
-          -if !@your_groups.first.is_a?(Group)
-            =link_to "Join some groups!", groups_path       
-          -else
-            /=render :partial => 'feed', :locals => {:feed_items => @your_groups}
-            =render :partial => 'your_group_feed_item', :collection => @your_groups, :as => :group
-    %div.row-fluid
-      %h3 Random Groups
-      =render :partial => 'random_group_feed', :locals => {:feed_items => @random_groups}
-
-
-
-
-/group feed and create group button
-////render group
-////join button
-////post button
-/item-post feed
-////render post
-///////tags
-////buy button
-
-
-
-////PLAYING WITH JQUERY
-/ %h2 Recipe for Rum Cake:
-/ %h2
-/   Add
-/   %span#dynamic-text-wrapper
-/     %span#old-text all the ingredients
-/     %span#new-text all the ingredients
-/   %br/
-/   to the cake batter.
+/ / %div.row
+/ / 
+/ / %div.row
+/ /   %div.span12
+/ /     %ul 
+/ /       %li get rid of stuff
+/ /       %li ask for stuff
+/ /       %li notify certain groups of people
+/ / %div.banner
+/ /   %div.row
+/ /     %div.span12
+/ /       %h1
+/ /         %span#chkWidth{:style => "display: none;"}
+/ /       %h1#changingtext
+/ /         %span.toggle Sell
+/ /         Stuff
+/ /   %div.row
+/ /     %div.span12
+/ /       %h1
+/ /         %span#chkWidth2{:style => "display: none;"}
+/ /       %h1#changingtext2
+/ /         Notify
+/ /         %span.toggle groups of people
+/ /   %br/
 / %br/
-/ 
-////PLAYING WITH MODAL WINDOWDS
 / %div.row
-/   #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-/     / %p.validateTips All form fields are required.
-/     .modal-header
-/       %h1 Post Something
-/     .model-body
-/       =form_for @post, :remote => true do |f|
-/         =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
-/         =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
-/         =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
-/         .model-footer
-/           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
+/   %div.span3
+/     /new post button
+/     =link_to "Post Something", new_post_path, :class => "btn btn-primary", :id => "btn-post", :role => "button"
+/   %div.span9
+/     /search bar
+/     =render :partial => "search/search_form"
 / 
 / %div.row
-/   %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal
+/   %div.span8
+/     %div.post-feed
+/       %div.row-fluid
+/         %div.span2
+/           %h2 Posts
+/         %div.span6.posts-nav
+/           %span
+/             =link_to "For Sale", for_sale_path, id: 'for_sale_link'
+/           %span 
+/             =link_to "Wanted", wanted_path, id: 'wanted_link'
+/           %span
+/             =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
+/           %span
+/             =link_to "All Categories", root_path, id: "all_link"
+/       /Should put these buttons on a "search result page"
+/       /Sorting buttons
+/       /=sort_link @sort_posts, :name, "Name"
+/       /=sort_link @sort_posts, :released_on, "release date"
+/       
+/       / =link_to "Name", sort_name_posts_path
+/       
+/       /Post feed
+/       =render :partial => 'feed',:locals => {:feed_items => @posts}
+/   %div.span4
+/     %div.row-fluid
+/       -if current_user
+/         %h3 Followed Tags
+/         -@followed_tags.each do |tag|
+/           =link_to tag.name, tag_url(tag), :class => "tag"
+/         =link_to "More tags...", tags_path
+/       -else
+/         %h3 Followed Tags
+/         =link_to "More tags...", tags_path
+/       / -else
+/       /   /popular tags?
+/     -unless @near_groups.nil?
+/       %div.row-fluid
+/         %div.row-fluid
+/           %h3 Groups Close to You
+/ 
+/         %p Join groups to get notifications from them. Manage your notifications on your profile page
+/         =render :partial => 'random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+/     -if current_user
+/       %div.row-fluid
+/         %div.span8
+/           %h3 Your Groups      
+/       %div.row-fluid      
+/         /Group feed
+/         #your_groups
+/           -if !@your_groups.first.is_a?(Group)
+/             =link_to "Join some groups!", groups_path       
+/           -else
+/             /=render :partial => 'feed', :locals => {:feed_items => @your_groups}
+/             =render :partial => 'your_group_feed_item', :collection => @your_groups, :as => :group
+/     %div.row-fluid
+/       %h3 Random Groups
+/       =render :partial => 'random_group_feed', :locals => {:feed_items => @random_groups}
+/ 
+/ 
+/ 
+/ 
+/ /group feed and create group button
+/ ////render group
+/ ////join button
+/ ////post button
+/ /item-post feed
+/ ////render post
+/ ///////tags
+/ ////buy button
+/ 
+/ 
+/ 
+/ ////PLAYING WITH JQUERY
+/ / %h2 Recipe for Rum Cake:
+/ / %h2
+/ /   Add
+/ /   %span#dynamic-text-wrapper
+/ /     %span#old-text all the ingredients
+/ /     %span#new-text all the ingredients
+/ /   %br/
+/ /   to the cake batter.
+/ / %br/
+/ / 
+/ ////PLAYING WITH MODAL WINDOWDS
+/ / %div.row
+/ /   #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+/ /     / %p.validateTips All form fields are required.
+/ /     .modal-header
+/ /       %h1 Post Something
+/ /     .model-body
+/ /       =form_for @post, :remote => true do |f|
+/ /         =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
+/ /         =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
+/ /         =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
+/ /         .model-footer
+/ /           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
+/ / 
+/ / %div.row
+/ /   %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal
