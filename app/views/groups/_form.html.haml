@@ -24,7 +24,7 @@
       %div.control-group
         =f.label :password, "Pass-phrase to get into group", :class => "control-label"
         %div.controls
-          = f.text_field :password, :class => "input-block-level inline", :placeholder => "Password", :disabled => true, :id => "private_group"
+          = f.text_field :password, :class => "input-block-level inline", :placeholder => "Password", :disabled => !@group.new_record? && @group.password? ? false : true, :id => "private_group"
   %div.row
     %div.span1
       %div.control-group
