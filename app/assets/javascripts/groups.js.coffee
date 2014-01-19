@@ -7,6 +7,17 @@
 # 	$("form.form").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
 
+jQuery ->
+	$(".show-members-link").click ->
+		$(".hide-link").toggle()
+		$(".private-user-list").toggle()
+		$(".show-members-link").toggle()
+jQuery ->
+	$(".hide-link").click ->
+		$(".private-user-list").toggle()
+		$(".hide-link").toggle()
+		$(".show-members-link").toggle()
+
 ## ENABLE THE PASSWORD FIELD ON PRIVATE BOX Check
 jQuery ->
 	$("input#private").change ->
@@ -26,13 +37,3 @@ $ ->
 
 
 
-jQuery ->
-	$(".show-members-link").click ->
-		$(".hide-link").toggle()
-		$(".private-user-list").toggle()
-		$(".show-members-link").toggle()
-jQuery ->
-	$(".hide-link").click ->
-		$(".private-user-list").toggle()
-		$(".hide-link").toggle()
-		$(".show-members-link").toggle()
