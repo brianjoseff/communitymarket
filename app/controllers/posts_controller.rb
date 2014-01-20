@@ -80,6 +80,7 @@ class PostsController < ApplicationController
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])
       @post = @user.posts.new(params[:post])
+          
       if !@post.for_sale?
         @post.tier_id = nil
         @post.price = nil
@@ -102,6 +103,7 @@ class PostsController < ApplicationController
     elsif current_user
       @user = current_user
       @post = @user.posts.new(params[:post])
+      @assets = @post.assets
       if !@post.for_sale?
         @post.tier_id = nil
         @post.price = nil
@@ -256,7 +258,24 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def complete
+    @post = Post.find(params[:id])
+    @post.update_attribute(:completed, true)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.json { head :no_content }
+    end
+  end
   
+  def undo_completed
+    @post = Post.find(params[:id])
+    @post.update_attribute(:completed, false)
+    respond_to do |format|
+      format.html { redirect_to @user }
+      format.json { head :no_content }
+    end
+  end
+    
   def deactivate
     @post = Post.find(params[:id])
     @post.update_attribute(:active, false)

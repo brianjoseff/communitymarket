@@ -81,6 +81,8 @@ Communitymarket::Application.routes.draw do
     member do
       get :deactivate
       get :reactivate
+      get :complete
+      get :undo_completed
     end
     resources :assignments
   end

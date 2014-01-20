@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217064630) do
+ActiveRecord::Schema.define(:version => 20140119212858) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20131217064630) do
     t.integer  "price"
     t.boolean  "active",           :default => true
     t.boolean  "post_to_facebook"
+    t.boolean  "completed"
   end
 
   create_table "sashes", :force => true do |t|

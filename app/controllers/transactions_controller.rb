@@ -79,6 +79,7 @@ class TransactionsController < ApplicationController
           sign_in @user
           #format.js { render }
           @post.deactivate!
+          @post.complete!
           @seller = User.find(@post.user_id)
           # @post.user_id = @user.id
           @post.save!
@@ -104,6 +105,7 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
+           @post.complete!
           @seller=User.find(@post.user_id)
           # @post.user_id = @user.id
           @post.save!
@@ -130,6 +132,7 @@ class TransactionsController < ApplicationController
         if @transaction.save
           @user.charge_as_customer(@amount)
           @post.deactivate!
+           @post.complete!
           @seller=User.find(@post.user_id)
           # @post.user_id = @user.id
           @post.save!
@@ -149,6 +152,7 @@ class TransactionsController < ApplicationController
         @transaction = Transaction.new(params[:transaction].merge(:price => @amount))
         if @transaction.save
           @post.deactivate!
+           @post.complete!
           @transaction.charge(@amount, params[:transaction][:stripe_card_token], params[:transaction][:email])
           if @tier_id
             # SoldPostMailer.notify(@user, @post, user, group).deliver
@@ -197,6 +201,7 @@ class TransactionsController < ApplicationController
       if @transaction.save
         @user.charge_as_customer(@amount)
         @post.deactivate!
+         @post.complete!
         @post.user_id = @user.id
         @post.save!
         if @tier_id

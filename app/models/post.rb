@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   after_create :to_facebook
+  # before_save :set_default_completed_false
   attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook
   has_many :assets, :as => :imageable, :dependent => :destroy
   belongs_to :post_category
@@ -19,6 +20,11 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   attr_reader :tag_tokens
   attr_accessor :stripe_card_token
+  
+  
+  def set_default_completed_false
+    self.completed ||= false
+  end
   
   
   def after_sign_in_post_to_facebook
@@ -61,6 +67,11 @@ class Post < ActiveRecord::Base
   
   def deactivate!
     self.active = false
+    self.save!
+  end
+  
+  def complete!
+    self.completed = true
     self.save!
   end
   
