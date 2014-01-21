@@ -11,4 +11,5 @@ class NewPostMailer < ActionMailer::Base
     #attachments[""]
     mail(:to => recipient.email, :subject => "#{@post.post_category.name} | #{@post_name}", :reply_to => creator.email)
   end
+  default :from => "#{@group.name.parameterize}@peopleandstuff.com"
 end
