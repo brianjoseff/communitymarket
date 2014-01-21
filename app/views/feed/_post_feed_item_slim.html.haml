@@ -48,11 +48,8 @@
   %div.span9
     %div.row-fluid.slim-feed-title-row
       -if feed_item.post_category_id == 1
-        /%div.for-sale-marker
-        /%span.pink [For Sale]
-        /%span.for-sale For Sale
-        / %span
-        /          %i.icon-large.icon-usd
+        -unless feed_item.assets.empty?
+          =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
       -elsif feed_item.post_category_id == 2
         /%div.wanted-marker
         %span.for-sale Wanted
