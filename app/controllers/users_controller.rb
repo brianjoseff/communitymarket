@@ -79,9 +79,9 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-    if params[:group_id]
-      @group = Group.find(params[:group_id])
-    end
+    # if params[:group_id]
+    #   @group = Group.find(params[:group_id])
+    # end
     respond_to do |format|
       #format.html { render 'new_modal', layout: false } if request.xhr?
       format.html
@@ -136,9 +136,9 @@ class UsersController < ApplicationController
       # } if request.xhr?
       
       if @user.save
-        if @group
-          @group.update_attributes(params[:group])
-        end
+        # if @group
+        #   @group.update_attributes(params[:group])
+        # end
         # if session[:followed_tag]
         #   @tag = Tag.find(session[:followed_tag])
         #   @user.follow!(@tag)

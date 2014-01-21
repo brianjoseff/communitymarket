@@ -1,4 +1,5 @@
 / %p.pull-right#notice= notice
+%p #{session.inspect}
 -flash.each do |name, msg|
   =content_tag :div, msg, class: name
 %div.row-fluid.nav-area

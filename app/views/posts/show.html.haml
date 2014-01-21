@@ -38,7 +38,7 @@
             %span#span-tag
             =link_to tag.name, tag_url(tag), :class => "tag"
       %div.row-fluid
-        %p #{@post.description}
+        %p #{simple_format h(@post.description)}
   -else
     %div.row-fluid
       %h1 Wanted: #{@post.title}
@@ -47,7 +47,7 @@
           %span#span-tag
           =link_to tag.name, tag_url(tag), :class => "tag"
     %div.row-fluid
-      %p #{@post.description}
+      %p #{simple_format h(@post.description)}
     
 %div.row-fluid
   %div.span4

@@ -24,7 +24,7 @@
     =render :partial => 'feed/post_feed', :collection => feed_items, :as => :feed_item
     =paginate @posts
   -else
-    =render :partial => 'feed/group_feed_item', :collection => feed_items, :as => :feed_item  
+    =render :partial => 'feed/your_group_feed_item', :collection => feed_items, :as => :feed_item  
   /   
   / -if feed_items
   /   -if feed_items.first.is_a?(Post)

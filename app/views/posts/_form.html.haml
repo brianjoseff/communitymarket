@@ -212,16 +212,21 @@
     %div.controls
       %div#purchase_message_premium{:style => "display:none;"} $2: Premium Post
       %div#purchase_message{:style => "display:none;"} $3: Notify more than 2 groups or 500+ people
+  
+  
+  /************************************************************       
+  /FACEBOOK
+  /************************************************************    
       
-  %div.control-group
-    %div.controls
-      %p{:style => "font-weight: bold"}
-        %span{:style => "text-decoration: underline"} Share on Facebook:
-      = f.label :post_to_facebook, class: "checkbox" do
-        = f.check_box :post_to_facebook, class: "checkbox", id: "post_to_facebook"
-        =label_tag "Share on Facebook"
-        -if @user.oauth_token.nil?
-          %p your account is not linked to facebook. If you check this box, your item will be posted and your user details will be updated to reflect facebook integration
+  / %div.control-group
+  /   %div.controls
+  /     %p{:style => "font-weight: bold"}
+  /       %span{:style => "text-decoration: underline"} Share on Facebook:
+  /     = f.label :post_to_facebook, class: "checkbox" do
+  /       = f.check_box :post_to_facebook, class: "checkbox", id: "post_to_facebook"
+  /       =label_tag "Share on Facebook"
+  /       -if @user.oauth_token.nil?
+  /         %p your account is not linked to facebook. If you check this box, your item will be posted and your user details will be updated to reflect facebook integration
   
   
   

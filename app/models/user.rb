@@ -223,7 +223,7 @@ class User < ActiveRecord::Base
   end
   
   def join!(group)
-    if group.members.count > 500
+    if group.members.count > 100
       memberships.create!(group_id: group.id, email_setting_id: 2)
     else
       memberships.create!(group_id: group.id, email_setting_id: 1)
