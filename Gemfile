@@ -51,6 +51,7 @@ gem 'kaminari'
 gem 'rails_tokeninput'
 
 gem 'stripe'
+gem 'omniauth-stripe-connect'
 gem 'skeuocard-rails'
 
 #gems that help with seed files

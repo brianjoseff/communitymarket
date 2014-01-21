@@ -3,6 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+.random-posts{
+	border-top: 6px solid #7f8c8d;
+	padding-top: 10px;
+	margin-top: 10px;
+}
+.random-post{
+	margin: 5px;
+}
+.title{
+	width: 100px;
+}
+.wanted-random-post{
+	display: block;
+	width: 95px;
+	height: 95px;
+	font-weight: bold;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 95px;
+	border: 3px solid #7f8c8d;
+}
+
 /************************************************************/
 /*********** POST FORM **************************************/
 /************************************************************/

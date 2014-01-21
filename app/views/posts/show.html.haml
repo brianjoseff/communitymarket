@@ -14,28 +14,41 @@
 
 
 %div.row-fluid
-  %div.span2
-    / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-    %div#modal_image{:style => "display:none;"}
-      =render 'modal_image', :post => @post
+  -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
+    %div.span2
+      / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+    
+      =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+      %div#modal_image{:style => "display:none;"}
+        =render 'modal_image', :post => @post
+
+      %div.row-fluid
+        -if @post.price
+          $#{@post.price}
+        -elsif @tier
+          Tier #{@tier.id}
+          %p sells for: $#{@tier.price/100}
+      /buy button
+      /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+    %div.span8
+      %div.row-fluid
+        %h1 #{@post.title}
+        -@post.tags.each do |tag|
+          %div#whole_tag
+            %span#span-tag
+            =link_to tag.name, tag_url(tag), :class => "tag"
+      %div.row-fluid
+        %p #{@post.description}
+  -else
     %div.row-fluid
-      -if @post.price
-        $#{@post.price}
-      -elsif @tier
-        Tier #{@tier.id}
-        %p sells for: $#{@tier.price/100}
-    /buy button
-    /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-  %div.span8
-    %div.row-fluid
-      %h1 #{@post.title}
+      %h1 Wanted: #{@post.title}
       -@post.tags.each do |tag|
         %div#whole_tag
           %span#span-tag
           =link_to tag.name, tag_url(tag), :class => "tag"
     %div.row-fluid
       %p #{@post.description}
+    
 %div.row-fluid
   %div.span4
     %div.buy.pull-left#show_post_buy
@@ -67,3 +80,6 @@
   = link_to 'Edit', edit_post_path(@post)
   \|
   = link_to 'Back', posts_path
+%div.row-fluid.random-posts
+  %h5 More Posts:
+  =render partial: 'random_post', collection: @random_posts, as: :post

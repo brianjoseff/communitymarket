@@ -1,5 +1,5 @@
 class NewPostMailer < ActionMailer::Base
-  default :from => "brianjoseff@peopleandstuff.com"
+  default :from => "#{@group.name.parameterize}@peopleandstuff.com"
   def notify(creator, post, recipient, group)
     @creator = creator
     @group = group

@@ -91,7 +91,7 @@
           -if post.completed?
             = link_to 'Undo', undo_completed_post_path(post), :class => 'btn btn-mini deactivate_region'
           -else
-            = link_to post.post_category == 2 ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
+            = link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
 
 
 

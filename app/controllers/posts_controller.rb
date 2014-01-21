@@ -16,7 +16,6 @@ class PostsController < ApplicationController
   #shows the post and creates a transaction object for the "buy" button
   
   def show
-    
     @post = Post.find(params[:id])
     @transaction = Transaction.new(:post_id => @post.id)
     if @post.tier_id?
@@ -27,6 +26,7 @@ class PostsController < ApplicationController
     else
       @user = current_user
     end
+    @random_posts = Post.last(7) - @user.posts
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
