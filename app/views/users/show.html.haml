@@ -8,6 +8,10 @@
     -if current_user && current_user.admin?
       %div.row-fluid
         %p Users count: #{@users_count}
+        %p Group rank:
+        %ul
+          -@group_rank.each do |g|
+            %li #{g.members.count}: #{g.name}
         %p Super Users:
         %ul
           -if !@users_with_5_posts.nil?

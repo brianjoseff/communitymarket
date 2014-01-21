@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     if current_user.admin?
       @posts = Post.all
       @users_with_5_posts = User.joins(:posts).select('users.*, count(user_id) as "post_count"').group('users.id').order(' post_count desc')
+      @group_rank = Group.joins(:members).select('groups.*, count(group_id) as "member_count"').group('groups.id').order(' member_count desc')
       @users_count = User.all.count
       @posts_count = Post.all.count
       
