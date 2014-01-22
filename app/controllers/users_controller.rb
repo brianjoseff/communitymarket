@@ -18,13 +18,16 @@ class UsersController < ApplicationController
   def show
     #@user = User.find(params[:id])
 
-    @user = current_user
+    @user = User.find(params[:id])
+    @random_groups = Group.last(20) - @user.groups_as_member
     @badges = []
     @user.badges.each do |badge|
       @badges << badge.name
     end
     @badge_hash = Hash.new(0)
-    @memberships = @user.memberships
+    
+    @memberships = @user.memberships ||= []
+    
     @email_settings = EmailSetting.all
     @groups = @user.groups_as_member
     @posts = @user.posts
@@ -110,51 +113,53 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
-  def create
-
-    @user = User.new(params[:user])
-    # if params[:group_id]
-    #   @group = Group.find(params[:group_id])
-    # 
-    #   @group.member_ids << @user.id
-    # end
-    
-
-    #@user.save
-    # if @user.valid?
-    #    flash[:notice] = 'You have successfully signed your soul away.'
-    #  end
-    respond_to do |format|
-      # format.js{render 'create'}
-      # format.html {
-      #   if @user.valid?
-      #     #sign_in @user
-      #     redirect_to root_path
-      #     #render partial: 'table', locals: { animal_handbooks: @animal_handbooks }
-      #   else
-      #     render 'new_modal', layout: false
-      #   end
-      # } if request.xhr?
-      
-      if @user.save
-        # if @group
-        #   @group.update_attributes(params[:group])
-        # end
-        # if session[:followed_tag]
-        #   @tag = Tag.find(session[:followed_tag])
-        #   @user.follow!(@tag)
-        # end
-        #SignupMailer.new_subscriber(@user).deliver
-        #sign_in @user
-        format.html { redirect_back_or root_path, "Thank you for signing up!" }
-        format.json { render json: @user, status: :created, location: @user }
-        # format.js {'create'}
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-        #format.js
-      end
-    end
+  # def create
+  # 
+  #     @user = User.new(params[:user])
+  #     # if params[:group_id]
+  #     #   @group = Group.find(params[:group_id])
+  #     # 
+  #     #   @group.member_ids << @user.id
+  #     # end
+  #     
+  # 
+  #     #@user.save
+  #     # if @user.valid?
+  #     #    flash[:notice] = 'You have successfully signed your soul away.'
+  #     #  end
+  #     respond_to do |format|
+  #       # format.js{render 'create'}
+  #       # format.html {
+  #       #   if @user.valid?
+  #       #     #sign_in @user
+  #       #     redirect_to root_path
+  #       #     #render partial: 'table', locals: { animal_handbooks: @animal_handbooks }
+  #       #   else
+  #       #     render 'new_modal', layout: false
+  #       #   end
+  #       # } if request.xhr?
+  #       
+  #       if @user.save
+  #         # if @group
+  #         #   @group.update_attributes(params[:group])
+  #         # end
+  #         # if session[:followed_tag]
+  #         #   @tag = Tag.find(session[:followed_tag])
+  #         #   @user.follow!(@tag)
+  #         # end
+  #         #SignupMailer.new_subscriber(@user).deliver
+  #         #sign_in @user
+  #         format.html { redirect_back_or root_path, "Thank you for signing up!" }
+  #         format.json { render json: @user, status: :created, location: @user }
+  #         # format.js {'create'}
+  #       else
+  #         format.html { render action: "new" }
+  #         format.json { render json: @user.errors, status: :unprocessable_entity }
+  #         #format.js
+  #       end
+  #     end
+  
+  
     #flash.discard :notice if request.xhr?
     # AJAX efforts
     # respond_to do |format|
@@ -188,7 +193,7 @@ class UsersController < ApplicationController
     #         end
     #       end
     #@user = User.new(params[:user])
-  end
+  #end
 
 
   def update_dom

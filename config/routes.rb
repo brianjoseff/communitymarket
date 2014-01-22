@@ -8,7 +8,7 @@ Communitymarket::Application.routes.draw do
   match "/404", to: "exceptions#not_found", via: [:get, :post]
  
 
-  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
+  devise_for :users, controllers: { :registrations => "registrations", omniauth_callbacks: 'users/omniauth_callbacks'}
   # devise_scope :user do
   #   #match '/sessions/user', to: 'devise/sessions#create', via: :post
   #   get "/sign_in", :to => "devise/sessions#new"

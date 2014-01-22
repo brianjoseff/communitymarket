@@ -1,5 +1,11 @@
 %p#notice= notice
 %div.row-fluid
+  %div.span12
+    %div.row-fluid
+      %h5 Join some groups so that when you post you can notify people in the groups
+    %div.row-fluid
+      =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
+%div.row-fluid
   %div.span8
     %h4 #{@user.name}
 
