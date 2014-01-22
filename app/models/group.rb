@@ -22,4 +22,15 @@ class Group < ActiveRecord::Base
   has_many :posts,      :through => :assignments
   
   validates :name, :presence => true
+  
+  def self.searchable_columns
+    wanted_columns = ['name', 'created_at']
+    self.column_names.select{ |column| wanted_columns.include?(column) }
+  end
+  def self.translated_searchable_columns
+    columns = self.searchable_columns
+    result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
+    result
+  end
+
 end

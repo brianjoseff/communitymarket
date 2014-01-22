@@ -6,7 +6,14 @@
 # $ ->
 # 	$("form.form").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
-
+$(document).ready ->
+  $(".group-sort").on "change", ->
+    $.ajax
+      url: "/groups"
+      type: "GET"
+      dataType: "script"
+      data:
+        sort: $(".group-sort").val()
 jQuery ->
 	$(".show-members-link").click ->
 		$(".hide-link").toggle()

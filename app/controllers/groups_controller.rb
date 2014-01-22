@@ -9,10 +9,26 @@ class GroupsController < ApplicationController
       @groups = Group.all
     end
     @g_categories = GroupCategory.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @groups }
-    end
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.js #index.js.erb
+    #   format.json { render json: @groups }
+    # end
+    # 
+    
+    @group_attributes = Group.columns
+     if params[:sort]
+       @groups= Group.order(params[:sort])
+     else
+       @groups = Group.order(:name)
+     end 
+
+     respond_to do |format|
+       format.html # index.html.erb
+       format.js # index.js.erb
+       format.json { render json: @groups }
+     end 
+    
   end
   
   # def nearby

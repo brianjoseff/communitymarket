@@ -255,13 +255,14 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to current_user ? user_path(current_user) : root_path }
       format.json { head :no_content }
     end
   end
   def complete
     @post = Post.find(params[:id])
     @post.update_attribute(:completed, true)
+    @post.update_attribute(:active, false)
     respond_to do |format|
       format.html { redirect_to @user }
       format.json { head :no_content }
@@ -271,6 +272,7 @@ class PostsController < ApplicationController
   def undo_completed
     @post = Post.find(params[:id])
     @post.update_attribute(:completed, false)
+    @post.update_attribute(:active, true)
     respond_to do |format|
       format.html { redirect_to @user }
       format.json { head :no_content }
