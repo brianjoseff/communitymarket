@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     else
       @user = current_user
     end
-    @random_posts = Post.limit(7).order("RANDOM()") - @user.posts
+    @random_posts = Post.limit(7).order("RANDOM()").select{|x| x.active?} - @user.posts
     @random_posts.delete(@post)
     respond_to do |format|
       format.html # show.html.erb
