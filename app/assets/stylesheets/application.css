@@ -120,7 +120,16 @@ h1#changingtext2{
 	height: 40px;
 }
 
-
+#banner_image{
+	opacity: .8;
+}
+.hero-text{
+	position:absolute;
+	margin-top: 50px;
+	margin-left: 40px;
+	letter-spacing: -1px;
+	z-index: 9999;
+}
 
 
 

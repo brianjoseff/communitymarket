@@ -26,6 +26,10 @@
 # 	$("#new_post").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
 
+$ ->
+	$("div.inactive-post a").replaceWith ->
+	  $(this).contents()
+
 ## POST TAGS TOKEN INPUT
 jQuery ->
   $("#post_tag_tokens").tokenInput "/tags.json",

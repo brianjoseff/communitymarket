@@ -26,6 +26,7 @@ class MessagesController < ApplicationController
   # GET /messages/new.json
   def new
     @message = Message.new
+    # @message.post_id = params[:message][:post_id]
     # flash[:the_post_id] = params[:post_id]
     # flash[:seller_email] = params[:recipient]
     respond_to do |format|
@@ -43,10 +44,12 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
+    @message.post_id = params[:message][:post_id]
     @sender = current_user.email
+    @post = Post.find(@message.post_id)
     respond_to do |format|
       if @message.save
-        MessageMailer.send_message(@sender, params[:message][:recipient],params[:message][:subject], params[:message][:content]).deliver
+        MessageMailer.send_message(@post, @sender, params[:message][:recipient],params[:message][:subject], params[:message][:content]).deliver
         format.html { redirect_to root_path, notice: 'Message was successfully sent.' }
         format.json { render json: @message, status: :created, location: @message }
       else

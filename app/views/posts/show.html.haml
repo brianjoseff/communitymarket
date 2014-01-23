@@ -3,6 +3,8 @@
 /////////////////////////////
 /////// SHOW A POST   ///////
 /////////////////////////////
+
+
 %div.row-fluid
   %div.search-row
     %div.span2
@@ -11,75 +13,77 @@
     %div.span10
       /search bar
       =render :partial => "search/search_form"
-
-
-%div.row-fluid
-  -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
-    %div.span2
-      / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+  %div.row-fluid
+    -if !@post.active?
+      %h3 Post is inactive
+%div{:class => "#{@post.active? ? "" : "inactive-post"}"}
+  %div.row-fluid
+    -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
+      %div.span2
+        / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
     
-      =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-      %div#modal_image{:style => "display:none;"}
-        =render 'modal_image', :post => @post
+        =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+        %div#modal_image{:style => "display:none;"}
+          =render 'modal_image', :post => @post
 
+        %div.row-fluid
+          -if @post.price
+            $#{@post.price}
+          -elsif @tier
+            Tier #{@tier.id}
+            %p sells for: $#{@tier.price/100}
+        /buy button
+        /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+      %div.span8
+        %div.row-fluid
+          %h1 #{@post.title}
+          -@post.tags.each do |tag|
+            %div#whole_tag
+              %span#span-tag
+              =link_to tag.name, tag_url(tag), :class => "tag"
+        %div.row-fluid
+          %p #{simple_format h(@post.description)}
+    -else
       %div.row-fluid
-        -if @post.price
-          $#{@post.price}
-        -elsif @tier
-          Tier #{@tier.id}
-          %p sells for: $#{@tier.price/100}
-      /buy button
-      /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-    %div.span8
-      %div.row-fluid
-        %h1 #{@post.title}
+        %h1 Wanted: #{@post.title}
         -@post.tags.each do |tag|
           %div#whole_tag
             %span#span-tag
             =link_to tag.name, tag_url(tag), :class => "tag"
       %div.row-fluid
         %p #{simple_format h(@post.description)}
-  -else
-    %div.row-fluid
-      %h1 Wanted: #{@post.title}
-      -@post.tags.each do |tag|
-        %div#whole_tag
-          %span#span-tag
-          =link_to tag.name, tag_url(tag), :class => "tag"
-    %div.row-fluid
-      %p #{simple_format h(@post.description)}
     
-%div.row-fluid
-  %div.span4
-    %div.buy.pull-left#show_post_buy
-      -if @post.tier_id
-        -if signed_in? && current_user.stripe_customer_id
-          = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
-            - if @transaction.errors.any?
-              .error_messages
-                %h2
-                  = pluralize(@transaction.errors.count, "error")
-                  prohibited this transaction from being saved:
-                %ul
-                  - @transaction.errors.full_messages.each do |msg|
-                    %li= msg                                          
-            =f.hidden_field :post_id, :value => @post.id
-            =f.submit "Buy Now", class: "btn btn-medium btn-success"
-        -elsif signed_in? && current_user.stripe_customer_id.nil?
-          =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
-        -else
-          =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id
-    %div.email.pull-left
-      =link_to_modal "Email", new_message_path(:post_id => @post.id, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
   %div.row-fluid
-  -unless @post.assets.empty?
-    -@post.assets[1..-1].each do |asset|
-      =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
+    %div.span4
+      %div.buy.pull-left#show_post_buy
+        -if @post.tier_id
+          -if signed_in? && current_user.stripe_customer_id
+            = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
+              - if @transaction.errors.any?
+                .error_messages
+                  %h2
+                    = pluralize(@transaction.errors.count, "error")
+                    prohibited this transaction from being saved:
+                  %ul
+                    - @transaction.errors.full_messages.each do |msg|
+                      %li= msg                                          
+              =f.hidden_field :post_id, :value => @post.id
+              =f.submit "Buy Now", class: "btn btn-medium btn-success"
+          -elsif signed_in? && current_user.stripe_customer_id.nil?
+            =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
+          -else
+            =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id
+      %div.email.pull-left
+        =link_to_modal "Email", new_message_path(:post_id => @post.id, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
+    %div.row-fluid
+    -unless @post.assets.empty?
+      -@post.assets[1..-1].each do |asset|
+        =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
 
--if current_user && current_user.posts.include?(@post)
-  = link_to 'Edit', edit_post_path(@post)
-  \|
-  = link_to 'Back', posts_path
+  -if current_user && current_user.posts.include?(@post)
+    = link_to 'Edit', edit_post_path(@post)
+    \|
+    = link_to 'Back', posts_path
 %div.row-fluid.random-posts
   %h5 More Posts:
   =render partial: 'random_post', collection: @random_posts, as: :post

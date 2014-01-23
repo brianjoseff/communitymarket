@@ -49,6 +49,28 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   
+  def stripe_connect
+    # attempt 1
+    if !current_user.stripe_connect
+      callback = OmniauthCallbackCreator.new({user: current_user, \
+        params: request.env["omniauth.auth"]})
+      if callback.save
+        redirect_to root_path, notice: 'Thank you! You have successfully linked your account with stripe!
+        Now you can sell your lesson plans with ease!'
+      else
+        redirect_to root_path, alert: 'There was an error when linking your account with stripe.
+        Please make sure your credentials are correct and try again in a few minutes.'
+      end
+    else
+        redirect_to root_path, notice: 'You have already linked your account with stripe, thank you!'
+    end
+    
+    # attempt 2
+    omniauth = request.env["omniauth.auth"]
+    current_user.apply_omniauth(omniauth)
+    current_user.save!
+    redirect_to new_item_path
+  end
   # def facebook_update_and_post
   #   @user = User.update_profile_to_facebook(request.env["omniauth.auth"], current_user)
   #   if @user.persisted?

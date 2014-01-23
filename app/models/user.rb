@@ -23,7 +23,18 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
+  def stripe_parameters
+    {
+      'stripe_user[business_type]' => 'sole_prop',
+      'stripe_user[currency]' => 'usd'
+    }
+  end
 
+  def apply_omniauth(omniauth)
+    self.secret_key = omniauth['credentials']['token']
+    self.public_key = omniauth['info']['stripe_publishable_key']
+    self.uid = omniauth['uid']
+  end
   
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)

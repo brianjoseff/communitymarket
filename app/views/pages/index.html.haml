@@ -10,27 +10,30 @@
 
 %div.banner
   -if !current_user
-    %div#top_banner_row.row
-      %div.span12
-        %h1
-          %span#chkWidth{:style => "display: none;"}
-        %h1#changingtext
-          %span.toggle Sell
-          Stuff     
-    %div.row
-      %div.span12
-        %h1
-          %span#chkWidth2{:style => "display: none;"}
-        %h1#changingtext2
-          Notify
-          %span.toggle Groups of people
-  -else
-    %div.row
-      %div.span12
-        %div.row-fluid
-          %h5 Join some groups so that when you post you can notify people in the groups
-        %div.row-fluid
-          =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
+    %div.row-fluid
+      %h1.hero-text We are good consumers.
+      =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
+  /   %div#top_banner_row.row
+  /     %div.span12
+  /       %h1
+  /         %span#chkWidth{:style => "display: none;"}
+  /       %h1#changingtext
+  /         %span.toggle Sell
+  /         Stuff     
+  /   %div.row
+  /     %div.span12
+  /       %h1
+  /         %span#chkWidth2{:style => "display: none;"}
+  /       %h1#changingtext2
+  /         Notify
+  /         %span.toggle Groups of people
+  / -else
+  /   %div.row
+  /     %div.span12
+  /       %div.row-fluid
+  /         %h5 Join some groups so that when you post you can notify people in the groups
+  /       %div.row-fluid
+  /         =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
       
 %div.row-fluid
   %div.search-row
