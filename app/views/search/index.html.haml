@@ -5,7 +5,8 @@
     %h1 Stuff:
     %p search returned #{pluralize(@posts_results.count, 'post')}
     /Post feed
-    =render :partial => 'shared/feed',:locals => {:feed_items => @posts_results}
+
+    =render :partial => 'feed/feed',:locals => {:feed_items => @posts_results}
     
   %div.span6
     %h1 Tags
