@@ -18,6 +18,14 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @transaction = Transaction.new(:post_id => @post.id)
+    
+    @appliances = Tag.find_by_id(4)
+    @sports = Tag.find_by_id(27)
+    @electronics = Tag.find_by_id(36)
+    @clothing = Tag.find_by_id(40)
+    @books = Tag.find_by_id(21)
+    @furniture = Tag.find_by_id(3)
+    
     if @post.tier_id?
       @tier = Tier.find(@post.tier_id)
     end

@@ -1,10 +1,14 @@
+%h3 From: #{@group.name}
 -unless @post.assets.empty?
   =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:small), :alt => @post.title), post_url(@post)
 
 %h2 #{@post_name}
 %p #{@category}
 %p #{@post_desc}
-%p $#{@post.price}
+-if @post.post_category.id == 2
+  %p Wanted
+-else
+  %p $#{@post.price}
 
 =post_url(@post, :host => "peopleandstuff.com")
 
@@ -13,4 +17,4 @@
   
   
   
-%p Want to modify your email frequency? click #{link_to 'here.', post_url(@post)}
+%p Want to modify your email frequency? click #{link_to 'here.', user_url(@recipient)}
