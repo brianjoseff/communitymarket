@@ -57,3 +57,18 @@
   = link_to 'Edit', edit_group_path(@group)
   |
   = link_to 'Destroy!', @group, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+
+-if current_user && current_user.admin?
+  = form_tag bulk_update_path do
+    =hidden_field_tag :group_id, @group.id
+    %table
+      %th Delete
+      %th Name
+      - @group.memberships.each do |membership|
+        %tr
+          %td= check_box_tag "delete[]", membership.id
+          %td= User.find(membership.member_id).name
+
+    = button_tag "Delete users"

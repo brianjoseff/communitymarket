@@ -31,6 +31,16 @@ class GroupsController < ApplicationController
     
   end
   
+  def bulk_update
+    Membership.where(:id => params[:delete]).destroy_all
+    @group = Group.find(params[:group_id])
+    respond_to do |format|
+      format.html { redirect_to @group }
+      format.json { head :no_content }
+    end
+  end
+  
+  
   # def nearby
   #     zipcode = 
   #     

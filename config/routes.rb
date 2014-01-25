@@ -68,6 +68,7 @@ Communitymarket::Application.routes.draw do
   #resources :sessions, :only => [:new, :create, :destroy]
   resources :groups do
     collection do
+      put :bulk_update
       put :private
     end
   end
@@ -87,7 +88,7 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   
-  
+  match '/bulk_update', :to => "groups#bulk_update"
   match '/for_sale', :to => "pages#for_sale"
   match '/borrow_rent', :to => "pages#borrow_rent"
   match '/wanted', :to => "pages#wanted"
