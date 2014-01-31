@@ -28,6 +28,10 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     @user = User.new
     flash[:the_post_id] = params[:post_id]
+    @post = Post.find(params[:post_id])
+    if @post.tier_id?
+      @tier = Tier.find(@post.tier_id)
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @transaction }

@@ -1,4 +1,4 @@
-class DailyQueueMailer < ActionMailer::Base
+class WeeklyQueueMailer < ActionMailer::Base
   default :from => "brianjoseff123@peopleandstuff.com"
   def notify(creator, post, recipient, group)
     @creator = creator

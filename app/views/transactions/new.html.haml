@@ -1,6 +1,9 @@
 / %h2#myModalLabel You need to add a credit card
 
 #transaction
+  -if @post
+    %h3 Get this post for $#{@tier.price/100}: #{@post.title}
+    
   = simple_form_for @transaction, html: {class: 'form-horizontal'} do |f|
     - if @transaction.errors.any?
       #error_explanation
@@ -12,4 +15,7 @@
     =render 'form', f: f, post_id: :post_id
     %br/
     %div.row-fluid
-      = f.button :submit, name: 'Get It', class: "btn-primary", id: "new_transaction_button"
+      = f.submit "Get It", name: 'Get It', class: "btn btn-primary", id: "new_transaction_button"
+    %div.row-fluid
+      %br/
+      =link_to image_tag('solid.png', :alt => 'Stripe Payment Services'), "https://www.stripe.com/", id: "stripe_button"

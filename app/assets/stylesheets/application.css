@@ -39,6 +39,9 @@
 /* 1. General Styles*****************************************/
 /************************************************************/
 
+a:hover#stripe_button{
+	background-color: transparent;
+}
 
 span.points{
 	margin-left: 5px;

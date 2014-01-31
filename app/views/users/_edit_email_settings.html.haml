@@ -1,7 +1,7 @@
-%div.email_settings
-  %table
+%div.row-fluid.email_settings
+  %table.table.table-striped
     %tr
-      %th
+      %th Group name
       -@email_settings[0..2].each do |email_setting|
         %th=email_setting.name
     =form_tag update_individual_memberships_path, :method => :put do

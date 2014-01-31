@@ -23,9 +23,9 @@
           -if !@users_with_5_posts.nil?
             -@users_with_5_posts.each do |x|
               -if x.posts.count > 5
-                %li #{x.name}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+                %li #{link_to x.name, user_path(x)}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
               -else
-                %li #{x.name}, with #{x.posts.count}
+                %li #{link_to x.name, user_path(x)}, with #{x.posts.count}
         %p Posts count: #{@posts_count}
         
     %div.row-fluid
@@ -91,7 +91,7 @@
         %td #{link_to post.title, post_url(post)}
         %td #{time_ago_in_words(post.created_at)} ago
         %td #{post.active}
-        %td
+        %td.post-management-buttons
           = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
           = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger destroy_region'
           -if post.active?
@@ -103,6 +103,33 @@
           -else
             = link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
 
+
+
+-if current_user && current_user.admin?
+  %h1 Admin Post Dashboard
+  %div.row-fluid              
+    %table.table.table-striped
+      %tr
+        %th My posts
+        %th Date posted
+        %th Active?
+        %th.table-actions Actions
+      -@admin_posts.each do |post|
+        %tr
+          %td #{link_to post.title, post_url(post)}
+          %td #{time_ago_in_words(post.created_at)} ago
+          %td #{post.active}
+          %td.post-management-buttons
+            = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
+            = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger destroy_region'
+            -if post.active?
+              = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-deactivate deactivate_region'
+            -else
+              = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
+            -if post.completed?
+              = link_to 'Undo', undo_completed_post_path(post), :class => 'btn btn-mini deactivate_region'
+            -else
+              = link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
 
 
 
