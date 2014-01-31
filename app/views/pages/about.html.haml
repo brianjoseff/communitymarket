@@ -56,14 +56,22 @@
     /     %p Things began to implode
     /     %p When he chopped off my hand at the wrist
     /     =image_tag "PSLogo.png"
+
+    
   %div.span4
     %h3 Contact
     =form_tag "/contacts",  :method => :post, :class => "contact-me-submit" do
       / =hidden_field_tag :from, current_user.id
+      -if current_user
+        =hidden_field_tag :email, current_user.email
+      -else
+        =text_field_tag 'email', params[:email], :class => "input-block-level", :placeholder => "Your email so I can reply"
       %div.row-fluid
         %span.area
           =text_area_tag :content, params[:content], :class => "input-block-level", :placeholder => "Questions, comments, criticisms, and concerns", :rows => "10"
-      =submit_tag "Message Me", :class => "contact-me-submit"
+      =submit_tag "Contact Me", :class => "contact-me-submit"
 
-
+    %h3 Or
+    %p Brian Joseff
+    %p brianjoseff123@gmail.com
 //form for user submissions

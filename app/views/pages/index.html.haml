@@ -78,8 +78,8 @@
       -if current_user
         %h4 Popular Tags
         =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
-        %h4 Tags You Follow
-        =render :partial => 'tags/your_tags', :locals => {:tags => @followed_tags}
+        / %h4 Tags You Follow
+        / =render :partial => 'tags/your_tags', :locals => {:tags => @followed_tags}
       -else
         %h4 Popular Tags
         =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}

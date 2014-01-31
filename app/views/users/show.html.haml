@@ -17,7 +17,7 @@
         %p Group rank:
         %ul
           -@group_rank.each do |g|
-            %li #{g.members.count}: #{g.name}
+            %li #{g.members.count}/posts:#{g.posts.count}: #{g.name}
         %p Super Users:
         %ul
           -if !@users_with_5_posts.nil?
