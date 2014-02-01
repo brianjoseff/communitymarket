@@ -44,7 +44,12 @@
         %div.row-fluid
           %p #{simple_format h(@post.description)}
     -else
-      %div.row-fluid
+      %div.row-fluid      
+        -unless @post.assets.empty?
+          %div.span2
+            =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+            %div#modal_image{:style => "display:none;"}
+              =render 'modal_image', :post => @post
         %h1 Wanted: #{@post.title}
         -@post.tags.each do |tag|
           %div#whole_tag
@@ -52,6 +57,7 @@
             =link_to tag.name, tag_url(tag), :class => "tag"
       %div.row-fluid
         %p #{simple_format h(@post.description)}
+      
     
   %div.row-fluid
     %div.span4
