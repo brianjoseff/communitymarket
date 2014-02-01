@@ -5,17 +5,17 @@
 /////////////////////////////
 
 
+/ %div.row-fluid
+/   %div.search-row
+/     %div.span2
+/       =render :partial => "search/category_dropdown"
+/ 
+/     %div.span10
+/       /search bar
+/       =render :partial => "search/search_form"
 %div.row-fluid
-  %div.search-row
-    %div.span2
-      =render :partial => "search/category_dropdown"
-
-    %div.span10
-      /search bar
-      =render :partial => "search/search_form"
-  %div.row-fluid
-    -if !@post.active?
-      %h3 Post is inactive
+  -if !@post.active?
+    %h3 Post is inactive
 %div{:class => "#{@post.active? ? "" : "inactive-post"}"}
   %div.row-fluid
     -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
@@ -34,7 +34,7 @@
             %p sells for: $#{@tier.price/100}
         /buy button
         /%a.btn{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-      %div.span8
+      %div.span10
         %div.row-fluid
           %h1 #{@post.title}
           -@post.tags.each do |tag|
