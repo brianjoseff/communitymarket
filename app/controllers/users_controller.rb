@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       location = request.ip
       @rec_groups = Group.near(location, 20)
     end
-    if current_user.admin?
+    if current_user && current_user.admin?
       @admin_posts = Post.all
       @users_with_5_posts = User.joins(:posts).select('users.*, count(user_id) as "post_count"').group('users.id').order(' post_count desc')
       @group_rank = Group.joins(:members).select('groups.*, count(group_id) as "member_count"').group('groups.id').order(' member_count desc')
