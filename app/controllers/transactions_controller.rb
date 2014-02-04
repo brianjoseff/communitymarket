@@ -131,7 +131,7 @@ class TransactionsController < ApplicationController
         @user = current_user
         # @user.update_payment_details(@user.email, @token)
         # @user.charge_as_customer(@amount)
-        @transaction = @user.transactions.new(params[:transaction].merge(:price => @amount).merge(:email => @user.email))
+        @transaction = @user.transactions.new(params[:transaction].merge(:price => @amount).merge(:email => @user.email).merge(:post_id => @post.id))
         @transaction.save_customer(@user)
         if @transaction.save
           @user.charge_as_customer(@amount)
