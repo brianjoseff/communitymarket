@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   
-
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :validatable#,:trackable
+         :recoverable, :rememberable, :validatable, :trackable
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password
@@ -23,12 +23,14 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
+  
   def stripe_parameters
     {
       'stripe_user[business_type]' => 'sole_prop',
       'stripe_user[currency]' => 'usd'
     }
   end
+  
 
   def apply_omniauth(omniauth)
     self.secret_key = omniauth['credentials']['token']

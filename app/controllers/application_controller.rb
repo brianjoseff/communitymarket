@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
-  before_filter :get_search_object, :set_user, :get_location, :set_message
+  before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at
   
   def after_sign_in_path_for(resource) 
     if session[:followed_tag]
@@ -78,5 +78,12 @@ class ApplicationController < ActionController::Base
       redirect_to signin_path
     end
   end
-  
+  protected
+
+  def update_last_sign_in_at
+    if user_signed_in? && !session[:logged_signin]
+      sign_in(current_user, :force => true)
+      session[:logged_signin] = true
+    end
+  end
 end
