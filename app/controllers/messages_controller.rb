@@ -43,9 +43,11 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
+    @user = current_user
     @message = Message.new(params[:message])
     @message.post_id = params[:message][:post_id]
-    @sender = current_user.email
+    @message.sender = @user.email
+    @sender = @user.email
     @post = Post.find(@message.post_id)
     respond_to do |format|
       if @message.save
