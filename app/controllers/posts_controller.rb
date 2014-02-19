@@ -117,17 +117,23 @@ class PostsController < ApplicationController
         @post.tier_id = nil
         @post.price = nil
       end
+      # could include elsif here to set lump, hrly rat, other to nil
+      
+      
       @post.email = @user.email
-      @amount = 300
-      if @user.stripe_customer_id
-        @transaction = @user.transactions.new(:email => @user.email)
-        @user.charge_as_customer(@amount)
-      elsif params[:credit_card_number].present?
-        @transaction = @user.transactions.new
-        @transaction.email = @user.email
-        @transaction.price = @amount
-        @post.save_customer(@user)
-        @user.charge_as_customer(@amount)
+      
+      if @post.premium?
+        @amount = 300
+        if @user.stripe_customer_id
+          @transaction = @user.transactions.new(:email => @user.email)
+          @user.charge_as_customer(@amount)
+        elsif params[:credit_card_number].present?
+          @transaction = @user.transactions.new
+          @transaction.email = @user.email
+          @transaction.price = @amount
+          @post.save_customer(@user)
+          @user.charge_as_customer(@amount)
+        end
       end
       
       if @post.save

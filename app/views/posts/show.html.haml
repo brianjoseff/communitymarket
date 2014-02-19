@@ -43,7 +43,21 @@
               =link_to tag.name, tag_url(tag), :class => "tag"
         %div.row-fluid
           %p #{simple_format h(@post.description)}
-    -else
+    -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer a Service"
+      %div.row-fluid      
+        -unless @post.assets.empty?
+          %div.span2
+            =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+            %div#modal_image{:style => "display:none;"}
+              =render 'modal_image', :post => @post
+        %h1 Service: #{@post.title}
+        -@post.tags.each do |tag|
+          %div#whole_tag
+            %span#span-tag
+            =link_to tag.name, tag_url(tag), :class => "tag"
+      %div.row-fluid
+        %p #{simple_format h(@post.description)}
+    -elsif @post.post_category.name == "Wanted"
       %div.row-fluid      
         -unless @post.assets.empty?
           %div.span2

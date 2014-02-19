@@ -74,7 +74,46 @@
             %div.cash-field
               $
               =f.text_field :price, :class => "input-block-level inline span10", :placeholder => "price"
-  
+  %div#compensation{:style=>"display:none"}
+    %div.row-fluid
+      %div.span7
+        %div.control-group
+          Compensation:
+          %div.controls
+            / -[:lump_sum, :hourly_rate, :other].each do |r|
+            /   =f.label r, class:"radio" do
+            /     =radio_button_tag , class: "input-block-level inline"
+            /     =label_tag r
+            /     %div.span4{:style=>"display:none", class: r}
+            /       =f.text_field :lump_sum
+            / /=f.input :include_cover, :as => :radio, :collection => [:lump_sum, :hourly_rate, :other], :label => "Compensation:"
+            
+            
+            =f.label :lump_sum, class: "radio" do
+              =radio_button_tag 'compensation',1, true, class: "input-block-level inline lump compensation"
+              =label_tag "Lump Sum"
+              %div#lump_text
+                $
+                =f.text_field :lump_sum, id:"lump_text", class:"span4"
+            =f.label :hourly_rate, class: "radio" do
+              =radio_button_tag 'compensation',2, false, class: "input-block-level inline hrly compensation"
+              =label_tag "hourly_rate"
+              %div#hrly_text{:style=>"display:none"}
+                $
+                =f.text_field :hourly_rate, id:"hrly_text", class:"span4"
+                per hour
+            =f.label :other, class: "radio" do
+              =radio_button_tag 'compensation',3, false, class: "input-block-level inline other compensation"
+              =label_tag "other"
+              %div#other_text{:style=>"display:none"}
+                =f.text_field :other, id:"other_text", class:"span8"
+            / =f.label :hourly_rate, class: "radio" do
+            /   =f.radio_button :hourly_rate, class: "input-block-level inline"
+            /   =label_tag "Hourly Wage"
+            / =f.label :other, class: "radio" do
+            /   =f.radio_button :other, class: "input-block-level inline"
+            /   =label_tag "Other"
+            /   
   /CASH MONEY FIELDS
   / %div#get_paid_region
   /   %div.control-group
@@ -126,17 +165,22 @@
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
-            = link_to_add_fields "Add Another Image", f, :assets
             %div.control-group
               =asset_fields.label "image", :class=>"control-label"
               %div.controls
-                
                 =asset_fields.file_field :image
+            %div.control-group
+              %div.controls
+                = link_to_add_fields "Add Another Image", f, :assets
+                
+            
+          
           -else
             /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
             =image_tag(asset_fields.object.image.url(:post))
             =asset_fields.label  "delete image"
             =asset_fields.check_box :_destroy
+     
 
   /THIS IS THE GROUPS/ASSIGNMENTS SECTION...suck it
   %div.random-form-elements

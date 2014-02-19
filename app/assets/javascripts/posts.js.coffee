@@ -26,6 +26,38 @@
 # 	$("#new_post").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
 
+
+#select hrly, disable other and lump
+jQuery ->
+	$("input.hrly").click ->
+		#$("#other").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$("div#hrly_text").toggle()
+		$("div#lump_text").hide()
+		$("div#other_text").hide()
+		
+#select lump, disable hrly and other
+jQuery ->
+	$("input.lump").click ->
+		#$("#other").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$("div#hrly_text").hide()
+		$("div#lump_text").toggle()
+		$("div#other_text").hide()
+
+#select other, disable hrly and lump
+jQuery ->
+	$("input.other").click ->
+		#$("#other").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+		$("div#hrly_text").hide()
+		$("div#lump_text").hide()
+		$("div#other_text").toggle()
+
+
+# jQuery ->
+# 	$("input.compensation").change ->
+# 		$("#other").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
+# 		alert "hello"
+# 		$(this).child.toggle()
+
 $ ->
 	$("div.inactive-post a").replaceWith ->
 	  $(this).contents()
@@ -129,16 +161,29 @@ $ ->
 
 
 ## DISABLE PRICE AREA WHEN FREE or REQUEST post type is chosen
-		
 checkType = ->
 	n = $(this).data "id"
-	if n > 1
+	# if n > 1
+	# 	$("#price_field").val('')
+	# 	$("div#get_paid_stuff").hide()
+	# 			
+	# else
+	# 	$("div#get_paid_stuff").show()
+	if n > 1 && n < 4
 		$("#price_field").val('')
-		$("div#get_paid_stuff").hide()		
-	else
+		$("div#get_paid_stuff").hide()
+		$("div#compensation").hide()		
+	else if n == 4 || n == 5
+		$("#price_field").val('')
+		$("div#get_paid_stuff").hide()
+		$("div#compensation").show()
+	else if n == 1
 		$("div#get_paid_stuff").show()
+		$("div#compensation").hide()
+		
 $ ->
 	$("button.switch").on "click", checkType
+	
 	
 $ ->
 	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->

@@ -53,9 +53,14 @@
       -elsif feed_item.post_category_id == 2
         /%div.wanted-marker
         %span.for-sale Wanted
-      -else
+      -elsif feed_item.post_category_id == 3
         /%div.free-marker
-        %span.blue [For Rent/Borrow]
+        %span.for-sale For Rent/Borrow
+      -elsif feed_item.post_category_id == 4
+        %span.for-sale{class: "#{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "paid-service" : ""}"}
+          #{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "$ Make Money" : "Help Needed"}
+      -elsif feed_item.post_category_id == 5
+        %span.for-sale Service Offered
       /price
       /make price a variable that can be passed into the modal partials below so
       /that on credit card charge, we know how much to charge      

@@ -1,6 +1,6 @@
 = link_to 'New Tag', new_tag_path
 
-%div.row
+%div.row-fluid
   %div.span3
     %h3 Search
     =search_form_for @q, :url => { :controller => "tags", :action => "search"}, :html => { :class => "form-inline"} do |f|
@@ -22,30 +22,28 @@
     %div.row
       %div.span3
         %h3 Popular Tags
-      / %div.span6.posts-nav
-      /   %span
-      /     =link_to "For Sale", for_sale_path, id: 'for_sale_link'
-      /   %span 
-      /     =link_to "Wanted", wanted_path, id: 'wanted_link'
-      /   %span
-      /     =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
-      /=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
-      / %div.span9
-      /   %ul.nav-tabs
-      /     %li 
-      /Sort by: closest, newest, oldest, most popular
-      / %ul.breadcrumb
-      /   %li
-      /     =link_to "All", groups_path
-      /   %li
-      /     =link_to @group_category, group_category_path(@group_category)
     =render @popular_tags
-    /=render @tags
-%br
+
 
 /
 
-
+/ %div.span6.posts-nav
+/   %span
+/     =link_to "For Sale", for_sale_path, id: 'for_sale_link'
+/   %span 
+/     =link_to "Wanted", wanted_path, id: 'wanted_link'
+/   %span
+/     =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
+/=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
+/ %div.span9
+/   %ul.nav-tabs
+/     %li 
+/Sort by: closest, newest, oldest, most popular
+/ %ul.breadcrumb
+/   %li
+/     =link_to "All", groups_path
+/   %li
+/     =link_to @group_category, group_category_path(@group_category)
 
 /Categories side bar
 /Content area
