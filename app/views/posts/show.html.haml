@@ -43,7 +43,7 @@
               =link_to tag.name, tag_url(tag), :class => "tag"
         %div.row-fluid
           %p #{simple_format h(@post.description)}
-    -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer a Service"
+    -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"
       %div.row-fluid      
         -unless @post.assets.empty?
           %div.span2
