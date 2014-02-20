@@ -51,6 +51,12 @@
             %div#modal_image{:style => "display:none;"}
               =render 'modal_image', :post => @post
         %h1 Service: #{@post.title}
+        -if @post.lump_sum?
+          %h3 Compensation: $ #{@post.lump_sum}
+        -elsif @post.hourly_rate
+          %h3 Compensation: $#{@post.hourly_rate} per hour
+        -else
+          %h3 Compensation: #{@post.other}
         -@post.tags.each do |tag|
           %div#whole_tag
             %span#span-tag
