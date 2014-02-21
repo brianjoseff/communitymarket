@@ -17,6 +17,7 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
     unless @tag.posts.empty?
 		  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+		  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
 		end
 
     respond_to do |format|
