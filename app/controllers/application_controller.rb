@@ -1,7 +1,15 @@
 class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
-  before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at
+  before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags
+  def get_category_tags
+    @appliances = Tag.find_by_id(4)
+    @sports = Tag.find_by_id(27)
+    @electronics = Tag.find_by_id(36)
+    @clothing = Tag.find_by_id(40)
+    @books = Tag.find_by_id(21)
+    @furniture = Tag.find_by_id(3)
+  end
   
   def after_sign_in_path_for(resource) 
     if session[:followed_tag]

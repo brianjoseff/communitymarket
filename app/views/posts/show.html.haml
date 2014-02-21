@@ -100,7 +100,7 @@
           -else
             =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id
       %div.email.pull-left
-        =link_to_modal "Email", new_message_path(:post_id => @post.id, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
+        =link_to_modal "Email", new_message_path(:post_id => @post.id, :post=>@post, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
     %div.row-fluid
     -unless @post.assets.empty?
       -@post.assets[1..-1].each do |asset|

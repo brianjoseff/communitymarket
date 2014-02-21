@@ -1,5 +1,7 @@
 .modal-message-form
   %h1 Email them:
-  
+  -if @post
+    %p =@post.title
+    =@post.description
 
   = render 'form', post_id: :post_id, recipient: :recipient
