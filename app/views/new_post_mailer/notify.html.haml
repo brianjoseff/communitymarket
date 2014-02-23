@@ -1,4 +1,4 @@
-%h3 From: #{@group.name}
+%h3 From: #{link_to @group.name, group_url(@group)}
 -unless @post.assets.empty?
   =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:small), :alt => @post.title), post_url(@post)
 
@@ -18,3 +18,4 @@
   
   
 %p Want to modify your email frequency? click #{link_to 'here.', user_url(@recipient)}
+%p Want to leave this group? click #{link_to 'here.', group_url(@group)}
