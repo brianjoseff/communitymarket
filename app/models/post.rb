@@ -79,6 +79,10 @@ class Post < ActiveRecord::Base
     return self.post_category_id == 1
   end
   
+  def assign_to!(group)
+    assignments.create!(group_id: group.id)
+  end
+  
   def save_customer(user)
     if valid?
       customer = Stripe::Customer.create( :description => user.email, :card => stripe_card_token)
