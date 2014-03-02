@@ -9,6 +9,19 @@ class ApplicationController < ActionController::Base
     @clothing = Tag.find_by_id(40)
     @books = Tag.find_by_id(21)
     @furniture = Tag.find_by_id(3)
+    @full_post_categories = PostCategory.all
+    @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture]
+    @browse_by_array = []
+    @browse_by_array_tags.each do |a|
+      if !a.nil?
+        @browse_by_array << a
+      end
+    end
+    @full_post_categories.each do |c|
+      @browse_by_array << c
+    end
+    
+    @browse_by_array.sort! {|a,b| (a.name.downcase <=> b.name.downcase) || nil}
   end
   
   def after_sign_in_path_for(resource) 
