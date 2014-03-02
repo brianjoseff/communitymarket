@@ -53,13 +53,17 @@
       %div.row-fluid
         %div.span2
           %h2 Posts
-        %div.span6.posts-nav
-          %span
-            =link_to "For Sale", for_sale_path, id: 'for_sale_link'
-          %span 
-            =link_to "Wanted", wanted_path, id: 'wanted_link'
-          %span
-            =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
+        %div.span3.posts-nav
+          = form_tag('pages', :remote => true) do
+            =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
+          / %span
+          /   =link_to "For Sale | ", for_sale_path, id: 'off_for_sale_link'
+          / %span 
+          /   =link_to "Wanted | ", wanted_path, id: 'off_wanted_link'
+          / %span
+          /   =link_to "For Rent/Borrow | ", borrow_rent_path, id: "off_borrow_rent_link"
+          / %span
+          /   =link_to "Services", services_path, id: "off_borrow_rent_link"
       /Should put these buttons on a "search result page"
       /Sorting buttons
       /=sort_link @sort_posts, :name, "Name"
@@ -69,7 +73,8 @@
       
       /Post feed
       /=render :partial => 'feed',:locals => {:feed_items => @posts}
-      =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+      #post_feed
+        =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
   %div.span4
     / %div.advertising
     %a.advertising{:href => "http://www.moranogelato.com/", :target=>"Morano"}

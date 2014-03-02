@@ -2,10 +2,26 @@ class PagesController < ApplicationController
   # skip_before_filter :require_login
   # skip_before_filter :authorize
   require 'will_paginate/array' 
+  def feed      
+    if params[:cat]
+      @post_category= PostCategory.find_by_name(params[:cat])
+      @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    else
+      @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    end
+    respond_to do |format|
+       format.html
+       format.js
+       format.json { render json: @posts }
+     end
+  end
   
   def index
-
     @post = Post.new
+    @post_categories = PostCategory.pluck(:name)
+    @post_categories << "All"
     @transaction = Transaction.new
     @sort_posts = Post.search()
     @sorted_posts = @sort_posts.result
@@ -19,10 +35,20 @@ class PagesController < ApplicationController
     
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user
-      #@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
-      @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
-      #@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
+      #OLD######@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
+      # @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      # @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      
+      if params[:categorize] && params[:categorize] != "All" 
+        @post_category= PostCategory.find_by_name(params[:categorize])
+        @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      else
+        @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      end
+      
+      #OLD#######@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.groups_as_member
       unless @location.first.nil?
         @near_groups = Group.near(@location.first.city, 10000)
@@ -31,8 +57,16 @@ class PagesController < ApplicationController
       @followed_tags = @user.followed_tags
     else
       #must sort them in opposite order because of the way the partials are rendered?
-      @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      #@posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      if params[:categorize]
+        @post_category= PostCategory.find_by_name(params[:categorize])
+        @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      else
+        @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      end
       @random_tags = Tag.last(5)
       #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
@@ -53,7 +87,12 @@ class PagesController < ApplicationController
       #@posts = @entries.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       #@groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @random_groups = Group.last(20) - @user.groups_as_member
-    end
+    end 
+    respond_to do |format|
+       format.html # index.html.erb
+       format.js # index.js.erb
+       format.json { render json: @posts }
+     end 
   end
   
   def wanted
@@ -144,6 +183,11 @@ class PagesController < ApplicationController
       @random_groups = Group.last(20) - @user.groups_as_member
     end
   end
+  
+  def services
+    
+  end
+  
   def borrow_rent
     @post_category = PostCategory.find(4)
     @post = Post.new

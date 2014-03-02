@@ -1,3 +1,12 @@
+$(document).ready ->
+  $(".post-sort").on "change", ->
+    $.ajax
+      url: "/"
+      type: "GET"
+      dataType: "script"
+      data:
+        categorize: $(".post-sort").val()
+
 $ ->
 	$("form.contact-me-submit").submit ->
 	  $('input[type=submit].contact-me-submit').attr('disabled', 'disabled')

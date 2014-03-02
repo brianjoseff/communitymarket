@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @posts = @group.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
     @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
-    
+    @random_groups = Group.last(20) - @user.groups_as_member
     if !signed_in?
       @user = User.new
     else

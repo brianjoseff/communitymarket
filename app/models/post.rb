@@ -22,6 +22,17 @@ class Post < ActiveRecord::Base
   attr_accessor :stripe_card_token
   
   
+  def self.searchable_columns
+    wanted_columns = ['name', 'created_at']
+    self.column_names.select{ |column| wanted_columns.include?(column) }
+  end
+  def self.translated_searchable_columns
+    columns = self.searchable_columns
+    result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
+    result
+  end
+  
+  
   def set_default_completed_false
     self.completed ||= false
   end
@@ -67,6 +78,10 @@ class Post < ActiveRecord::Base
   
   def deactivate!
     self.active = false
+    self.save!
+  end
+  def activate!
+    self.active = true
     self.save!
   end
   

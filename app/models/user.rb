@@ -145,6 +145,25 @@ class User < ActiveRecord::Base
     false   
   end
   
+  def charge_as_customer_through_connect(amount, email, merchant)
+    token = params[:stripeToken]
+    fee = amount*Communitymarket::Application::STRIPE_CONNECT_FEE
+    charge = Stripe::Charge.create(
+      {
+        amount:          amount,
+        application_fee: fee,
+        currency:        'usd',
+        card:            params[:stripeToken],
+        description:     email,
+    },
+      merchant.stripe_access_key
+    )
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while charging card: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
+  
   def update_payment_details(email, token)
     customer = Stripe::Customer.create( :description => email, :card => token)
     self.update_attributes(:stripe_customer_id => customer.id)
@@ -204,6 +223,9 @@ class User < ActiveRecord::Base
     errors.add :base, "There was a problem with your credit card."
   
   end
+  
+  
+  
   
   def post_feed
     groups_as_owner = self.groups_as_owner
