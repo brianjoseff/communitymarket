@@ -3,15 +3,24 @@
     Shop By Category
     %b.caret
   %ul.dropdown-menu
-    %li
-      %a{href: @appliances ? tag_url(@appliances) : "#"} Appliances
-    %li
-      %a{href: @books ?tag_url(@books) : "#"} Books
-    %li
-      %a{href: @clothing ?tag_url(@clothing) : "#"} Clothing
-    %li
-      %a{href: @electronics ?tag_url(@electronics) : "#"} Electronics
-    %li
-      %a{href: @furniture ?tag_url(@furniture) : "#"} Furniture
-    %li
-      %a{href: @sports ?tag_url(@sports) : "#"} Sporting Goods
+    -@browse_by_array.each do |category|
+      -if category.is_a?(Tag)
+        %li
+          %a{href: category ? tag_url(category) : "#"} #{category.name}
+      -elsif category.is_a?(PostCategory)
+        %li
+          %a{href: category ? post_category_url(category) : "#"} #{category.name}
+      
+    / %li
+    /   %a{href: @appliances ? tag_url(@appliances) : "#"} Appliances
+    / %li
+    /   %a{href: @books ? tag_url(@books) : "#"} Books
+    / %li
+    /   %a{href: @clothing ? tag_url(@clothing) : "#"} Clothing
+    / %li
+    /   %a{href: @electronics ? tag_url(@electronics) : "#"} Electronics
+    / %li
+    /   %a{href: @furniture ? tag_url(@furniture) : "#"} Furniture
+    / %li
+    /   %a{href: @sports ? tag_url(@sports) : "#"} Sporting Goods
+    
