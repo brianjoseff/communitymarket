@@ -1,5 +1,9 @@
 / %p#notice= notice
-%div.row-fluid
+
+
+
+/ IMAGE, GROUP NAME, DESCRIPTION
+%div.row-fluid.group-header
   -unless @group.assets.empty?
     %div.span3
       =link_to image_tag(@group.assets.empty?  ? '/assets/small.png': @group.assets.first.image.url(:medium), :alt => @group.name), group_url(@group), :class => "thumbnail"
@@ -9,6 +13,7 @@
       %p (private group)
     %div.row-fluid
       %p #{@group.description}
+      =render "shared/group_show_join", :group => @group
     / %p
     /   %b Name:
     /   = @group.name
@@ -21,38 +26,63 @@
     
     
 
--if @group.private? && current_user && current_user.admin?
-  =link_to "Show Members","#", :class => "show-members-link"
-  =link_to "Hide", "#", :class => "hide-link",:style => "display:none;"
-  %div.private-user-list{:style => "display:none;"}
-    -@group.members.each do |member|
-      %p #{member.name ? member.name : member.email}
-  %p Group password will be included in the invite email
-  = render :partial => 'invite', :locals => {:group => @group}
-  -unless @group.posts.empty?
-    %h2 Posts
-    =render :partial => 'shared/feed',:locals => {:feed_items => @posts}    
+/ -if @group.private? && current_user && current_user.admin?
+/   =link_to "Show Members","#", :class => "show-members-link"
+/   =link_to "Hide", "#", :class => "hide-link",:style => "display:none;"
+/   %div.private-user-list{:style => "display:none;"}
+/     -@group.members.each do |member|
+/       %p #{member.name ? member.name : member.email}
+/   %p Group password will be included in the invite email
+/   = render :partial => 'invite', :locals => {:group => @group}
+/   -unless @group.posts.empty?
+/     %h2 Posts
+/     =render :partial => 'shared/feed',:locals => {:feed_items => @posts}  
+
+
+
+
+/ PRIVATE GROUPS
 -if @group.private? && @group.members.include?(current_user)
-  =link_to "Show Members","#", :class => "show-members-link"
-  =link_to "Hide", "#", :class => "hide-link",:style => "display:none;"
-  %div.private-user-list{:style => "display:none;"}
-    -@group.members.each do |member|
-      %p #{member.name ? member.name : member.email}
-  %p Group password will be included in the invite email
-  = render :partial => 'invite', :locals => {:group => @group}
-  -unless @group.posts.empty?
-    %h2 Posts
-    =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+  %div.row-fluid
+    %div.span8
+      =link_to "Show Members","#", :class => "show-members-link"
+      =link_to "Hide", "#", :class => "hide-link",:style => "display:none;"
+      %div.private-user-list{:style => "display:none;"}
+        -@group.members.each do |member|
+          %p #{member.name ? member.name : member.email}
+      -unless @group.posts.empty?
+        %h2 Posts
+        =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+    %div.span4
+      -if flash[:wrong_password]
+        %p#wrong_password= "Wrong password homie"
+      %p Group password will be included in the invite email
+      = render :partial => 'invite', :locals => {:group => @group}
 
--if flash[:wrong_password]
-  %p#wrong_password= "Wrong password homie"
+-else
+  /POSTS and INVITE
+  %div.row-fluid
+    %div.span8
+      -if !@posts.empty?
+        %h2 Posts:
+        =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+      -else
+        %h2 Posts:
+        =link_to "None! Click here to post something", new_post_path
+    %div.span4
+      /=render "shared/simple_join", :group => @group  
+      -if current_user && !@group.private?
+        = render :partial => 'invite', :locals => {:group => @group}
+      %h3 More Groups:
+      =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
+  /=render "join_form", :group => @group
 
-=render "shared/simple_join", :group => @group  
-/=render "join_form", :group => @group
--if current_user && !@group.private?
-  = render :partial => 'invite', :locals => {:group => @group}
-  %h2 Posts
-  =render :partial => 'shared/feed',:locals => {:feed_items => @posts}
+
+
+
+
+
+
 -if current_user && current_user.groups_as_owner.include?(@group)
   = link_to 'Edit', edit_group_path(@group)
   |
@@ -71,4 +101,4 @@
           %td= check_box_tag "delete[]", membership.id
           %td= User.find(membership.member_id).name
 
-    = button_tag "Delete users"
+    = button_tag "Remove members"
