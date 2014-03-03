@@ -89,6 +89,10 @@ class Post < ActiveRecord::Base
     self.completed = true
     self.save!
   end
+  def uncomplete!
+    self.completed = false
+    self.save!
+  end
   
   def for_sale?
     return self.post_category_id == 1

@@ -51,6 +51,7 @@ transaction =
 			$('#new_transaction')[0].submit()
 		else
 			alert(response.error.message)
+			$('input[type=submit]').attr('disabled', false)
 
 # $('#stripe_error').text(response.error.message)
 

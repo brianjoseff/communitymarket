@@ -49,6 +49,9 @@
         =f.text_field :email, :validate => true, :value => (current_user ? current_user.email : "")
       -unless current_user
         %div.row-fluid
+          =label_tag :name
+          =text_field_tag :name, params[:name]
+        %div.row-fluid
           =label_tag :password
           =text_field_tag :password, params[:password]
 

@@ -1,8 +1,7 @@
 -if feed_item.premium?
   %div.feed-item.row-fluid
     %div.row-fluid
-      =render 'shared/post_feed_item_premium', :feed_item => feed_item
+      =render 'feed/post_feed_item_premium', :feed_item => feed_item
 -else
   %div.row-fluid
-    %div.slim-feed-item.row-fluid
-      =render 'shared/post_feed_item_slim', :feed_item => feed_item
+    =render 'feed/post_feed_item_slim', :feed_item => feed_item
