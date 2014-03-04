@@ -6,10 +6,10 @@
     -@browse_by_array.each do |category|
       -if category.is_a?(Tag)
         %li
-          %a{href: category ? tag_url(category) : "#"} #{category.name}
+          %a{href: category ? tag_url(category) : "#"} #{category.name.titleize}
       -elsif category.is_a?(PostCategory)
         %li
-          %a{href: category ? post_category_url(category) : "#"} #{category.name}
+          %a{href: category ? post_category_url(category) : "#"} #{category.name.titleize}
       
     / %li
     /   %a{href: @appliances ? tag_url(@appliances) : "#"} Appliances
