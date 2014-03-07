@@ -16,7 +16,8 @@ class PostCategoriesController < ApplicationController
   def show
     @post_category = PostCategory.find(params[:id])
     unless @post_category.posts.empty?
-		  @posts = @post_category.posts.paginate(:per_page => 5, :page => params[:page])
+		  @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+		  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
 		end
 
     respond_to do |format|
