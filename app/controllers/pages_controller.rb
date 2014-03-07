@@ -32,25 +32,25 @@ class PagesController < ApplicationController
     
     #VERY BRITTLE CODE HERE
     # For "Browse by Category" feature on search bar
-    @appliances = Tag.find_by_id(4)
-    @sports = Tag.find_by_id(27)
-    @electronics = Tag.find_by_id(36)
-    @clothing = Tag.find_by_id(40)
-    @books = Tag.find_by_id(21)
-    @furniture = Tag.find_by_id(3)
-    @full_post_categories = PostCategory.all
-    @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture]
-    @browse_by_array = []
-    @browse_by_array_tags.each do |a|
-      if !a.nil?
-        @browse_by_array << a
-      end
-    end
-    @full_post_categories.each do |c|
-      @browse_by_array << c
-    end
-    
-    @browse_by_array.sort! {|a,b| (a.name.downcase <=> b.name.downcase) || nil}
+    # @appliances = Tag.find_by_id(4)
+    # @sports = Tag.find_by_id(27)
+    # @electronics = Tag.find_by_id(36)
+    # @clothing = Tag.find_by_id(40)
+    # @books = Tag.find_by_id(21)
+    # @furniture = Tag.find_by_id(3)
+    # @full_post_categories = PostCategory.all
+    # @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture]
+    # @browse_by_array = []
+    # @browse_by_array_tags.each do |a|
+    #   if !a.nil?
+    #     @browse_by_array << a
+    #   end
+    # end
+    # @full_post_categories.each do |c|
+    #   @browse_by_array << c
+    # end
+    # 
+    # @browse_by_array.sort! {|a,b| (a.name.downcase <=> b.name.downcase) || nil}
     
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user

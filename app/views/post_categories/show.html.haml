@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @post_category.name
+  / %div{:id => "follow_button_"+@post_category.id.to_s}
+  /   =render 'shared/simple_follow', :tag => @post_category
+/ %p
+/   %b Description:
+/   = @post_category.description
+-unless @post_category.posts.empty?
+  /=will_paginate @posts
+  /=render @posts
+  
+  /=render :partial => 'shared/post_feed', :collection => @posts, :as => :feed_item
+  =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+  /=will_paginate @posts
