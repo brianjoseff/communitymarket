@@ -8,10 +8,13 @@
 /       %li ask for stuff
 /       %li notify certain groups of people
 
+/STRIPE CONNECT
+/= link_to "Sign up with Stripe Connect", user_omniauth_authorize_path(:stripe_connect)
+
 %div.banner
   -if !current_user
     %div.row-fluid
-      %h1.hero-text We are good consumers.
+      %h1.hero-text Your community marketplace.
       =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
     /   %div#top_banner_row.row
     /     %div.span12
@@ -56,6 +59,9 @@
         %div.span3.posts-nav
           = form_tag('pages', :remote => true) do
             =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
+        %div.span2
+          %div.loading_indicator{:style => "display:none"}
+            = image_tag("loader.gif")
           / %span
           /   =link_to "For Sale | ", for_sale_path, id: 'off_for_sale_link'
           / %span 
