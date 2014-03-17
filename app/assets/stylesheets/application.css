@@ -11,13 +11,14 @@
  *= require_self
  *= require jquery.ui.all
  *= require token-input-facebook
- *= require skeuocard.reset
- *= require skeuocard
  *= require s3_direct_upload_progress_bars
  *= require_tree .
  */
 
 
+/* *= require skeuocard.reset
+ *= require skeuocard
+*/
 /*
 1. General Styles
 2. Messages

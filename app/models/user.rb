@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password
-  attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at
+  attr_accessor :password, :password_confirmation, :current_password
+  attr_accessible :email, :name,:password, :password_confirmation, :current_password, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at
   #include Clearance::User
+  
   has_many :transactions
   has_many :posts
   has_many :groups_as_member, :through => :memberships, :source => :group, :class_name => "Group", :foreign_key => :user_id
@@ -23,6 +25,9 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
+
+  
+  
   
   def stripe_parameters
     {

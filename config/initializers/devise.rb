@@ -11,7 +11,12 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'password-reset@peopleandstuff.com'
-
+  
+  config.omniauth :stripe_connect,
+    ENV['STRIPE_CONNECT_CLIENT_ID'],
+    ENV['STRIPE_SECRET'],
+    :scope => 'read_write', # or :scope => 'read_only'
+    :stripe_landing => 'login' # or :stripe_landing => 'register'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

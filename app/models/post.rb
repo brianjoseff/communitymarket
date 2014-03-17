@@ -22,8 +22,9 @@ class Post < ActiveRecord::Base
   attr_accessor :stripe_card_token
   
   
+  
   def self.searchable_columns
-    wanted_columns = ['name', 'created_at']
+    wanted_columns = ['title', 'created_at', 'price']
     self.column_names.select{ |column| wanted_columns.include?(column) }
   end
   def self.translated_searchable_columns
@@ -31,7 +32,6 @@ class Post < ActiveRecord::Base
     result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
     result
   end
-  
   
   def set_default_completed_false
     self.completed ||= false

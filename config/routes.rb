@@ -1,4 +1,5 @@
 Communitymarket::Application.routes.draw do
+  # mount Monologue::Engine, at: '/blog'
   resources :messages
 
 
@@ -9,6 +10,7 @@ Communitymarket::Application.routes.draw do
  
 
   devise_for :users, controllers: { :registrations => "registrations", omniauth_callbacks: 'users/omniauth_callbacks'}
+  get '/auth/stripe_connect/callback', to: 'stripe_connect#create'
   # devise_scope :user do
   #   #match '/sessions/user', to: 'devise/sessions#create', via: :post
   #   get "/sign_in", :to => "devise/sessions#new"
@@ -88,9 +90,11 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   
+  match '/feed', :to =>"pages#feed"
   match '/bulk_update', :to => "groups#bulk_update"
   match '/for_sale', :to => "pages#for_sale"
   match '/borrow_rent', :to => "pages#borrow_rent"
+  match '/services', to: "pages#services"
   match '/wanted', :to => "pages#wanted"
   match '/transactions/customer_purchase', :to => "transactions#customer_purchase"
   match '/memberships/join', :to => "memberships#join"

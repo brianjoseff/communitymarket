@@ -29,6 +29,7 @@ class PagesController < ApplicationController
     @sorted_posts = @sort_posts.result
     
     @popular_tags = get_popular_tags
+    # @ranked_users = User.all.first(5)
     
     #VERY BRITTLE CODE HERE
     # For "Browse by Category" feature on search bar

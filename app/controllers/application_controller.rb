@@ -2,6 +2,19 @@ class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
   before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags
+  # before_filter :configure_devise_permitted_parameters, if: :devise_controller?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) { |u| 
+      u.permit(:password, :password_confirmation, :current_password) 
+    }
+  end
+  
+  
+  # this method seeds the "Shop by Category" dropdown menu that
+  # it is in the "post + search" bar at the top of every page
+  # => contains both Tags and PostCategories
   def get_category_tags
     @appliances = Tag.find_by_id(4)
     @sports = Tag.find_by_id(27)
@@ -24,6 +37,11 @@ class ApplicationController < ActionController::Base
     @browse_by_array.sort! {|a,b| (a.name.downcase <=> b.name.downcase) || nil}
   end
   
+  
+  # If a non-signed up or signed-in user does some action on the site
+  # like follow a tag or join a group, the action is stored in
+  # session and this method makes sure it completes once the user
+  # signs in
   def after_sign_in_path_for(resource) 
     if session[:followed_tag]
       @tag = Tag.find(session[:followed_tag])
@@ -107,4 +125,19 @@ class ApplicationController < ActionController::Base
       session[:logged_signin] = true
     end
   end
+
+
+  # def configure_devise_permitted_parameters
+  #   registration_params = [:full_name, :email, :password, :password_confirmation]
+  # 
+  #   if params[:action] == 'update'
+  #     devise_parameter_sanitizer.for(:account_update) { 
+  #       |u| u.permit(registration_params << :current_password)
+  #     }
+  #   elsif params[:action] == 'create'
+  #     devise_parameter_sanitizer.for(:sign_up) { 
+  #       |u| u.permit(registration_params) 
+  #     }
+  #   end
+  # end
 end

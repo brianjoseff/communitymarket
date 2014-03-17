@@ -24,6 +24,9 @@
 //= require jquery.modal
 //= require_tree .
 
+
+
+
 // $(document).ready(function(){
 //   card = new Skeuocard($("#skeuocard"));
 // });
@@ -61,6 +64,8 @@
 //     return false; 
 //   });
 // });
+
+
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");

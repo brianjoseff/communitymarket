@@ -22,8 +22,8 @@
       %div.span3
         %h3 Groups
         %form.filter_form
-        = form_tag('groups', :remote => true) do
-          = select_tag :sort, options_for_select(Group.translated_searchable_columns, params[:sort]),  {:prompt => 'Sort By:', :class => "group-sort"}
+          = form_tag('groups', :remote => true) do
+            = select_tag :sort, options_for_select(Group.translated_searchable_columns, params[:sort]),  {:prompt => 'Sort By:', :class => "group-sort"}
           /= select_tag "name", options_from_collection_for_select(@group_attributes, "name", nil),  { :include_blank => true , :class => "group_select"}
         #products_list
       %div.span4

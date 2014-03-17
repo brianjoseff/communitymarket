@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140119212858) do
+ActiveRecord::Schema.define(:version => 20140218213145) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -150,6 +150,11 @@ ActiveRecord::Schema.define(:version => 20140119212858) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "monologue_posts_tags", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
   create_table "post_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -172,6 +177,9 @@ ActiveRecord::Schema.define(:version => 20140119212858) do
     t.boolean  "active",           :default => true
     t.boolean  "post_to_facebook"
     t.boolean  "completed"
+    t.integer  "lump_sum"
+    t.integer  "hourly_rate"
+    t.string   "other"
   end
 
   create_table "sashes", :force => true do |t|

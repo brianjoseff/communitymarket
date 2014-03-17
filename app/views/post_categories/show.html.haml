@@ -5,9 +5,13 @@
   = @post_category.name
   / %div{:id => "follow_button_"+@post_category.id.to_s}
   /   =render 'shared/simple_follow', :tag => @post_category
-/ %p
-/   %b Description:
-/   = @post_category.description
+  %form.filter_form
+    =content_tag 'div', class: "post-category-id", data: {pc_id: @post_category.id} do
+      shit
+      
+    = form_tag('post_categories', :remote => true) do
+      
+      = select_tag :sort, options_for_select(Post.translated_searchable_columns, params[:sort]),  {:prompt => 'Sort By:', :class => "post-category-sort"}
 -unless @post_category.posts.empty?
   /=will_paginate @posts
   /=render @posts

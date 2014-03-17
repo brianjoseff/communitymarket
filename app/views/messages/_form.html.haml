@@ -18,4 +18,4 @@
       = f.text_area :content, :class => "input-block-level inline", :placeholder => "Email Content", :rows => "8"
   = debug(params) if Rails.env.development?
   .actions
-    = f.submit 'Send Your Message'
+    = f.submit 'Send Your Message', id: "send_message"

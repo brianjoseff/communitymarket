@@ -1,4 +1,7 @@
 class WeeklyQueue < ActiveRecord::Base
+  # these are the emails that are queued for users that wish
+  # to receive Weekly updates for groups they are a part of
+  # rather than per-post or daily updates
   attr_accessible :post_id, :user_id, :sender_id, :group_id
   def self.send_email
     #add time range restraint as well

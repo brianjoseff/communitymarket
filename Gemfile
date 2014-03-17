@@ -26,13 +26,13 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails'
-  #gem 'chosen-rails'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
   gem 'jquery-modal-rails'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails'
+  #gem 'chosen-rails'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
@@ -50,9 +50,15 @@ gem 'will_paginate'
 gem 'kaminari'
 gem 'rails_tokeninput'
 
+#payment stuff
 gem 'stripe'
 gem 'omniauth-stripe-connect'
 gem 'skeuocard-rails'
+
+
+#blog
+# gem "bloggy"
+# gem "monologue"
 
 #gems that help with seed files
 gem 'forgery'
@@ -103,7 +109,7 @@ gem 'jquery-fileupload-rails'
 
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

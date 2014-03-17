@@ -10,9 +10,9 @@ $(document).ready ->
     expression: "if(VAL != '') return true; else return false;"
     message: "email is required."
 
-  $("#user_password").validate
-    expression: "if(VAL != '') return true; else return false;"
-    message: "password is required."
+  # $("#user_password").validate
+  #   expression: "if(VAL != '') return true; else return false;"
+  #   message: "password is required."
 
 
 jQuery ->

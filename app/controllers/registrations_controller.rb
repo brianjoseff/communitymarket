@@ -1,10 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  protected
 
-   def after_sign_up_path_for(resource)
-     user_url(current_user)
-   end
  
   def update
     if params[:user][:password].blank?
@@ -23,5 +19,11 @@ class RegistrationsController < Devise::RegistrationsController
       render_with_scope :edit
     end
   end
-  
+  protected
+
+   def after_sign_up_path_for(resource)
+     #user_url(current_user)
+     #sign_up_and_redirect current_user, :event => :authentication
+     request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+   end
 end

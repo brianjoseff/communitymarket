@@ -1,11 +1,41 @@
-$(document).ready ->
-  $(".post-sort").on "change", ->
-    $.ajax
-      url: "/"
-      type: "GET"
-      dataType: "script"
-      data:
-        categorize: $(".post-sort").val()
+ajaxReload = ->
+	$(".loading_indicator").show()
+  $.ajax
+    url: "/"
+    type: "GET"
+    dataType: "script"
+    data:
+      categorize: $(".post-sort").val()
+    success: (data) ->
+      $(".loading_indicator").hide()
+      return
+
+    error: (data) ->
+      $(".loading_indicator").hide()
+      return
+ 
+$ ->
+	$(".post-sort").on "change", ajaxReload
+
+
+
+# $ ->
+#   $(".post-sort").on "change", ->
+#     $("#loading_indicator").show()
+#     $.ajax
+#       url: "/"
+#       type: "GET"
+#       dataType: "script"
+#       data:
+#         categorize: $(".post-sort").val()
+# 	    success: (data) ->
+# 	      $("#loading_indicator").hide()
+# 	      return
+# 
+# 	    error: (data) ->
+# 	      $("#loading_indicator").hide()
+# 	      return
+# 	
 
 $ ->
 	$("form.contact-me-submit").submit ->

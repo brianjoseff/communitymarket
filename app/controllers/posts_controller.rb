@@ -95,6 +95,8 @@ class PostsController < ApplicationController
       if !@post.for_sale?
         @post.tier_id = nil
         @post.price = nil
+      elsif @post.tier_id?
+        @post.price = Tier.find(@post.tier_id).price
       end
       if params[:credit_card_number].present?
         @transaction = @user.transactions.new(:email => @user.email)

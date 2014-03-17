@@ -19,7 +19,14 @@ class PostCategoriesController < ApplicationController
 		  @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
 		  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
 		end
-
+		
+    #@post_attributes = Post.columns
+     if params[:sort]
+       @groups= Group.order(params[:sort])
+     else
+       @groups = Group.order(:name)
+     end 
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post_category }

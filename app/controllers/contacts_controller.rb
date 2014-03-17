@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  # this is for the "Contact Me" mailer form on the About page
   def new
     @content = params[:content]
     @email = params[:email]

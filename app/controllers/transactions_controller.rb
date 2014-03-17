@@ -28,10 +28,13 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     @user = User.new
     flash[:the_post_id] = params[:post_id]
-    @post = Post.find(params[:post_id])
-    if @post.tier_id?
-      @tier = Tier.find(@post.tier_id)
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+      if @post.tier_id?
+        @tier = Tier.find(@post.tier_id)
+      end
     end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @transaction }
@@ -71,7 +74,7 @@ class TransactionsController < ApplicationController
       #-------------------------------------------------------------------------------------------#
       #non-user encountered form and entered credit details AND password- signing up and paying
       if !current_user && params[:password].present?        
-        @user = User.new(:email => params[:transaction][:email], :password => params[:password])
+        @user = User.new(:email => params[:transaction][:email], :password => params[:password], :name => params[:name])
         #@user.save_as_customer(params[:transaction][:email], @token)
         # @user.save_as_customer
         @transaction = @user.transactions.new(params[:transaction].merge(:price => @amount))
@@ -87,8 +90,7 @@ class TransactionsController < ApplicationController
           @seller = User.find(@post.user_id)
           # @post.user_id = @user.id
           @post.save!
-          if @tier_id
-            
+          if @tier_id 
             SoldPostMailer.notify(@user, @post, @seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
@@ -115,6 +117,7 @@ class TransactionsController < ApplicationController
           @post.save!
           if @tier_id
             SoldPostMailer.notify(@user, @post, @seller).deliver
+            PurchaseCompletedMailer.notify(@user,@post,@seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
           format.json { render json: @user, status: :created, location: @transaction }
@@ -142,6 +145,7 @@ class TransactionsController < ApplicationController
           @post.save!
           if @tier_id
             SoldPostMailer.notify(@user, @post, @seller).deliver
+            PurchaseCompletedMailer.notify(@user,@post,@seller).deliver
           end
           format.html { redirect_to @user, notice: 'You have succesfully acquired some stuff.' }
         else
