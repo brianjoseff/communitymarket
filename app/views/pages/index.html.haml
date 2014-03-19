@@ -16,6 +16,18 @@
     %div.row-fluid
       %h1.hero-text Your community marketplace.
       =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
+
+    %div.row-fluid
+      %div.search-row
+        %div.span3
+          /new post button
+          =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
+        %div.span2
+          =render :partial => "search/category_dropdown"
+
+        %div.span7
+          /search bar
+          =render :partial => "search/search_form"
     /   %div#top_banner_row.row
     /     %div.span12
     /       %h1
@@ -37,18 +49,7 @@
     /         %h5 Join some groups so that when you post you can notify people in the groups
     /       %div.row-fluid
     /         =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
-      
-    %div.row-fluid
-      %div.search-row
-        %div.span3
-          /new post button
-          =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
-        %div.span2
-          =render :partial => "search/category_dropdown"
-  
-        %div.span7
-          /search bar
-          =render :partial => "search/search_form"
+
 
 %div.row-fluid
   %div.span8

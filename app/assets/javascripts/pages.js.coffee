@@ -1,6 +1,6 @@
 ajaxReload = ->
 	$(".loading_indicator").show()
-  $.ajax
+	$.ajax
     url: "/"
     type: "GET"
     dataType: "script"
