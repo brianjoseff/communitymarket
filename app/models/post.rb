@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  
   after_create :to_facebook
   # before_save :set_default_completed_false
   attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook, :lump_sum, :other, :hourly_rate

@@ -8,10 +8,14 @@
 /   =image_tag(asset_fields.object.image.url(:post))
 /   =asset_fields.label  "delete image"
 /   =asset_fields.check_box :_destroy
-  
+
+ 
 %div.control-group.image-control-group
   =f.label "image", :class=>"control-label"
   %div.controls
     = link_to_remove_fields "remove", f
-    =f.file_field :image
+    -if is_mobile_device? || is_tablet_device?
+      =f.file_field :image, accept: "image/*", capture: "camera", name: "cameraInput", type: "file"
+    -else
+      =f.file_field :image
     

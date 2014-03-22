@@ -1,5 +1,5 @@
 ajaxReload = ->
-	$(".loading_indicator").show()
+	$(".loading-indicator").show()
 	$.ajax
     url: "/"
     type: "GET"
@@ -7,11 +7,11 @@ ajaxReload = ->
     data:
       categorize: $(".post-sort").val()
     success: (data) ->
-      $(".loading_indicator").hide()
+      $(".loading-indicator").hide()
       return
 
     error: (data) ->
-      $(".loading_indicator").hide()
+      $(".loading-indicator").hide()
       return
  
 $ ->

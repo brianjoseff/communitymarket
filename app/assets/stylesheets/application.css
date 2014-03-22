@@ -459,6 +459,10 @@ input[type="text"].search-bar-field{
 /************************************************************/
 /****** 8.  POST FEED ***************************************/
 /************************************************************/
+
+.loading-indicator{
+	margin-top: 15px;
+}
 .for-sale{
 	background:#8e8e8e;
 	padding:1px;
@@ -530,7 +534,7 @@ div.free-marker{
 
 
 .posts-nav{
-	margin-top: 22px;
+	margin-top: 15px;
 }
 
 #slim_post_customer_buy_button{

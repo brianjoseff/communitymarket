@@ -75,6 +75,7 @@
             var success = "Success";
             if (!validation_state) {
                 $('input[type=submit]').attr('disabled','disabled')
+               
                 jQueryObjectBeforeErrorMessage = getjQueryObjectBeforeErrorMessage(jQuery(id));
                 
                 if (jQueryObjectBeforeErrorMessage.next('.' + options['error_message_class']).length == 0) {
@@ -115,7 +116,8 @@
         jQuery(this).each(function(){
             if (this.tagName == "FORM") {
                 jQuery(this).submit(function(){
-                    if (ValidationErrors[jQuery(this).attr("id")].length == 0) 
+                    if (ValidationErrors[jQuery(this).attr("id")].length == 0)
+                        
                         callback();
 					return false;
                 });

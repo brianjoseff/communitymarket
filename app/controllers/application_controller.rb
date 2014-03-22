@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
+  has_mobile_fu false
   before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags
   # before_filter :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :configure_permitted_parameters, if: :devise_controller?

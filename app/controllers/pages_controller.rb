@@ -79,7 +79,7 @@ class PagesController < ApplicationController
       #must sort them in opposite order because of the way the partials are rendered?
       #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       #@posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
-      if params[:categorize]
+      if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
         @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
         @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)

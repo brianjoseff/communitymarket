@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
+  
   before_filter :require_admin_login, :only => [:index]
   before_filter :redirect_to_signup, :only => [:new]
   def index

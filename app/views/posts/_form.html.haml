@@ -141,7 +141,8 @@
 
 
   /PHOTO UPLOAD FIELDS
-         
+  -if is_mobile_device? || is_tablet_device?
+    %div.iphone-upload-fields
   %div.row-fluid
     %div.span8
       / %p S3 Direct:
@@ -168,7 +169,10 @@
             %div.control-group
               =asset_fields.label "image", :class=>"control-label"
               %div.controls
-                =asset_fields.file_field :image
+                -if is_mobile_device? || is_tablet_device?
+                  =asset_fields.file_field :image, accept: "image/*", capture: "camera", name: "cameraInput", type: "file"
+                -else
+                  =asset_fields.file_field :image
             %div.control-group
               %div.controls
                 = link_to_add_fields "Add Another Image", f, :assets
@@ -278,10 +282,14 @@
     %div.control-group
       %div.controls
         = f.submit 'Upload your post!', :class => "btn btn-custom btn-large submit-button", :id => "#{current_user.stripe_customer_id ? "customer_upload_post" : "upload_post"}"
+        %div.loading-indicator{:style => "display:none"}
+          = image_tag("loader.gif")
   -else
     %div.control-group
       %div.controls
         = f.submit 'Edit your post!', :class => "btn btn-custom btn-large submit-button"
+        %div.loading-indicator{:style => "display:none"}
+          = image_tag("loader.gif")
 / %div#tier_explanation_wrapper
 /   %div#tier_explanation
 /     %p Assign your post to a value tier. The instant someone clicks "buy" on your post, an email with a coupon or giftcard will arrive in your inbox.

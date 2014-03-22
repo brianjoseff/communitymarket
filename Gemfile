@@ -106,7 +106,7 @@ gem 's3_direct_upload'
 gem 's3_file_field'
 gem 'turbolinks'
 gem 'jquery-fileupload-rails'
-
+gem 'mobile-fu'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
