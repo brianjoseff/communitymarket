@@ -170,7 +170,7 @@
               =asset_fields.label "image", :class=>"control-label"
               %div.controls
                 -if is_mobile_device? || is_tablet_device?
-                  =asset_fields.file_field :image, accept: "image/*", capture: "camera", name: "cameraInput", type: "file"
+                  =asset_fields.file_field :image, accept: "image/*;capture=camera"
                 -else
                   =asset_fields.file_field :image
             %div.control-group

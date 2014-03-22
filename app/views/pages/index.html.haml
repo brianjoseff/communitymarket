@@ -16,18 +16,10 @@
       %div.row-fluid
         %h1.hero-text Your community marketplace.
         =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
-      =render partial: "layouts/banner_icons"
+      
       %div.row-fluid
-        %div.search-row
-          %div.span3
-            /new post button
-            =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
-          %div.span2
-            =render :partial => "search/category_dropdown"
-
-          %div.span7
-            /search bar
-            =render :partial => "search/search_form"
+        =render partial: "layouts/banner_icons"
+        =render partial: "shared/post_search_bar"
       /   %div#top_banner_row.row
       /     %div.span12
       /       %h1

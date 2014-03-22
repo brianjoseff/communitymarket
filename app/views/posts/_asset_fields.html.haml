@@ -15,7 +15,7 @@
   %div.controls
     = link_to_remove_fields "remove", f
     -if is_mobile_device? || is_tablet_device?
-      =f.file_field :image, accept: "image/*", capture: "camera", name: "cameraInput", type: "file"
+      =f.file_field :image, accept: "image/*;capture=camera"
     -else
       =f.file_field :image
     
