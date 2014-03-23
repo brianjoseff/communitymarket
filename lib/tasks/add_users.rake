@@ -9,12 +9,12 @@ namespace :db do
       name = Faker::Name.name
       email = Faker::Name.first_name + '@' + Forgery(:LoremIpsum).word(:random => true) + '.edu'
       password = Forgery(:basic).password
-      
+
       # zip = Forgery(:address).zip
       User.create!(:name => name,
                    :email => email,
-                   :password => password)
+                   :password => "password")
     end
-    
+
   end
 end
