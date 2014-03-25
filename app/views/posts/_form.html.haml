@@ -141,8 +141,7 @@
 
 
   /PHOTO UPLOAD FIELDS
-  -if is_mobile_device? || is_tablet_device?
-    %div.iphone-upload-fields
+
   %div.row-fluid
     %div.span8
       / %p S3 Direct:
@@ -162,7 +161,8 @@
       /           / =asset_fields.s3_file_field :image, :class => 'js-s3_file_field', :key => "/uploads/${timestamp}/${filename}"
       /           / .progress
       /           /   .meter{ :style => "width: 0%" }
-      
+      -unless is_mobile_device? || is_tablet_device?
+        %p If you have iOS 6 on your iphone, you can "point and shoot" to upload images. Way easier.
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
@@ -172,6 +172,7 @@
                 -if is_mobile_device? || is_tablet_device?
                   =asset_fields.file_field :image, accept: "image/*;capture=camera"
                 -else
+                  
                   =asset_fields.file_field :image
             %div.control-group
               %div.controls
