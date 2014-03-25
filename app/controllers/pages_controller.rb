@@ -255,6 +255,26 @@ class PagesController < ApplicationController
   
   def about
   end
+  
+  def textbooks
+    @post_category= Tag.find_by_id(88)
+    @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    respond_to do |format|
+        format.js { render :layout=>false }
+    end
+  end
+  
+  def dorm_furniture
+    @post_category= Tag.find_by_id(3)
+    @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    respond_to do |format|
+        format.js { render :layout=>false }
+    end
+  end
+  
+  
   private
   def get_popular_tags
     adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym

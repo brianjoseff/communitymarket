@@ -49,20 +49,15 @@
       %div.row-fluid
         %div.span2
           %h2 Posts
-        %div.span5.posts-nav
+        %div.span4.posts-nav
           = form_tag('pages', :remote => true) do
             =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
         %div.span2
           %div.loading-indicator{:style => "display:none"}
             = image_tag("loader.gif")
-          / %span
-          /   =link_to "For Sale | ", for_sale_path, id: 'off_for_sale_link'
-          / %span 
-          /   =link_to "Wanted | ", wanted_path, id: 'off_wanted_link'
-          / %span
-          /   =link_to "For Rent/Borrow | ", borrow_rent_path, id: "off_borrow_rent_link"
-          / %span
-          /   =link_to "Services", services_path, id: "off_borrow_rent_link"
+        %div.span5
+          =link_to "Textbooks", {:action=>"textbooks"}, {:remote => true, :id=>"textbook_link", class: "special-vertical"}
+          =link_to "Dorm Furniture", {:action=>"dorm_furniture"}, {:remote => true, :id=>"furniture_link", class: "special-vertical"}
       /Should put these buttons on a "search result page"
       /Sorting buttons
       /=sort_link @sort_posts, :name, "Name"

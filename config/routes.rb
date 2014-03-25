@@ -57,7 +57,12 @@ Communitymarket::Application.routes.draw do
     resources :posts
     resources :groups
   end
-  
+  resources :pages do
+    collection do
+      get :textbooks
+      get :dorm_furniture
+    end
+  end
   get 'users/new_modal'
   
   # member do

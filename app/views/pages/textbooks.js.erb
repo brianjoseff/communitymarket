@@ -1,0 +1,1 @@
+$("#post_feed").html("<%= escape_javascript(render :partial => 'feed/feed',:locals => {:feed_items => @posts}) %>");

@@ -487,6 +487,14 @@ input[type="text"].search-bar-field{
 /****** 8.  POST FEED ***************************************/
 /************************************************************/
 
+.special-vertical{
+	font-weight: bold;
+	font-size: 125%;
+	text-decoration: underline;
+	float:left;
+	margin-left: 15px;
+}
+
 .loading-indicator{
 	margin-top: 15px;
 }

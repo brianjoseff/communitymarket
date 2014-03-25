@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   # it is in the "post + search" bar at the top of every page
   # => contains both Tags and PostCategories
   def get_category_tags
+    @textbooks = Tag.find_by_id(88)
     @appliances = Tag.find_by_id(4)
     @sports = Tag.find_by_id(27)
     @electronics = Tag.find_by_id(36)
@@ -24,7 +25,7 @@ class ApplicationController < ActionController::Base
     @books = Tag.find_by_id(21)
     @furniture = Tag.find_by_id(3)
     @full_post_categories = PostCategory.all
-    @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture]
+    @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture, @textbooks]
     @browse_by_array = []
     @browse_by_array_tags.each do |a|
       if !a.nil?
