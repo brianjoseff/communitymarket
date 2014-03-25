@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require jquery.ui.all
+ *= require bootstrap
  *= require token-input-facebook
  *= require s3_direct_upload_progress_bars
  *= require_tree .
@@ -157,6 +158,32 @@ img#trust_icon{
 	height: 50px !important;
 	height: auto;
 	margin-bottom: 5px;
+}
+img#furniture_icon{
+	height: 50px !important;
+	height: auto;
+	margin-bottom: 5px;
+}
+#furniture{
+	display:block;
+	text-align:center;
+	float:left;
+	width: 270px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+img#books_icon{
+	height: 50px !important;
+	height: auto;
+	margin-bottom: 5px;
+}
+#books{
+	display:block;
+	text-align:center;
+	float:left;
+	width: 270px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #house{
