@@ -1,3 +1,7 @@
+$ ->
+	$(".completed").click (e) ->
+		e.preventDefault()
+
 ajaxReload = ->
 	$(".loading-indicator").show()
 	$.ajax

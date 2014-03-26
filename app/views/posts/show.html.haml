@@ -14,8 +14,11 @@
 /       /search bar
 /       =render :partial => "search/search_form"
 %div.row-fluid
-  -if !@post.active?
+  -if !@post.active? && !@post.completed?
     %h3 Post is inactive
+  -elsif @post.completed?
+    %h3 Post has been completed! Sold, GotRE:, found, etc...
+    %h5 Check out more stuff below
 %div{:class => "#{@post.active? ? "" : "inactive-post"}"}
   %div.row-fluid
     -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"

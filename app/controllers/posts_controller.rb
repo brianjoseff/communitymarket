@@ -37,7 +37,7 @@ class PostsController < ApplicationController
     end
     
     
-    @random_posts = Post.limit(7).order("RANDOM()").select{|x| x.active?} - @user.posts
+    @random_posts = Post.limit(10).order("RANDOM()").select{|x| x.active?} - @user.posts
     @random_posts.delete(@post)
     respond_to do |format|
       format.html # show.html.erb
