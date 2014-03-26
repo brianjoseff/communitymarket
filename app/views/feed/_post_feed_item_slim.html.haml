@@ -43,13 +43,16 @@
 /OK?
 /GOOD.
 
-%div.slim-feed-item.row-fluid
+%div.slim-feed-item.row-fluid{class: "#{feed_item.completed? ? "completed" : ""}"}
 
   %div.span9
     %div.row-fluid.slim-feed-title-row
+      -if feed_item.completed?
+        %span.completed-icon
+          [SOLD/GOT!] 
       -if feed_item.post_category_id == 1
         -unless feed_item.assets.empty?
-          =link_to image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
+          =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
       -elsif feed_item.post_category_id == 2
         /%div.wanted-marker
         %span.for-sale Wanted
@@ -65,7 +68,7 @@
       /make price a variable that can be passed into the modal partials below so
       /that on credit card charge, we know how much to charge      
       %span.slim-feed-title
-        = link_to feed_item.title, post_url(feed_item), :class => "slim-feed-title"
+        = link_to_if !feed_item.completed?, feed_item.title, post_url(feed_item), :class => "slim-feed-title"
       -unless feed_item.assets.first.nil?
         %i.icon-medium.icon-camera
       /COMMENTED OUT DATE  
@@ -103,6 +106,9 @@
           %span.non-tier-price $#{feed_item.price} [Cash OBO] 
       %div.email.pull-right
         / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-        =link_to_modal "Email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
+        -if feed_item.completed?
+          =link_to "Email", "#", class: "btn btn-mini completed"
+        -else
+          =link_to_modal "Email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button btn btn-mini"
 
 

@@ -486,6 +486,13 @@ input[type="text"].search-bar-field{
 /************************************************************/
 /****** 8.  POST FEED ***************************************/
 /************************************************************/
+.completed{
+	opacity:0.6;
+  filter:alpha(opacity=60);
+  pointer-events: none;
+  cursor: default;
+}
+
 
 .special-vertical{
 	font-weight: bold;

@@ -25,7 +25,10 @@
 //= require_tree .
 
 
-
+$('.completed').click(function(e) {
+    e.preventDefault();
+    //do other stuff when a click happens
+});
 
 // $(document).ready(function(){
 //   card = new Skeuocard($("#skeuocard"));
