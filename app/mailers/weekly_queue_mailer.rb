@@ -1,5 +1,5 @@
 class WeeklyQueueMailer < ActionMailer::Base
-  default :from => "brianjoseff123@peopleandstuff.com"
+  default :from => "group-notifications@peopleandstuff.com"
   def notify(creator, post, recipient, group)
     @creator = creator
     @group = group
@@ -9,6 +9,6 @@ class WeeklyQueueMailer < ActionMailer::Base
     @post_name = post.title
     @post_desc  = post.description
     #attachments[""]
-    mail(:to => recipient.email, :subject => "For Sale | #{@post_name}", :reply_to => creator.email)
+    mail(:to => recipient.email, :subject => "New Stuff | #{@post_name}", :reply_to => creator.email)
   end
 end

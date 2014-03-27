@@ -1,14 +1,17 @@
 class DailyQueueMailer < ActionMailer::Base
-  default :from => "brianjoseff123@peopleandstuff.com"
-  def notify(creator, post, recipient, group)
-    @creator = creator
-    @group = group
+  default :from => "new-stuff@peopleandstuff.com"
+  # def notify(creator, post, recipient, group)
+  def notify(recipient, users_posts)
+    
+
     @recipient = recipient
-    @post = post
-    # @category = category
-    @post_name = post.title
-    @post_desc  = post.description
+    @posts = users_posts
+    # @post = post
+    # @creator = creator
+    # @group = group
+    # @post_name = post.title
+    # @post_desc  = post.description
     #attachments[""]
-    mail(:to => recipient.email, :subject => "For Sale | #{@post_name}", :reply_to => creator.email)
+    mail(:to => recipient.email, :subject => "New Stuff Today")
   end
 end

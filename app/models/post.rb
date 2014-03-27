@@ -63,6 +63,7 @@ class Post < ActiveRecord::Base
         }
       self.user.facebook.put_object(self.user.uid, 'links',options)
     end
+
   end
   
   def tag_tokens=(tokens)

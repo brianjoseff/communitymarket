@@ -61,12 +61,12 @@ class PagesController < ApplicationController
       
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
-        @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = kaminari_paginate(@posts, 50)
       else
         @posts = filter_posts(Post.all).sort { |x,y| y.created_at <=> x.created_at }
         #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+        @posts = kaminari_paginate(@posts, 50) 
       end
       
       #OLD#######@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
@@ -82,7 +82,7 @@ class PagesController < ApplicationController
       #@posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
-        @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
         @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       else
         @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
@@ -179,7 +179,7 @@ class PagesController < ApplicationController
   def dorm_furniture
     @post_category= Tag.find_by_id(3)
     @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    @posts = kaminari_paginate(@posts, 50)
     respond_to do |format|
         format.js { render :layout=>false }
     end

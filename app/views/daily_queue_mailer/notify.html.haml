@@ -1,0 +1,5 @@
+%h3 New stuff today:
+-@posts.each do |p|
+  =link_to p.title, posts_url(p)
+  =p.price
+  %p  ------------------------------------------------

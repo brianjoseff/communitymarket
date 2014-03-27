@@ -1,4 +1,4 @@
 %p You bought: ( #{@post.title} )
 
-%p The Seller #{@buyer.name ? ","+ @buyer.name : ""} should be contacting you shortly, but here is there email just in case:
+%p The Seller #{@buyer.name ? ","+ @buyer.name : ""} should be contacting you shortly, but here is their email just in case:
 %a{ :href => "mailto:#{@seller.email}"} #{@seller.email}
