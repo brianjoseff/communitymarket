@@ -104,6 +104,7 @@
     
         %p Join groups so that you can send targeted notifications
         =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+        %h2 Random Groups
         =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
 
     / %div.row-fluid
