@@ -73,8 +73,7 @@
         =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
   %div.span4
     / %div.advertising
-    %a.advertising{:href => "http://www.moranogelato.com/", :target=>"Morano"}
-    %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
+
     %div.row-fluid
       -if current_user
         %h4 Popular Tags
@@ -84,6 +83,11 @@
       -else
         %h4 Popular Tags
         =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
+    
+    
+    
+    %a.advertising{:href => "http://www.moranogelato.com/", :target=>"Morano"}
+    %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
     -unless @near_groups.nil?
       %div.row-fluid
         %div.row-fluid
@@ -104,7 +108,7 @@
     
         %p Join groups so that you can send targeted notifications
         =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
-        %h2 Random Groups
+        %h4 Random Groups
         =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
 
     / %div.row-fluid
