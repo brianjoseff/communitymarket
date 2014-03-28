@@ -68,46 +68,32 @@ class PagesController < ApplicationController
         #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50) 
       end
-      
-      #OLD#######@posts = current_user.post_feed.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @your_groups = current_user.groups_as_member
       unless @location.first.nil?
         @near_groups = Group.near(@location.first.city, 10000)
+        @near_groups = @near_groups.sort {|x,y| x.name <=> y.name}
       end
       @random_groups = Group.last(20) - @user.groups_as_member
+      @random_groups = @random_groups.sort {|x,y| x.name <=> y.name}
       @followed_tags = @user.followed_tags
     else
-      #must sort them in opposite order because of the way the partials are rendered?
-      #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-      #@posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
         @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
-        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+        @posts = kaminari_paginate(@posts, 50)
       else
         @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-        @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+        @posts = kaminari_paginate(@posts, 50)
       end
       @random_tags = Tag.last(5)
-      #@page_results = @posts.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
-      # @posts = WillPaginate::Collection.create(1, 35, nil) do |pager|
-      #   result = Post.find(:all, :order => "created_at DESC", :limit => pager.per_page, :offset => pager.offset)
-      #   #result = Post.all.select{|x| x.active?}
-      #   # inject the result array into the paginated collection:
-      #   pager.replace(result)
-      # 
-      #   unless pager.total_entries
-      #     # the pager didn't manage to guess the total count, do it manually
-      #     pager.total_entries = Post.count
-      #   end
-      # end
       @user = User.new
       unless @location.first.nil?
         @near_groups = Group.near(@location.first.city, 10000)
+        @near_groups = @near_groups.sort {|x,y| x.name <=> y.name}
       end
-      #@posts = @entries.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
-      #@groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
       @random_groups = Group.last(20) - @user.groups_as_member
+      @random_groups = @random_groups.sort {|x,y| x.name <=> y.name}
     end 
     respond_to do |format|
        format.html # index.html.erb

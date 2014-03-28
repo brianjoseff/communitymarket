@@ -1,9 +1,9 @@
 development:
-  app_id: 162885127254772
-  secret_key: 8625816fd5e08a272e103f910785c51a
+  app_id: <%= ENV["FACEBOOK_APPID"] %>
+  secret_key: <%= ENV["FACEBOOK_SECRET"] %>
 test:
-  app_id: 162885127254772
-  secret_key: 8625816fd5e08a272e103f910785c51a
+  app_id: <%= ENV["FACEBOOK_APPID"] %>
+  secret_key: <%= ENV["FACEBOOK_SECRET"] %>
 production:
-  app_id: 162885127254772
-  secret_key: 8625816fd5e08a272e103f910785c51a
+  app_id: <%= ENV["FACEBOOK_APPID"] %>
+  secret_key: <%= ENV["FACEBOOK_SECRET"] %>
