@@ -227,8 +227,8 @@ class PostsController < ApplicationController
           # DEDUPE EFFORTS **************************************
         end
         
-        if @user.oauth_token.nil? && @post.post_to_facebook == true 
-          
+        #if @user.oauth_token.nil? && @post.post_to_facebook == true 
+        if @post.post_to_facebook == true   
           redirect_to user_omniauth_authorize_path(:facebook)
         # elsif @post.post_to_facebook == true && @user.oauth_token
         #   @post.to_facebook

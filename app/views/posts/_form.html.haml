@@ -271,11 +271,12 @@
       
   %div.control-group
     %div.controls
-      %p{:style => "font-weight: bold"}
-        %span{:style => "text-decoration: underline"} Share on Facebook:
+      / %p{:style => "font-weight: bold"}
+      /   %span{:style => "text-decoration: underline"} Share on Facebook:
       = f.label :post_to_facebook, class: "checkbox" do
         = f.check_box :post_to_facebook, class: "checkbox", id: "post_to_facebook"
         =label_tag "Share on Facebook"
+        =image_tag "fb.png", id: "fb"
         -if @user.oauth_token.nil?
           %p your account is not linked to facebook. If you check this box, your item will be posted and your user details will be updated to reflect facebook integration
   

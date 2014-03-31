@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   
-  after_create :to_facebook
+  #after_create :to_facebook
   # before_save :set_default_completed_false
   attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook, :lump_sum, :other, :hourly_rate
   has_many :assets, :as => :imageable, :dependent => :destroy
@@ -49,10 +49,17 @@ class Post < ActiveRecord::Base
     self.user.facebook.put_object(self.user.uid, 'links',options)
   end
   
+  
+  def update_token(auth_hash)
+    user = self.user
+    user.token = auth_hash["credentials"]["token"]
+    user.save
+  end
+  
   def to_facebook
 
-    if self.post_to_facebook == true
-      if self.user.oauth_token == nil || expired
+    if self.post_to_facebook == true  
+      if self.user.oauth_token == nil
         return
       end
       options = { 

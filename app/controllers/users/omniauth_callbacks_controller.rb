@@ -15,7 +15,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         else
           flash[:error] = "The Facebook account has been linked with another user."
         end
-        redirect_to edit_user_registration_path
+        # redirect_to edit_user_registration_path
+        redirect_to post_url(@post)
         # auth =request.env["omniauth.auth"]
         # @user = User.find_by_email(params[:email]).update_attributes(name:auth.raw_info.name,
         #                      provider:auth.provider,
