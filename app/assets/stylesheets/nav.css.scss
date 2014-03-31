@@ -25,16 +25,22 @@ i.nav-icon{
 /************************************************************/
 /*Actual Nav bar ********************************************/
 /************************************************************/
-
+img#dartmouth_logo{
+	height: 38px !important;
+	height: auto;
+	margin-top: 10px;
+	margin-right: 20px;
+}
 #header_logo{
-	float:right;
+	float:left;
 	display: block;
 	background-image: url('circlelogo1.png');
 	background-size: 38px 38px;
 	width: 38px;
 	height: 38px;
   margin-top: 10px;
-	margin-right: 60px;
+	margin-right: 10px;
+	margin-left: 10px;
 }
 
 a:hover > .nav-icon{

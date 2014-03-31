@@ -52,14 +52,14 @@ class Post < ActiveRecord::Base
   def to_facebook
 
     if self.post_to_facebook == true
-      if self.user.oauth_token == nil
+      if self.user.oauth_token == nil || expired
         return
       end
       options = { 
           :message     => self.title,
           :description => self.description,
           :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s, 
-          :picture     => "#{}" 
+          :picture     => "#{self.assets.empty?  ? '/assets/small.png': self.assets.first.image.url(:thumb)}" 
         }
       self.user.facebook.put_object(self.user.uid, 'links',options)
     end

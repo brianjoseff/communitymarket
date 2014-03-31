@@ -228,7 +228,11 @@ class PostsController < ApplicationController
         end
         
         if @user.oauth_token.nil? && @post.post_to_facebook == true 
+          
           redirect_to user_omniauth_authorize_path(:facebook)
+        # elsif @post.post_to_facebook == true && @user.oauth_token
+        #   @post.to_facebook
+        #   redirect_to @post, notice: "Successfully created post."
         else
           redirect_to @post, notice: "Successfully created post."
         end

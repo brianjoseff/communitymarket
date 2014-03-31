@@ -57,9 +57,9 @@ class User < ActiveRecord::Base
                            password:Devise.friendly_token[0,20],
                            oauth_token: auth.credentials.token,
                            oauth_expires_at: Time.at(auth.credentials.expires_at)
-                           )
-      
+                           )     
   end
+  
   def update_external_account(auth)
      user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
@@ -72,7 +72,13 @@ class User < ActiveRecord::Base
      self.oauth_token = auth.credentials.token
      self.oauth_expires_at = Time.at(auth.credentials.expires_at)
      self.save!
-   end
+  end
+  
+  def update_token(auth)
+    self.oauth_token = auth["credentials"]["token"]
+    self.save!
+  end
+   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     # do you want to edit your profile to make it facebook enabled?
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
