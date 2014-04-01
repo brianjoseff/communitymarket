@@ -227,10 +227,6 @@ class TransactionsController < ApplicationController
   end
   
   
-  def pay_merchant
-    
-  
-  
   
   # DELETE /transactions/1
   # DELETE /transactions/1.json
