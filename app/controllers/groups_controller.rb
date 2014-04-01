@@ -58,8 +58,10 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
-    @posts = @group.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(35)
+
+    @posts = filter_posts(@group.posts).sort { |x,y| y.created_at <=> x.created_at }
+    @posts = kaminari_paginate(@posts, 50)
+    
     @random_groups = Group.last(20) - @user.groups_as_member
     if !signed_in?
       @user = User.new
@@ -165,4 +167,24 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def kaminari_paginate(posts, per_page)
+    Kaminari.paginate_array(posts).page(params[:page]).per(per_page)
+  end
+  
+  def filter_posts(posts)
+    posts = posts.select do |post|
+      case
+      when post.active?
+        true
+      when !post.active? && post.completed?
+        true
+      else
+        false
+      end
+    end
+    return posts
+  end
+  
 end

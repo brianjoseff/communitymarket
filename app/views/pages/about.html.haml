@@ -68,7 +68,7 @@
         =text_field_tag 'email', params[:email], :class => "input-block-level", id:"contact_email", :placeholder => "Your email so I can reply"
       %div.row-fluid
         %span.area
-          =text_area_tag :content, params[:content], :class => "input-block-level", :placeholder => "Questions, comments, criticisms, and concerns", :rows => "10"
+          =text_area_tag :content, params[:content], :class => "input-block-level",id:"contact_body", :placeholder => "Questions, comments, criticisms, and concerns", :rows => "10"
       =submit_tag "Contact Me", :class => "contact-me-submit"
 
     %h3 Or me:

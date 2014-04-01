@@ -80,6 +80,8 @@ Communitymarket::Application.routes.draw do
     end
   end
 
+
+
   #resource :session, controller: 'sessions'
 
   resources :posts do
