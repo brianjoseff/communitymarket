@@ -50,6 +50,39 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   
+  def post_to_facebook
+    # You need to implement the method below in your model (e.g. app/models/user.rb)
+    # If a user is signed in then he is trying to link a new account
+    if user_signed_in?
+      
+        auth = request.env["omniauth.auth"]
+        if current_user && current_user.persisted? && current_user.update_external_account(auth)
+          flash[:success] = "Your facebook account has been linked to this user account successfully."
+          @post = current_user.posts.last
+          if @post.post_to_facebook?
+            @post.after_sign_in_post_to_facebook
+          end
+            
+        else
+          flash[:error] = "The Facebook account has been linked with another user."
+        end
+        # redirect_to edit_user_registration_path
+        redirect_to post_url(@post)
+
+    else
+      @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+  
+      if @user.persisted?
+        sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      else
+        session["devise.facebook_data"] = request.env["omniauth.auth"]
+        redirect_to new_user_registration_url, notice: "Oops, something went wrong"
+      end
+    end
+  end
+  
+  
   def stripe_connect
     # attempt 1
     if !current_user.stripe_connect

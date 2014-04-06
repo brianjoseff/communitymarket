@@ -78,6 +78,14 @@ class User < ActiveRecord::Base
     self.oauth_token = auth["credentials"]["token"]
     self.save!
   end
+  
+  def token_expired?(new_time = nil)
+    expiry = (new_time.nil? ? oauth_expires_at : Time.at(new_time))
+    return true if expiry < Time.now ## expired token, so we should quickly return
+    token_expires_at = expiry
+    save if changed?
+    false # token not expired. :D
+  end
    
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     # do you want to edit your profile to make it facebook enabled?
