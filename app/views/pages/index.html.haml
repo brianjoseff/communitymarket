@@ -10,49 +10,27 @@
 
 /STRIPE CONNECT
 /= link_to "Sign up with Stripe Connect", user_omniauth_authorize_path(:stripe_connect)
-%div.row-fluid
+%div.row
   %div.banner
     -if !current_user
-      %div.row-fluid
+      %div.row
         %h1.hero-text Your community marketplace.
         =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
       
-      %div.row-fluid
+      %div.row
         =render partial: "layouts/banner_icons"
         =render partial: "shared/post_search_bar"
-      /   %div#top_banner_row.row
-      /     %div.span12
-      /       %h1
-      /         %span#chkWidth{:style => "display: none;"}
-      /       %h1#changingtext
-      /         %span.toggle Sell
-      /         Stuff     
-      /   %div.row
-      /     %div.span12
-      /       %h1
-      /         %span#chkWidth2{:style => "display: none;"}
-      /       %h1#changingtext2
-      /         Notify
-      /         %span.toggle Groups of people
-      / -else
-      /   %div.row
-      /     %div.span12
-      /       %div.row-fluid
-      /         %h5 Join some groups so that when you post you can notify people in the groups
-      /       %div.row-fluid
-      /         =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
 
-
-%div.row-fluid
-  %div.span8
+%div.row
+  %div.span8.col-sm-8
     %div.post-feed
-      %div.row-fluid
-        %div.span2
+      %div.row
+        %div.span2.col-sm-2
           %h2 Posts
-        %div.span5.posts-nav
+        %div.span5.posts-nav.col-sm-5
           = form_tag('pages', :remote => true) do
             =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
-        %div.span2
+        %div.span2.col-sm-2
           %div.loading-indicator{:style => "display:none"}
             = image_tag("loader.gif")
           / %span
@@ -74,11 +52,11 @@
       /=render :partial => 'feed',:locals => {:feed_items => @posts}
       #post_feed
         =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
-  %div.span4
+  %div.span4.col-sm-4
     / %div.advertising
     %a.advertising{:href => "http://www.moranogelato.com/", :target=>"Morano"}
     %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
-    %div.row-fluid
+    %div.row
       -if current_user
         %h4 Popular Tags
         =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
@@ -88,8 +66,8 @@
         %h4 Popular Tags
         =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
     -unless @near_groups.nil?
-      %div.row-fluid
-        %div.row-fluid
+      %div.row
+        %div.row
           %h3 Groups Close to You
           %span
             -if current_user
@@ -100,10 +78,10 @@
         %p Join specialized groups to make it easier to share your postings and get targeted notifications about stuff that matters to you
         =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
     / -if current_user
-    /   %div.row-fluid
+    /   %div.row
     /     %div.span8
     /       %h3 Your Groups      
-    /   %div.row-fluid      
+    /   %div.row      
     /     /Group feed
     /     #your_groups
     /       -if !@your_groups.first.is_a?(Group)
@@ -111,7 +89,7 @@
     /       -else
     /         /=render :partial => 'feed', :locals => {:feed_items => @your_groups}
     /         =render :partial => 'feed/your_group_feed_item', :collection => @your_groups, :as => :group
-    %div.row-fluid
+    %div.row
       %h3 Random Groups
       =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
 

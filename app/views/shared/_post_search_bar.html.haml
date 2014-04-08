@@ -1,10 +1,11 @@
 %div.search-row
-  %div.span3
+  %div.span3.col-sm-4
     /new post button
-    =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
-  %div.span2
-    =render :partial => "search/category_dropdown"
+    .category-post-cluster
+      =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
 
-  %div.span7
+      =render :partial => "search/category_dropdown"
+
+  %div.span7.col-sm-8
     /search bar
     =render :partial => "search/search_form"

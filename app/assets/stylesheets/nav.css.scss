@@ -1,11 +1,14 @@
 /************************************************************/
 /*Sign In signout Links above nav bar with icon**************/
 /************************************************************/
-span.user-nav{
+.user-nav{
 	margin-right: 10px;
+	margin-top: 15px;
+	font-size: 110%;
 }
 ul#nav_pill_section{
 	padding:0;
+	margin-top:10px;
 }
 .nav-user-link{
 	text-decoration: underline;
@@ -25,18 +28,51 @@ i.nav-icon{
 /************************************************************/
 /*Actual Nav bar ********************************************/
 /************************************************************/
-
+#nav{
+	margin-bottom: 70px;
+}
+.nav-row{
+	margin-bottom: 70px;
+}
+.navbar-default {
+    background-color: #fff;
+}
+.people-and-stuff-marquee{
+	margin-top: -10px;
+}
 #header_logo{
-	float:right;
+	float:left;
 	display: block;
 	background-image: url('circlelogo1.png');
 	background-size: 38px 38px;
-	width: 38px;
-	height: 38px;
-  margin-top: 10px;
-	margin-right: 60px;
+	width: 28px;
+	height: 28px;
+  margin-top: 19px;
+	margin-right: 5px;
+	margin-left: 5px;
 	
 }
+.at-dartmouth{
+	margin-top: 28px;
+	margin-right: 15px;
+	margin-left: 5px;
+	color: #1C6126;
+}
+
+
+ul.nav{
+	/*padding: 10px 0 0;*/
+}
+.nav-area{
+	border-bottom: 6px solid #7f8c8d; /*asbestos grey*/
+}
+.nav{
+	/*margin-bottom: 10px;*/
+}
+
+
+
+
 
 a:hover > .nav-icon{
 	color: #fff;
@@ -45,13 +81,13 @@ a:hover > .nav-icon{
 .nav-pills > .nav-icon{
 	color: #7f8c8d;
 }
-.nav-pills > .active > a{
+.nav-pills > li.active > a{
 	
 				background-color: #7f8c8d; /*asbestos grey*/
 /*			background-color: #00e0ac;*/
 	/*	background-color: #ffc0b9;*/
 }
-.nav-pills > .active > a:hover{
+.nav-pills > li.active > a:hover{
 	
 				background-color: #7f8c8d; /*asbestos grey*/
 /*			background-color: #00e0ac;*/
@@ -76,14 +112,3 @@ a:hover > .nav-icon{
 /*	background-color: #ffc0b9;*/
 }
 
-
-ul.nav{
-	padding: 10px 0 0;
-
-}
-.nav-area{
-	border-bottom: 6px solid #7f8c8d; /*asbestos grey*/
-}
-.nav{
-	margin-bottom: 10px;
-}

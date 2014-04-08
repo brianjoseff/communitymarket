@@ -13,7 +13,7 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require bootstrap.min.js
 //= require jquery.tokeninput
 //= require posts.js.coffee
 //= require pages.js.coffee

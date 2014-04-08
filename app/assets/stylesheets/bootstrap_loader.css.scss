@@ -1,4 +1,4 @@
-@import "bootstrap";
+//@import "bootstrap";
 $baseFontFamily: "Open Sans", sans-serif !default;
 
 /*$white: #ffffff;
@@ -79,23 +79,23 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
-  
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
 	font-weight: bold;
-	
-	width: 172px;
+	/*width: 172px;*/
 	
 	display: inline-block;
-	/*below adds up to 50px*/
-	padding: 12px 12px;
-	line-height: 26px;
+	min-height: 45px;
+	/*below adds up to 45px*/
+	padding-top: 12px;
+	padding-botton: 12px;
+	padding-right: 5px;
+	padding-left: 5px;
+	line-height: 21px;
 	/*---------------------*/
 	margin-bottom: 0;
 	font-size: 150%;
-	
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
@@ -106,23 +106,23 @@ a#btn_post_flat:hover{
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
-  border-color: #ff47f5 #ff47f5 hsl(303, 100%, 62%);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
 	font-weight: bold;
-	
-	width: 172px;
+	/*width: 172px;*/
 	
 	display: inline-block;
-	/*below adds up to 50px*/
-	padding: 12px 12px;
-	line-height: 26px;
+	min-height: 45px;
+	/*below adds up to 45px*/
+	padding-top: 12px;
+	padding-botton: 12px;
+	padding-right: 5px;
+	padding-left: 5px;
+	line-height: 21px;
 	/*---------------------*/
 	margin-bottom: 0;
 	font-size: 150%;
-	
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
