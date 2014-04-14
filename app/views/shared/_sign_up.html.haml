@@ -1,0 +1,23 @@
+= simple_form_for @user,  html: {role:"form", class: 'form'} do |f|
+  -if params[:group_id]
+    =hidden_field_tag('group[member_ids][]', @user.id)
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div#name_field.form-group
+    / =f.label :name, :class => 'control-label'
+    / %div.controls
+    =f.text_field :name, type:"text",:class => "form-control", :placeholder => "Thomas More"        
+  %div.form-group
+    / =f.label :email, :class => 'control-label'
+    /%div.controls
+    =f.text_field :email,type:"email", :class => "form-control", :placeholder => "hello@mom.com"  
+  %div.form-group
+    /=f.label :password, :class => 'control-label'
+    /%div.controls
+    =f.password_field :password, type:"password",:class => "form-control", :placeholder => "Password"  
+  =f.submit "Sign Up", class: "btn btn-default btn-primary btn-landing-page"

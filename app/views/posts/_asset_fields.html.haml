@@ -9,13 +9,20 @@
 /   =asset_fields.label  "delete image"
 /   =asset_fields.check_box :_destroy
 
+.image-control-group
+  =f.label "image", :class=>"col-sm-2 control-label"
+  = link_to_remove_fields "remove", f
+  -if is_mobile_device? || is_tablet_device?
+    =f.file_field :image, type:"file", accept: "image/*;capture=camera"
+  -else
+    =f.file_field :image, type:"file"
  
-%div.control-group.image-control-group
-  =f.label "image", :class=>"control-label"
-  %div.controls
-    = link_to_remove_fields "remove", f
-    -if is_mobile_device? || is_tablet_device?
-      =f.file_field :image, accept: "image/*;capture=camera"
-    -else
-      =f.file_field :image
-    
+/ %div.control-group.image-control-group
+/   =f.label "image", :class=>"control-label"
+/   %div.controls
+/     = link_to_remove_fields "remove", f
+/     -if is_mobile_device? || is_tablet_device?
+/       =f.file_field :image, accept: "image/*;capture=camera"
+/     -else
+/       =f.file_field :image
+/     

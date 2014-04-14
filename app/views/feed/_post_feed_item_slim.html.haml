@@ -20,21 +20,21 @@
 /       
 / 
 /   %div.span2
-/     %a.btn.btn-mini{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+/     %a.btn.btn-sm{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
 /     -if feed_item.tier_id
 /       -if signed_in? && current_user.stripe_customer_id.nil? == false
 /         /IF: signed_in and no c#, THEN: user_credit_modal
 /         =render 'user_you_sure_modal'
-/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-sm", :data_postid => feed_item.id 
 /       -elsif signed_in? && current_user.stripe_customer_id.nil?
 /         /IF: signed_in and yes c# THEN: user_you_sure_modal
 /      
-/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id 
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-sm", :data_postid => feed_item.id 
 /       
 /         %div#transaction_modal.modal.hide
 / 
 /       -else
-/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-mini", :data_postid => feed_item.id    
+/         =link_to_modal 'Buy', new_transaction_path(:post_id => feed_item.id), :remote => true, :id => "new_transaction_link", :class => "btn btn-sm", :data_postid => feed_item.id    
 / 
 / 
 / 
@@ -93,16 +93,16 @@
                     - @transaction.errors.full_messages.each do |msg|
                       %li= msg                                          
               =f.hidden_field :post_id, :value => feed_item.id
-              =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-mini btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
+              =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-sm btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
           -elsif signed_in? && current_user.stripe_customer_id.nil?
-            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id 
+            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id 
             %div#transaction_modal.modal.hide
           -else
-            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-mini btn-success", :data_postid => feed_item.id     
+            =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id     
         -elsif feed_item.price
           %span.non-tier-price $#{feed_item.price} [Cash OBO] 
       %div.email.pull-right
-        / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
-        =link_to_modal "Email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button btn btn-default btn-mini"
+        / %a.btn.btn-sm.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+        =link_to_modal "Email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button btn btn-default btn-sm"
 
 

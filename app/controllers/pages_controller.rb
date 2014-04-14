@@ -255,6 +255,10 @@ class PagesController < ApplicationController
   
   def about
   end
+  
+  def landing
+  end
+  
   private
   def get_popular_tags
     adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym

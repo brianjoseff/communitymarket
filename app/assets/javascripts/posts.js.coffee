@@ -184,23 +184,18 @@ checkType = ->
 $ ->
 	$("button.switch").on "click", checkType
 	
-	
 $ ->
 	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
 	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
 	  $this = $(this)
 	  if $(this).attr("class-toggle") isnt `undefined` and not $(this).hasClass("disabled")
-	    btnGroup = $this.parent(".btn-group")
+	    btnGroup = $this.parent(".btn-group, .btn[data-toggle=\"button\"]")
 	    btnToggleClass = $this.attr("class-toggle")
 	    btnCurrentClass = $this.hasAnyClass(buttonClasses)
-	    if btnGroup.attr("data-toggle") is "buttons-radio"
+	    if btnGroup.attr("data-toggle") is "button"
 	      return false  if $this.hasClass("active")
-	      activeButton = btnGroup.find(".btn.active")
-	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
-	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
-	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
+				$($(".btn-group > .btn, .btn[data-toggle=\"button\"]").parent(".btn-group").find(".btn.active")[0]).removeClass("active")
 
-		
 	$.fn.hasAnyClass = (classesToCheck) ->
 	  i = 0
 
@@ -208,6 +203,29 @@ $ ->
 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
 	    i++
 	  false
+
+# $ ->
+# 	$(".btn-group > .btn[data-toggle=\"button\"]").click ->
+# 	  buttonClasses = ["btn-primary","btn-default", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
+# 	  $this = $(this)
+# 	  if $(this).attr("class-toggle") isnt `undefined` and not $(this).hasClass("disabled")
+# 	    btnGroup = $this.parent(".btn-group")
+# 	    btnToggleClass = $this.attr("class-toggle")
+# 	    btnCurrentClass = $this.hasAnyClass(buttonClasses)
+# 	    if btnGroup.attr("data-toggle") is "button"
+# 	      return false  if $this.hasClass("active")
+# 				activeButton = btnGroup.find(".btn.active")
+# 	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
+# 	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
+# 	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
+# 
+# 	$.fn.hasAnyClass = (classesToCheck) ->
+# 	  i = 0
+# 
+# 	  while i < classesToCheck.length
+# 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
+# 	    i++
+# 	  false
 	
 
 # $ ->

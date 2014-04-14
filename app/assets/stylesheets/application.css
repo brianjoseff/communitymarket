@@ -75,6 +75,7 @@ span.points{
 .slim-button-row{
  display: inline-block;
  float:right;
+margin-bottom: 5px;
 }
 
 .buy{

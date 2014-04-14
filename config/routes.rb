@@ -104,6 +104,7 @@ Communitymarket::Application.routes.draw do
   match '/search', :to => 'search#index'
   match '/search_tags', :to => 'tags#search'
   match '/about', :to => 'pages#about'
+  match '/landing', :to => 'pages#landing'
  # match '/facebook_update_and_post', :to => "users/omniauth_callbacks#facebook_update_and_post"
   # match '/signout', :to => 'sessions#destroy'
   # match '/sign_in', :to => 'sessions#new'
