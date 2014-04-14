@@ -64,11 +64,18 @@
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
   %body
     %div.container
-      %div.row-fluid
+      %div.row
         %div#nav
           =render 'layouts/header'
+
     %div.container
-      %div.row-fluid
+      %div.row
+        /=render partial: "shared/post_search_bar" unless @disable_nav
+        -if current_user
+          -if current_page?(root_url)
+            =render partial: "layouts/banner_icons"
+          %div.row
+            =render partial: "shared/post_search_bar" unless current_page?(landing_url)
         = yield
         = debug(params) if Rails.env.development?
       /%div#signup_modal.modal.hide

@@ -1,83 +1,129 @@
-/ %p.pull-right#notice= notice
-/%p #{session.inspect}
--flash.each do |name, msg|
-  =content_tag :div, msg, class: name
-%div.row-fluid.nav-area
-  %div.span5
-    
-    %h2.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
-    =image_tag "circlelogo1.png", :id => "header_logo"
-    =image_tag "dartmouth.jpg", :id => "dartmouth_logo"
-    /%label.credit_card_label
-  %div.span7
-    %div.row-fluid
-      %span.user-nav.pull-right
-        / - if user_signed_in?
-        /   Logged in as
-        /   = succeed "." do
-        /     %strong= current_user.email
-        /   = link_to 'Edit profile', edit_user_registration_path
-        /   |
-        /   \#{link_to "Logout", , method: :delete}
-        / - else
-        /   = link_to "Sign up", 
-        /   |
-        /   \#{link_to "Login", }
-        
-        -if user_signed_in?
-          -if current_user.name
-            =link_to current_user.name, user_path(current_user)
-          -else
-            =link_to "Your Page", user_path(current_user)
-          %span.points
-            =current_user.points
-            / %i.icon
-            / =current_user.badges.count
-            
-            
-          %i.icon.icon-user.nav-icon
-          =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
-        -else
-          %i.icon.icon-user.nav-icon
-          = link_to "Sign Up", new_user_registration_path, :class => "nav-user-link"
-          or
-          =link_to "Sign In", new_user_session_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
-          
-        / -if signed_in?
-        /   =link_to current_user.name , user_path(current_user)
-        /   %i.icon.icon-user.nav-icon
-        /   =link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
-        / -else
-        /   %i.icon.icon-user.nav-icon
-        /   = link_to "Sign Up", new_user_path, :class => "nav-user-link"
-        /   or
-        /   =link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
-    %div.row-fluid
-      %ul#nav_pill_section.nav.nav-pills.pull-right.colored-pills 
-        %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path
-        %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
-        %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
-        %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
-        %li{:class => "#{'active' if current_page?(tags_path)}"}=link_to "Tags", tags_path
-        / -if signed_in?
-        /   %li#nav-pill-yellow{:class => "#{'active' if current_page?(user_path(current_user))}"}=link_to "Your page", user_path(current_user)
-        /   %li=link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)}"
-        /   /%li=link_to "Add Image", new_image_path, :class => "#{'active' if current_page?(root_path)}"    
-        / -else
-        /   /=link_to_open_modal('Sign up', new_user_path, '#signup_modal', {class: 'action'})
-        /   /%li=link_to "Sign up", new_user_path
-        /   /%li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
-        /   %li{:class => "#{'active' if current_page?(new_user_path)}"}= link_to "Sign Up", new_user_path
-        /   /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
-        /   /%a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up
-        /   / %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
-        /   /   =render 'users/new_modal'
-        /   %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"
+#navbar-main.nav-area.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+  .container
+    .row
+      / Brand and toggle get grouped for better mobile display
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-header.people-and-stuff-marquee
+        =image_tag "circlelogo1.png", :id => "header_logo"
+        %h3.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
+        %span.at-dartmouth.pull-right
+          at Dartmouth College
 
--if current_user
-  -if current_page?(root_url)
-    =render partial: "layouts/banner_icons"
-  %div.row-fluid
-    =render partial: "shared/post_search_bar"
-
-
+      / Collect the nav links, forms, and other content for toggling
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav 
+          / %ul#nav_pill_section.nav.nav-pills.navbar-right.colored-pills 
+          %li{:class => "#{'active' if current_page?(root_path)} smoothScroll"}=link_to "Home", root_path
+          %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
+          %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
+          %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
+          %li{:class => "#{'active' if current_page?(tags_path)}"}=link_to "Tags", tags_path
+        .nav.navbar-nav.navbar-right
+          .user-nav
+            -if user_signed_in?
+              -if current_user.name
+                =link_to current_user.name, user_path(current_user)
+              -else
+                =link_to "Your Page", user_path(current_user)
+              %span.points
+                =current_user.points
+              %i.icon.icon-user.nav-icon
+              =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+            -else
+              %i.icon.icon-user.nav-icon
+              = link_to "Sign Up", new_user_registration_path, :class => "nav-user-link"
+              or
+              =link_to "Sign In", new_user_session_path, :class => "#{'active' if current_page?(root_path)} nav-user-link" 
+  / 
+  / -flash.each do |name, msg|
+  /   =content_tag :div, msg, class: name
+  / / %form.navbar-form.navbar-left{role: "search"}
+  / /   .form-group
+  / /     %input.form-control{placeholder: "Search", type: "text"}/
+  / /   %button.btn.btn-default{type: "submit"} Submit
+  / %div.row.nav-row
+  /   .navbar-header
+  /     %button.navbar-toggle{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+  /       %span.sr-only Toggle navigation
+  /       %span.icon-bar
+  /       %span.icon-bar
+  /       %span.icon-bar
+  /   %div.nav-area.navbar.navbar-default.navbar-fixed-top
+  /     %div.span5.col-sm-5
+  /       =image_tag "circlelogo1.png", :id => "header_logo"
+  /       %h3.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}
+  /     
+  /       /%label.credit_card_label
+  /     %div.span7.col-sm-7
+  /       %div.row
+  /         %span.user-nav.pull-right
+  /           / - if user_signed_in?
+  /           /   Logged in as
+  /           /   = succeed "." do
+  /           /     %strong= current_user.email
+  /           /   = link_to 'Edit profile', edit_user_registration_path
+  /           /   |
+  /           /   \#{link_to "Logout", , method: :delete}
+  /           / - else
+  /           /   = link_to "Sign up", 
+  /           /   |
+  /           /   \#{link_to "Login", }
+  /         
+  /           -if user_signed_in?
+  /             -if current_user.name
+  /               =link_to current_user.name, user_path(current_user)
+  /             -else
+  /               =link_to "Your Page", user_path(current_user)
+  /             %span.points
+  /               =current_user.points
+  /               / %i.icon
+  /               / =current_user.badges.count
+  /             
+  /             
+  /             %i.icon.icon-user.nav-icon
+  /             =link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+  /           -else
+  /             %i.icon.icon-user.nav-icon
+  /             = link_to "Sign Up", new_user_registration_path, :class => "nav-user-link"
+  /             or
+  /             =link_to "Sign In", new_user_session_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
+  /           
+  /           / -if signed_in?
+  /           /   =link_to current_user.name , user_path(current_user)
+  /           /   %i.icon.icon-user.nav-icon
+  /           /   =link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)} nav-user-signout"    
+  /           / -else
+  /           /   %i.icon.icon-user.nav-icon
+  /           /   = link_to "Sign Up", new_user_path, :class => "nav-user-link"
+  /           /   or
+  /           /   =link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)} nav-user-link"
+  /       %div#navbar-collapse
+  /         %div.row.navbar-collapse.collapse
+  /           %ul#nav_pill_section.nav.nav-pills.pull-right.colored-pills 
+  /             %li{:class => "#{'active' if current_page?(root_path)}"}=link_to "Home", root_path
+  /             %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
+  /             %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
+  /             %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
+  /             %li{:class => "#{'active' if current_page?(tags_path)}"}=link_to "Tags", tags_path
+  /             / -if signed_in?
+  /             /   %li#nav-pill-yellow{:class => "#{'active' if current_page?(user_path(current_user))}"}=link_to "Your page", user_path(current_user)
+  /             /   %li=link_to "Sign out", signout_path, :class => "#{'active' if current_page?(root_path)}"
+  /             /   /%li=link_to "Add Image", new_image_path, :class => "#{'active' if current_page?(root_path)}"    
+  /             / -else
+  /             /   /=link_to_open_modal('Sign up', new_user_path, '#signup_modal', {class: 'action'})
+  /             /   /%li=link_to "Sign up", new_user_path
+  /             /   /%li= link_to_modal 'New User', new_modal_users_path, :width=> "600", :height =>"400", :remote => true, :id => "new_user_link"
+  /             /   %li{:class => "#{'active' if current_page?(new_user_path)}"}= link_to "Sign Up", new_user_path
+  /             /   /%li= link_to "Sign up", conversations_path, data: { toggle: "modal", target: "#sign_up_modal" 
+  /             /   /%a.btn{ "data-target" => "#sign_up_modal", "data-toggle" => "modal", 'data-remote' => "/users/new", :href => "/users/new", :role => "button"} Sign up
+  /             /   / %div#sign_up_modal.modal.fade{ 'data-userid' => "#{@user.id}", :role => "dialog",:style=>"display:none"}
+  /             /   /   =render 'users/new_modal'
+  /             /   %li=link_to "Sign In", signin_path, :class => "#{'active' if current_page?(root_path)}"
+  / 
+  / 
+  / 
+  / 

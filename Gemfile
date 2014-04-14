@@ -64,8 +64,14 @@ gem 'skeuocard-rails'
 gem 'forgery'
 gem 'faker'
 
-gem 'bootstrap-sass'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+#BOOTSTRAP
+# gem 'bootstrap-sass'
+# gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+
+
+
 # gem 'jquery-rails'
 # gem 'jquery-ui-rails'
 

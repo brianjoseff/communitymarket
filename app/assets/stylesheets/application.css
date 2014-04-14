@@ -76,6 +76,7 @@ span.points{
 .slim-button-row{
  display: inline-block;
  float:right;
+margin-bottom: 5px;
 }
 
 .buy{
@@ -117,9 +118,7 @@ footer{
 /*  3. Front Page Banner ************************************/
 /************************************************************/
 
-.banner{
-	/*height: 138px;*/
-}
+
 h1#changingtext{
 	height: 40px;
 }
@@ -141,19 +140,18 @@ h1#changingtext2{
 
 #banner_icons{
 padding-top: 10px;
-margin:auto;
-width: 870px;
+
 }
 
 
-#trust{
+#trust, #house, #dollar{
 	display:block;
 	text-align:center;
 	float:left;
-	width: 270px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
 img#trust_icon{
 	height: 50px !important;
 	height: auto;
@@ -186,31 +184,14 @@ img#books_icon{
 	padding-right: 10px;
 }
 
-#house{
-	text-align:center;
-	float:left;
-	width: 270px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-img#house_icon{
+
+img#trust_icon, img#house_icon, img#dollar_icon{
 	height: 50px !important;
 	height: auto;
 	margin-bottom: 5px;
 }
 
-#dollar{
-	text-align:center;
-	float:left;
-	width: 270px;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-img#dollar_icon{
-	height: 50px !important;
-	height: auto;
-	margin-bottom: 5px;
-}
+
 
 dl{
 	font-size: 110%;
@@ -449,12 +430,40 @@ input[type="text"].search-bar-field{
 
 .search-bar{
 	padding-top: 10px;
+	height:;
 }
 .search-row{
 	background-color: #7f8c8d;
-	height: 60px;
+	display:block;
+	min-height: 65px;
 	padding-top: 10px;
-	padding-left: 10px;
+	padding-bottom: 10px;
+	/*padding-left: 10px;*/
+}
+#btn_search{
+	background-color: #00e5d6 !important;
+	
+  
+/*  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);*/
+  -webkit-font-smoothing: antialiased;
+  color: #fff !important;
+	border: none !important;
+	font-weight: bold;
+	width: 100px;
+	/*display: inline-block;*/
+	/*below adds up to 50px*/
+	/*padding: 12px 12px;*/
+	/*line-height: 26px;*/
+	/*---------------------*/
+	margin-bottom: 0;
+	font-size: 150%;
+	
+/*	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;	*/
+}
+#btn_search:hover{
+	background-color: #06d5c9 !important;
 }
 
 .btn-search {
@@ -473,11 +482,17 @@ input[type="text"].search-bar-field{
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.29);
   -webkit-font-smoothing: antialiased;
 }
-
-#shop_by_category{
-	width: 80px;
+.category-post-cluster{
+	margin-bottom:10px;
+	padding-right: 10px;
+}
+.shop-by-category{
+	float:right;
+}
+#shop_by_category_button{
+	/*width: 80px;*/
 	display:block;
-
+	min-height: 45px;
 }
 .dropdown{
 	list-style-type:none;

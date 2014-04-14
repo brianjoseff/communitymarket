@@ -1,8 +1,22 @@
-%li.dropdown
-  %a#shop_by_category.btn.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+/ .btn-group
+/   %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+/     Action
+/     %span.caret
+/   %ul.dropdown-menu{role: "menu"}
+/     %li
+/       %a{href: "#"} Action
+/     %li
+/       %a{href: "#"} Another action
+/     %li
+/       %a{href: "#"} Something else here
+/     %li.divider
+/     %li
+/       %a{href: "#"} Separated link
+.btn-group.shop-by-category
+  %button#shop_by_category_button.btn.btn-large.btn-default.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
     Shop By Category
-    %b.caret
-  %ul.dropdown-menu
+    %span.caret
+  %ul.dropdown-menu{role: "menu"}
     -@browse_by_array.each do |category|
       -if category.is_a?(Tag)
         %li

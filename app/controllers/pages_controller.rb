@@ -192,6 +192,12 @@ class PagesController < ApplicationController
     Kaminari.paginate_array(posts).page(params[:page]).per(per_page)
   end
   
+
+  def landing
+  end
+  
+  private
+
   def get_popular_tags
     adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym
     case adapter_type
