@@ -24,8 +24,9 @@
   .container.features
     .row
       .col-lg-3
-        =image_tag 'books.png', id: "books_icon"
-        %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
+        =link_to textbooks_url do
+          =image_tag 'books.png', id: "books_icon"
+          %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
       .col-lg-3
         =image_tag 'furniture.png', id: "furniture_icon"
         %h4.bold FIND RAD DORM FURNITURE  
@@ -51,9 +52,9 @@
           %h4 REBECCA HU '15
           %p I've sold a ton of the crap that was sitting around my room and in so doing accumulated currency
         .col-lg-4
-          .circle-image.center.person
+          .circle-image.center.gabe
           / =image_tag 'head-shot.jpg'
-          %h4 BOB JABLONSKI '92
+          %h4 GABE JABLONSKI '15
           %p I put all my textbooks on here, made bank, and P&S even came and picked them up. Radical.  
         .col-lg-4
           .circle-image.center.hanlon

@@ -3,7 +3,7 @@
     %div.col-lg-5
       /new post button
       .category-post-cluster
-        =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
+        =link_to "Post Something", new_post_path, :id => "btn_post_flat", class: "pull-left", :role => "button"
 
         =render :partial => "search/category_dropdown"
 

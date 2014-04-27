@@ -161,8 +161,15 @@ class PagesController < ApplicationController
     #     format.js { render :layout=>false }
     # end
     @pc = PostCategory.find_by_name("Textbook")
+    @tag = Tag.find_by_id(88)
     
-    @textbooks = @pc.posts
+    unless @tag.nil?
+      @tag_textbooks = @tag.posts
+      @textbooks = @pc.posts + @tag_textbooks
+    else
+      @textbooks = @pc.posts
+    end
+    
     
     
   end

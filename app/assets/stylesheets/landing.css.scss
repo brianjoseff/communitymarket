@@ -233,17 +233,24 @@ p {
 .hanlon{
 	background-position-y:0%;
 	background-position-x: 55%;
+	background-size: 100%;
 	background-image:url("hanlon.jpg");
 }
 .rebecca{
-	background-position-y: 25%;
+	background-position-y: 10%;
 	background-position-x: 25%;
-	background-size: 90%;
-	background-image:url("head-shot.jpg");
+	background-size: 110%;
+	background-image:url("rebecca.jpg");
 }
 .person{
 	background-size: 100%;
 	background-image:url("hanlon.jpg");
+}
+.gabe{
+	background-position-y: 25%;
+	background-position-x: 25%;
+	background-size: 110%;
+	background-image:url("gabe.jpg");
 }
 
 

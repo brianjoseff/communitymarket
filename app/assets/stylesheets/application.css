@@ -59,9 +59,10 @@ a:hover#stripe_button{
 	background-color: transparent;
 }
 
-#no-black:hover;{
-	backgound-color: transparent !important;
+a:hover.no-black{
+	background-color: transparent !important;
 }
+
 span.points{
 	margin-left: 5px;
 	margin-right: 5px;
