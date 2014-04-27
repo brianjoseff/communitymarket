@@ -154,6 +154,7 @@ class PagesController < ApplicationController
   end
   
   def textbooks
+    @transaction = Transaction.new
     # @post_category= Tag.find_by_id(88)
     # @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
     # @posts = kaminari_paginate(@posts, 50) 
@@ -163,16 +164,8 @@ class PagesController < ApplicationController
     @pc = PostCategory.find_by_name("Textbook")
     @tag = Tag.find_by_id(88)
     
-    unless @tag.nil?
-      @tag_textbooks = @tag.posts
-      @textbooks = @pc.posts + @tag_textbooks
-    else
-      @textbooks = @pc.posts
-    end
-    unless @textbooks
-		  @textbooks = @textbooks.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-		  @textbooks = Kaminari.paginate_array(@textbooks).page(params[:page]).per(50)
-		end
+	  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+	  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
     
     
   end

@@ -127,6 +127,11 @@ class PostsController < ApplicationController
       
       @post.email = @user.email
       
+      if @post.post_category.name == "Textbook"
+        @textbook_tag = Tag.find_by_id(88)
+        @post.tag_to(@textbook_tag)
+      end
+      
       if @post.premium?
         @amount = 300
         if @user.stripe_customer_id
