@@ -6,8 +6,8 @@
   / %div{:id => "follow_button_"+@post_category.id.to_s}
   /   =render 'shared/simple_follow', :tag => @post_category
   %form.filter_form
-    =content_tag 'div', class: "post-category-id", data: {pc_id: @post_category.id} do
-      shit
+    / =content_tag 'div', class: "post-category-id", data: {pc_id: @post_category.id} do
+    /   x
       
     = form_tag('post_categories', :remote => true) do
       

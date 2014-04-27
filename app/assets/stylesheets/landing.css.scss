@@ -10,8 +10,12 @@
 
 
 body {
-  padding-top: 70px;
+  padding-top: 36px;
   background-color: #efeee9;
+}
+
+.landing-page{
+	margin-top: -50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,12 +67,12 @@ p {
 	border-bottom: #1abc9c solid 3px;
 }
 
-.navbar-default .navbar-nav > .active > a,
+/*.navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   	color: #ffffff;
 	background-color: #1abc9c
-}
+}*/
 
 .navbar-brand licon {
 	font-size: 20px;
@@ -89,8 +93,10 @@ p {
 .accordion-heading a:hover {
 	font-family: 'Raleway', sans-serif;
 	font-size: 22px;
-	color: #1abc9c;
+/*	color: #1abc9c;*/
+	color: #00e5d6;
 	text-decoration: none;
+	background-color: transparent
 }
 
 .form-control {
@@ -170,11 +176,12 @@ p {
 }
 
 #section01 {
-	background: url(../img/section01.jpg) no-repeat center top;
-	padding-top:80px;
-	text-align:center;
+/*	background: url('aerial-large.jpg') no-repeat center top;
 	background-attachment: relative;
-	background-position: center center;
+	background-position: center center;*/
+	background-color: #e7e7e7;
+	padding-top:30px;
+	text-align:center;
 	min-height: 400px;
 	width: 100%;
 	
@@ -198,9 +205,51 @@ p {
 	padding-top: 30px;
 	letter-spacing: 3px;
 }
+.circle-img-div{
+    height:100px;
+    width:100px;
+    overflow:hidden;
+    border-radius:50%;
+		text-align:center;
+}
+
+.circle-img-div img{
+    -webkit-transform:translate(-50%);
+    margin-left:50px;
+}
+
+.circle-image{
+    width:150px;
+    height:150px;
+		margin-left: 25px;
+    border-radius:50%;
+    
+
+		background-repeat: no-repeat;
+		background-position: center;
+    display:block;
+
+}
+.hanlon{
+	background-position-y:0%;
+	background-position-x: 55%;
+	background-image:url("hanlon.jpg");
+}
+.rebecca{
+	background-position-y: 25%;
+	background-position-x: 25%;
+	background-size: 90%;
+	background-image:url("head-shot.jpg");
+}
+.person{
+	background-size: 100%;
+	background-image:url("hanlon.jpg");
+}
+
+
 
 #section02 {
-	background: url(../img/section02.jpg) no-repeat center top;
+	background: url('moosilake.jpg') no-repeat center top;
 	padding-top:80px;
 	text-align:center;
 	background-attachment: relative;
@@ -260,7 +309,7 @@ p {
 }
 
 #registerwrap {
-	background-color: #1abc9c;
+	background-color: #00e5d6;
 	color: #ffffff;
 	margin-top: 40px;
 }

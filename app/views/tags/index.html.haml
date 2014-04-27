@@ -1,11 +1,13 @@
-= link_to 'New Tag', new_tag_path
 
-%div.row-fluid
-  %div.span3
+%div.row
+  %div.col-lg-3
     %h3 Search
     =search_form_for @q, :url => { :controller => "tags", :action => "search"}, :html => { :class => "form-inline"} do |f|
-      =f.text_field :name_cont, :class => "", :placeholder => "search for tags"
-      =f.submit 'Search', :class => "btn btn-med"
+      .input-group
+        =f.text_field :name_cont, type: "text", :class => "form-control col-lg-8", :placeholder => "search for tags"
+        %span.input-group-btn
+          = button_tag(type: 'submit', class: "btn btn-default btn-lg") do
+            %span.glyphicon.glyphicon-search
     /put tag search bar here
     / =form_tag(groups_path, method: :get) do
     /   .input-group
@@ -13,21 +15,21 @@
     /     %span.input-group-btn
     /       =button_tag "Go", name: nil, :class => "btn-default btn", :type => "button"
       
-
+    = link_to 'New Tag', new_tag_path, class: "btn btn-default"
     /TAG CATEGORIES?
     / %ul.nav
     /   -@g_categories.each do |gcat|
     /     =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
-  %div.span9
+  %div.col-lg-9
     %div.row
-      %div.span3
+      %div.col-lg-3
         %h3 Popular Tags
     =render @popular_tags
 
 
 /
 
-/ %div.span6.posts-nav
+/ %div.col-lg-6.posts-nav
 /   %span
 /     =link_to "For Sale", for_sale_path, id: 'for_sale_link'
 /   %span 
@@ -35,7 +37,7 @@
 /   %span
 /     =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
 /=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
-/ %div.span9
+/ %div.col-lg-9
 /   %ul.nav-tabs
 /     %li 
 /Sort by: closest, newest, oldest, most popular

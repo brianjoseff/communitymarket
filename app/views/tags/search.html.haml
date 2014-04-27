@@ -1,51 +1,52 @@
-= link_to 'New Tag', new_tag_path
+
 
 %div.row
-  %div.span3
+  %div.col-lg-3
     %h3 Search
     =search_form_for @q, :url => { :controller => "tags", :action => "search"}, :html => { :class => "form-inline"} do |f|
-      =f.text_field :name_cont, :class => "", :placeholder => "search for tags"
-      =f.submit 'Search', :class => "btn btn-small"
+      .input-group
+        =f.text_field :name_cont, type: "text", :class => "form-control col-lg-8", :placeholder => "search for tags"
+        %span.input-group-btn
+          = button_tag(type: 'submit', class: "btn btn-default btn-lg") do
+            %span.glyphicon.glyphicon-search
     /put tag search bar here
     / =form_tag(groups_path, method: :get) do
     /   .input-group
     /     =text_field_tag :zipcode, nil,:class => "form-control", :placeholder =>"Zipcode"
     /     %span.input-group-btn
     /       =button_tag "Go", name: nil, :class => "btn-default btn", :type => "button"
-      
-
+    
+    = link_to 'New Tag', new_tag_path, class: "btn btn-default"
     /TAG CATEGORIES?
     / %ul.nav
     /   -@g_categories.each do |gcat|
     /     =link_to gcat.name, group_category_path(gcat), :class => "span2 chevron_right"
-  %div.span9
+  %div.col-lg-9
     %div.row
-      %div.span2
+      %div.col-lg-3
         %h3 Results
-      %div.span6.posts-nav
-        %span
-          =link_to "All Tags", tags_path
-        / %span 
-        /   =link_to "Wanted", wanted_path, id: 'wanted_link'
-        / %span
-        /   =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
-      
-    / %div.span9
-    /   %ul.nav-tabs
-    /     %li 
-    /Sort by: closest, newest, oldest, most popular
-    / %ul.breadcrumb
-    /   %li
-    /     =link_to "All", groups_path
-    /   %li
-    /     =link_to @group_category, group_category_path(@group_category)
-    /=render @popular_tags
     =render @tags
-%br
+
 
 /
 
-
+/ %div.col-lg-6.posts-nav
+/   %span
+/     =link_to "For Sale", for_sale_path, id: 'for_sale_link'
+/   %span 
+/     =link_to "Wanted", wanted_path, id: 'wanted_link'
+/   %span
+/     =link_to "For Rent/Borrow", borrow_rent_path, id: "borrow_rent_link"
+/=link_to "Create a group", new_group_path, :class => "btn group-button pull-right", :role => "button", :id => "front_page_new_group"
+/ %div.col-lg-9
+/   %ul.nav-tabs
+/     %li 
+/Sort by: closest, newest, oldest, most popular
+/ %ul.breadcrumb
+/   %li
+/     =link_to "All", groups_path
+/   %li
+/     =link_to @group_category, group_category_path(@group_category)
 
 /Categories side bar
 /Content area

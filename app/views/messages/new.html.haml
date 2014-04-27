@@ -1,7 +1,13 @@
-.modal-message-form
-  %h1 Email them:
-  -if @post
-    %p =@post.title
-    =@post.description
+.modal-message-form.center.col-lg-5
+  .modal-content
+    .modal-header
+      /%button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+      .pull-right
+        = link_to 'X', "#", :rel => "modal:close", class: "close bold"
+      %h4 Email them:
+    .modal-body
+      -if @post
+        %p =@post.title
+        =@post.description
 
-  = render 'form', post_id: :post_id, recipient: :recipient
+      = render 'form', post_id: :post_id, recipient: :recipient

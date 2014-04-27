@@ -89,7 +89,6 @@ class TagsController < ApplicationController
     @q = Tag.search(params[:q])
     @tags = @q.result
     @tags_count = @tags.count
-    
   end
   
   

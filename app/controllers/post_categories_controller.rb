@@ -14,6 +14,7 @@ class PostCategoriesController < ApplicationController
   # GET /post_categories/1
   # GET /post_categories/1.json
   def show
+    @transaction = Transaction.new
     @post_category = PostCategory.find(params[:id])
     unless @post_category.posts.empty?
 		  @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }

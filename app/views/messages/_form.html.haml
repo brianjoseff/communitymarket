@@ -7,15 +7,13 @@
       %ul
         - @message.errors.full_messages.each do |msg|
           %li= msg
-  %div.control-group   
+  %div.form-group
     / = f.label :subject, :class => "control-label"
-    %div.controls
-      = f.text_field :subject, :class => "input-block-level inline", :placeholder => "Subject"
+    = f.text_field :subject, type: "text", :class => "form-control", :placeholder => "Subject"
   /= params[:recipient].to_s
-  %div.control-group   
+  %div.form-group 
     / = f.label :content, :class => "control-label"
-    %div.controls
-      = f.text_area :content, :class => "input-block-level inline", :placeholder => "Email Content", :rows => "8"
+    = f.text_area :content, type: "text", :class => "form-control", :placeholder => "Email Content", :rows => "8"
   = debug(params) if Rails.env.development?
-  .actions
-    = f.submit 'Send Your Message', id: "send_message"
+  .modal-footer
+    = f.submit 'Send Your Message', id: "send_message", class: "btn btn-default btn-primary"

@@ -1,18 +1,18 @@
-%div.row-fluid
+%div.row
   =render :partial => "search_form"
-%div.row-fluid
-  %div.span6
+%div.row
+  %div.col-lg-6
     %h1 Stuff:
     %p search returned #{pluralize(@posts_results.count, 'post')}
     /Post feed
 
     =render :partial => 'feed/feed',:locals => {:feed_items => @posts_results}
     
-  %div.span6
+  %div.col-lg-6
     %h1 Tags
     -@tag_results.each do |tag|
       =link_to tag.name, tag_url(tag), :class => "tag"
     =link_to "More tags...", tags_path
     %h1 Groups:
     %p search returned #{pluralize(@group_count, 'group')}
-    =render @groups
+    =render @groups, :as => "group_feed_item"

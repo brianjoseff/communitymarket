@@ -37,6 +37,30 @@
 /************************************************************/
 /*********** 2. POST FORM ***********************************/
 /************************************************************/
+.cash-field-label{
+	position: absolute;
+	left: -5px;
+	top: 15px;
+	font-size: 150%;
+}
+.comp-field-label{
+	position:absolute;
+	font-size: 150%;
+	left: 15px;
+	top: 65px;
+}
+.comp-field-label-2{
+	position:absolute;
+	font-size: 150%;
+	left: 15px;
+	top: 100px;
+}
+
+.comp-text-field{
+	padding-left: 30px;
+	padding-top: 10px;
+}
+
 .control-label{
 	width: 120px !important;
 }
@@ -364,5 +388,8 @@ img#fb{
 	margin-left: -60px;
 }
 
+button.active{
+/*	background-color: #696969 !important;*/
+}
 
 

@@ -172,14 +172,19 @@ checkType = ->
 	if n > 1 && n < 4
 		$("#price_field").val('')
 		$("div#get_paid_stuff").hide()
-		$("div#compensation").hide()		
+		$("div#compensation").hide()
+		$("div#textbook").hide()		
 	else if n == 4 || n == 5
 		$("#price_field").val('')
 		$("div#get_paid_stuff").hide()
 		$("div#compensation").show()
+		$("div#textbook").hide()
 	else if n == 1
 		$("div#get_paid_stuff").show()
 		$("div#compensation").hide()
+		$("div#textbook").hide()
+	else if n > 5
+		$("div#textbook").show()
 		
 $ ->
 	$("button.switch").on "click", checkType
@@ -195,6 +200,7 @@ $ ->
 	    if btnGroup.attr("data-toggle") is "button"
 	      return false  if $this.hasClass("active")
 				$($(".btn-group > .btn, .btn[data-toggle=\"button\"]").parent(".btn-group").find(".btn.active")[0]).removeClass("active")
+				$this.addClass("active")
 
 	$.fn.hasAnyClass = (classesToCheck) ->
 	  i = 0

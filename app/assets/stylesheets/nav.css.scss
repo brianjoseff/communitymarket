@@ -108,16 +108,24 @@ a:hover > .nav-icon{
 /*			background-color: #00e0ac;*/
 	/*	background-color: #ffc0b9;*/
 }
-.nav-pills > li > a:hover{
+.navbar-nav > li > a:hover{
 		
 		/*background-color: #ff91af;*/
-		background-color: #7f8c8d;
+		background-color: #7f8c8d !important;
+		color: #fff !important;
 /*	background-color: #ffc0b9;*/
+}
+#nav-pill-pink{
+	background-color: #00e5d6 !important;
+	
+}
+#nav-pill-pink > a{
+	color: #fff !important;
 }
  #nav-pill-pink a:hover{
 		
 		/*background-color: #ff91af;*/
-		background-color: #ff91af;
+		background-color: #ff91af !important;
 /*	background-color: #ffc0b9;*/
 }
  #nav-pill-yellow a:hover{

@@ -1,404 +1,399 @@
-!!!
-%html{lang: "en"}
-  %head
-    %meta{charset: "utf-8"}/
-    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-    %meta{content: "", name: "description"}/
-    %meta{content: "", name: "author"}/
-    %link{href: "../../assets/ico/favicon.png", rel: "shortcut icon"}/
-    %title Diamond - Bootstrap 3 App Landing
-    / Bootstrap core CSS
-    %link{href: "assets/css/bootstrap.css", rel: "stylesheet"}/
-    / Custom styles for this template
-    %link{href: "assets/css/main.css", rel: "stylesheet"}/
-    %link{href: "assets/css/linecons.css", rel: "stylesheet"}/
-    %link{href: "assets/css/icomoon.css", rel: "stylesheet"}/
-    %link{href: "http://fonts.googleapis.com/css?family=Lato:100,300,400,700,300italic,400italic", rel: "stylesheet", type: "text/css"}/
-    %link{href: "http://fonts.googleapis.com/css?family=Raleway:100,400,300,700", rel: "stylesheet", type: "text/css"}/
-    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
-    /[if lt IE 9]
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-  %body{"data-offset" => "0", "data-spy" => "scroll", "data-target" => "#navbar-main"}
-
-    / ========== HEADERWRAP ==========
-    %section#home.scrollspy{name: "home"}
-    #headerwrap
-      .container
-        .col-lg-8
-          %h1 A marketplace for your school
-          %p.hidden-xs buy and sell stuff with people you know. Textbooks are guaranteed to sell. Be part of the magic.
-        .col-lg-4
-          // SIGN UP FORM GOES HERE
-          .landing-signup
+/ !!!
+/ %html{lang: "en"}
+/   %head
+/     %meta{charset: "utf-8"}/
+/     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+/     %meta{content: "", name: "description"}/
+/     %meta{content: "", name: "author"}/
+/     %link{href: "../../assets/ico/favicon.png", rel: "shortcut icon"}/
+/     %title Diamond - Bootstrap 3 App Landing
+/     / Bootstrap core CSS
+/     %link{href: "assets/css/bootstrap.css", rel: "stylesheet"}/
+/     / Custom styles for this template
+/     %link{href: "assets/css/main.css", rel: "stylesheet"}/
+/     %link{href: "assets/css/linecons.css", rel: "stylesheet"}/
+/     %link{href: "assets/css/icomoon.css", rel: "stylesheet"}/
+/     %link{href: "http://fonts.googleapis.com/css?family=Lato:100,300,400,700,300italic,400italic", rel: "stylesheet", type: "text/css"}/
+/     %link{href: "http://fonts.googleapis.com/css?family=Raleway:100,400,300,700", rel: "stylesheet", type: "text/css"}/
+/     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+/     /[if lt IE 9]
+/       <script src="../../assets/js/html5shiv.js"></script>
+/       <script src="../../assets/js/respond.min.js"></script>
+%div.landing-page{"data-offset" => "0", "data-spy" => "scroll", "data-target" => "#navbar-main"}
+  / ========== HEADERWRAP ==========
+  %section#home.scrollspy{name: "home"}
+  #headerwrap
+    .container
+      .col-lg-8
+        %h1 A marketplace for your school
+        %p.hidden-xs buy and sell stuff with people you know. Textbooks are guaranteed to sell. Be part of the magic.
+      .col-lg-4
+        // SIGN UP FORM GOES HERE
+        .landing-signup
+        -unless current_user
           = render "shared/sign_up"
-    / ========== WELCOME TEXT ==========
+  / ========== WELCOME TEXT ==========
+  / .container
+  /   .row
+  /     %br/
+  /     .col-lg-8
+  /       %h2 CREATE THE BEST PRESENTATION PAGE FOR YOUR APP. A NEW EXPERIENCE FOR YOUR USERS.
+  /     .col-lg-4
+
+  / ========== FEATURES SECTION ==========
+  .container.features
+    .row
+      .col-lg-3
+        =image_tag 'books.png', id: "books_icon"
+        %h4 ALL TEXTBOOKS GUARANTEED TO SELL
+      .col-lg-3
+        =image_tag 'furniture.png', id: "furniture_icon"
+        %h4 FIND RAD DORM FURNITURE  
+      .col-lg-3
+        =image_tag 'trust.png', id: "trust_icon"
+        %h4 DEAL WITH PEOPLE YOU KNOW AND TRUST
+      .col-lg-3
+        =image_tag 'dollar.png', id: "dollar_icon"
+        %h4 BUY STUFF HERE AND SAVE MONEY
+
+  / ========== SECTION DIVIDER 01 ==========
+  #section01
     .container
       .row
-        %br/
-        .col-lg-8
-          %h2 CREATE THE BEST PRESENTATION PAGE FOR YOUR APP. A NEW EXPERIENCE FOR YOUR USERS.
-        .col-lg-4
-      / row
-    / /container
-    / ========== FEATURES SECTION ==========
-    .container.features
+        .col-lg-6.col-lg-offset-3
+          %h2.centered Satisfied Users and Phil
+          %br/
+          %br/
       .row
-        .col-lg-3
-          =image_tag 'trust.png', id: "trust_icon"
-          %h4 FIRST CLASS DESIGN. SHOW YOUR APP WITH STYLE.
-        / col-lg-3
-        .col-lg-3
-          %licon.li_heart
-          %h4 CRAFTED WITH LOVE FOR YOUR APP NEEDS.
-        / col-lg-3
-        .col-lg-3
-          %licon.li_phone
-          %h4 RESPONSIVE & RETINA DISPLAY READY.
-        / col-lg-3
-        .col-lg-3
-          %licon.li_lab
-          %h4 USING THE FINEST FRAMEWORK IN THE WORLD.
-        / col-lg-3
-      / features
+        .col-lg-4
+          .circle-image.center.rebecca
+          / =image_tag 'head-shot.jpg'
+          %h4 REBECCA HU '15
+          %p I've sold a ton of the crap that was sitting around my room and in so doing accumulated currency
+        .col-lg-4
+          .circle-image.center.person
+          / =image_tag 'head-shot.jpg'
+          %h4 BOB JABLONSKI '92
+          %p I put all my textbooks on here, made bank, and P&S even came and picked them up. Radical.  
+        .col-lg-4
+          .circle-image.center.hanlon
+          %h4 Phil Hanlon '77
+          %p P&S Rocks
+
     / container
-    / ========== SECTION DIVIDER 01 ==========
-    #section01
-      .container
-        %h1 Your app deserves the best landing page.
-      / container
     / section01
     / ========== APP SHOWCASE ==========
-    %section#showcase.scrollspy{name: "showcase"}
+    / %section#showcase.scrollspy{name: "showcase"}
+    / .container
+    /   .row
+    /     %br/
+    /     %br/
+    /     .col-lg-6.col-lg-offset-3
+    /       %h2.centered Community marketplace
+    /       %hr/
+    /       %br/
+    /       %p 
+    / 
+    /   %br/
+    /    %br/
+    /    #ac-wrapper.ac-wrapper
+    /      .ac-device
+    /        %a{href: "#"}
+    /          =image_tag 'trust.png', id: "trust_icon"
+    /        %h3.ac-title Pssst! Try to click the image.
+    /      .ac-grid
+    /        %a{href: "#"}
+    /          %img{src: "assets/img/screens/screen2.jpg"}/
+    /          %span Awesome showcase script.
+    /        %a{href: "#"}
+    /          %img{src: "assets/img/screens/screen1.jpg"}/
+    /          %span Ideal for any app.
+    /        %a{href: "#"}
+    /          %img{src: "assets/img/screens/screen3.jpg"}/
+    /          %span Truly fashion design.
+    /        %a{href: "#"}
+    /          %img{src: "assets/img/screens/screen4.jpg"}/
+    /          %span It's cool, you know it.
+    /    ac-wrapper
+    %br/
+    %br/
+    %br/
+  / container
+  / ========== SECTION DIVIDER 02 ==========
+  #section02
+    .container
+      %h1
+    / container
+  / section02
+  / ========== FAQ SECTION ==========
+  %section#faq.scrollspy{name: "faq"}
+  #faqsection
     .container
       .row
         %br/
         %br/
         .col-lg-6.col-lg-offset-3
-          %h2.centered QUALITY MEETS LANDING PAGE.
+          %h2.centered FEATURES
           %hr/
           %br/
-          %p Any web page that you purposely send traffic to is a ‘landing page’. It’s the page where people end up after they click on a PPC ad, a tweet, an email, or after they scan a QR code – just to name a few.
-          %p While you could simply direct this campaign traffic to your homepage or a product page within your website, this doesn’t usually yield the best results.
-          %p The page where someone lands after the click has enormous potential to influence whether or not that visitor eventually converts into a lead or sale. Too often, marketers focus most of their attention and budget on attracting and driving good traffic, but that’s really only half of the equation.
+          %br/
         / col-lg-6
+        .col-lg-6{style: "text-align: left"}
+          /%img.img-responsive{src: "assets/img/animation.gif"}/
+          =image_tag "laptop1.png", class: "img-responsive"
+
+        .col-lg-6.faq
+          #accordion2.accordion
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
+                  %span.glyphicon.glyphicon-envelope
+                  Post things and notify people
+              #collapseOne.accordion-body.collapse.in
+                .accordion-inner
+                  %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseTwo"}
+                  %span.glyphicon.glyphicon-transfer
+                  Join groups and send them targeted notifications
+              #collapseTwo.accordion-body.collapse
+                .accordion-inner
+                  %p Basically a glorified listserv, but allows you to notify more groups at once and view posts within Dartmouth, segmented by group
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseThree"}
+                  %span.glyphicon.glyphicon-tags
+                  
+                  Follow tags and get notified
+              #collapseThree.accordion-body.collapse
+                .accordion-inner
+                  %p Searching for housing options and don't want to keep checking for new listings? Follow the housing tag and get alerts when new posts are made or weekly digests.
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
+                  %span.glyphicon.glyphicon-book
+                  Textbooks are guaranteed to sell
+              #collapseFour.accordion-body.collapse
+                .accordion-inner
+                  %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
+
+            %br/
+
+    %br/
+    %br/
+  / faqsection
+  / ========== SECTION DIVIDER 03 ==========
+  / #section03
+  /   .container
+  /     %h1 Relax, take it easy & enjoy.
+  / section03
+  / ========== PRICING LIST ==========
+  / %section#pricing.scrollspy{name: "pricing"}
+  / #pricing.container{name: "pricing"}
+  /   %br/
+  /   .row
+  /     %br/
+  /     .col-lg-6.col-lg-offset-3
+  /       %h2.centered BEST PRICES IN TOWN.
+  /       %hr/
+  /       %br/
+  /       %br/
+  /     / col-lg-6
+  /   / /row
+  /   .row
+  /     .col-lg-3
+  /       / START PRICING TABLE
+  /       .pricing-option
+  /         .pricing-top
+  /           %span.pricing-edition Starter
+  /           %span.price
+  /             %sup $
+  /             %span.price-amount 19
+  /             %small /mo
+  /         %ul
+  /           %li
+  /             %strong 10GB
+  /             Storage
+  /           %li
+  /             Up to
+  /             %strong 10
+  /             Users
+  /           %li
+  /             %strong 5
+  /             Domains
+  /           %li
+  /             %strong Free
+  /             Setup
+  /           %li
+  /             %strong 1-year
+  /             Free support *
+  /         %a.pricing-signup{href: "index.html#"} Sign up
+  /       / /pricing-option
+  /       / END PRICING TABLE
+  /     / /col
+  /     .col-lg-3
+  /       / START PRICING TABLE
+  /       .pricing-option
+  /         .pricing-top
+  /           %span.pricing-edition Standard
+  /           %span.price
+  /             %sup $
+  /             %span.price-amount 29
+  /             %small /mo
+  /         %ul
+  /           %li
+  /             %strong 20GB
+  /             Storage
+  /           %li
+  /             Up to
+  /             %strong 20
+  /             Users
+  /           %li
+  /             %strong 10
+  /             Domains
+  /           %li
+  /             %strong Free
+  /             Setup
+  /           %li
+  /             %strong 2-year
+  /             Free support *
+  /         %a.pricing-signup{href: "index.html#"} Sign up
+  /       / /pricing-option
+  /       / END PRICING TABLE
+  /     / /col
+  /     .col-lg-3
+  /       / START PRICING TABLE
+  /       .pricing-option
+  /         .pricing-top
+  /           %span.special-label OFFER!
+  /           %span.pricing-edition Ultimate
+  /           %span.price
+  /             %sup $
+  /             %span.price-amount 69
+  /             %small /mo
+  /         %ul
+  /           %li
+  /             %strong 150GB
+  /             Storage
+  /           %li
+  /             %strong Unlimited
+  /             Users
+  /           %li
+  /             %strong 50
+  /             Domains
+  /           %li
+  /             %strong Free
+  /             Setup
+  /           %li
+  /             %strong 5-year
+  /             Free support *
+  /         %a.pricing-signup{href: "index.html#"} Sign up
+  /       / /pricing-option
+  /       / END PRICING TABLE
+  /     / /col
+  /     .col-lg-3
+  /       / START PRICING TABLE
+  /       .pricing-option
+  /         .pricing-top
+  /           %span.pricing-edition Business
+  /           %span.price
+  /             %sup $
+  /             %span.price-amount 49
+  /             %small /mo
+  /         / /pricing-top
+  /         %ul
+  /           %li
+  /             %strong 40GB
+  /             Storage
+  /           %li
+  /             Up to
+  /             %strong 40
+  /             Users
+  /           %li
+  /             %strong 25
+  /             Domains
+  /           %li
+  /             %strong Free
+  /             Setup
+  /           %li
+  /             %strong 3-year
+  /             Free support *
+  /         %a.pricing-signup{href: "index.html#"} Sign up
+  /       / /pricing-option
+  /       / END PRICING TABLE
+ 
+  /  %br/
+  /  %br/
+  / Container
+  / ========== Register Wrap ==========
+  %section#register.scrollspy{name: "register"}
+  #registerwrap
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2
+          %h1 Click here to see inside the marketplace
+
+      .row
+        .col-lg-offset-3.col-lg-9
+          .form-group
+            .col-lg-8.centered
+              %br/
+              =link_to "Take a Peek Inside!", root_url, class: "btn-lg btn-theme"
+        / col-lg-9
       / row
-      %br/
-      %br/
-      #ac-wrapper.ac-wrapper
-        .ac-device
-          %a{href: "#"}
-            =image_tag 'trust.png', id: "trust_icon"
-          %h3.ac-title Pssst! Try to click the image.
-        .ac-grid
-          %a{href: "#"}
-            %img{src: "assets/img/screens/screen2.jpg"}/
-            %span Awesome showcase script.
-          %a{href: "#"}
-            %img{src: "assets/img/screens/screen1.jpg"}/
-            %span Ideal for any app.
-          %a{href: "#"}
-            %img{src: "assets/img/screens/screen3.jpg"}/
-            %span Truly fashion design.
-          %a{href: "#"}
-            %img{src: "assets/img/screens/screen4.jpg"}/
-            %span It's cool, you know it.
-      / ac-wrapper
-      %br/
-      %br/
-      %br/
-    / container
-    / ========== SECTION DIVIDER 02 ==========
-    #section02
-      .container
-        %h1 Our team works hard for you.
-      / container
-    / section02
-    / ========== FAQ SECTION ==========
-    %section#faq.scrollspy{name: "faq"}
-    #faqsection
-      .container
-        .row
-          %br/
-          %br/
-          .col-lg-6.col-lg-offset-3
-            %h2.centered FREQUENTLY ASKED QUESTIONS.
-            %hr/
-            %br/
-            %br/
-          / col-lg-6
-          .col-lg-6{style: "text-align: left"}
-            %img.img-responsive{src: "assets/img/animation.gif"}/
-          / col-lg-6
-          / ACCORDION
-          .col-lg-6.faq
-            #accordion2.accordion
-              .accordion-group
-                .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
-                    %licon.li_diamond
-                    First Class Design
-                / /accordion-heading
-                #collapseOne.accordion-body.collapse.in
-                  .accordion-inner
-                    %p It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  / /accordion-inner
-                / /collapse
-              / /accordion-group
-              %br/
-              .accordion-group
-                .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseTwo"}
-                    %licon.li_display
-                    Retina Ready Theme
-                #collapseTwo.accordion-body.collapse
-                  .accordion-inner
-                    %p It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  / /accordion-inner
-                / /collapse
-              / /accordion-group
-              %br/
-              .accordion-group
-                .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseThree"}
-                    %licon.li_like
-                    Awesome Support
-                #collapseThree.accordion-body.collapse
-                  .accordion-inner
-                    %p It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  / /accordion-inner
-                / /collapse
-              / /accordion-group
-              %br/
-              .accordion-group
-                .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
-                    %licon.li_phone
-                    Responsive Design
-                #collapseFour.accordion-body.collapse
-                  .accordion-inner
-                    %p It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                  / /accordion-inner
-                / /collapse
-              / /accordion-group
-              %br/
-            / Accordion
-          / col-lg-6
-        / row
-      / container
-      %br/
-      %br/
-    / faqsection
-    / ========== SECTION DIVIDER 03 ==========
-    #section03
-      .container
-        %h1 Relax, take it easy & enjoy.
-      / container
-    / section03
-    / ========== PRICING LIST ==========
-    %section#pricing.scrollspy{name: "pricing"}
-    #pricing.container{name: "pricing"}
-      %br/
-      .row
-        %br/
-        .col-lg-6.col-lg-offset-3
-          %h2.centered BEST PRICES IN TOWN.
-          %hr/
-          %br/
-          %br/
-        / col-lg-6
-      / /row
-      .row
-        .col-lg-3
-          / START PRICING TABLE
-          .pricing-option
-            .pricing-top
-              %span.pricing-edition Starter
-              %span.price
-                %sup $
-                %span.price-amount 19
-                %small /mo
-            %ul
-              %li
-                %strong 10GB
-                Storage
-              %li
-                Up to
-                %strong 10
-                Users
-              %li
-                %strong 5
-                Domains
-              %li
-                %strong Free
-                Setup
-              %li
-                %strong 1-year
-                Free support *
-            %a.pricing-signup{href: "index.html#"} Sign up
-          / /pricing-option
-          / END PRICING TABLE
-        / /col
-        .col-lg-3
-          / START PRICING TABLE
-          .pricing-option
-            .pricing-top
-              %span.pricing-edition Standard
-              %span.price
-                %sup $
-                %span.price-amount 29
-                %small /mo
-            %ul
-              %li
-                %strong 20GB
-                Storage
-              %li
-                Up to
-                %strong 20
-                Users
-              %li
-                %strong 10
-                Domains
-              %li
-                %strong Free
-                Setup
-              %li
-                %strong 2-year
-                Free support *
-            %a.pricing-signup{href: "index.html#"} Sign up
-          / /pricing-option
-          / END PRICING TABLE
-        / /col
-        .col-lg-3
-          / START PRICING TABLE
-          .pricing-option
-            .pricing-top
-              %span.special-label OFFER!
-              %span.pricing-edition Ultimate
-              %span.price
-                %sup $
-                %span.price-amount 69
-                %small /mo
-            %ul
-              %li
-                %strong 150GB
-                Storage
-              %li
-                %strong Unlimited
-                Users
-              %li
-                %strong 50
-                Domains
-              %li
-                %strong Free
-                Setup
-              %li
-                %strong 5-year
-                Free support *
-            %a.pricing-signup{href: "index.html#"} Sign up
-          / /pricing-option
-          / END PRICING TABLE
-        / /col
-        .col-lg-3
-          / START PRICING TABLE
-          .pricing-option
-            .pricing-top
-              %span.pricing-edition Business
-              %span.price
-                %sup $
-                %span.price-amount 49
-                %small /mo
-            / /pricing-top
-            %ul
-              %li
-                %strong 40GB
-                Storage
-              %li
-                Up to
-                %strong 40
-                Users
-              %li
-                %strong 25
-                Domains
-              %li
-                %strong Free
-                Setup
-              %li
-                %strong 3-year
-                Free support *
-            %a.pricing-signup{href: "index.html#"} Sign up
-          / /pricing-option
-          / END PRICING TABLE
-        / /col
-      / /row
       %br/
       %br/
     / Container
-    / ========== Register Wrap ==========
-    %section#register.scrollspy{name: "register"}
-    #registerwrap
-      .container
-        .row
-          .col-lg-8.col-lg-offset-2
-            %h1 Register to our newsletter and be the first to know our latest updates
+  / registerwrap
+  #footerwrap
+    .container
+      .row
+        .col-lg-4.centered
+          %h3 Central Command
+          %br/
+          %p
+            1593 Gender Neutral Social Space Ln,
             %br/
-        .row
-          .col-lg-offset-3.col-lg-9
-            %form.form-horizontal{role: "form"}
-              .form-group
-                .col-lg-8
-                  %input#inputEmail1.form-control{placeholder: "your@email.com", type: "email"}/
-              .form-group
-                .col-lg-8.centered
-                  %br/
-                  %a.btn-lg.btn-theme{type: "submit"} Sign in
-          / col-lg-9
-        / row
-        %br/
-        %br/
-      / Container
-    / registerwrap
-    #footerwrap
-      .container
-        .row
-          .col-lg-4.centered
-            %h3 Our Headquarters
+            Hanover, NH
             %br/
-            %p
-              Winchester 987,
-              %br/
-              New York, NY
-              %br/
-              Tel.: 609 984236
-              %br/
-              hello@yourmail.com
-          .col-lg-4.centered
-            %h3 Testimonial
+            Tel.: 609 984236
             %br/
-            %p
-              %img.centered.img-circle{alt: "", height: "50px", src: "assets/img/pic.jpg", width: "50px"}/
-            %p
-              %i Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          .col-lg-4.centered
-            %h3 We Are Social
-            %br/
-            %p
-              %a.icon.icon-twitter{href: "#"}
-              %a.icon.icon-facebook{href: "#"}
-              %a.icon.icon-flickr{href: "#"}
-        %br/
-        %br/
-    /
-      Bootstrap core JavaScript
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-    %script{src: "assets/js/jquery.min.js", type: "text/javascript"}
-    %script{src: "assets/js/bootstrap.min.js", type: "text/javascript"}
-    %script{src: "assets/js/appshowcase.js", type: "text/javascript"}
-    %script{src: "assets/js/smoothscroll.js", type: "text/javascript"}
-    %script{src: "assets/js/jquery-func.js", type: "text/javascript"}
-    %script{src: "assets/js/retina.js", type: "text/javascript"}
-    :javascript
-      $(function() {
-      	AppShowcase.init();
-      });
+            brianjoseff123@gmail.com
+        .col-lg-4.centered
+          %h3 Mind Control 
+          %br/
+          / %p
+          /   %img.centered.img-circle{alt: "", height: "50px", src: "assets/img/pic.jpg", width: "50px"}/
+          %p
+            %i You will now go and post 3 things from your room and join some groups...and write my paper for me.
+        .col-lg-4.centered
+          %h3 Social Media
+          %br/
+          %p haha
+          / %p
+          /             %a.icon.icon-twitter{href: "#"}
+          /             %a.icon.icon-facebook{href: "#"}
+          /             %a.icon.icon-flickr{href: "#"}
+      %br/
+      %br/
+  /
+    Bootstrap core JavaScript
+    \==================================================
+  / Placed at the end of the document so the pages load faster
+  %script{src: "assets/js/jquery.min.js", type: "text/javascript"}
+  %script{src: "assets/js/bootstrap.min.js", type: "text/javascript"}
+  %script{src: "assets/js/appshowcase.js", type: "text/javascript"}
+  %script{src: "assets/js/smoothscroll.js", type: "text/javascript"}
+  %script{src: "assets/js/jquery-func.js", type: "text/javascript"}
+  %script{src: "assets/js/retina.js", type: "text/javascript"}
+  :javascript
+    $(function() {
+    	AppShowcase.init();
+    });

@@ -1,7 +1,6 @@
 
 
 /MODAL ATTEMPT
-
 -if current_user
   -if group.members.include?(current_user)
     /=render :partial => "leave"
@@ -14,18 +13,28 @@
       =form_tag(private_groups_path,  method: :put) do
         =hidden_field_tag :group_id, group.id
         =hidden_field_tag('group[member_ids][]', current_user.id)
-        %div.span3
+        %div.col-lg-3
           =text_field_tag :password, nil, :class => "input-block-level inline", :placeholder => "Password", :id => "join_private_group"
-        =submit_tag "Join", :class => "btn btn-mini"
+        =submit_tag "Join", :class => "btn btn-default btn-sm btn-join"
     -else
       = form_for current_user.memberships.build(:group_id => group.id), :html => {:id => "group_#{group.id}"} , remote: true  do |f|                                          
         = f.hidden_field :group_id
-        = f.submit "Join", class: "btn btn-mini"
+        = f.submit "Join", class: "btn btn-default btn-sm btn-join"
       / =form_for group do |f|
       /   =hidden_field_tag('group[member_ids][]', current_user.id)
       /   =f.submit "Join", :class => "btn btn-mini"
 -else
-  /=link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true 
-  = form_for @user.memberships.build(:group_id => group.id), :html => {:id => "group_#{group.id}"}  do |f|                                          
-    = f.hidden_field :group_id
-    = f.submit "Join", class: "btn btn-mini"
+  /=link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true
+  -if group.private?
+    / =form_tag(private_groups_path,  method: :put) do
+    /   =hidden_field_tag :group_id, group.id
+    /   =hidden_field_tag('group[member_ids][]', current_user.id)
+    /   %div.span3
+    /     =text_field_tag :password, nil, :class => "input-block-level inline", :placeholder => "Password", :id => "join_private_group"
+    /   =submit_tag "Join", :class => "btn btn-mini"
+    / =link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-mini", :remote => true
+    =link_to "Private", groups_url(group), class: "btn btn-default btn-sm"
+  -else
+    = form_for @user.memberships.build(:group_id => group.id), :html => {:id => "group_#{group.id}"}  do |f|                                          
+      = f.hidden_field :group_id
+      = f.submit "Join", class: "btn btn-default btn-sm btn-join"

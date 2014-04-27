@@ -1,11 +1,12 @@
-%div.search-row
-  %div.span3.col-sm-4
-    /new post button
-    .category-post-cluster
-      =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
+.container
+  %div.search-row
+    %div.col-lg-5
+      /new post button
+      .category-post-cluster
+        =link_to "Post Something", new_post_path, :id => "btn_post_flat", :role => "button"
 
-      =render :partial => "search/category_dropdown"
+        =render :partial => "search/category_dropdown"
 
-  %div.span7.col-sm-8
-    /search bar
-    =render :partial => "search/search_form"
+    %div.col-lg-7
+      /search bar
+      =render :partial => "search/search_form"

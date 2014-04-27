@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require jquery.ui.all
- *= require bootstrap
+ *= require bootstrap.min
  *= require token-input-facebook
  *= require s3_direct_upload_progress_bars
  *= require_tree .
@@ -42,11 +42,26 @@
 /************************************************************/
 /* 1. General Styles*****************************************/
 /************************************************************/
-
+.main{
+	padding-top:30px;
+}
+.bold{
+	font-weight: bold !important;
+}
+.linkify{
+	text-decoration: underline;
+}
+.linkify:hover{
+	color: #1487ff;
+	background-color: transparent;
+}
 a:hover#stripe_button{
 	background-color: transparent;
 }
 
+#no-black:hover;{
+	backgound-color: transparent !important;
+}
 span.points{
 	margin-left: 5px;
 	margin-right: 5px;
@@ -100,7 +115,10 @@ footer{
 	width: 200px;
 }
 
-
+#lg-icon{
+	height: 200px;
+	
+}
 
 
 
@@ -110,6 +128,10 @@ footer{
 
 .modal-message-form{
 	padding: 10px;
+	margin-top: 60px;
+	min-width: 100px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -226,7 +248,9 @@ dl{
 	text-align: justify;*/
 }
 
-
+.random-group-feed-item{
+	margin-bottom: 10px;
+}
 
 .the_post_id{
 	display:none;
@@ -488,6 +512,7 @@ input[type="text"].search-bar-field{
 }
 .shop-by-category{
 	float:right;
+	margin-right: -20px;
 }
 #shop_by_category_button{
 	/*width: 80px;*/
@@ -693,6 +718,9 @@ i{
 	height: 100px;
 	width: auto;
 }*/
+.banner{
+		text-align: center;
+}
 
 .banner-group-body{
 	display: block;

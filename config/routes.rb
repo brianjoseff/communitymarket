@@ -59,7 +59,7 @@ Communitymarket::Application.routes.draw do
   end
   resources :pages do
     collection do
-      get :textbooks
+      # get :textbooks
       get :dorm_furniture
     end
   end
@@ -97,6 +97,7 @@ Communitymarket::Application.routes.draw do
     resources :assignments
   end
   
+  match '/textbooks', to: "pages#textbooks"
   match '/feed', :to =>"pages#feed"
   match '/bulk_update', :to => "groups#bulk_update"
   match '/for_sale', :to => "pages#for_sale"

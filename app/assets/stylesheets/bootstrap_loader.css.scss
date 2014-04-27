@@ -1,5 +1,14 @@
 //@import "bootstrap";
 $baseFontFamily: "Open Sans", sans-serif !default;
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/assets/glyphicons-halflings-regular.eot');
+  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+			 url('/assets/glyphicons-halflings-regular.woff') format('woff'),
+			 url('/assets/glyphicons-halflings-regular.ttf') format('truetype'),
+			 url('/assets/glyphicons-halflings-regular.svg') format('svg'),
+			 url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
 
 /*$white: #ffffff;
 $black: #000000;
@@ -7,10 +16,15 @@ $pink: #ffbcda;
 $darkpink: #ff91af;
 $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 
-
+/*
 .form-horizontal .control-label{
 	width: 80px;
+}*/
+
+.control-label{
+	font-size: 125% !important;
 }
+
 .credit{
 	margin-left: 0px;
 }
@@ -19,6 +33,13 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 }
 
 
+.btn-join{
+	background-color: #0072e6 !important;
+	color: #fff !important;
+}
+.btn-join:hover{
+	background-color: #165492 !important;
+}
 
 
 #btn_search_flat{
@@ -83,7 +104,7 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
 	font-weight: bold;
-	/*width: 172px;*/
+	width: 192px;
 	
 	display: inline-block;
 	min-height: 45px;

@@ -154,12 +154,17 @@ class PagesController < ApplicationController
   end
   
   def textbooks
-    @post_category= Tag.find_by_id(88)
-    @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-    @posts = kaminari_paginate(@posts, 50) 
-    respond_to do |format|
-        format.js { render :layout=>false }
-    end
+    # @post_category= Tag.find_by_id(88)
+    # @posts = @post_category.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+    # @posts = kaminari_paginate(@posts, 50) 
+    # respond_to do |format|
+    #     format.js { render :layout=>false }
+    # end
+    @pc = PostCategory.find_by_name("Textbook")
+    
+    @textbooks = @pc.posts
+    
+    
   end
   
   def dorm_furniture

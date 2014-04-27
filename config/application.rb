@@ -21,6 +21,7 @@ end
 
 module Communitymarket
   class Application < Rails::Application
+    config.assets.paths << Rails.root.join("vendor","assets", "fonts")
     STRIPE_CONNECT_FEE  = 0.10
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

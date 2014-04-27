@@ -1,77 +1,195 @@
-%div.row-fluid
-  %div.span8
-    %h1 About
-    
-    %h4 Buy more used goods
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      sustainable living
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      save money
-    
-    %h4 Buy new stuff and get it locally or from sustainable companies
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      sustainable living
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      strengthen your community
-    %h4 Get points and redeem them
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      giftcards to sustainable companies
-    %p
-      %span.checkmark #{image_tag("checkmark-icon.png")}
-      donate them to local non-profits
-     
-    / 
-    /     %p Dartmouth needs a community marketplace.
-    / 
-    /     %p No one uses Craigslist or Ebay because they are both highly annoying for various reasons.
-    / 
-    /     %p Ebay is for shipping high-value items and you need to bid, and it requires a lot of engagement from buyers to track the items they want, determine if the seller is reputable, and win the actual auction. A Seller practically needs to have a merchant license for all the effort that goes into posting an item- writing up extensive descriptions, buying shipping materials, taking professional pictures of the item, etc...
-    / 
-    /     %p Craigslist has some seriously weird vibes, what-with it being used for adult classifieds, nefarious ploys by serial killers, and the awkward nature of many of the transactions. It lacks an element of community.
-    / 
-    /     %p People and Stuff aims to be an easy way for people to start circulating all the stuff that has accumulated in their possession. 
-    / 
-    /     %p Join specialized groups to make it easier to share your postings and to get targeted notifications about stuff that matters to you
-    / 
-    / 
-    /     %p Here are some limericks that convey my feelings on Ebay and Craigslist.
-    /     %p Feel free to submit your own short missives, haikus, sonnets, etc... below.
-    / 
-    /     %h4 Death By a Thousand Forms:
-    /     %p To buy and sell things on Ebay,
-    /     %p Is no way to spend your whole day.
-    /     %p It takes so much time,
-    /     %p They nickel and dime,
-    /     %p I'd rather get mauled by a Blue Jay
-    /     %br
-    /     %h4 Sketchy Craigslist- A cautionary tale:
-    /     %p I bought a new couch on Craigslist
-    /     %p For my roommate to have his tryst
-    /     %p At the seller's abode
-    /     %p Things began to implode
-    /     %p When he chopped off my hand at the wrist
-    /     =image_tag "PSLogo.png"
 
-    
-  %div.span4
-    %h3 Contact
-    =form_tag "/contacts",  :method => :post, :class => "contact-me-submit" do
-      / =hidden_field_tag :from, current_user.id
-      -if current_user
-        =hidden_field_tag :email, current_user.email
-      -else
-        =text_field_tag 'email', params[:email], :class => "input-block-level", id:"contact_email", :placeholder => "Your email so I can reply"
-      %div.row-fluid
-        %span.area
-          =text_area_tag :content, params[:content], :class => "input-block-level",id:"contact_body", :placeholder => "Questions, comments, criticisms, and concerns", :rows => "10"
-      =submit_tag "Contact Me", :class => "contact-me-submit"
+%div.about-landing-page{"data-offset" => "0", "data-spy" => "scroll", "data-target" => "#navbar-main"}
+  / ========== HEADERWRAP ==========
+  -unless current_user
+    %section#home.scrollspy{name: "home"}
+    #headerwrap
+      .container
+        .col-lg-8
+          %h1 A marketplace for your school
+          %p.hidden-xs buy and sell stuff with people you know. Textbooks are guaranteed to sell. Be part of the magic.
+        .col-lg-4
+          // SIGN UP FORM GOES HERE
+          .landing-signup
+          = render "shared/sign_up"
+  / ========== WELCOME TEXT ==========
+  / .container
+  /   .row
+  /     %br/
+  /     .col-lg-8
+  /       %h2 CREATE THE BEST PRESENTATION PAGE FOR YOUR APP. A NEW EXPERIENCE FOR YOUR USERS.
+  /     .col-lg-4
 
-    %h3 Or me:
-    %p Brian Joseff
-    %p brianjoseff123@gmail.com
-//form for user submissions
+  / ========== FEATURES SECTION ==========
+  .container.features
+    .row
+      .col-lg-3
+        =image_tag 'books.png', id: "books_icon"
+        %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
+      .col-lg-3
+        =image_tag 'furniture.png', id: "furniture_icon"
+        %h4.bold FIND RAD DORM FURNITURE  
+      .col-lg-3
+        =image_tag 'trust.png', id: "trust_icon"
+        %h4.bold DEAL WITH PEOPLE YOU KNOW AND TRUST
+      .col-lg-3
+        =image_tag 'dollar.png', id: "dollar_icon"
+        %h4.bold BUY STUFF HERE AND SAVE MONEY
+
+  / ========== SECTION DIVIDER 01 ==========
+  #section01
+    .container
+      .row
+        .col-lg-6.col-lg-offset-3
+          %h2.centered Satisfied Users and Phil
+          %br/
+          %br/
+      .row
+        .col-lg-4
+          .circle-image.center.rebecca
+          / =image_tag 'head-shot.jpg'
+          %h4 REBECCA HU '15
+          %p I've sold a ton of the crap that was sitting around my room and in so doing accumulated currency
+        .col-lg-4
+          .circle-image.center.person
+          / =image_tag 'head-shot.jpg'
+          %h4 BOB JABLONSKI '92
+          %p I put all my textbooks on here, made bank, and P&S even came and picked them up. Radical.  
+        .col-lg-4
+          .circle-image.center.hanlon
+          %h4 Phil Hanlon '77
+          %p P&S Rocks
+
+
+  / container
+  / ========== SECTION DIVIDER 02 ==========
+  #section02
+    .container
+      %h1
+  %section#faq.scrollspy{name: "faq"}
+  #faqsection
+    .container
+      .row
+        %br/
+        %br/
+        .col-lg-6.col-lg-offset-3
+          %h2.centered FEATURES
+          %hr/
+          %br/
+          %br/
+        / col-lg-6
+        .col-lg-6{style: "text-align: left"}
+          /%img.img-responsive{src: "assets/img/animation.gif"}/
+          =image_tag "laptop1.png", class: "img-responsive"
+
+        .col-lg-6.faq
+          #accordion2.accordion
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
+                  %span.glyphicon.glyphicon-envelope
+                  Post things and notify people
+              #collapseOne.accordion-body.collapse.in
+                .accordion-inner
+                  %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseTwo"}
+                  %span.glyphicon.glyphicon-transfer
+                  Join groups and send them targeted notifications
+              #collapseTwo.accordion-body.collapse
+                .accordion-inner
+                  %p Basically a glorified listserv, but allows you to notify more groups at once and view posts within Dartmouth, segmented by group
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseThree"}
+                  %span.glyphicon.glyphicon-tags
+                  
+                  Follow tags and get notified
+              #collapseThree.accordion-body.collapse
+                .accordion-inner
+                  %p Searching for housing options and don't want to keep checking for new listings? Follow the housing tag and get alerts when new posts are made or weekly digests.
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
+                  %span.glyphicon.glyphicon-book
+                  Textbooks are guaranteed to sell
+              #collapseFour.accordion-body.collapse
+                .accordion-inner
+                  %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
+
+            %br/
+
+    %br/
+    %br/
+ 
+  %section#register.scrollspy{name: "register"}
+  #registerwrap
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2
+          %h1 Click here to see inside the marketplace
+
+      .row
+        .col-lg-offset-3.col-lg-9
+          .form-group
+            .col-lg-8.centered
+              %br/
+              =link_to "Take a Peek Inside!", root_url, class: "btn-lg btn-theme"
+        / col-lg-9
+      / row
+      %br/
+      %br/
+    / Container
+  / registerwrap
+  #footerwrap
+    .container
+      .row
+        .col-lg-4.centered
+          %h3 Central Command
+          %br/
+          %p
+            1593 Gender Neutral Social Space Ln,
+            %br/
+            Hanover, NH
+            %br/
+            Tel.: 805 2597624
+            %br/
+            brianjoseff123@gmail.com
+        .col-lg-4.centered
+          %h3 Mind Control 
+          %br/
+          / %p
+          /   %img.centered.img-circle{alt: "", height: "50px", src: "assets/img/pic.jpg", width: "50px"}/
+          %p
+            %i You will now go and post 3 things from your room and join some groups...and write my paper for me.
+        .col-lg-4.centered
+          %h3 Social Media
+          %br/
+          %p haha
+          / %p
+          /             %a.icon.icon-twitter{href: "#"}
+          /             %a.icon.icon-facebook{href: "#"}
+          /             %a.icon.icon-flickr{href: "#"}
+      %br/
+      %br/
+  /
+    Bootstrap core JavaScript
+    \==================================================
+  / Placed at the end of the document so the pages load faster
+  %script{src: "assets/js/jquery.min.js", type: "text/javascript"}
+  %script{src: "assets/js/bootstrap.min.js", type: "text/javascript"}
+  %script{src: "assets/js/appshowcase.js", type: "text/javascript"}
+  %script{src: "assets/js/smoothscroll.js", type: "text/javascript"}
+  %script{src: "assets/js/jquery-func.js", type: "text/javascript"}
+  %script{src: "assets/js/retina.js", type: "text/javascript"}
+  :javascript
+    $(function() {
+    	AppShowcase.init();
+    });
