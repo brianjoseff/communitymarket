@@ -169,7 +169,10 @@ class PagesController < ApplicationController
     else
       @textbooks = @pc.posts
     end
-    
+    unless @textbooks
+		  @textbooks = @textbooks.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+		  @textbooks = Kaminari.paginate_array(@textbooks).page(params[:page]).per(50)
+		end
     
     
   end
