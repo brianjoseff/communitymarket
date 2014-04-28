@@ -9,15 +9,23 @@
 / = render "devise/shared/links"
 
 
-%div.span4
+%div.col-lg-6
   %h1 Sign in
-  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-  =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form", id: "session"}) do |f|
+  %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+  =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
     /=render "shared/error_messages", :target => @user
+    %div.form-group
+      =f.label :email, :class => 'col-lg-3 control-label'
+      .col-lg-8
+        =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+    %div.form-group
+      =f.label :password, :class => 'col-lg-3 control-label'
+      .col-lg-8
+        =f.password_field :password, type: "text", :class => "form-control", :placeholder => "Password"
 
-    =f.text_field :email, :class => "input-block-level", :placeholder => "Email", :validate => { :presence => true } 
+    .user-auth-offset
+      =f.submit "Sign in", class: "btn btn-primary submit-button"
+      = render "devise/shared/links"
 
-    =f.password_field :password, :class => "input-block-level", :placeholder => "Password"
-    
-    .action=f.submit "Sign In"
-    = render "devise/shared/links"
+
+   

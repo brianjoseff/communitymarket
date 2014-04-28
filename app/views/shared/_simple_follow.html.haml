@@ -7,9 +7,9 @@
   -else
     = form_for current_user.followships.build(:followed_id => tag.id), :url => follow_followships_path, remote: true  do |f|                                          
       = f.hidden_field :followed_id
-      = f.submit "follow", class: "btn btn-mini"
+      = f.submit "follow", class: "btn btn-default btn-mini"
 
 -else
   = form_for @user.followships.build(:followed_id => tag.id), :url => follow_followships_path  do |f|                                          
     = f.hidden_field :followed_id
-    = f.submit "follow", class: "btn btn-mini"
+    = f.submit "follow", class: "btn btn-default btn-mini"
