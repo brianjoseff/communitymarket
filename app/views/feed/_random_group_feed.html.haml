@@ -22,7 +22,7 @@
                   = render "groups/join_form", :group => feed_item
                 -else
                   -unless current_user && current_user.groups_as_member.include?(feed_item)
-                    =link_to "Join", group_url(feed_item), class: "btn btn-mini"
+                    =link_to "Join", group_url(feed_item), class: "btn btn-defuault btn-join btn-mini"
               -else
                 -unless current_user && current_user.groups_as_member.include?(feed_item)
                   = render "groups/join_form", :group => feed_item
