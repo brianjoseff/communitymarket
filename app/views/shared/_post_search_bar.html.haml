@@ -1,12 +1,39 @@
+/ .container
+/   .search-row
+/     .col-lg-3
+/       =link_to "Post Something", new_post_path,  class: "btn btn-default btn-primary pull-left", :role => "button"
+/     .col-lg-2
+/       .btn-group
+/         %button#shop_by_category_button.btn.btn-large.btn-default.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+/           Shop By Category
+/           %span.caret
+/         %ul.dropdown-menu{role: "menu"}
+/           -@browse_by_array.each do |category|
+/             -if category.is_a?(Tag)
+/               %li
+/                 %a{href: category ? tag_url(category) : "#"} #{category.name.titleize}
+/             -elsif category.is_a?(PostCategory)
+/               %li
+/                 %a{href: category ? post_category_url(category) : "#"} #{category.name.titleize}
+/     .col-lg-7
+/       =search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "form-inline"} do |f|
+/         .input-group.input-group-lg
+/           =f.text_field :name_cont, :class => "form-control", :placeholder => "search for stuff or groups...type it here"
+/           %span.input-group-btn
+/             =f.submit 'Search', :class => "btn btn-flat", :id => "btn_search"
+/   
 .container
   %div.search-row
-    %div.col-lg-5
+    %div.col-lg-3
       /new post button
-      .category-post-cluster
-        =link_to "Post Something", new_post_path, :id => "btn_post_flat", class: "pull-left", :role => "button"
-
+      /.category-post-cluster
+      .container
+        =link_to "Post Something", new_post_path,:id => "btn_post_flat", class: "pull-left", :type => "button"
+    %div.col-lg-2
+      .container
         =render :partial => "search/category_dropdown"
 
     %div.col-lg-7
       /search bar
-      =render :partial => "search/search_form"
+      .container
+        =render :partial => "search/search_form"

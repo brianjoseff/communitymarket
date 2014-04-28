@@ -1,4 +1,4 @@
-=search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "form-inline"} do |f|
+=search_form_for @q, :url => { :controller => "search", :action => "index"}, :html => { :class => "search-form form-inline"} do |f|
   .input-group.input-group-lg
     =f.text_field :name_cont, :class => "form-control", :placeholder => "search for stuff or groups...type it here"
     %span.input-group-btn

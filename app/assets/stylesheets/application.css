@@ -463,7 +463,9 @@ input[type="text"].search-bar-field{
 	min-height: 65px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	/*padding-left: 10px;*/
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 10px;
 }
 #btn_search{
 	background-color: #00e5d6 !important;
@@ -514,6 +516,7 @@ input[type="text"].search-bar-field{
 .shop-by-category{
 	float:right;
 	margin-right: -20px;
+	margin-bottom: 10px;
 }
 #shop_by_category_button{
 	/*width: 80px;*/
@@ -522,6 +525,10 @@ input[type="text"].search-bar-field{
 }
 .dropdown{
 	list-style-type:none;
+}
+.search-form{
+/*	margin-top: 10px;
+	max-height: 25px;*/
 }
 
 /************************************************************/
