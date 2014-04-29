@@ -2,20 +2,39 @@ communitymarket
 ===============
 
 rails 3.2
-...
+
+**Get Started:**
+
+```
 bundle install
+```
 
+```
 rake db:create
+```
 
+```
 rake db:migrate
-...
+```
 
-Seed the database:
+**Seed the database:**
 
-...
-live_populate.rake
-populate.rake
-add_groups.rake
-add_posts.rake
-add_users.rake
-...
+```
+rake db:live_populate
+```
+
+```
+rake db:populate
+```
+
+```
+rake db:add_groups
+```
+
+```
+rake db:add_posts
+```
+
+```
+rake db:add_users
+```
