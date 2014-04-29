@@ -10,6 +10,8 @@ namespace :db do
                  :email => "brianjoseff123@gmail.com",
                  :password => "09090909",
                  :admin => true)
+    User.create!(:name => "Peter Loomis", :email => "loomispeter@gmail.com",
+      :password => "09090909", :admin => true)
 
    #email settings
    EmailSetting.create!(:name => "Each Post", :id => 1)
@@ -37,12 +39,12 @@ namespace :db do
    GroupCategory.create!(:name => "Region")
 
    #tiers
-   Tier.create!(:name => "$1-5", :id => "1")
-   Tier.create!(:name => "$6-10", :id => "2")
-   Tier.create!(:name => "$11-25", :id => "3")
-   Tier.create!(:name => "$26-50", :id => "4")
-   Tier.create!(:name => "$51-99", :id => "5")
-   Tier.create!(:name => "$100+", :id => "6")
+    Tier.create!(:name => "$1-5: Tier 1", :price => 250, :id => 1)
+    Tier.create!(:name => "$6-10: Tier 2", :price => 600, :id => 2)
+    Tier.create!(:name => "$11-25: Tier 3", :price => 1200, :id => 3)
+    Tier.create!(:name => "$26-50: Tier 4", :price => 3000, :id => 4)
+    Tier.create!(:name => "$51-99: Tier 5", :price => 6000, :id => 5)
+    Tier.create!(:name => "$100+: Tier 6", :price => 1100, :id => 6)
 
 
    # Group.create!(:name => name,
@@ -58,4 +60,3 @@ namespace :db do
 
   end
 end
-

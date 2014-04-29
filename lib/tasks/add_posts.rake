@@ -10,7 +10,7 @@ namespace :db do
     40.times do |x|
       title = Forgery(:LoremIpsum).word(:random => true)
       tier_id = Forgery(:Basic).number(:at_least=> 1, :at_most => 6)
-      price = nil
+      price = tier_id*100
       description = Forgery(:LoremIpsum).paragraph(:random => true)
       user_id = User.last(30).sample.id
       email = User.find(user_id).email
@@ -47,4 +47,3 @@ namespace :db do
     
   end
 end
-    

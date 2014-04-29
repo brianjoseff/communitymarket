@@ -8,13 +8,13 @@ namespace :db do
     30.times do |n|
       name = Faker::Name.name
       email = Faker::Name.first_name + '@' + Forgery(:LoremIpsum).word(:random => true) + '.edu'
-      password = Forgery(:basic).password
-
+      password = Forgery(:basic).password + '1234'
+      
       # zip = Forgery(:address).zip
       User.create!(:name => name,
                    :email => email,
-                   :password => "password")
+                   :password => password)
     end
-
+    
   end
 end

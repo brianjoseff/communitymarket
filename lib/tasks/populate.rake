@@ -7,13 +7,13 @@ namespace :db do
     [User, Group, Membership, Assignment, Post, PostCategory, GroupCategory, Tier].each(&:delete_all)
     User.create!(:name => "Brian",
                  :email => "b@b.edu",
-                 :password => "000000")
+                 :password => "09090909")
     
     #users
     15.times do |n|
       name = Faker::Name.name
       email = Faker::Name.first_name + '@' + Forgery(:LoremIpsum).word(:random => true) + '.edu'
-      password = Forgery(:basic).password
+      password = Forgery(:basic).password + '09090909'
       # zip = Forgery(:address).zip
       User.create!(:name => name,
                    :email => email,
@@ -37,8 +37,10 @@ namespace :db do
     PostCategory.create!(:name => "Wanted")
     # PostCategory.create!(:name => "Jobs/Internships")
     # PostCategory.create!(:name => "Free Stuff")
-    # PostCategory.create!(:name => "Housing")
-    PostCategory.create!(:name => "Other")    
+    PostCategory.create!(:name => "Housing")
+    PostCategory.create!(:name => "Textbook")
+    PostCategory.create!(:name => "Request Service")
+    PostCategory.create!(:name => "Offer Service")    
 
     
     #group_categories
@@ -114,4 +116,3 @@ namespace :db do
     
   end
 end 
-    
