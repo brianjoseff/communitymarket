@@ -20,8 +20,29 @@
           %li{:class => "#{'active' if current_page?(root_path)} smoothScroll"}=link_to "Home", root_path
           %li{:class => "#{'active' if current_page?(about_path)}"}=link_to "About", about_path
           %li#nav-pill-pink{:class => "#{'active' if current_page?(new_post_path)}"}=link_to "New Post", new_post_path
-          %li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
-          %li{:class => "#{'active' if current_page?(tags_path)}"}=link_to "Tags", tags_path
+          /%li{:class => "#{'active' if current_page?(groups_path)}"}=link_to "Groups", groups_path
+          %li{:class => "#{'active' if current_page?(groups_path)} dropdown"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+              Groups
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                =link_to "All", groups_path
+              %li.divider
+              -@group_categories.each do |gc|
+                %li
+                  =link_to gc.name, group_category_path(gc)
+          %li{:class => "#{'active' if current_page?(groups_path)} dropdown"}
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+              Tags
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                =link_to "Tags", tags_path
+              %li.divider
+              -@admin_chosen_tags.each do |t|
+                %li
+                  =link_to t.name, tag_path(t)
         .nav.navbar-nav.navbar-right
           .user-nav
             -if user_signed_in?

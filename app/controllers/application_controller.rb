@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
   has_mobile_fu false
-  before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags
+  before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags, :get_group_categories_for_nav, :admin_chosen_nav_tags
   # before_filter :configure_devise_permitted_parameters, if: :devise_controller?
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
@@ -12,6 +12,28 @@ class ApplicationController < ActionController::Base
     }
   end
   
+  def get_group_categories_for_nav
+    @group_categories = GroupCategory.all
+  end
+  
+  
+  def admin_chosen_nav_tags
+    @textbooks = Tag.find_by_id(88)
+    @appliances = Tag.find_by_id(4)
+    @sports = Tag.find_by_id(27)
+    @electronics = Tag.find_by_id(36)
+    @clothing = Tag.find_by_id(40)
+    @furniture = Tag.find_by_id(3)
+
+    @tags = [@appliances, @sports, @electronics, @clothing, @furniture, @textbooks]
+    @admin_chosen_tags = []
+    @tags.each do |x|
+      if !x.nil?
+        @admin_chosen_tags << x
+      end
+    end
+  end
+    
   
   # this method seeds the "Shop by Category" dropdown menu that
   # it is in the "post + search" bar at the top of every page

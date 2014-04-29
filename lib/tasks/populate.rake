@@ -44,11 +44,12 @@ namespace :db do
 
     
     #group_categories
-    GroupCategory.create!(:name => "Interest")
-    GroupCategory.create!(:name => "School")
-    GroupCategory.create!(:name => "Business")
-    GroupCategory.create!(:name => "Organization")
-    GroupCategory.create!(:name => "Region")
+    GroupCategory.create!(:name => "Greek")
+    GroupCategory.create!(:name => "Sport")
+    GroupCategory.create!(:name => "Club")
+    GroupCategory.create!(:name => "Department")
+    GroupCategory.create!(:name => "Dorm/Cluster")
+    GroupCategory.create!(:name => "Other")
     
     #tiers
     Tier.create!(:name => "$1-5", :id => "1")

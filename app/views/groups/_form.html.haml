@@ -7,39 +7,52 @@
         - @group.errors.full_messages.each do |msg|
           %li= msg
   
-  %div.control-group   
+  %div.form-group   
     = f.label :name, :class => "control-label"
-    %div.controls
-      = f.text_field :name, :class => "input-block-level inline", :placeholder => "Group Name"
+    = f.text_field :name, type: "text", :class => "form-control", :placeholder => "Group Name"
 
-  %div.control-group   
+  %div.form-group   
     = f.label :description, :class => "control-label"
     %div.controls
-      = f.text_area :description, :rows => "5", :class => "input-block-level inline", :placeholder => "Description of Group"
+      = f.text_area :description, type: "text", :rows => "5", :class => "form-control", :placeholder => "Description of Group"
+
+
+  .row
+  
+    .col-lg-6
+      = f.collection_select(:group_category_id, GroupCategory.all, :id, :name, {:prompt => 'Group Type'},:class => "form-control")
+  %br/
+  
+  %div.form-group
+    =f.label :zipcode, :class => "control-label"
+    %div.controls
+      .col-lg-3.no-left-padding
+        =f.text_field :zipcode, type: "text", :class => "form-control", :placeholder => "03755"
+
+  %br/
+  %br/
+  %br/
+  %p.bold Optional:
   = f.label :private, :class => "checkbox" do
     = f.check_box :private,:class => "checkbox", :id => "private"
     =label_tag "Private"
-  %div.row
-    %div.span3
-      %div.control-group
-        =f.label :password, "Pass-phrase to get into group", :class => "control-label"
-        %div.controls
-          = f.text_field :password, :class => "input-block-level inline", :placeholder => "Password", :disabled => !@group.new_record? && @group.password? ? false : true, :id => "private_group"
-  %div.row
-    %div.span1
-      %div.control-group
-        =f.label :zipcode, :class => "control-label"
-        %div.controls
-          =f.text_field :zipcode, :class => "input-block-level inline", :placeholder => "03755"
+  %div.form-group
+    =f.label :password, "Pass-phrase to get into group", :class => "control-label"
+    %div.controls
+      .col-lg-5.no-left-padding
+        = f.text_field :password, type: "text", :class => "form-control", :placeholder => "Password", :disabled => !@group.new_record? && @group.password? ? false : true, :id => "private_group"
           
-        
+  
+  %br/
+  %br/
+  %br/     
   /PHOTO UPLOAD FIELDS        
-  %div.row-fluid
-    %div.span8
+  %div.row
+    %div.col-lg-8
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
-            %div.control-group
+            %div.form-group
               =asset_fields.label "image", :class=>"control-label"
               %div.controls
                 =asset_fields.file_field :image
