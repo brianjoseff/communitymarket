@@ -1,5 +1,5 @@
 .col-lg-5
-  %h3 Textbooks are guaranteed to sell. We've partnered with Belltower Books so that if no one buys your book through P&S, we will buy it. We will give you the best possible price, come pick it up from you, and pay you cash
+  %h3 Textbooks are guaranteed to sell. We've partnered with Belltower Books so that if no one buys your book through P&S, we will buy it. We will give you the best possible price, come pick it up from you, and pay you cash. #{link_to "Post one!", new_post_path, class: "linkify"}
 .col-lg-7
   =image_tag 'books.png', id: "lg-icon", class: "center"
 =render :partial => 'feed/feed',:locals => {:feed_items => @posts}

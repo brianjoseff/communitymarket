@@ -163,9 +163,13 @@ class PagesController < ApplicationController
     # end
     @pc = PostCategory.find_by_name("Textbook")
     @tag = Tag.find_by_id(88)
-    
-	  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
-	  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    if !@tag.nil?
+  	  @posts = @tag.posts.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+  	  @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+	  else
+	    @posts = Post.first(10)
+	    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+    end
     
     
   end

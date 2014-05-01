@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     @clothing = Tag.find_by_id(40)
     @furniture = Tag.find_by_id(3)
 
-    @tags = [@appliances, @sports, @electronics, @clothing, @furniture, @textbooks]
+    @tags = [@appliances, @clothing, @electronics, @furniture, @sports, @textbooks]
     @admin_chosen_tags = []
     @tags.each do |x|
       if !x.nil?
