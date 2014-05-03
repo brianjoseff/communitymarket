@@ -26,7 +26,6 @@ h2 {
 	color: #333;
 	font-size: 26px;
 	font-weight: 400;
-	letter-spacing: 2px;
 	margin-left: 15px;
 }
 
@@ -34,25 +33,25 @@ h4 {
 	color: #333;
 	font-size: 18px;
 	font-weight: 300;
-	letter-spacing: 2px;
-	
+  &.bold {
+    letter-spacing: 1px;
+  }
 }
 
 p {
 	font-family: 'Lato', sans-serif;
 	color: #333;
 	font-size: 16px;
-	letter-spacing: 2px;
 	font-weight: 300;
 }
 
- hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
 }
 
 .centered {
@@ -103,7 +102,7 @@ p {
 	  height: 46px;
 	  font-size: 18px;
 	  font-family: 'Lato', sans-serif;
-	  letter-spacing: 1px;
+    letter-spacing: .01em;
 	  border-radius: 0px;
 }
 
@@ -137,7 +136,7 @@ p {
 	background-position: center center;
 	min-height: 500px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -184,7 +183,7 @@ p {
 	text-align:center;
 	min-height: 400px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -223,7 +222,7 @@ p {
     height:150px;
 		margin-left: 25px;
     border-radius:50%;
-    
+
 
 		background-repeat: no-repeat;
 		background-position: center;
@@ -263,7 +262,7 @@ p {
 	background-position: center center;
 	min-height: 400px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -293,7 +292,7 @@ p {
 	background-position: center center;
 	min-height: 400px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -571,7 +570,7 @@ licon {
 /* ==========================================================================
    Pricing Tables
    ========================================================================== */
-   
+
 .pricing-option {
     padding-bottom: 40px;
 }
@@ -686,15 +685,15 @@ licon {
 
 /* =========== Media Queries ============ */
 
-@media (max-width : 1025px) { 
-	
+@media (max-width : 1025px) {
+
 	#headerwrap h1 {
 		padding-top: 0px;
 		font-size: 30px;
 		line-height: 36px;
 		text-align: center;
 	}
-	
+
 	.phonefront {
 		position: relative;
 		text-align: center;
@@ -706,9 +705,9 @@ licon {
 
 
 @media screen and (max-width: 1024px) {
-	.ac-wrapper { 
-		font-size: 60%; 
-		width: 100%; 
+	.ac-wrapper {
+		font-size: 60%;
+		width: 100%;
 		padding: 0 20px;
 	}
 
@@ -717,15 +716,15 @@ licon {
 		width: 100%;
 	}
 
-	.ac-device h3 { 
+	.ac-device h3 {
 		width: 50%;
 		left: 290px;
 	}
 
-	.ac-wrapper h2 { 
-		left: 308px; 
-		padding: 0; 
-		text-align: left; 
+	.ac-wrapper h2 {
+		left: 308px;
+		padding: 0;
+		text-align: left;
 		margin-left: 30px;
 	}
 }
@@ -750,7 +749,7 @@ licon {
 		margin-left: -10px;
 	}
 
-	.ac-wrapper h2 { 
+	.ac-wrapper h2 {
 		width: 100%;
 		text-align: center;
 		margin: 0 0 1em;
