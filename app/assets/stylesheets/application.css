@@ -79,7 +79,7 @@ span.points{
 .new_followship{
 	margin-right: 5px;
 }
-.center { float: none !important; margin-left: auto!important; margin-right: auto!important; }
+.center { float: none !important; margin-left: auto!important; margin-right: auto!important; position: center}
 .tooltip{
 	width: 150px;
 }

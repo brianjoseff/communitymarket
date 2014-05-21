@@ -1,4 +1,4 @@
-#navbar-main.nav-area.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+#navbar-main.nav-area.navbar.navbar-default.navbar-fixed-top{role: "navigation", class: "#{'sa_nav_border' if current_page?(textbooks_url)  }"}
   .container
     .row
       / Brand and toggle get grouped for better mobile display
@@ -11,8 +11,10 @@
         =image_tag "circlelogo1.png", :id => "header_logo"
         %h3.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}        
         %span.at-dartmouth.pull-right.hidden-xs.hidden-sm
-          at Dartmouth College
-
+          -if current_page?(textbooks_url)
+            with Dartmouth Student Assembly
+          -else
+            at Dartmouth College
       / Collect the nav links, forms, and other content for toggling
       .navbar-collapse.collapse
         %ul.nav.navbar-nav 

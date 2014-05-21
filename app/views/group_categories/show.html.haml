@@ -20,6 +20,8 @@
              
 
       %ul
+        %li.chevron_right
+          =link_to "All", groups_path, :class => "chevron_right"
         -@group_categories.each do |gcat|
           %li.chevron_right
             =link_to gcat.name, group_category_path(gcat), :class => "chevron_right"

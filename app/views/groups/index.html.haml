@@ -78,3 +78,23 @@
   /Content area
   //tab nav bar: alphabetical, newest, most popular
   //groups: image, name, description, join button
+
+
+/ -if current_user && current_user.admin?
+/   = form_tag bulk_update_groups_path do
+/     %table
+/       
+/       %th Group
+/       %th 1
+/       %th 2
+/       %th 3
+/       %th 4
+/       %th 5
+/       %th 6
+/       - @groups.each do |g|
+/         %tr
+/           %td =g.name
+/           -@group_categories.each do |gc|
+/             %td= check_box_tag "group_category_id[]", gc.id
+/ 
+/     = button_tag "Update Groups"
