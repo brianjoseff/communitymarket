@@ -88,6 +88,10 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post_categories = PostCategory.all
+    forsale = @post_categories.find{|a| a.name == "Wanted"}
+    @post_categories.delete(forsale)
+    @post_categories.unshift(forsale)
+    
 
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])

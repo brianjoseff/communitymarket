@@ -74,18 +74,9 @@
             =link_to "Create a group", new_group_path, :id => "front_page_create_group_link"
           -else
             =link_to "Create a group", new_user_path, :id => "front_page_create_group_link"
-      / %div.row-fluid
-      /   %div.row-fluid
-      /     %h3 Groups Close to You
-      /     %span
-      /       -if current_user
-      /         =link_to "Create a group", new_group_path, :id => "front_page_create_group_link"
-      /       -else
-      /         =link_to "Create a group", new_user_path, :id => "front_page_create_group_link"
-
-      %p Join groups so that you can send targeted notifications
-      =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
-      %h4 Random Groups
+        %p Join groups so that you can send targeted notifications
+        =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+      %h4 Random groups
       =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
 
 
