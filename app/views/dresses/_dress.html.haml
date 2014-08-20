@@ -1,0 +1,8 @@
+.row
+  .dress
+    .col-lg-2
+      =link_to image_tag(dress.assets.empty?  ? '/assets/small.png': dress.assets.first.image.url(:medium), :alt => dress.title), dress_url(dress)
+    .col-lg-10
+      %p.bold=dress.title
+      %p.bold=dress.rental
+      %span=dress.retail

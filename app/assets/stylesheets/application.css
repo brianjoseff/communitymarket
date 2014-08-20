@@ -74,7 +74,9 @@ span.points{
 	width: 200px !important;
 }
 
-
+p{
+	letter-spacing: 1px !important;
+}
 
 .new_followship{
 	margin-right: 5px;

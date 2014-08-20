@@ -1,0 +1,63 @@
+= form_for @dress do |f|
+  - if @dress.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@dress.errors.count, "error")} prohibited this dress from being saved:"
+      %ul
+        - @dress.errors.full_messages.each do |msg|
+          %li= msg
+
+  .row
+    .col-lg-6
+      .row
+        .col-lg-10
+          .form-group
+            = f.label :title
+            = f.text_field :title, autofocus: true, type: "text", class: "form-control", placeholder: "Versace, Spin the Record Dress, black"
+        .col-lg-2
+          .form-group
+            = f.label :size
+            = f.text_field :size, autofocus: true, type: "text", class: "form-control", placeholder: "4"
+      .row
+        .col-lg-12
+          .form-group
+            = f.label :comments_on_fit
+            = f.text_area :comments_on_fit, autofocus: true, type: "text", class: "form-control", placeholder: "Fits well on athletic build, not too tight around waist, room in bust", rows: "5"
+
+  
+      /turn into radio buttons 0, 5, 10, 20, other
+      
+      .row
+        .col-lg-3
+          .form-group
+            = f.label :rental
+            = f.text_field :rental, autofocus: true, type: "text", class: "form-control", placeholder: "10"
+        .col-lg-3
+          .form-group
+            = f.label :retail
+            $
+            = f.text_field :retail, autofocus: true, type: "text", class: "form-control", placeholder: "350"
+      
+      -@assets.each do |asset|
+        =f.fields_for :assets, asset do |asset_fields|
+          -if asset_fields.object.image_file_name.nil?
+            .form-group
+              =asset_fields.label "image"
+              =asset_fields.file_field :image, type: "file"
+          -else
+            /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
+            =image_tag(asset_fields.object.image.url(:post))
+            =asset_fields.label  "delete image"
+            =asset_fields.check_box :_destroy
+      / .form-group
+      /   .row
+      /     .col-lg-3
+      /       = f.label :rental
+      /       = f.text_field :rental, autofocus: true, type: "text", class: "form-control", placeholder: "10"
+      /     .col-lg-3
+      /       = f.label :retail
+      /       $
+      /       = f.text_field :retail, autofocus: true, type: "text", class: "form-control", placeholder: "350"
+  
+
+      .form-group
+        = f.submit 'Post the Dress!', class: "btn btn-primary"

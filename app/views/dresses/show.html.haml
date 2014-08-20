@@ -1,0 +1,41 @@
+%p#notice= notice
+
+
+.row
+  .dress
+    .col-lg-2
+      =link_to image_tag(@dress.assets.empty?  ? '/assets/small.png': @dress.assets.first.image.url(:medium), :alt => @dress.title),"#" ,"data-target" => "#modal_image", "data-toggle" => "modal", :type => "button", :class => "thumbnail"
+      %div#modal_image{:style => "display:none;", class: "text-center"}
+        =image_tag(@dress.assets.empty?  ? '/assets/small.png': @dress.assets.first.image.url(:normal), :alt => @dress.title)
+    .col-lg-9
+      %h4=@dress.title
+      .dress-prices
+        .dress-rental.bold
+          Rental: $#{@dress.rental}
+        .dress-retail
+          Retail: $#{@dress.retail}
+      %p=@dress.comments_on_fit
+
+
+
+/ %p
+/   %b Size:
+/   = @@dress.size
+/ %p
+/   %b Rental:
+/   = @@dress.rental
+/ %p
+/   %b Title:
+/   = @@dress.title
+/ %p
+/   %b Retail:
+/   = @@dress.retail
+/ %p
+/   %b Comments on fit:
+/   = @@dress.comments_on_fit
+/ 
+/ =link_to image_tag(@@dress.assets.empty?  ? '/assets/small.png': @@dress.assets.first.image.url(:medium), :alt => @@dress.title), @dress_url(@@dress), :class => "thumbnail"
+/ 
+/ = link_to 'Edit', edit_@dress_path(@@dress)
+/ \|
+/ = link_to 'Back', @dresses_path

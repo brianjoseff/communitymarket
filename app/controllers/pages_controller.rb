@@ -153,6 +153,9 @@ class PagesController < ApplicationController
   def about
   end
   
+  def jobs
+  end
+  
   def textbooks
     @transaction = Transaction.new
     # @post_category= Tag.find_by_id(88)
