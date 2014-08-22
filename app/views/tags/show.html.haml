@@ -1,18 +1,28 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @tag.name
-  %div{:id => "follow_button_"+@tag.id.to_s}
-    =render 'shared/simple_follow', :tag => @tag
-%p
-  %b Description:
-  = @tag.description
--unless @tag.posts.empty?
-  /=will_paginate @posts
-  /=render @posts
-  
-  /=render :partial => 'shared/post_feed', :collection => @posts, :as => :feed_item
-  =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
-  /=will_paginate @posts
+.row
+  .col-lg-2
+  .col-lg-8
+
+    .page-element-background
+      %h3
+        #{@tag.name}
+        %span{style:"display:inline-block"}
+          %div{:id => "follow_button_"+@tag.id.to_s}
+          =render 'shared/simple_follow', :tag => @tag
+      / .row
+      /   .col-lg-6
+      /     %p Follow a tag so that you don't have to keep checking the marketplace to learn about new posts
+    %br/
+    / %p
+    /   %b Description:
+    /   = @tag.description
+    -unless @tag.posts.empty?
+      /=will_paginate @posts
+      /=render @posts
+
+      /=render :partial => 'shared/post_feed', :collection => @posts, :as => :feed_item
+      .page-element-background
+        =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+      /=will_paginate @posts
 

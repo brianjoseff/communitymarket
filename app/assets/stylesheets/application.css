@@ -63,6 +63,14 @@ a:hover.no-black{
 	background-color: transparent !important;
 }
 
+.page-element-background{
+	background-color:#e6e6e6;
+	padding:10px;
+}
+.center{
+	
+	margin: 10 auto !important;
+}
 span.points{
 	margin-left: 5px;
 	margin-right: 5px;
@@ -473,6 +481,8 @@ input[type="text"].search-bar-field{
 	padding-right: 5px;
 	margin-bottom: 10px;
 }
+
+
 #btn_search{
 	background-color: #00e5d6 !important;
 	
@@ -630,7 +640,7 @@ div.free-marker{
 
 
 .posts-nav{
-	margin-top: 15px;
+	margin-top: 22px;
 }
 
 #slim_post_customer_buy_button{
@@ -686,6 +696,7 @@ span.feed-title a:visited{
 	border-bottom: 1px solid #c9c9c9;
 /*	padding-bottom: 7px;*/
 	margin-bottom: 5px;
+	
 }
 
 .slim-feed-title-row{

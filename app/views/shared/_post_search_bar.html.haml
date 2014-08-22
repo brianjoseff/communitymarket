@@ -27,13 +27,13 @@
     %div.col-lg-3
       /new post button
       /.category-post-cluster
-      .container
+      .center-block
         =link_to "Post Something", new_post_path,:id => "btn_post_flat", class: "pull-left", :type => "button"
     %div.col-lg-2
-      .container
+      .center-block
         =render :partial => "search/category_dropdown"
 
     %div.col-lg-7
       /search bar
-      .container
+      .center-block
         =render :partial => "search/search_form"

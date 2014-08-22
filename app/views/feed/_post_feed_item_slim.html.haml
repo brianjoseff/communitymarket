@@ -45,83 +45,84 @@
 
 
 /%div.slim-feed-item.row-fluid{class: "#{feed_item.completed? ? "completed" : ""}"}
-%div.slim-feed-item.row
-  %div.span9.col-lg-8
-    %div.row.slim-feed-title-row
-      -if feed_item.post_category_id == 1
-        -unless feed_item.assets.empty?
-          =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
-      -elsif feed_item.post_category_id == 2
-        /%div.wanted-marker
-        %span.for-sale Wanted
-      -elsif feed_item.post_category_id == 3
-        /%div.free-marker
-        %span.for-sale For Rent/Borrow
-      -elsif feed_item.post_category_id == 4
-        %span.for-sale{class: "#{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "paid-service" : ""}"}
-          #{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "$ Make Money" : "Help Needed"}
-      -elsif feed_item.post_category_id == 5
-        %span.for-sale Service Offered
-      -if feed_item.completed?
-        %span.completed-icon
-          [SOLD/GOT!]
-      /price
-      /make price a variable that can be passed into the modal partials below so
-      /that on credit card charge, we know how much to charge      
-      %span.slim-feed-title
-        = link_to_if !feed_item.completed?, feed_item.title, post_url(feed_item), :class => "slim-feed-title"
-      -unless feed_item.assets.first.nil?
-        %i.icon-medium.icon-camera
-      /COMMENTED OUT DATE  
-      /%span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
-      
-    / %div.row
-    /   -feed_item.tags.each do |tag|
-    /     =link_to tag.name, tag_url(tag), :class => "tag"
-
-
-
-  %div.span3.col-lg-4
-    %div.slim-button-row
-      -unless feed_item.completed?
-        %div.buy.pull-left
-          -if feed_item.tier_id
-            -if signed_in? && current_user.stripe_customer_id
-              = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
-                - if @transaction.errors.any?
-                  .error_messages
-                    %h2
-                      = pluralize(@transaction.errors.count, "error")
-                      prohibited this transaction from being saved:
-                    %ul
-                      - @transaction.errors.full_messages.each do |msg|
-                        %li= msg                                          
-                =f.hidden_field :post_id, :value => feed_item.id
-                =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-sm btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
-            -elsif signed_in? && current_user.stripe_customer_id.nil?
-              =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id 
-              %div#transaction_modal.modal.hide
-            -else
-              =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id     
-          -elsif feed_item.price
-            %span.non-tier-price $#{feed_item.price} [Cash OBO] 
-      %div.email.pull-right
-        / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+.slim-feed-item
+  %div.row  
+    %div.col-lg-8
+      %div.slim-feed-title-row
+        -if feed_item.post_category_id == 1
+          -unless feed_item.assets.empty?
+            =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
+        -elsif feed_item.post_category_id == 2
+          /%div.wanted-marker
+          %span.for-sale Wanted
+        -elsif feed_item.post_category_id == 3
+          /%div.free-marker
+          %span.for-sale For Rent/Borrow
+        -elsif feed_item.post_category_id == 4
+          %span.for-sale{class: "#{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "paid-service" : ""}"}
+            #{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "$ Make Money" : "Help Needed"}
+        -elsif feed_item.post_category_id == 5
+          %span.for-sale Service Offered
         -if feed_item.completed?
+          %span.completed-icon
+            [SOLD/GOT!]
+        /price
+        /make price a variable that can be passed into the modal partials below so
+        /that on credit card charge, we know how much to charge      
+        %span.slim-feed-title
+          = link_to_if !feed_item.completed?, feed_item.title, post_url(feed_item), :class => "slim-feed-title"
+        -unless feed_item.assets.first.nil?
+          %i.icon-medium.icon-camera
+        /COMMENTED OUT DATE  
+        /%span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
+    
+      / %div.row
+      /   -feed_item.tags.each do |tag|
+      /     =link_to tag.name, tag_url(tag), :class => "tag"
+
+
+
+    %div.col-lg-4
+      %div.slim-button-row
+        -unless feed_item.completed?
+          %div.buy.pull-left
+            -if feed_item.tier_id
+              -if signed_in? && current_user.stripe_customer_id
+                = form_for @transaction, :url => customer_purchase_transactions_path(@transaction), :html => {:id => "slim_post_customer_buy_button"}  do |f|
+                  - if @transaction.errors.any?
+                    .error_messages
+                      %h2
+                        = pluralize(@transaction.errors.count, "error")
+                        prohibited this transaction from being saved:
+                      %ul
+                        - @transaction.errors.full_messages.each do |msg|
+                          %li= msg                                          
+                  =f.hidden_field :post_id, :value => feed_item.id
+                  =f.submit "Buy | $#{Tier.find(feed_item.tier_id).price/100}", class: "btn btn-sm btn-success", :confirm => "Are you sure you want to buy this post: #{feed_item.title}, for $#{feed_item.tier_id * 10}?"
+              -elsif signed_in? && current_user.stripe_customer_id.nil?
+                =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id 
+                %div#transaction_modal.modal.hide
+              -else
+                =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id     
+            -elsif feed_item.price
+              %span.non-tier-price $#{feed_item.price} [Cash OBO] 
+        %div.email.pull-right
+          / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
+          -if feed_item.completed?
+      
+            %button.btn.btn-default.btn-sm
+              =link_to "Email", "#", class: "message-seller-button completed"
+              %span.glyphicon.glyphicon-envelope
+          -else          
+            / = button_to 'Email <span class="glyphicon glyphicon-envelope"></span>.html_safe', new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)), :class=>"btn btn-default", :remote => true do                                                      
+            /   Email
+            =link_to_modal new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "btn btn-default btn-sm message-seller-button" do
+              Email
+              %span.glyphicon.glyphicon-envelope
         
-          %button.btn.btn-default.btn-sm
-            =link_to "Email", "#", class: "message-seller-button completed"
-            %span.glyphicon.glyphicon-envelope
-        -else          
-          / = button_to 'Email <span class="glyphicon glyphicon-envelope"></span>.html_safe', new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)), :class=>"btn btn-default", :remote => true do                                                      
-          /   Email
-          =link_to_modal new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "btn btn-default btn-sm message-seller-button" do
-            Email
-            %span.glyphicon.glyphicon-envelope
-          
-          / %button.btn.btn-default.btn-sm
-          /   =link_to_modal "email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button"
-          /   %span.glyphicon.glyphicon-envelope
+            / %button.btn.btn-default.btn-sm
+            /   =link_to_modal "email", new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "message-seller-button"
+            /   %span.glyphicon.glyphicon-envelope
 
 
 
