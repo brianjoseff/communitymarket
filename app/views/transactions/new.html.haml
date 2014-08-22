@@ -1,21 +1,23 @@
 / %h2#myModalLabel You need to add a credit card
+.row
+  .col-lg-4
+  .col-lg-4.page-element-background
+    #transaction
+      -if @post
+        %h3 Get this post for $#{@tier.price/100}: #{@post.title}
+      
+      = simple_form_for @transaction, html: {class: 'form-horizontal', role: "form"} do |f|
+        - if @transaction.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
+            %ul
+              - @transaction.errors.full_messages.each do |msg|
+                %li= msg
 
-#transaction
-  -if @post
-    %h3 Get this post for $#{@tier.price/100}: #{@post.title}
+        =render 'form', f: f, post_id: :post_id
+        %br/
     
-  = simple_form_for @transaction, html: {class: 'form-horizontal', role: "form"} do |f|
-    - if @transaction.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
-        %ul
-          - @transaction.errors.full_messages.each do |msg|
-            %li= msg
-
-    =render 'form', f: f, post_id: :post_id
-    %br/
-    
-    = f.submit "Get It", name: 'Get It', class: "btn btn-default btn-primary", id: "new_transaction_button"
-    %br/
-    %br/
-    =link_to image_tag('solid.png', :alt => 'Stripe Payment Services'), "https://www.stripe.com/", id: "stripe_button"
+        = f.submit "Get It", name: 'Get It', class: "btn btn-default btn-primary", id: "new_transaction_button"
+        %br/
+        %br/
+        =link_to image_tag('solid.png', :alt => 'Stripe Payment Services'), "https://www.stripe.com/", id: "stripe_button"
