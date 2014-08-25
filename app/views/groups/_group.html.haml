@@ -1,13 +1,10 @@
 %div.row.group-feed-item
-  %div.image.col-lg-3
+  %div.image.col-lg-2
     =link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)
-  %div.feed_item
-    %div.col-lg-7
-      %div.row
-        %span.feed-title
-          = link_to group.name, group_url(group)
-      %div.row
-        %span.description
-          = truncate(group.description, 10)
-    %div.col-lg-2
+  .feed_item
+    .col-lg-7
+      = link_to group.name, group_url(group), class: "feed-title"
+      .description
+        = truncate(group.description, 10)
+    .col-lg-2
       = render "shared/simple_join", :group => group

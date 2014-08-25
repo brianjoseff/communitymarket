@@ -1,6 +1,6 @@
 .container
   %div.row
-    %div.col-lg-3
+    %div.col-lg-3.group-categories
       %h3 Categories
       
       
@@ -18,15 +18,15 @@
       /     %span.input-group-btn
       /       =button_tag "Go", name: nil, :class => "btn btn-default btn-lg", :type => "button"
              
-
-      %ul
-        -@g_categories.each do |gcat|
-          %li.chevron_right
-            =link_to gcat.name, group_category_path(gcat), :class => "chevron_right"
-      -if current_user
-        =link_to "Create a group", new_group_path, :class => "btn btn-default group-button", :role => "button", :id => "front_page_new_group"
-      -else
-        =link_to "Create a group", new_user_registration_path, :class => "btn btn-default group-button", :role => "button", :id => "front_page_new_group"
+      .page-element-background
+        %ul
+          -@g_categories.each do |gcat|
+            %li.chevron_right
+              =link_to gcat.name, group_category_path(gcat), :class => "chevron_right"
+        -if current_user
+          =link_to "Create a group", new_group_path, :class => "btn btn-default group-button", :role => "button", :id => "front_page_new_group"
+        -else
+          =link_to "Create a group", new_user_registration_path, :class => "btn btn-default group-button", :role => "button", :id => "front_page_new_group"
     %div.col-lg-9
       %div.row
         .col-xs-3
@@ -47,8 +47,10 @@
           /   %li
           /     =link_to @group_category, group_category_path(@group_category)
       %div.row
-        %div#groups_list
-        =render @groups, :as => "group_feed_item"
+        .page-element-background
+          %div#groups_list
+            .col-lg-12
+              =render @groups, :as => "group_feed_item"
   / %table
   /   %tr
   /     %th Name

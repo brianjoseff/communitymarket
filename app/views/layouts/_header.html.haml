@@ -34,7 +34,7 @@
               -@group_categories.each do |gc|
                 %li
                   =link_to gc.name, group_category_path(gc)
-          %li{:class => "#{'active' if current_page?(groups_path)} dropdown"}
+          %li{:class => "#{'active' if current_page?(tags_path)} dropdown"}
             %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
               Tags
               %b.caret

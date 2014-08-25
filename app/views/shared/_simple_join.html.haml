@@ -14,11 +14,11 @@
           =hidden_field_tag('group[member_ids][]', current_user.id)
           %div.span3
             =text_field_tag :password, nil, :class => "input-block-level inline", :placeholder => "Password", :id => "join_private_group"
-          =submit_tag "Join", :class => "btn btn-default btn-sm btn-join"
+          =submit_tag "Join", :class => "btn btn-default btn-mini btn-join"
       -else
         = form_for current_user.memberships.build(:group_id => group.id), :url => join_memberships_path, remote: true  do |f|                                          
           = f.hidden_field :group_id
-          = f.submit "Join", class: "btn btn-default btn-sm btn-join"
+          = f.submit "Join", class: "btn btn-default btn-mini btn-join"
         / =form_for group do |f|
         /   =hidden_field_tag('group[member_ids][]', current_user.id)
         /   =f.submit "Join", :class => "btn btn-mini"
@@ -30,8 +30,8 @@
       /   %div.span3
       /     =text_field_tag :password, nil, :class => "input-block-level inline", :placeholder => "Password", :id => "join_private_group"
       /   =submit_tag "Join", :class => "btn btn-mini"
-      =link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-default btn-sm", :remote => true 
+      =link_to_modal "Join", new_user_path(:group_id => group.id), :class => "btn btn-default btn-mini", :remote => true 
     -else
       = form_for @user.memberships.build(:group_id => group.id), :url => join_memberships_path  do |f|                                          
         = f.hidden_field :group_id
-        = f.submit "Join", class: "btn btn-default btn-sm btn-join"
+        = f.submit "Join", class: "btn btn-default btn-mini btn-join"

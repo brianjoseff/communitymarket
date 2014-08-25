@@ -105,7 +105,7 @@
               -else
                 =link_to "Buy | $#{Tier.find(feed_item.tier_id).price/100}", new_transaction_path(:post_id => feed_item.id), :id => "new_transaction_link", :class => "btn btn-sm btn-success", :data_postid => feed_item.id     
             -elsif feed_item.price
-              %span.non-tier-price $#{feed_item.price} [Cash OBO] 
+              %span.non-tier-price $#{feed_item.price}
         %div.email.pull-right
           / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
           -if feed_item.completed?

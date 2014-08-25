@@ -44,10 +44,10 @@
 	font-size: 150%;
 }
 .comp-field-label{
-	position:absolute;
+	position:relative;
 	font-size: 150%;
-	left: 15px;
-	top: 65px;
+	left: -65px;
+	top: 5px;
 }
 .comp-field-label-2{
 	position:absolute;
@@ -59,6 +59,32 @@
 .comp-text-field{
 	padding-left: 30px;
 	padding-top: 10px;
+}
+
+
+.premium-container{
+	border: 2px solid #696969;
+	background-color: #f3f9f0;
+	padding: 5px;
+}
+.premium-container-shadow-right{
+	/*Right*/
+	-webkit-box-shadow: 4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+	-moz-box-shadow:    4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+	box-shadow:         4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+}
+.premium-container-shadow-left{
+	/*left*/
+	-webkit-box-shadow: -4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+	-moz-box-shadow:    -4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+	box-shadow:         -4px 0px 24px 0px rgba(65, 194, 105, 0.75);
+}
+
+label.premium-checkbox {
+	position:relative;
+	font-size: 120%;
+	top:2px;
+	left:0px;
 }
 
 .control-label{
@@ -383,5 +409,41 @@ img#fb{
 button.active{
 /*	background-color: #696969 !important;*/
 }
+
+ul.token-input-list-facebook {
+overflow: hidden;
+height: auto !important;
+height: 1%;
+vertical-align: middle !important;
+max-width: 400px !important;
+min-width:100px !important;
+border: 1px solid #ccc !important;
+cursor: text;
+font-size: 12px;
+font-family: Verdana, sans-serif;
+min-height: 1px;
+z-index: 999;
+margin: 0;
+padding: 0;
+background-color: #fff;
+list-style-type: none;
+clear: left;
+
+
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
+}
+ul.token-input-list-facebook input{
+
+width: 400px !important;
+min-width:100px !important
+}
+
+
+
+
+
 
 

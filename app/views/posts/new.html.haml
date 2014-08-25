@@ -1,7 +1,9 @@
-%div.row
-  %div.span7
-    %h1.form-title New post
-    =render 'form'
+.row
+  .col-lg-3
+  .col-lg-6
+    %h1 New post
+    .page-element-background
+      =render 'form'
     / -if signed_in?
     /   = render 'form'
     / -else

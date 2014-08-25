@@ -1,16 +1,7 @@
-/ -if asset_fields.object.image_file_name.nil?
-/   %div.control-group
-/     =asset_fields.label "image", :class=>"control-label"
-/     %div.controls
-/       =asset_fields.file_field :image
-/ -else
-/   /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
-/   =image_tag(asset_fields.object.image.url(:post))
-/   =asset_fields.label  "delete image"
-/   =asset_fields.check_box :_destroy
 
-%label.col-lg-2.control-label
-.image-control-group.form-control-static 
+
+
+.image-control-group
   = link_to_remove_fields "remove", f
   -if is_mobile_device? || is_tablet_device?
     =f.file_field :image, type:"file", accept: "image/*;capture=camera"
@@ -26,3 +17,15 @@
 /     -else
 /       =f.file_field :image
 /     
+
+
+/ -if asset_fields.object.image_file_name.nil?
+/   %div.control-group
+/     =asset_fields.label "image", :class=>"control-label"
+/     %div.controls
+/       =asset_fields.file_field :image
+/ -else
+/   /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
+/   =image_tag(asset_fields.object.image.url(:post))
+/   =asset_fields.label  "delete image"
+/   =asset_fields.check_box :_destroy

@@ -4,7 +4,7 @@
   -if tag.followers.include?(current_user)
     = form_for current_user.followships.find_by_followed_id(tag), html: {:method => :delete, :class => "form" }, remote: true do |f|
       =f.hidden_field :followed_id, :value => tag.id                                            
-      = f.submit "unfollow", class: "anti-button"
+      = f.submit "unfollow", class: "anti-button", style: "margin-left: 10px; margin-right: 15px;"
   -else
     = form_for current_user.followships.build(:followed_id => tag.id), :url => follow_followships_path, remote: true  do |f|                                          
       = f.hidden_field :followed_id
