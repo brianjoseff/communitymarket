@@ -166,6 +166,7 @@ class PagesController < ApplicationController
     # end
     @pc = PostCategory.find_by_name("Textbook")
     @tag = Tag.find_by_id(88)
+    @classes = []
     if !@tag.nil?
       @posts = filter_posts(@tag.posts).sort { |x,y| y.created_at <=> x.created_at }
       @posts = kaminari_paginate(@posts, 50)

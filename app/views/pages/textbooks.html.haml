@@ -1,10 +1,21 @@
 .textbooks_header
-  .col-lg-5
-    .logo-text
-      / #{link_to "Post one!", new_post_path, class: "linkify"}
-      %h3 Textbooks are guaranteed to sell. We've partnered with Belltower Books so that if no one buys your book through P&S, we will buy it. We will give you the best possible price, come pick it up from you, and pay you cash. 
-      =link_to "Post a Textbook!", new_post_path, class: "btn btn-success center post-textbook-btn"
-  .col-lg-7
-    /=image_tag 'books.png', id: "lg-icon", class: "center"
-    .sa-logo.pull-right
-=render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+  .row
+    .col-lg-5
+      .logo-text
+        / #{link_to "Post one!", new_post_path, class: "linkify"}
+        %h3 Textbooks are guaranteed to sell. We've partnered with Belltower Books so that if no one buys your book through P&S, we will buy it. We will give you the best possible price, come pick it up from you, and pay you cash. 
+        =link_to "Post a Textbook!", new_post_path, class: "btn btn-success center post-textbook-btn"
+    .col-lg-7
+      /=image_tag 'books.png', id: "lg-icon", class: "center"
+      .sa-logo.pull-right
+.row
+  
+  .col-lg-8
+    %h3 Books
+    .page-element-background
+      =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+  .col-lg-4
+    %h3 Classes
+    .page-element-background
+      =render @classes
+    
