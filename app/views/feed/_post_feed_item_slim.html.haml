@@ -48,10 +48,10 @@
 .slim-feed-item
   %div.row  
     %div.col-lg-8
-      %div.slim-feed-title-row
+      %div.slim-feed-title-row{class: "#{feed_item.completed? ? 'opaque' : '' }"}
         -if feed_item.post_category_id == 1
           -unless feed_item.assets.empty?
-            =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title), post_url(feed_item)
+            =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title, class: "#{feed_item.completed? ? 'opaque' : '' }"), post_url(feed_item)
         -elsif feed_item.post_category_id == 2
           /%div.wanted-marker
           %span.for-sale Wanted
@@ -63,9 +63,9 @@
             #{feed_item.lump_sum.to_i > 0 || feed_item.hourly_rate.to_i > 0 ? "$ Make Money" : "Help Needed"}
         -elsif feed_item.post_category_id == 5
           %span.for-sale Service Offered
-        -if feed_item.completed?
-          %span.completed-icon
-            [SOLD/GOT!]
+        / -if feed_item.completed?
+        /   %span.completed-icon
+        /     [SOLD/GOT!]
         /price
         /make price a variable that can be passed into the modal partials below so
         /that on credit card charge, we know how much to charge      
@@ -110,9 +110,9 @@
           / %a.btn.btn-mini.message-seller-button{ :href => "mailto:#{feed_item.email}", :role => "button"} Email
           -if feed_item.completed?
       
-            %button.btn.btn-default.btn-sm
+            %button.btn.btn-default.btn-sm.completed
               =link_to "Email", "#", class: "message-seller-button completed"
-              %span.glyphicon.glyphicon-envelope
+              %span.glyphicon.glyphicon-envelope{class: "#{feed_item.completed? ? 'opaque' : '' }"}
           -else          
             / = button_to 'Email <span class="glyphicon glyphicon-envelope"></span>.html_safe', new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)), :class=>"btn btn-default", :remote => true do                                                      
             /   Email

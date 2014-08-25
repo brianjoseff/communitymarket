@@ -82,9 +82,9 @@ span.points{
 	width: 200px !important;
 }
 
-p{
+/*p{
 	letter-spacing: 1px !important;
-}
+}*/
 
 .new_followship{
 	margin-right: 5px;
@@ -557,7 +557,15 @@ input[type="text"].search-bar-field{
   cursor: default;
 }
 
-
+.opaque{
+	opacity:0.6;
+}
+.opaque span{
+	opacity:0.6;
+}
+.completed:hover{
+	background-color: white !important;
+}
 .special-vertical{
 	font-weight: bold;
 	font-size: 125%;
