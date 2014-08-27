@@ -45,6 +45,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    choice (0.1.6)
     client_side_validations (3.2.6)
     client_side_validations-simple_form (2.1.0)
       client_side_validations (~> 3.2.5)
@@ -225,6 +226,11 @@ GEM
       activesupport (= 3.2.9)
       bundler (~> 1.0)
       railties (= 3.2.9)
+    rails-erd (1.1.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     rails_tokeninput (1.6.0)
       railties (>= 3.1.0)
     railties (3.2.9)
@@ -264,6 +270,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-graphviz (1.0.9)
     rubyzip (1.1.0)
     s3_direct_upload (0.1.6)
       coffee-rails (>= 3.2.1)
@@ -360,6 +367,7 @@ DEPENDENCIES
   paperclip
   pg
   rails (= 3.2.9)
+  rails-erd
   rails_tokeninput
   ransack
   rspec-rails (>= 2.0.1)

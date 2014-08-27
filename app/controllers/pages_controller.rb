@@ -59,6 +59,7 @@ class PagesController < ApplicationController
       # @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       # @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
       
+      
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
         @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
