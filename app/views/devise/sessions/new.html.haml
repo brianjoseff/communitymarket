@@ -13,6 +13,8 @@
   %h1 Sign in
   %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
   =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
+    = notice
+    =flash[:alert]
     /=render "shared/error_messages", :target => @user
     %div.form-group
       =f.label :email, :class => 'col-lg-3 control-label'

@@ -31,8 +31,34 @@ class PagesController < ApplicationController
     @popular_tags = get_popular_tags
     # @ranked_users = User.all.first(5)
     
+    #VERY BRITTLE CODE HERE
+    # For "Browse by Category" feature on search bar
+    # @appliances = Tag.find_by_id(4)
+    # @sports = Tag.find_by_id(27)
+    # @electronics = Tag.find_by_id(36)
+    # @clothing = Tag.find_by_id(40)
+    # @books = Tag.find_by_id(21)
+    # @furniture = Tag.find_by_id(3)
+    # @full_post_categories = PostCategory.all
+    # @browse_by_array_tags = [@appliances, @sports, @electronics, @clothing, @books, @furniture]
+    # @browse_by_array = []
+    # @browse_by_array_tags.each do |a|
+    #   if !a.nil?
+    #     @browse_by_array << a
+    #   end
+    # end
+    # @full_post_categories.each do |c|
+    #   @browse_by_array << c
+    # end
+    # 
+    # @browse_by_array.sort! {|a,b| (a.name.downcase <=> b.name.downcase) || nil}
+    
     if signed_in? # && current_user.post_feed.is_a?(Array)
       @user = current_user
+      #OLD######@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
+      # @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+      # @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
+      
       
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
