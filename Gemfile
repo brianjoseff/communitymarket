@@ -11,9 +11,9 @@ group :development do
   gem 'sqlite3'
   #gem 'pg'
 end
-group :development do
-  gem 'rails-erd'
-end
+# group :development do
+#   gem 'rails-erd'
+# end
 
 #group :production do
 #  gem 'pg'
@@ -119,7 +119,7 @@ gem 'jquery-fileupload-rails'
 gem 'mobile-fu'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

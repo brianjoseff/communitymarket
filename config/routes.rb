@@ -14,13 +14,13 @@ Communitymarket::Application.routes.draw do
   
   
   # devise_for :users
-  devise_for :users, controllers: { :registrations => "registrations", omniauth_callbacks: 'users/omniauth_callbacks'}
+  devise_for :users, controllers: { :sessions => "sessions", :registrations => "registrations", omniauth_callbacks: 'users/omniauth_callbacks'}
   get '/auth/stripe_connect/callback', to: 'stripe_connect#create'
-  devise_scope :user do
-    match '/sessions/user', to: 'devise/sessions#create', via: :post
-    get "/sign_in", :to => "devise/sessions#new"
-    delete '/sign_out',to: 'devise/sessions#destroy'
-  end
+  # devise_scope :user do
+  #   match '/sessions/user', to: 'devise/sessions#create', via: :post
+  #   get "/sign_in", :to => "devise/sessions#new"
+  #   delete '/sign_out',to: 'devise/sessions#destroy'
+  # end
 
   resources :email_settings
   resources :followships

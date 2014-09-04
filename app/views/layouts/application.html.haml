@@ -72,6 +72,8 @@
 
     %div.container.main
       %div.row
+        %p.notice= notice
+        %p.alert= alert
         /=render partial: "shared/post_search_bar" unless @disable_nav
         -if current_user
           -if current_page?(root_url)
