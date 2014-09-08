@@ -21,21 +21,21 @@
   /     .col-lg-4
 
   / ========== FEATURES SECTION ==========
-  .container.features
-    .row
-      .col-lg-3
-        =link_to textbooks_url class: "no-black" do
-          =image_tag 'books.png', id: "books_icon"
-          %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
-      .col-lg-3
-        =image_tag 'furniture.png', id: "furniture_icon"
-        %h4.bold FIND RAD DORM FURNITURE  
-      .col-lg-3
-        =image_tag 'trust.png', id: "trust_icon"
-        %h4.bold DEAL WITH PEOPLE YOU KNOW AND TRUST
-      .col-lg-3
-        =image_tag 'dollar.png', id: "dollar_icon"
-        %h4.bold BUY STUFF HERE AND SAVE MONEY
+  / .container.features
+  /   .row
+  /     .col-lg-3
+  /       =link_to textbooks_url class: "no-black" do
+  /         =image_tag 'books.png', id: "books_icon"
+  /         %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
+  /     .col-lg-3
+  /       =image_tag 'furniture.png', id: "furniture_icon"
+  /       %h4.bold FIND RAD DORM FURNITURE  
+  /     .col-lg-3
+  /       =image_tag 'trust.png', id: "trust_icon"
+  /       %h4.bold DEAL WITH PEOPLE YOU KNOW AND TRUST
+  /     .col-lg-3
+  /       =image_tag 'dollar.png', id: "dollar_icon"
+  /       %h4.bold BUY STUFF HERE AND SAVE MONEY
 
   / ========== SECTION DIVIDER 01 ==========
   #section01
@@ -62,26 +62,58 @@
       /   /   %p P&S Rocks
       .row  
         .col-lg-6.col-lg-offset-3
-          %h2.centered Make Money and Get Rid of Stuff Without Lifting a Finger
+          .text-center
+            %h1 A Marketplace You Can Finally Trust
+            %h4 Deal with people who live in your community and are not sketchy
           %br/
           %br/
       .row
         .col-lg-4
           /.circle-image.center.rebecca
           / =image_tag 'head-shot.jpg'
-          %h4 CONTACT OUR SUPER SELLER ABOUT YOUR STUFF
-          %p.hero-subtext Email one of our authorized sellers on campus that you have some stuff you want to sell
+          =image_tag 'post-icon.png', id: "post_icon", class: "about-icon"
+          %h3 Post your stuff
+          /%p.hero-subtext Email one of our authorized sellers on campus that you have some stuff you want to sell
         .col-lg-4
           /.circle-image.center.gabe
           / =image_tag 'head-shot.jpg'
-          %h4 PUT THE STUFF SOMEWHERE THEY CAN GET IT
-          %p.hero-subtext Box up everything you want to get rid of and put it near your door so they can pick it up
+          =image_tag 'contact-icon.png', id: "contact_icon", class: "about-icon"
+          %h3 Get contacted from people you know
+          /%p.hero-subtext Box up everything you want to get rid of and put it near your door so they can pick it up
         .col-lg-4
           /.circle-image.center.hanlon
-          %h4 DO NOTHING AND GET PAID
-          %p.hero-subtext Our SuperSeller will do all the work of posting the items and dealing with buyers picking stuff up. All you have to do is sit back and watch the proceeds roll in. You get 80%
+          =image_tag 'exchange-icon.png', id: "contact_icon", class: "about-icon"
+          %h3 Meet up and complete the transaction
+          /%p.hero-subtext Our SuperSeller will do all the work of posting the items and dealing with buyers picking stuff up. All you have to do is sit back and watch the proceeds roll in. You get 80%
 
-
+   
+      .row.about-spacer-row
+        .col-lg-12.about-spacer
+      .row  
+        .col-lg-6.col-lg-offset-3
+          .text-center
+            %h1 Selling is as Easy as Clicking a Button
+            %h4 Our SuperSellers will post your stuff for you and deal with all the hassle
+          %br/
+          %br/
+      .row
+        .col-lg-4
+          /.circle-image.center.rebecca
+          / =image_tag 'head-shot.jpg'
+          =image_tag 'contact-icon.png', id: "post_icon", class: "about-icon"
+          %h3 Contact our SuperSellers
+          /%p.hero-subtext Email one of our authorized sellers on campus that you have some stuff you want to sell
+        .col-lg-4
+          /.circle-image.center.gabe
+          / =image_tag 'head-shot.jpg'
+          =image_tag 'leavestuff-icon.png', id: "post_icon", class: "about-icon"
+          %h3 Leave your stuff at your door
+          /%p.hero-subtext Box up everything you want to get rid of and put it near your door so they can pick it up
+        .col-lg-4
+          /.circle-image.center.hanlon
+          =image_tag 'paid-icon2.png', id: "post_icon", class: "about-icon"
+          %h3 We sell it. You get paid
+          /%p.hero-subtext Our SuperSeller will do all the work of posting the items and dealing with buyers picking stuff up. All you have to do is sit back and watch the proceeds roll in. You get 80%
   / container
   / ========== SECTION DIVIDER 02 ==========
   #section02
@@ -108,11 +140,12 @@
             .accordion-group
               .accordion-heading
                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
-                  %span.glyphicon.glyphicon-envelope
-                  Post things and notify people
-              #collapseOne.accordion-body.collapse.in
+                  
+                  %span.glyphicon.glyphicon-book
+                  Textbooks are guaranteed to sell
+              #collapseOne.accordion-body.collapse
                 .accordion-inner
-                  %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
+                  %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
 
             %br/
             .accordion-group
@@ -139,11 +172,11 @@
             .accordion-group
               .accordion-heading
                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
-                  %span.glyphicon.glyphicon-book
-                  Textbooks are guaranteed to sell
-              #collapseFour.accordion-body.collapse
+                  %span.glyphicon.glyphicon-envelope
+                  Post things and notify people
+              #collapseFour.accordion-body.collapse.in
                 .accordion-inner
-                  %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
+                  %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
 
             %br/
 
@@ -155,7 +188,7 @@
     .container
       .row
         .col-lg-8.col-lg-offset-2
-          %h1 Click here to see inside the marketplace
+          %h1.offcolor-h1 Click here to see inside the marketplace
 
       .row
         .col-lg-offset-3.col-lg-9
@@ -176,14 +209,12 @@
 
         .col-lg-4.centered
           %h3 Central Command
-          %br/
           %p
-            %br/
             Palo Alto, CA
             %br/
             Tel.: 805 2597624
             %br/
-            brianjoseff123@gmail.com
+            brian@peopleandstuff.com
         .col-lg-4.centered
           %h3 Jobs
           %p We're Hiring

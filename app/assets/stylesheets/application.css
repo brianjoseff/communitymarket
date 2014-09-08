@@ -45,6 +45,10 @@
 .main{
 	padding-top:30px;
 }
+.copyright{
+	color: #e6e6e6;
+	font-size: 80%;
+}
 .bold{
 	font-weight: bold !important;
 }
