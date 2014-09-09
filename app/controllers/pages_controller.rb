@@ -84,7 +84,7 @@ class PagesController < ApplicationController
         @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       else
-        @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(Post.all).select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       end
       @random_tags = Tag.last(5)
