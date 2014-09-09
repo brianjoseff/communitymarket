@@ -8,7 +8,7 @@ class Asset < ActiveRecord::Base
                             :storage => :s3, 
                             :s3_credentials => "#{Rails.root}/config/s3.yml", 
                             :path => "/:attachment/:id/:style/:filename"
-                            
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]                          
   def to_jq_upload
     {
       "name" => read_attribute(:package_file_name),
