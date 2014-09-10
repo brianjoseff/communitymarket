@@ -440,7 +440,52 @@ ul.token-input-list-facebook input{
 	min-width:100px !important;
 }
 
+.post-show{
+	width: 100%;
+	display:block;
+/*	background-color: #e6e6e6;
+	padding: 10px;*/
+}
+.post-image{
+	
+}
+.post-thumbnails{
+	margin-top: 5px;
+	
+}
+.post-thumbnail{
+	display: inline-block
+}
+.post-content{
+	background-color: #e6e6e6;
+}
+.post-info{
+	padding: 10px;
+	padding-left: 10px;
+}
+.post-call-to-action{
+	border-top: dotted 1px #696969;
+	padding: 10px;
+	padding-left: 10px;
+}
+.post-call-to-action > .email a{
+	font-size: 150%;
+}
+.post-call-to-action > .email a:hover{
+	border: solid 1px #77D64B;
+	background-color: #e6e6e6;
+	webkit-box-shadow: rgba(119,214,75,0.5) 0 1px 4px;
+	box-shadow: rgba(119,214,75,0.5) 0 1px 4px;
+}
+.post-call-to-action > .email a{
+	font-size: 150%;
+}
 
+/*SHOW PAGE*/
+
+.post-show-title{
+	margin-top: 0px;
+}
 
 
 

@@ -1,18 +1,22 @@
 .container.banner
   .row
-    .col-lg-3
-      =link_to textbooks_url, class: "no-black" do
-        =image_tag 'books.png', id: "books_icon"
-        %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
-    .col-lg-3
-      =image_tag 'furniture.png', id: "furniture_icon"
-      %h4.bold FIND RAD DORM FURNITURE  
-    .col-lg-3
-      =image_tag 'trust.png', id: "trust_icon"
-      %h4.bold REQUEST THINGS FROM PEOPLE YOU KNOW AND TRUST
-    .col-lg-3
-      =image_tag 'dollar.png', id: "dollar_icon"
-      %h4.bold BUY STUFF HERE AND SAVE MONEY
+    .col-lg-6
+      .row
+        .col-sm-6
+          =link_to textbooks_url, class: "no-black" do
+            =image_tag 'books.png', id: "books_icon"
+            %h4.bold ALL TEXTBOOKS GUARANTEED TO SELL
+        .col-sm-6
+          =image_tag 'furniture.png', id: "furniture_icon"
+          %h4.bold FIND RAD DORM FURNITURE  
+    .col-lg-6
+      .row
+        .col-sm-6
+          =image_tag 'trust.png', id: "trust_icon"
+          %h4.bold REQUEST THINGS FROM PEOPLE YOU KNOW AND TRUST
+        .col-sm-6
+          =image_tag 'dollar.png', id: "dollar_icon"
+          %h4.bold BUY STUFF HERE AND SAVE MONEY
 / %div#banner_icons.row
 /   %div.col-lg-4
 /     #books
