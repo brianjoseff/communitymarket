@@ -30,8 +30,12 @@
           =f.label :phone, :class => 'col-lg-3 control-label'
           .col-lg-8
             =f.text_field :phone, type: "tel", :id => "phone", :class => "form-control", :placeholder => "555-555-5555"
+        %div.form-group
+        .super-seller-checkbox.clearfix
+          =f.check_box :super_seller, :checked => true
+          =f.label :super_seller, 'Become a <span>SuperSeller</span> and earn extra cash!'.html_safe
 
-        .user-auth-offset
+        .user-submit
           =f.submit "Sign up", class: "btn btn-primary submit-button"
 
 
@@ -52,5 +56,5 @@
           .col-lg-8
             =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
 
-        .user-auth-offset
+        .user-submit
           =f.submit "Sign in", class: "btn btn-primary submit-button"

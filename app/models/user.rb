@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password
 
-  attr_accessible :email, :name, :password, :password_confirmation, :current_password, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at, :phone
+  attr_accessible :email, :name, :password, :password_confirmation, :current_password, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at, :phone, :super_seller
   # attr_accessor :password, :password_confirmation, :current_password
   #include Clearance::User
 
