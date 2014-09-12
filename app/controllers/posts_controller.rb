@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
-  
-  before_filter :require_admin_login, :only => [:index]
-  before_filter :redirect_to_signup, :only => [:new]
+
+  before_filter :require_admin_login, :except => [:show, :index]
+  before_filter :redirect_to_signup, :except => [:show, :index]
+
   def index
     @posts = Post.all
 
@@ -15,18 +16,18 @@ class PostsController < ApplicationController
 
 
   #shows the post and creates a transaction object for the "buy" button
-  
+
   def show
     @post = Post.find(params[:id])
     @transaction = Transaction.new(:post_id => @post.id)
-    
+
     @appliances = Tag.find_by_id(4)
     @sports = Tag.find_by_id(27)
     @electronics = Tag.find_by_id(36)
     @clothing = Tag.find_by_id(40)
     @books = Tag.find_by_id(21)
     @furniture = Tag.find_by_id(3)
-    
+
     if @post.tier_id?
       @tier = Tier.find(@post.tier_id)
     end
@@ -35,8 +36,8 @@ class PostsController < ApplicationController
     else
       @user = current_user
     end
-    
-    
+
+
     @random_posts = Post.limit(10).order("RANDOM()").select{|x| x.active?} - @user.posts
     @random_posts.delete(@post)
     respond_to do |format|
@@ -50,7 +51,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post_categories = PostCategory.all
-    
+
     @assets = @post.assets
     if !signed_in?
       @post.assets.build
@@ -81,7 +82,7 @@ class PostsController < ApplicationController
     #   @group = Group.first
     #   @message = "You are not signed up for any groups! If you post this, it will be visible, but nobody will be notified. Below is a random group:"
     # end
-    
+
   end
 
   # POST /posts
@@ -91,12 +92,12 @@ class PostsController < ApplicationController
     forsale = @post_categories.find{|a| a.name == "Wanted"}
     @post_categories.delete(forsale)
     @post_categories.unshift(forsale)
-    
+
 
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])
       @post = @user.posts.new(params[:post])
-          
+
       if !@post.for_sale?
         @post.tier_id = nil
         @post.price = nil
@@ -127,15 +128,15 @@ class PostsController < ApplicationController
         @post.price = nil
       end
       # could include elsif here to set lump, hrly rat, other to nil
-      
-      
+
+
       @post.email = @user.email
-      
+
       if @post.post_category.name == "Textbook"
         @textbook_tag = Tag.find_by_id(88)
         @post.tag_to(@textbook_tag)
       end
-      
+
       if @post.premium?
         @amount = 300
         if @user.stripe_customer_id
@@ -149,21 +150,21 @@ class PostsController < ApplicationController
           @user.charge_as_customer(@amount)
         end
       end
-      
+
       if @post.save
         if @transaction && !@transaction.save
           render :new
         end
-                  
+
 
         @groups = @post.groups
         # all_members = []
         unless @groups.empty?
           send_notification_emails_to_group_members(@groups, @user)
         end
-        
-        #if @user.oauth_token.nil? && @post.post_to_facebook == true 
-        if @post.post_to_facebook == true   
+
+        #if @user.oauth_token.nil? && @post.post_to_facebook == true
+        if @post.post_to_facebook == true
           redirect_to user_omniauth_authorize_path(:facebook)
         # elsif @post.post_to_facebook == true && @user.oauth_token
         #   @post.to_facebook
@@ -226,7 +227,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def undo_completed
     @post = Post.find(params[:id])
     @post.update_attribute(:completed, false)
@@ -236,7 +237,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-    
+
   def deactivate
     @post = Post.find(params[:id])
     @post.update_attribute(:active, false)
@@ -253,7 +254,7 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def sort_name
     @post = Post.new
     @transaction = Transaction.new
@@ -268,38 +269,38 @@ class PostsController < ApplicationController
     else
       @user = User.new
       @posts = Post.paginate(:page => params[:page], :per_page => 15, :order => "name DESC")
-      
+
       @groups = Group.paginate(:page => params[:page], :per_page => 15, :order => "created_at DESC")
     end
     redirect_to root_path
   end
-  
+
   def require_admin_login
     unless current_user.admin?
-      flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}" 
-      redirect_to signin_path
+      flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}"
+      redirect_to 'users/sign_up'
     end
   end
   def redirect_to_signup
-    
+
     unless signed_in?
       store_location
-      
+
       redirect_to new_user_registration_path, notice: "Please sign up or in."
     end
   end
-  
+
   def store_location
     session[:user_return_to] = request.url
     #session[:return_to] = root_path
     #setting to root here because it redirects to sign up when the user tries to access /followships
-    
+
   end
-  
+
   def setup_post(post)
     if current_user
       if post.groups
-        groups = current_user.groups_as_owner + current_user.groups_as_member 
+        groups = current_user.groups_as_owner + current_user.groups_as_member
         (groups - post.groups).each do |group|
           post.assignments.build(:group_id => group.id)
         end
@@ -314,9 +315,9 @@ class PostsController < ApplicationController
       return
     end
   end
-  
-  
-  
+
+
+
   private
   def send_notification_emails_to_group_members(groups, user)
     all_memberships = []
@@ -341,7 +342,7 @@ class PostsController < ApplicationController
     off = []
     off = all_memberships.select{|membership| membership.email_setting_id == 6}
     #*************************************************************************************
-    
+
     for every_post in every_posts do
       user = User.find(every_post.member_id)
       NewPostMailer.notify(@user, @post, user, group).deliver
@@ -357,8 +358,8 @@ class PostsController < ApplicationController
       WeeklyQueue.create(:sender_id => @user.id, :post_id => @post.id, :user_id => user.id, :group_id => group.id)
     end
   end
-  
-  
-  
-  
+
+
+
+
 end

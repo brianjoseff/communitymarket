@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  
+
   before_filter :require_admin_login, :only => [:index]
+
+
+
   def index
     @users = User.all
 
@@ -25,9 +28,9 @@ class UsersController < ApplicationController
       @badges << badge.name
     end
     @badge_hash = Hash.new(0)
-    
+
     @memberships = @user.memberships ||= []
-    
+
     @email_settings = EmailSetting.all
     @groups = @user.groups_as_member
     @posts = @user.posts
@@ -41,23 +44,23 @@ class UsersController < ApplicationController
       @group_rank = Group.joins(:members).select('groups.*, count(group_id) as "member_count"').group('groups.id').order(' member_count desc')
       @users_count = User.all.count
       @posts_count = Post.all.count
-      
+
     end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
     end
   end
-  
+
   # def new_modal
   #   @user = User.new(params[:user])
-  #   
+  #
   #   if params[:user][:password].nil?
   #     # charge card
-  # 
+  #
   #     # get the credit card details submitted by the form
   #     token = params[:stripeToken]
-  # 
+  #
   #     # create the charge on Stripe's servers - this will charge the user's card
   #     charge = Stripe::Charge.create(
   #       :amount => 1000, # amount in cents, again
@@ -65,7 +68,7 @@ class UsersController < ApplicationController
   #       :card => token,
   #       :description => params[:email]
   #     )
-  #     
+  #
   #   else
   #     # create user
   #     token = params[:stripeToken]
@@ -77,8 +80,8 @@ class UsersController < ApplicationController
   #     #create customer and charge
   #   end
   # end
-  
-  
+
+
   # GET /users/new
   # GET /users/new.json
   def new
@@ -93,7 +96,7 @@ class UsersController < ApplicationController
       #format.json { render json: @user }
     end
   end
-  
+
   def new_modal
     @user = User.new
 
@@ -103,7 +106,7 @@ class UsersController < ApplicationController
       format.json { render json: @user }
     end
   end
-  
+
 
   # GET /users/1/edit
   def edit
@@ -114,15 +117,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   # def create
-  # 
+  #
   #     @user = User.new(params[:user])
   #     # if params[:group_id]
   #     #   @group = Group.find(params[:group_id])
-  #     # 
+  #     #
   #     #   @group.member_ids << @user.id
   #     # end
-  #     
-  # 
+  #
+  #
   #     #@user.save
   #     # if @user.valid?
   #     #    flash[:notice] = 'You have successfully signed your soul away.'
@@ -138,7 +141,7 @@ class UsersController < ApplicationController
   #       #     render 'new_modal', layout: false
   #       #   end
   #       # } if request.xhr?
-  #       
+  #
   #       if @user.save
   #         # if @group
   #         #   @group.update_attributes(params[:group])
@@ -158,8 +161,8 @@ class UsersController < ApplicationController
   #         #format.js
   #       end
   #     end
-  
-  
+
+
     #flash.discard :notice if request.xhr?
     # AJAX efforts
     # respond_to do |format|
@@ -167,7 +170,7 @@ class UsersController < ApplicationController
     #         # Charge the card and don't make a user
     #         # get the credit card details submitted by the form
     #         token = params[:stripeToken]
-    # 
+    #
     #         # create the charge on Stripe's servers - this will charge the user's card
     #         charge = Stripe::Charge.create(
     #           :amount => 1000, # amount in cents, again
@@ -175,7 +178,7 @@ class UsersController < ApplicationController
     #           :card => token,
     #           :description => params[:email]
     #         )
-    #         
+    #
     #       else
     #         # create user, customer, and charge them
     #         token = params[:stripeToken]
@@ -200,7 +203,7 @@ class UsersController < ApplicationController
     #render :template => "layouts/header", :layout => false
     format.js {"create"}
   end
-  
+
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -216,15 +219,15 @@ class UsersController < ApplicationController
       end
     end
   end
-  
 
-  
+
+
   def add_image
     @user = current_user
     @image = @user.build(params[:image])
   end
-  
-  
+
+
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -237,7 +240,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   private
+
     def to_csv
       CSV.generate do |csv|
         csv << User.column_names
@@ -264,17 +269,19 @@ class UsersController < ApplicationController
       else
         redirect_to default
       end
-      
+
     end
-  
+
     def store_location
       session[:user_return_to] = request.fullpath
     end
+
     def require_admin_login
       unless current_user.try(:admin?)
-        flash[:error] = "You must be logged in as an admin to access this section" 
+        flash[:error] = "You must be logged in as an admin to access this section"
         redirect_to sign_in_path
       end
     end
-  
+
+
 end

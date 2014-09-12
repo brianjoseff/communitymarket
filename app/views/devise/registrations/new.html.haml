@@ -13,37 +13,40 @@
             %ul
               - @user.errors.full_messages.each do |msg|
                 %li= msg
-          
+
         %div#name_field.form-group
           =f.label :name, :class => 'col-lg-3 control-label'
           .col-lg-8
-            =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Thomas More"        
+            =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Thomas More"
         %div.form-group
           =f.label :email, :class => 'col-lg-3 control-label'
           .col-lg-8
-            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"  
+            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"
         %div.form-group
           =f.label :password, :class => 'col-lg-3 control-label'
           .col-lg-8
-            =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
-        
+            =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
+        %div.form-group
+          =f.label :phone, :class => 'col-lg-3 control-label'
+          .col-lg-8
+            =f.text_field :phone, type: "tel", :id => "phone", :class => "form-control", :placeholder => "555-555-5555"
+
         .user-auth-offset
           =f.submit "Sign up", class: "btn btn-primary submit-button"
-          
-        
+
 
 
   .col-lg-6
     %div.row.sign-in
       .user-auth-offset
         %h1 Sign in
-      %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+      %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)}
       =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
         /=render "shared/error_messages", :target => @user
         %div.form-group
           =f.label :email, :class => 'col-lg-3 control-label'
           .col-lg-8
-            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true }
         %div.form-group
           =f.label :password, :class => 'col-lg-3 control-label'
           .col-lg-8

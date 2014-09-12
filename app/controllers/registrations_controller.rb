@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
-  
 
- 
+
+
   def update
     if params[:user][:password].blank?
       params[:user].delete(:password)
@@ -19,6 +19,7 @@ class RegistrationsController < Devise::RegistrationsController
       render_with_scope :edit
     end
   end
+
   protected
 
    def after_sign_up_path_for(resource)
@@ -26,4 +27,6 @@ class RegistrationsController < Devise::RegistrationsController
      #sign_up_and_redirect current_user, :event => :authentication
      request.env['omniauth.origin'] || stored_location_for(resource) || root_path
    end
+
+
 end

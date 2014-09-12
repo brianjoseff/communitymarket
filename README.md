@@ -38,3 +38,7 @@ rake db:add_posts
 ```
 rake db:add_users
 ```
+
+```
+rake db:add_tiers
+```

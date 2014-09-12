@@ -13,6 +13,7 @@
 //= require_self
 //= require jquery
 //= require jquery_ujs
+//= require jquery.mask.min.js
 //= require bootstrap.min.js
 //= require jquery.tokeninput
 //= require posts.js.coffee
@@ -27,7 +28,7 @@
 
 
 
-// 
+//
 // $(document).ready(function(){
 //   $('a.completed').click(function(e) {
 //       e.preventDefault();
@@ -52,11 +53,11 @@
 
 
 // $(document).ready(function(){
-// 
-//   $('.message-seller-button').click(function() {  
+//
+//   $('.message-seller-button').click(function() {
 //     var valuesToSubmit = $("#form_id").serialize();
 //     $(".message-seller-form").modal('hide') ;
-// 
+//
 //     $.ajax({
 //       url: "/message/create",
 //       data: valuesToSubmit,
@@ -64,8 +65,8 @@
 //       }).success(function(data, status){
 //         $("#id_if_div_where_you_want_to_show_updated_data").html( data );
 //     });
-// 
-//     return false; 
+//
+//     return false;
 //   });
 // });
 
@@ -81,6 +82,7 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().after(content.replace(regexp, new_id));
 }
+
 // document.ready(function() {
 //   var flipText, flipUp, index, interval, maxIndex;
 //   flipText = function(newText) {

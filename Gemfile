@@ -6,11 +6,7 @@ gem 'rails', '3.2.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'koala'
-group :development do
-  #gem 'mysql2'
-  gem 'sqlite3'
-  #gem 'pg'
-end
+
 # group :development do
 #   gem 'rails-erd'
 # end
@@ -68,6 +64,9 @@ gem 'skeuocard-rails'
 gem 'forgery'
 gem 'faker'
 
+
+#number formatting
+gem 'phony_rails'
 
 #BOOTSTRAP
 # gem 'bootstrap-sass'
@@ -133,7 +132,7 @@ gem 'bcrypt-ruby'
 # To use debugger
 # gem 'debugger'
 
-gem "localtunnel"
+# gem "localtunnel"
 
 
 gem "haml", ">= 3.0.0"

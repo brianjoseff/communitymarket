@@ -10,29 +10,29 @@ Communitymarket::Application.routes.draw do
 
 
   match "/404", to: "exceptions#not_found", via: [:get, :post]
- 
-  
-  
+
+
+
   # devise_for :users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'}
   get '/auth/stripe_connect/callback', to: 'stripe_connect#create'
 
-  # :registrations => "registrations", 
+  # :registrations => "registrations",
   resources :email_settings
   resources :followships
-  
-  
+
+
   # resources :assets do
   #    collection do
   #      post :post_create
   #    end
   #  end
-  
+
 
   # resources :posts do
   #   resources :transactions
   # end
-  
+
   resources :transactions do
     collection do
       post :customer_purchase
@@ -65,11 +65,11 @@ Communitymarket::Application.routes.draw do
     end
   end
   # get 'users/new_modal'
-  
+
   # member do
   #   get :new_modal
   # end
-  
+
   resources :images
   resources :group_categories
   resources :post_categories
@@ -97,7 +97,7 @@ Communitymarket::Application.routes.draw do
     end
     resources :assignments
   end
-  
+
   match '/textbooks', to: "pages#textbooks"
   match '/feed', :to =>"pages#feed"
   match '/bulk_update', :to => "groups#bulk_update"
@@ -121,10 +121,10 @@ Communitymarket::Application.routes.draw do
   # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
   match '/contacts', :to => 'contacts#new', via: :post
-  
+
   root :to => 'pages#index'
-  
-  
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

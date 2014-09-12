@@ -1,8 +1,8 @@
 
 
 namespace :db do
-  desc "change names of tiers"
-  task :edit_tiers => :environment do
+  desc "add Tiers 1-6"
+  task :add_tiers => :environment do
     require 'faker'
     require 'forgery'
     Tier.delete_all
@@ -14,6 +14,6 @@ namespace :db do
     Tier.create!(:name => "$26-50: Tier 4", :price => 3000, :id => 4)
     Tier.create!(:name => "$51-99: Tier 5", :price => 6000, :id => 5)
     Tier.create!(:name => "$100+: Tier 6", :price => 1100, :id => 6)
-    
+
   end
-end 
+end

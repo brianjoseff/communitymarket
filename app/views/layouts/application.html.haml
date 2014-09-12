@@ -2,14 +2,15 @@
 %html
   %head
     %title People and Stuff
+    %script{:type => "text/javascript", :src  => "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"}
     %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:400,700,800', :rel => "stylesheet", :type => "text/css"}/
     %link{:href => 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', :rel => "stylesheet", :type => "text/css"}
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application", "https://js.stripe.com/v2/"
     %meta{:name=>"description", :content=> "A community marketplace where you interact with people you know and trust and can buy new items from local small businesses. Get rid of stuff, save money, and build your community."}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
-      
-      
+
+
     :javascript
       $(function() {
         var t1 = new Array( "Sell", "Get", "Borrow", "Give");
@@ -24,7 +25,7 @@
                   $(this).animate({'opacity': 1, 'width': width}, 1000);
               });
 
-              if(i < t1.length -1) 
+              if(i < t1.length -1)
                   i++;
               else i = 0;
 
@@ -44,14 +45,14 @@
                   $(this).animate({'opacity': 1, 'width': width, 'height':38.5}, 1000);
               });
 
-              if(i2 < t2.length -1) 
+              if(i2 < t2.length -1)
                   i2++;
               else i2 = 0;
 
             }, 3000 );
 
       });
-    
+
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-37799908-1']);
       _gaq.push(['_trackPageview']);
@@ -63,9 +64,9 @@
       })();
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
-  
 
-    
+
+
   %body
     %div.container
       =render 'layouts/header'
@@ -81,7 +82,7 @@
           %div.row
             =render partial: "shared/post_search_bar" unless current_page?(landing_url)
         = yield
-        /= debug(params) if Rails.env.development?
+        = debug(params) if Rails.env.development?
       /%div#signup_modal.modal.hide
     %footer
     %script{:type=>"text/javascript"}
