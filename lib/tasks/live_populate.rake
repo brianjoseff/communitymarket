@@ -7,10 +7,10 @@ namespace :db do
     [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, Tagging, Tier, EmailSetting, Transaction].each(&:delete_all)
     [User, Group, DailyQueue, WeeklyQueue, Membership, Asset, Image, Assignment, Followship, Post, PostCategory, GroupCategory, Tag, Tagging, Tier, EmailSetting, Transaction].each(&:reset_pk_sequence)
     User.create!(:name => "Brian Joseff",
-                 :email => "brianjoseff123@gmail.com",
+                 :email => "admin1@gmail.com",
                  :password => "09090909",
                  :admin => true)
-    User.create!(:name => "Peter Loomis", :email => "loomispeter@gmail.com",
+    User.create!(:name => "Peter Loomis", :email => "admin2@gmail.com",
       :password => "09090909", :admin => true)
 
    #email settings

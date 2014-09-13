@@ -4,7 +4,7 @@ namespace :db do
     require 'faker'
     require 'forgery'
 
-    #users
+    #groups
     30.times do |n|
       name = Faker::Name.name + "group"
       id = User.last(30).sample.id

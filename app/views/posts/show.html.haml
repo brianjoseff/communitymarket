@@ -53,7 +53,7 @@
                 -elsif @post.post_category.name == "Wanted" 
                   Wanted:
                 #{@post.title}
-                -if current_user && current_user.posts.include?(@post) || current_user.admin?
+                -if current_user && current_user.posts.include?(@post) || current_user && current_user.admin?
                   =link_to 'Edit', edit_post_path(@post), style:"font-size: 50%;"
               -if @post.price
                 %h3 $#{@post.price}
