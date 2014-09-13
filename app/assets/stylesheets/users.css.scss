@@ -1,22 +1,29 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
 .email_settings{
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.table{
-	width:auto;
-}
 .table td.post-management-buttons{
-	width:250px;
+  width:250px;
 }
+.post-management-buttons a {
+  margin-right: 5px;
+}
+.post-management-buttons a:nth-child(1) {
+  color: steelblue;
+}
+.post-management-buttons a:nth-child(2) {
+  color: red;
+}
+.post-management-buttons a:nth-child(3) {
+  color: #FF91AF;;
+}
+
 
 .facebook-signin{
-	position: absolute;
-	top: 38px;
-	left: 250px;
+  position: absolute;
+  top: 38px;
+  left: 250px;
 }
 
 .user-auth-offset{
@@ -53,3 +60,51 @@
   font-size: 1.5em;
 }
 
+h1 span {
+  color:#FF91AF;
+  font-size: 0.75em;
+}
+
+.table-actions {
+  width: 300px;
+}
+
+
+.user-profile-header {
+  margin: 0 5px 20px 5px;
+}
+
+.user-page {
+  height: 100%;
+}
+
+.group {
+  background: #f9f9f9;
+  margin: 10px 0;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+.group.btn {
+  margin: 5px;
+}
+.group-header{
+  border-bottom: 6px solid #7f8c8d;
+  margin-bottom: 15px;
+}
+.group-sort{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.group-feed-item{
+  border-bottom: 1px solid #7f8c8d;
+  margin-bottom: 5px;
+}
+
+a.feed-title{
+  color: #005b9b;
+}
+.group-categories ul{
+  list-style-type: none;
+}

@@ -10,17 +10,6 @@ $baseFontFamily: "Open Sans", sans-serif !default;
 			 url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-/*$white: #ffffff;
-$black: #000000;
-$pink: #ffbcda;
-$darkpink: #ff91af;
-$pink-gradient: linear-gradient(top, $pink, $darkpink);*/
-
-/*
-.form-horizontal .control-label{
-	width: 80px;
-}*/
-
 .control-label{
 	font-size: 125% !important;
 }
@@ -48,16 +37,16 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	
-  
+
+
 /*  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);*/
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
 	border: none !important;
 	font-weight: bold;
-	
+
 	width: 100px;
-	
+
 	display: inline-block;
 	/*below adds up to 50px*/
 	padding: 12px 12px;
@@ -65,7 +54,7 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 	/*---------------------*/
 	margin-bottom: 0;
 	font-size: 150%;
-	
+
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
@@ -77,12 +66,12 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
 .btn-flat{
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;  
+	border-radius: 4px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
 	font-weight: bold;
-	width: 172px;	
+	width: 172px;
 	display: inline-block;
 	/*below adds up to 50px*/
 	padding: 12px 12px;
@@ -105,7 +94,7 @@ $pink-gradient: linear-gradient(top, $pink, $darkpink);*/
   color: #fff !important;
 	font-weight: bold;
 	width: 192px;
-	
+
 	display: inline-block;
 	min-height: 45px;
 	/*below adds up to 45px*/
@@ -132,7 +121,7 @@ a#btn_post_flat:hover{
   color: #fff !important;
 	font-weight: bold;
 	/*width: 172px;*/
-	
+
 	display: inline-block;
 	min-height: 45px;
 	/*below adds up to 45px*/

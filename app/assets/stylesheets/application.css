@@ -33,7 +33,7 @@
 11. Badges
 */
 
-/* 
+/*
 *= require skeuocard.reset
 *= require skeuocard
 */
@@ -68,7 +68,7 @@ a:hover.no-black{
 	padding:10px;
 }
 .center{
-	
+
 	margin: 10 auto !important;
 }
 span.points{
@@ -119,20 +119,17 @@ footer{
 	margin-left: auto;
 	margin-right: auto;
 
-	
+
 }
+
 
 .hide-this{
 	display: none;
 }
 
-.table-actions{
-	width: 200px;
-}
-
 #lg-icon{
 	height: 200px;
-	
+
 }
 
 .no-left-padding{
@@ -490,8 +487,8 @@ input[type="text"].search-bar-field{
 
 #btn_search{
 	background-color: #00e5d6 !important;
-	
-  
+
+
 /*  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);*/
   -webkit-font-smoothing: antialiased;
   color: #fff !important;
@@ -505,7 +502,7 @@ input[type="text"].search-bar-field{
 	/*---------------------*/
 	margin-bottom: 0;
 	font-size: 150%;
-	
+
 /*	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;	*/
@@ -709,7 +706,7 @@ span.feed-title a:visited{
 	border-bottom: 1px solid #c9c9c9;
 /*	padding-bottom: 7px;*/
 	margin-bottom: 5px;
-	
+
 }
 
 .slim-feed-title-row{

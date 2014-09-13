@@ -1,9 +1,9 @@
 %p#notice= notice
 
 %div.col-lg-12
-  
+
   %h5 Join some groups so that when you post you can notify people in the groups
-  
+
   =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
 
 %div.col-lg-8
@@ -26,13 +26,13 @@
           -else
             %li #{link_to x.name, user_path(x)}, with #{x.posts.count}
     %p Posts count: #{@posts_count}
-      
+
   %div.row
     %p
       %b Points:
       = @user.points
-  
-  %div.row  
+
+  %div.row
     = link_to 'Edit Your Details', edit_user_registration_path
   %div.row
     %div.col-lg-3
@@ -66,7 +66,7 @@
                 = truncate(group.description, 10)
           %div.col-lg-2
             = render "groups/join_form", :group => group
-  
+
 
   %h4 Badges:
   -@badges.each do |v|

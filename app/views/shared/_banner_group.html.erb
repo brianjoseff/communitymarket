@@ -1,0 +1,31 @@
+<% unless groups.nil? %>
+  <h4>Join some groups to notify members when you post</h4>
+
+  <% groups.take(6).each do |group| %>
+
+      <div class="row group" id="group_<%= group.id %>">
+        <div class="banner-group-image">
+          <%= link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group) %>
+        </div>
+        <div>
+          <%= link_to group.name, group_url(group) %>
+        </div>
+        <div>
+          <% if group.private? %>
+            <% if !current_user %>
+            <% else %>
+              <% unless current_user && current_user.groups_as_member.include?(group) %>
+                <%= link_to "Join", group_url(group), class: "btn btn-mini"%>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% unless current_user && current_user.groups_as_member.include?(group) %>
+              <%= render "groups/join_form", :group => group %>
+            <% end %>
+          <% end %>
+        </div>
+
+      </div>
+
+  <% end %>
+<% end %>
