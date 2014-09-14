@@ -14,6 +14,8 @@
 /= link_to "Sign up with Stripe Connect", user_omniauth_authorize_path(:stripe_connect)
 
 /BANNER ICONS + SEARCH BAR
+:javascript
+  mixpanel.track("Sign Up");
 -if signed_in?
   %div.row
     %div.banner
