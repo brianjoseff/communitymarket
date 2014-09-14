@@ -100,7 +100,14 @@
               =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups[0..5]}
             -else
               =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+  
+  / Track a specific Crazy Egg snapshot by name
+  :javascript
+    var CE_SNAPSHOT_NAME = "Landing- user";
 -else
   =render partial: "layouts/cta"
+  / Track a specific Crazy Egg snapshot by name
+  :javascript
+    var CE_SNAPSHOT_NAME = "Landing- non-user";
 
 

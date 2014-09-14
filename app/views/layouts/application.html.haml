@@ -15,47 +15,6 @@
       for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
       mixpanel.init("96c9e63d20b6842a51cbd2f6a598daaa");/ end Mixpanel
     :javascript
-      $(function() {
-        var t1 = new Array( "Sell", "Get", "Borrow", "Give");
-        var i = 0;
-        var width;
-        var tid = setInterval(
-            function() {
-                $("#changingtext span").animate({'opacity': 0}, 1000, function () {
-                  $(this).text(t1[i]);
-                  width = $('#chkWidth').text(t1[i]).width();
-                  console.log(t1[i], width);
-                  $(this).animate({'opacity': 1, 'width': width}, 1000);
-              });
-
-              if(i < t1.length -1) 
-                  i++;
-              else i = 0;
-
-            }, 3000 );
-
-      });
-      $(function() {
-        var t2 = new Array( "people that care", "Dartmouth Students", "your workplace", "Upper Valley cyclists", "your teammates", "targeted groups" );
-        var i2 = 0;
-        var width;
-        var tid2 = setInterval(
-            function() {
-                $("#changingtext2 span").animate({'opacity': 0}, 1000, function () {
-                  $(this).text(t2[i2]);
-                  width = $('#chkWidth2').text(t2[i2]).width() +100;
-                  console.log(t2[i2], width);
-                  $(this).animate({'opacity': 1, 'width': width, 'height':38.5}, 1000);
-              });
-
-              if(i2 < t2.length -1) 
-                  i2++;
-              else i2 = 0;
-
-            }, 3000 );
-
-      });
-    
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-37799908-1']);
       _gaq.push(['_trackPageview']);
@@ -91,12 +50,14 @@
         = yield
         /= debug(params) if Rails.env.development?
       /%div#signup_modal.modal.hide
-    %footer
-      / %div.copyright
-      /         Icons made by Freepik from
-      /         %a{:href => "http://www.flaticon.com", :title => "Flaticon"} www.flaticon.com
-      /         is licensed by
-      /         %a{:href => "http://creativecommons.org/licenses/by/3.0/", :title => "Creative Commons BY 3.0"} CC BY 3.0
+    / %footer
+    /   %div.copyright
+    /           Icons made by Freepik from
+    /           %a{:href => "http://www.flaticon.com", :title => "Flaticon"} www.flaticon.com
+    /           is licensed by
+    /           %a{:href => "http://creativecommons.org/licenses/by/3.0/", :title => "Creative Commons BY 3.0"} CC BY 3.0
+    
+    / CRAZY EGG TRACKING SCRIPT  
     %script{:type=>"text/javascript"}
       setTimeout(function(){var a=document.createElement("script");
       var b=document.getElementsByTagName("script")[0];
