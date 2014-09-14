@@ -115,6 +115,7 @@ Communitymarket::Application.routes.draw do
   match '/about', :to => 'pages#about'
   match '/jobs', to: 'pages#jobs'
   match '/landing', :to => 'pages#landing'
+  match '/marketplace', to: 'pages#marketplace'
  # match '/facebook_update_and_post', :to => "users/omniauth_callbacks#facebook_update_and_post"
   # match '/signout', :to => 'sessions#destroy'
   # match '/sign_in', :to => 'sessions#new'

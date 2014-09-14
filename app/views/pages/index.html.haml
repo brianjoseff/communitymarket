@@ -14,132 +14,91 @@
 /= link_to "Sign up with Stripe Connect", user_omniauth_authorize_path(:stripe_connect)
 
 /BANNER ICONS + SEARCH BAR
-%div.row
-  %div.banner
-    -if !current_user
-      / %div.row
-      /   %h1.hero-text Your community marketplace.
-      /   =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
-      
-      %div.row.main
-        =render partial: "layouts/banner_icons"
-      
-        =render partial: "shared/post_search_bar"
-
-/BODY OF PAGE
-.container
+-if signed_in?
   %div.row
-  
-    /POST FEED
-    %div.col-sm-8
-      %div.post-feed
-        %div.row
-          %div.col-sm-2
-            %h3 Posts
-          %div.posts-nav.col-sm-5
-            = form_tag('pages', :remote => true) do
-              =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
-          %div.col-sm-2
-            %div.loading-indicator{:style => "display:none"}
-              = image_tag("loader.gif")
-              
-              
-          / %div.span5
-          /   =link_to "Textbooks", {:action=>"textbooks"}, {:remote => true, :id=>"textbook_link", class: "special-vertical"}
-          /   =link_to "Dorm Furniture", {:action=>"dorm_furniture"}, {:remote => true, :id=>"furniture_link", class: "special-vertical"}
-        /Should put these buttons on a "search result page"
-        /Sorting buttons
-        /=sort_link @sort_posts, :name, "Name"
-        /=sort_link @sort_posts, :released_on, "release date"
-      
-        / =link_to "Name", sort_name_posts_path
-      
-        /Post feed
-        /=render :partial => 'feed',:locals => {:feed_items => @posts}
+    %div.banner
+      -if !current_user
+        / %div.row
+        /   %h1.hero-text Your community marketplace.
+        /   =image_tag 'dartmouth-panorama2.jpg', id: "banner_image"
 
-        #post_feed.page-element-background
-          .col-lg-12
-            =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
-    
-    /RIGHT COLUMN: TAGS AND GROUPS
-    
-    /TAGS
-    %div.span4.col-sm-4
-      / %div.row
-      -if current_user
-        %h3 Popular Tags
-        .page-element-background
-          =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
-        / %h4 Tags You Follow
-        / =render :partial => 'tags/your_tags', :locals => {:tags => @followed_tags}
-      -else
-        %h3 Popular Tags
-        .page-element-background
-          =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
-    
-    
-      /ADVERTISING
-      / .text-center.center
-      /   %a.advertising.center{:href => "http://www.moranogelato.com/", :target=>"Morano"}
-      /   %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
-      
-      /GROUPS
-      -unless @near_groups.nil?
-        %h3 Find Your Communities
-        .page-element-background
-          %span
-            -if current_user
-              =link_to "Create a group", new_group_path, :id => "front_page_create_group_link"
+        %div.row.main
+          =render partial: "layouts/banner_icons"
+
+          =render partial: "shared/post_search_bar"
+
+  /BODY OF PAGE
+  .container
+    %div.row
+
+      /POST FEED
+      %div.col-sm-8
+        %div.post-feed
+          %div.row
+            %div.col-sm-2
+              %h3 Posts
+            %div.posts-nav.col-sm-5
+              = form_tag('pages', :remote => true) do
+                =select_tag :categorize, options_for_select(@post_categories, params[:categorize]), {:prompt => 'Category:', :class => "post-sort"}
+            %div.col-sm-2
+              %div.loading-indicator{:style => "display:none"}
+                = image_tag("loader.gif")
+
+
+            / %div.span5
+            /   =link_to "Textbooks", {:action=>"textbooks"}, {:remote => true, :id=>"textbook_link", class: "special-vertical"}
+            /   =link_to "Dorm Furniture", {:action=>"dorm_furniture"}, {:remote => true, :id=>"furniture_link", class: "special-vertical"}
+          /Should put these buttons on a "search result page"
+          /Sorting buttons
+          /=sort_link @sort_posts, :name, "Name"
+          /=sort_link @sort_posts, :released_on, "release date"
+
+          / =link_to "Name", sort_name_posts_path
+
+          /Post feed
+          /=render :partial => 'feed',:locals => {:feed_items => @posts}
+
+          #post_feed.page-element-background
+            .col-lg-12
+              =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+
+      /RIGHT COLUMN: TAGS AND GROUPS
+
+      /TAGS
+      %div.span4.col-sm-4
+        / %div.row
+        -if current_user
+          %h3 Popular Tags
+          .page-element-background
+            =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
+          / %h4 Tags You Follow
+          / =render :partial => 'tags/your_tags', :locals => {:tags => @followed_tags}
+        -else
+          %h3 Popular Tags
+          .page-element-background
+            =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
+
+
+        /ADVERTISING
+        / .text-center.center
+        /   %a.advertising.center{:href => "http://www.moranogelato.com/", :target=>"Morano"}
+        /   %a{ :href => "mailto:brianjoseff123@gmail.com?subject=Advertising with People and Stuff", :role => "button"} Advertise With Us!
+
+        /GROUPS
+        -unless @near_groups.nil?
+          %h3 Find Your Communities
+          .page-element-background
+            %span
+              -if current_user
+                =link_to "Create a group", new_group_path, :id => "front_page_create_group_link"
+              -else
+                =link_to "Create a group", new_user_path, :id => "front_page_create_group_link"
+            %p Join groups so that you can send targeted notifications
+            -if @near_groups.empty?
+              =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups[0..5]}
             -else
-              =link_to "Create a group", new_user_path, :id => "front_page_create_group_link"
-          %p Join groups so that you can send targeted notifications
-          -if @near_groups.empty?
-            =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups[0..5]}
-          -else
-            =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
-      / %h3 Random groups
-      / .page-element-background
-      /   =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @random_groups}
+              =render :partial => 'feed/random_group_feed', :locals => {:feed_items => @near_groups[0..5]}
+-else
+  =render partial: "layouts/cta"
 
 
-
-
-
-  /group feed and create group button
-  ////render group
-  ////join button
-  ////post button
-  /item-post feed
-  ////render post
-  ///////tags
-  ////buy button
-
-
-
-  ////PLAYING WITH JQUERY
-  / %h2 Recipe for Rum Cake:
-  / %h2
-  /   Add
-  /   %span#dynamic-text-wrapper
-  /     %span#old-text all the ingredients
-  /     %span#new-text all the ingredients
-  /   %br/
-  /   to the cake batter.
-  / %br/
-  / 
-  ////PLAYING WITH MODAL WINDOWDS
-  / %div.row
-  /   #postModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  /     / %p.validateTips All form fields are required.
-  /     .modal-header
-  /       %h1 Post Something
-  /     .model-body
-  /       =form_for @post, :remote => true do |f|
-  /         =f.text_field :email, :class => "input-block-level", :placeholder => "Email"
-  /         =f.text_field :title, :class => "input-block-level", :placeholder => "Post Title"
-  /         =f.text_area :description, :rows => "5", :class => "input-block-level", :placeholder => "Description"
-  /         .model-footer
-  /           = submit_tag "Create new post", :value=>"Post", :id => "submit-post"
-  / 
-  / %div.row
-  /   %a.btn{"data-toggle" => "modal", :href => "#postModal", :role => "button"} Launch demo modal

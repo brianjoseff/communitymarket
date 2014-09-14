@@ -103,6 +103,66 @@ class PagesController < ApplicationController
      end 
   end
   
+  def marketplace
+    @post = Post.new
+    @post_categories = PostCategory.pluck(:name)
+    @post_categories << "All"
+    
+    @transaction = Transaction.new
+    
+    @sort_posts = Post.search()
+    @sorted_posts = @sort_posts.result
+    
+    @popular_tags = get_popular_tags
+
+    
+    if signed_in? # && current_user.post_feed.is_a?(Array)
+      @user = current_user
+      
+      
+      if params[:categorize] && params[:categorize] != "All" 
+        @post_category= PostCategory.find_by_name(params[:categorize])
+        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = kaminari_paginate(@posts, 50)
+      else
+        @posts = filter_posts(Post.all).sort { |x,y| y.created_at <=> x.created_at }
+        #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = kaminari_paginate(@posts, 50) 
+      end
+      @your_groups = current_user.groups_as_member
+      unless @location.first.nil?
+        @near_groups = Group.near(@location.first.city, 10000)
+        @near_groups = @near_groups.sort {|x,y| x.name <=> y.name}
+      end
+      @random_groups = Group.last(20) - @user.groups_as_member
+      @random_groups = @random_groups.sort {|x,y| x.name <=> y.name}
+      @followed_tags = @user.followed_tags
+    else
+
+      if params[:categorize] && params[:categorize] != "All" 
+        @post_category= PostCategory.find_by_name(params[:categorize])
+        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = kaminari_paginate(@posts, 50)
+      else
+        @posts = filter_posts(Post.all).select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = kaminari_paginate(@posts, 50)
+      end
+      @random_tags = Tag.last(5)
+      @user = User.new
+      unless @location.first.nil?
+        @near_groups = Group.near(@location.first.city, 10000)
+        @near_groups = @near_groups.sort {|x,y| x.name <=> y.name}
+      end
+      @random_groups = Group.last(20) - @user.groups_as_member
+      @random_groups = @random_groups.sort {|x,y| x.name <=> y.name}
+    end 
+    respond_to do |format|
+       format.html # index.html.erb
+       format.js # index.js.erb
+       format.json { render json: @posts }
+     end
+    
+  end
   
   def borrow_rent
     @post_category = PostCategory.find(4)

@@ -102,6 +102,8 @@ gem 'aws-sdk'
 gem 'pg'
 gem 'heroku', '~>3.1.0'
 
+gem 'friendly_id'
+
 
 #transactional email
 gem 'mandrill-api'
