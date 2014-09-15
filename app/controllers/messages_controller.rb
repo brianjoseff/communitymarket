@@ -88,21 +88,12 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  def redirect_to_signup
-    
-    unless signed_in?
-      store_location
-      
-      redirect_to new_user_registration_path, notice: "Please sign up or in."
-    end
-  end
-  
+
   def store_location
     session[:user_return_to] = request.url
     #session[:return_to] = root_path
     #setting to root here because it redirects to sign up when the user tries to access /followships
-    
+
   end
-  
+
 end

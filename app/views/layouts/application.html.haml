@@ -4,7 +4,7 @@
     %title People and Stuff
     %script{:type => "text/javascript", :src  => "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"}
     %link{:href => 'http://fonts.googleapis.com/css?family=Open+Sans:400,700,800', :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', :rel => "stylesheet", :type => "text/css"}
+    / %link{:href => 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', :rel => "stylesheet", :type => "text/css"}
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application", "https://js.stripe.com/v2/"
     %meta{:name=>"description", :content=> "A community marketplace where you interact with people you know and trust and can buy new items from local small businesses. Get rid of stuff, save money, and build your community."}
@@ -73,8 +73,10 @@
 
     %div.container.main
       %div.row
-        %p.notice= notice
-        %p.alert= alert
+        -if notice || alert
+          %p.notice= notice
+          %p.alert= alert
+
         /=render partial: "shared/post_search_bar" unless @disable_nav
         -if current_user
           -if current_page?(root_url)

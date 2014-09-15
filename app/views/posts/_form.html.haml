@@ -21,7 +21,17 @@
           %li= msg
 
   =f.hidden_field :stripe_card_token
-  
+
+  /IF SUPER SELLER POST, SUPER SELLER MUST FIND THE USER FIRST
+  - if @post.sseller_post
+    .form-group
+      = f.label :sseller_post_for_user_id, "Which user are you posting for?", :class => "control-label"
+      .controls
+        = text_field_tag nil, nil, id: 'find-user-input', data: { autocomplete_source: '/find_users_autofill' }, type:"text", :class => "form-control", :placeholder => "John Smith"
+        = f.hidden_field :sseller_post_for_user_id, id: 'post_for_user_id'
+        = f.hidden_field :sseller_post, :value => true
+
+
   /POST CATEGORY
   .form-group
     =label_tag "Post Type",nil, class: "control-label"
@@ -29,7 +39,7 @@
       .btn-group{"data-toggle" => "buttons"}
         %button.switch.btn.btn-default.active{type:"radio", "data-id" => @post_categories.first.id, "id" => "category1", "data-toggle"=>"button"} #{@post_categories.first.name}
         -@post_categories[1..6].each do |c|
-          %button.switch.btn.btn-default{type:"radio", "data-toggle"=>"button","data-id" => c.id, "id" => "category"+c.id.to_s} #{c.name} 
+          %button.switch.btn.btn-default{type:"radio", "data-toggle"=>"button","data-id" => c.id, "id" => "category"+c.id.to_s} #{c.name}
       =f.hidden_field :post_category_id, id: "post_cateogry_button_value", value: "1"
 
 
@@ -39,7 +49,7 @@
     .controls
       = f.text_field :title,type:"text", :class => "form-control", :placeholder => "Perfectly Functional Dorm Fridge"
 
-  /DESCRIPTION    
+  /DESCRIPTION
   .form-group
     = f.label :description, :class => "control-label"
     .controls
@@ -55,14 +65,14 @@
   /   %span Connect with Stripe
 
   /TIER and CASH MONEY FIELDS
-  .row{style: "margin-left: -15px; margin-bottom: 10px;"} 
+  .row{style: "margin-left: -15px; margin-bottom: 10px;"}
     .col-xs-3
       .form-group#get_paid_stuff
         = f.label :price, :class=>"control-label"
         .controls
 
           =f.text_field :price, type: "text", :class => "form-control col-lg-3", :placeholder => "25", type:"text"
-      
+
       / %div#get_paid_stuff
       /        %div.form-group
       /          =f.label :tier, "Payment method", :class=>"control-label"
@@ -75,7 +85,7 @@
       /                  %p.helper
       /                    %span#gift_card_value
       /                    giftcard sent to your inbox upon sale
-      /              .col-lg-4   
+      /              .col-lg-4
       /                .col-lg-1
       /                  %p.underline or
       /                .col-lg-11
@@ -86,7 +96,7 @@
       /                        =f.check_box :cash, type:"checkbox", :class => "cash-box"
       /                      %div.cash-field-cloak.col-lg-4{:style=>"display:none"}
       /                        %div.cash-field
-      / 
+      /
       /                          =label_tag "$", nil, class: "cash-field-label"
       /                          =f.text_field :price, type: "text", :class => "pull-right form-control col-lg-5", :placeholder => "price", type:"text"
       #compensation{:style=>"display:none"}
@@ -106,7 +116,7 @@
               =f.label :hourly_rate do
                 =radio_button_tag 'compensation',2, false, class: "hrly compensation", type:"radio"
                 =label_tag "hourly_rate"
-            .row.comp-text-field    
+            .row.comp-text-field
               %div#hrly_text{:style=>"display:none"}
                 =label_tag "$", nil, class: "comp-field-label-2"
                 =f.text_field :hourly_rate, id:"hrly_text", class: "col-lg-2", type:"text"
@@ -115,23 +125,23 @@
               =f.label :other do
                 =radio_button_tag 'compensation',3, false, class: "other compensation", type:"radio"
                 =label_tag "other"
-            .row.comp-text-field 
+            .row.comp-text-field
               %div#other_text{:style=>"display:none"}
                 =f.text_field :other, id:"other_text", class:"col-lg-6", type:"text"
     .col-xs-9
-      /CATEGORY/TAGS token input    
+      /CATEGORY/TAGS token input
       %div.form-group
         =f.label :tag_tokens, "Tags", :class => "control-label token-label"
         .controls
           //insert tag form field here
           =f.text_field :tag_tokens, data: {:load => @post.tags}, :class => "form-control", :placeholder => "furniture", type:"text"
- 
-  
+
+
   /PHOTO UPLOAD FIELDS
   .form-group
     %div#textbook{style: "display:none"}
       %h4 Take a picture of the Bar code/ ISBN number so we can tell you how much we'll pay you if we end up buying your book from you
-  
+
     -if is_mobile_device? || is_tablet_device?
       %div.iphone-upload-fields
 
@@ -139,19 +149,19 @@
       -@assets.each do |asset|
         =f.fields_for :assets, asset do |asset_fields|
           -if asset_fields.object.image_file_name.nil?
-            %div.form-group         
+            %div.form-group
               =asset_fields.label "image", class: "control-label"
               .controls
                 -if is_mobile_device? || is_tablet_device?
                   =asset_fields.file_field :image, type:"file", accept: "image/*;capture=camera"
                 -else
                   =asset_fields.file_field :image, type:"file"
-                  = link_to_add_fields "Add Another Image", f, :assets    
+                  = link_to_add_fields "Add Another Image", f, :assets
           -else
             /= asset_fields.check_box asset_fields.file_field :image_delete, :label => 'Delete Image'
             =image_tag(asset_fields.object.image.url(:post))
             =asset_fields.label  "delete image"
-            =asset_fields.check_box :_destroy  
+            =asset_fields.check_box :_destroy
 
   /THIS IS THE GROUPS/ASSIGNMENTS SECTION...suck it
   %div.random-form-elementsx.form-group
@@ -160,35 +170,35 @@
         =@info_message
         /make a button to join groups in modal window
     %div.row.group-row
-      
+
     .controls
       %p Choose groups to notify
       =f.fields_for :assignments do |ff|
         =ff.label :_destroy, ff.object.group.name , :class => "checkbox" do
           =ff.check_box :_destroy, {:checked => ff.object.persisted?, :class=>"group-box checkbox"}, '0','1'
           =ff.object.group.name.humanize
-          / (#{ff.object.group.members.count} members) 
-  
+          / (#{ff.object.group.members.count} members)
+
           =ff.hidden_field :group_id
 
   /STRIPE INTEGRATION FOR CREATING A CUSTOMER
-  -if current_user && current_user.stripe_customer_id == nil   
-    %div#post_credit_fields{:style=>"display:none"}      
+  -if current_user && current_user.stripe_customer_id == nil
+    %div#post_credit_fields{:style=>"display:none"}
       =render 'modal_credit', user: current_user
       / =render 'skeuocard'
       %div.row
       / .field
       /   = f.label :premium
       /   = f.check_box :premium
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
   /IMAGES
-  / 
+  /
   / = f.label :image, "Upload images:"
   / = f.file_field :image, multiple: true, name: "post[image]"
   / %script#template-upload{type: "text/x-tmpl"}
@@ -224,16 +234,16 @@
   / / The table listing the files available for upload/download
   / %table.table.table-striped
   /   %tbody.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
-  /   
+  /
   %div.form-group
     %div#purchase_message_premium{:style => "display:none;"} $2: Premium Post
     %div#purchase_message{:style => "display:none;"} $3: Notify more than 2 groups or 500+ people
 
 
-  /************************************************************       
+  /************************************************************
   /FACEBOOK
-  /************************************************************    
-  
+  /************************************************************
+
 
 
   / %div.form-group
@@ -256,16 +266,16 @@
     %p{style: "font-weight: bold"}
       More visibility, higher search rank, stays active longer
   %br/
-      
+
   -if @post.new_record?
     %div.form-group
-      
+
       = f.submit 'Upload your post!', :class => "btn btn-custom btn-large submit-button", :id => "#{current_user.stripe_customer_id ? "customer_upload_post" : "upload_post"}"
       %div.loading-indicator{:style => "display:none"}
         = image_tag("loader.gif")
   -else
     %div.form-group
-      
+
       = f.submit 'Edit your post!', :class => "btn btn-custom btn-large submit-button"
       %div.loading-indicator{:style => "display:none"}
         = image_tag("loader.gif")

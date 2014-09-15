@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140912024250) do
+ActiveRecord::Schema.define(:version => 20140915154307) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -165,18 +165,22 @@ ActiveRecord::Schema.define(:version => 20140912024250) do
     t.integer  "user_id"
     t.integer  "post_category_id"
     t.boolean  "premium"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.string   "email"
     t.boolean  "cash"
     t.integer  "price"
-    t.boolean  "active",           :default => true
+    t.boolean  "active",                   :default => true
     t.boolean  "post_to_facebook"
-    t.boolean  "completed",        :default => false
+    t.boolean  "completed",                :default => false
     t.integer  "lump_sum"
     t.integer  "hourly_rate"
     t.string   "other"
+    t.integer  "sseller_post_for_user_id"
+    t.boolean  "sseller_post",             :default => false
   end
+
+  add_index "posts", ["sseller_post_for_user_id"], :name => "index_posts_on_sseller_post_for_user_id"
 
   create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false

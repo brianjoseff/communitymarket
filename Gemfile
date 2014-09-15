@@ -7,9 +7,10 @@ gem 'rails', '3.2.9'
 
 gem 'koala'
 
-# group :development do
-#   gem 'rails-erd'
-# end
+group :development do
+  gem 'debugger'
+  # gem 'rails-erd'
+end
 
 #group :production do
 #  gem 'pg'
@@ -64,9 +65,6 @@ gem 'skeuocard-rails'
 gem 'forgery'
 gem 'faker'
 
-
-#number formatting
-gem 'phony_rails'
 
 #BOOTSTRAP
 # gem 'bootstrap-sass'
@@ -130,7 +128,7 @@ gem 'bcrypt-ruby'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+
 
 # gem "localtunnel"
 

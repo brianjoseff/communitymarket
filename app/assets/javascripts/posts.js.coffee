@@ -8,23 +8,34 @@
 
 # $(document).ready ->
 #   card = new Skeuocard($("#skeuocard"))
-# 			
+#
 # primeSkeuocard = ->
 # 	card = new Skeuocard($("#skeuocard"))
 # 	card.bind "fieldFillStateWillChange.skeuocard", (e, _card, fieldName, newFillState) ->
 # 		if card.isValid() == true
 # 			alert "valid"
 # 			$('input[type=submit]#upload_post').removeAttr('disabled')
-# 
+#
 # $ ->
 # 	$("input#premium").on "change", primeSkeuocard
-# 
+#
 # $ ->
 # 	$("form.form").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
 # $ ->
 # 	$("#new_post").submit ->
 # 	  $('input[type=submit]').attr('disabled', 'disabled')
+
+# Find User auto-complete
+jQuery ->
+  $('#find-user-input').autocomplete
+    source: $('#find-user-input').data('autocomplete-source')
+    focus: (event, ui) ->
+    	event.preventDefault()
+    	$(this).val ui.item.label
+    select: (event, ui) ->
+    	event.preventDefault()
+	    $('#post_for_user_id').val ui.item.value
 
 
 #select hrly, disable other and lump
@@ -34,7 +45,7 @@ jQuery ->
 		$("div#hrly_text").toggle()
 		$("div#lump_text").hide()
 		$("div#other_text").hide()
-		
+
 #select lump, disable hrly and other
 jQuery ->
 	$("input.lump").click ->
@@ -75,32 +86,32 @@ jQuery ->
 
 
 getGiftCard = ->
-	
+
 	y = $("#post_tier_id option:selected").val()
 	x = parseInt(y)
 	if x ==1
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$2.50</span>")
-		
+
 	else if x==2
-		
+
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$6</span>")
-		
+
 	else if x==3
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$12</span>")
-			
+
 	else if x==4
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$30</span>")
-		
+
 	else if x==5
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$60</span>")
-		
+
 	else if x==6
 		$("span#gift_card_value").replaceWith("<span id='gift_card_value'>$110</span>")
-		
-		
+
+
 $ ->
 	$("#post_tier_id").on "change", getGiftCard
-		
+
 # monify = ->
 # 	if $("form#new_post").find("input.group-box:checked").length > 2
 # 		$("div#post-credit-fields").show "slide",
@@ -125,7 +136,7 @@ $ ->
 # 		    message: "credit card is required if you want to notify more than two groups."
 # 		else
 # 			$("div#post-credit-fields").hide
-# 
+#
 # jQuery ->
 #   $('#new_post').fileupload
 #     dataType: "script"
@@ -152,7 +163,7 @@ countChecked = ->
 		$("div#purchase_message").show()
 	else
 		$("div#post_credit_fields").hide()
-		$("div#purchase_message").hide()	
+		$("div#purchase_message").hide()
 
 
 $ ->
@@ -166,14 +177,14 @@ checkType = ->
 	# if n > 1
 	# 	$("#price_field").val('')
 	# 	$("div#get_paid_stuff").hide()
-	# 			
+	#
 	# else
 	# 	$("div#get_paid_stuff").show()
 	if n > 1 && n < 4
 		$("#price_field").val('')
 		$("div#get_paid_stuff").hide()
 		$("div#compensation").hide()
-		$("div#textbook").hide()		
+		$("div#textbook").hide()
 	else if n == 4 || n == 5
 		$("#price_field").val('')
 		$("div#get_paid_stuff").hide()
@@ -185,10 +196,10 @@ checkType = ->
 		$("div#textbook").hide()
 	else if n > 5
 		$("div#textbook").show()
-		
+
 $ ->
 	$("button.switch").on "click", checkType
-	
+
 $ ->
 	$(".btn-group > .btn, .btn[data-toggle=\"button\"]").click ->
 	  buttonClasses = ["btn-primary", "btn-danger", "btn-warning", "btn-success", "btn-info", "btn-inverse"]
@@ -224,15 +235,15 @@ $ ->
 # 	      activeBtnClass = activeButton.hasAnyClass(buttonClasses)
 # 	      activeButton.removeClass(activeBtnClass).addClass(activeButton.attr("class-toggle")).attr "class-toggle", activeBtnClass
 # 	    $this.removeClass(btnCurrentClass).addClass(btnToggleClass).attr "class-toggle", btnCurrentClass
-# 
+#
 # 	$.fn.hasAnyClass = (classesToCheck) ->
 # 	  i = 0
-# 
+#
 # 	  while i < classesToCheck.length
 # 	    return classesToCheck[i]  if @hasClass(classesToCheck[i])
 # 	    i++
 # 	  false
-	
+
 
 # $ ->
 # 	$("#zipcode_submit").click (e) -?
@@ -245,13 +256,13 @@ $ ->
 	$(".switch").click (e) ->
 		e.preventDefault()
 		$("#post_cateogry_button_value").val $(this).data "id"
-			
+
 # $ ->
 # 	$("input.group-box").change ->
 # 	  monify()
 
 # $ ->
-# 	$("input.group-box").change ->		
+# 	$("input.group-box").change ->
 # 		if $("form#new_post").find("input.group-box:checked").length > 2
 # 			$("div#post-credit-fields").show "slide",
 # 				direction: "right"
@@ -266,7 +277,7 @@ $ ->
 ######################################################################################
 
 
-$ ->	
+$ ->
   $("#post_title").validate
     expression: "if(VAL != '') return true; else return false;"
     message: "title is required."
@@ -283,22 +294,22 @@ $ ->
 # 	$("#post_email").validate
 # 		expression: "if(VAL.match(/^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i)) return true; else return false;"
 # 		message: "Email format yo. check it: 'blah@blah.com'"
-		
 
-jQuery ->	
+
+jQuery ->
 	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 	transaction.setupForm()
 
 transaction =
 	setupForm: ->
-		$("#upload_post").click ->			
+		$("#upload_post").click ->
 			#$('input[type=submit]').attr('disabled', true)
 			# if $("form#new_post").find("input.group-box:checked").length > 2 && $('#card_number').length ||
 			n = $("#card_number").val().length
-			if n > 2				
+			if n > 2
 				transaction.processCard()
 				false
-			else				
+			else
 				$('#new_post')[0].submit()
 				true
 	processCard: ->
@@ -309,10 +320,10 @@ transaction =
 			exp_year: $('#card_year').val()
 		Stripe.createToken(card, transaction.handleStripeResponse)
 	handleStripeResponse: (status, response) ->
-		if status == 200			
+		if status == 200
 			$('#post_stripe_card_token').val(response.id)
 			$('#new_post')[0].submit()
-		else			
+		else
 			alert(response.error.message)
 			$('input[type=submit]').attr('disabled', false)
 
@@ -333,7 +344,7 @@ transaction =
 # 		#make modal disappear
 # 		alert "you're good"
 # 		#$("#dialog-form").dialog "close"
-# 	
+#
 
 ## TOOL TIPS
 $ ->
@@ -346,7 +357,7 @@ $ ->
 jQuery ->
 	$("input#post_cash").change ->
 		$("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
-		$("div.cash-field-cloak").toggle()		
+		$("div.cash-field-cloak").toggle()
 
 ## SHOW CREDIT CARD FIELDS ON PREMIUM CHECK BOX CLICK
 jQuery ->
@@ -356,7 +367,7 @@ jQuery ->
 		# 	    message: "credit card is required."
 		# $("#post_tier_id").prop "disabled", not $("#post_tier_id").prop("disabled") && $("input#post_price").val('')
 		x = $('input[type=submit]#upload_post').is(':disabled')
-		
+
 		if $('input[type=submit]#upload_post')
 			if x==true
 				$('input[type=submit]#upload_post').removeAttr('disabled')
@@ -372,7 +383,7 @@ jQuery ->
 
 #the function is getting called before the active button gets changed...so has old button id
 
-		
+
 
 
 
@@ -386,7 +397,7 @@ jQuery ->
 # 			direction: "right"
 #$(document).ready ->
 
-		
+
 
 # ready = ->
 #   $(".js-s3_file_field").each ->
@@ -406,7 +417,7 @@ jQuery ->
 #       progress: (e, data) ->
 #         progress = parseInt(data.loaded / data.total * 100, 10)
 #         $meter.css(width: "#{progress}%")
-# 
+#
 # $ ->
 # 	ready
 # $(document).on('page:load', ready)

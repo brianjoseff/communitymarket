@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
 
-  before_filter :require_admin_login, :only => [:index]
-
+  # before_filter :require_admin_login, :only => [:index]
+  before_filter :redirect_to_signup, :except => :show
 
 
   def index
@@ -33,7 +33,10 @@ class UsersController < ApplicationController
 
     @email_settings = EmailSetting.all
     @groups = @user.groups_as_member
-    @posts = @user.posts
+    @posts = @user.posts.where('sseller_post IS NOT TRUE')
+
+    @sseller_posts = @user.posts.where(sseller_post: true)
+
     if (7.days.ago..Time.now).cover?(@user.created_at)
       location = request.ip
       @rec_groups = Group.near(location, 20)
@@ -46,10 +49,15 @@ class UsersController < ApplicationController
       @posts_count = Post.all.count
 
     end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
+
+    # Check if logged in user owns the user page
+
+    if current_user == @user
+      render 'admin_show'
+    else
+      render 'show'
     end
+
   end
 
   # def new_modal
@@ -113,6 +121,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
   end
+
+  def join_super_seller
+    if current_user
+      current_user.super_seller = true
+    end
+    redirect_to edit_user_path(current_user), notice: "You've successfully signed up for our SuperSeller program! Please ouble-check your phone number to make sure it's correct."
+  end
+
+  def autocomplete
+    @users = User.order(:name).where("name like ?", "%#{params[:term]}%")
+    render json: @users.map {|user| {label: user.name, value: user.id } }   #.map(&:name)
+  end
+
 
   # POST /users
   # POST /users.json
@@ -206,12 +227,17 @@ class UsersController < ApplicationController
 
   # PUT /users/1
   # PUT /users/1.json
+
+  # Find out why user is logged out automatically
+  # everytime you update settings.
+
+
   def update
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User settings successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

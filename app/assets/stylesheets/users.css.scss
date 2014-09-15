@@ -65,6 +65,19 @@ h1 span {
   font-size: 0.75em;
 }
 
+h1 span#super-seller {
+  color: #0b9102;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+h1 span:nth-of-type(2) {
+  color: #0b9102;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+
 .table-actions {
   width: 300px;
 }
@@ -107,4 +120,18 @@ a.feed-title{
 }
 .group-categories ul{
   list-style-type: none;
+}
+
+.posts-container,
+.super-seller-posts-container {
+  margin-bottom: 30px;
+}
+
+.super-seller-posts-container span {
+  color: #0b9102;
+  font-weight: bold;
+}
+
+.padding {
+  padding: 10px;
 }

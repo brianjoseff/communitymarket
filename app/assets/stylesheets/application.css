@@ -482,6 +482,7 @@ input[type="text"].search-bar-field{
 	padding-left: 5px;
 	padding-right: 5px;
 	margin-bottom: 10px;
+	border-radius: 5px;
 }
 
 
@@ -663,6 +664,7 @@ div.free-marker{
 	margin-bottom: 5px;
 }
 .feed-title{
+	padding-top: 5px;
 	font-size: 125%;
 	font-weight: bold;
 }

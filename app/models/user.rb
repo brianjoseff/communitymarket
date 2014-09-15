@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -27,9 +26,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
 
-  phony_normalize :phone, :default_country_code => 'US'
-
-
+  validates :phone, format: { with: /\(\d{3}\) \d{3}-\d{4}/, message: "is not valid" }
+  validates_uniqueness_of :phone
 
   def stripe_parameters
     {

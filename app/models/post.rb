@@ -1,8 +1,9 @@
 class Post < ActiveRecord::Base
-  
+
   #after_create :to_facebook
   # before_save :set_default_completed_false
-  attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook, :lump_sum, :other, :hourly_rate
+  attr_accessible :borrow, :description, :post_category_id, :premium, :price, :cash, :email, :tier_id, :title, :user_id, :assignments_attributes,:assets_attributes, :image, :tag_tokens, :stripe_card_token,:post_to_facebook, :lump_sum, :other, :hourly_rate, :sseller_post_for_user_id, :sseller_post
+
   has_many :assets, :as => :imageable, :dependent => :destroy
   belongs_to :post_category
   belongs_to :tier
@@ -21,9 +22,11 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :tags
   attr_reader :tag_tokens
   attr_accessor :stripe_card_token
-  
-  
-  
+
+  def posted_for_user
+    User.find(self.sseller_post_for_user_id)
+  end
+
   def self.searchable_columns
     wanted_columns = ['title', 'created_at', 'price']
     self.column_names.select{ |column| wanted_columns.include?(column) }
@@ -33,50 +36,50 @@ class Post < ActiveRecord::Base
     result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
     result
   end
-  
+
   def set_default_completed_false
     self.completed ||= false
   end
-  
-  
+
+
   def after_sign_in_post_to_facebook
-    options = { 
+    options = {
         :message     => self.title,
         :description => self.description,
-        :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s, 
-        :picture     => "" 
+        :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s,
+        :picture     => ""
       }
     self.user.facebook.put_object(self.user.uid, 'links',options)
   end
-  
-  
+
+
   def update_token(auth_hash)
     user = self.user
     user.token = auth_hash["credentials"]["token"]
     user.save
   end
-  
+
   def to_facebook
 
-    if self.post_to_facebook == true  
+    if self.post_to_facebook == true
       if self.user.oauth_token == nil
         return
       end
-      options = { 
+      options = {
           :message     => self.title,
           :description => self.description,
-          :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s, 
-          :picture     => "#{self.assets.empty?  ? '/assets/small.png': self.assets.first.image.url(:thumb)}" 
+          :link        => "http://www.peopleandstuff.com/posts/"+self.id.to_s,
+          :picture     => "#{self.assets.empty?  ? '/assets/small.png': self.assets.first.image.url(:thumb)}"
         }
       self.user.facebook.put_object(self.user.uid, 'links',options)
     end
 
   end
-  
+
   def tag_tokens=(tokens)
     self.tag_ids = Tag.ids_from_tokens(tokens)
   end
-  
+
   def self.from_groups_user_is_member_of(groups)
     posts = Array.new
     groups.each do |group|
@@ -84,7 +87,7 @@ class Post < ActiveRecord::Base
     end
     return posts
   end
-  
+
   def deactivate!
     self.active = false
     self.save!
@@ -93,7 +96,7 @@ class Post < ActiveRecord::Base
     self.active = true
     self.save!
   end
-  
+
   def complete!
     self.completed = true
     self.save!
@@ -102,19 +105,19 @@ class Post < ActiveRecord::Base
     self.completed = false
     self.save!
   end
-  
+
   def for_sale?
     return self.post_category_id == 1
   end
-  
+
   def assign_to!(group)
     assignments.create!(group_id: group.id)
   end
-  
+
   def tag_to(tag)
     taggings.create!(tag_id: tag.id)
   end
-  
+
   def save_customer(user)
     if valid?
       customer = Stripe::Customer.create( :description => user.email, :card => stripe_card_token)

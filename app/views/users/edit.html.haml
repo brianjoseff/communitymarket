@@ -1,4 +1,4 @@
-%h1 Editing user
+%h1 Your Account Settings
 
 = simple_form_for @user,  html: {class: 'form-horizontal'} do |f|
   - if @user.errors.any?
@@ -7,8 +7,5 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-          
+
   =render 'form', f: f
-  %div.form-actions
-    = f.button :submit, name: 'Sign Up', class: "btn btn-primary submit-button"
-  / =link_to "Sign In", signin_path

@@ -9,6 +9,7 @@ $(document).ready ->
   $("#phone").mask('(000) 000-0000')
 
 
+
   $("#user_email").validate ->
     expression: "if(VAL != '') return true; else return false;"
     message: "email is required."

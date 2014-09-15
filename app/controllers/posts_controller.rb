@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
 
-  before_filter :require_admin_login, :except => [:show, :index]
+  # before_filter :require_admin_login, :only => [:show, :index]
   before_filter :redirect_to_signup, :except => [:show, :index]
 
   def index
@@ -50,6 +50,8 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
+    @post.sseller_post = params[:sseller_post]
+
     @post_categories = PostCategory.all
 
     @assets = @post.assets
@@ -132,10 +134,10 @@ class PostsController < ApplicationController
 
       @post.email = @user.email
 
-      if @post.post_category.name == "Textbook"
-        @textbook_tag = Tag.find_by_id(88)
-        @post.tag_to(@textbook_tag)
-      end
+      # if @post.post_category.name == "Textbook"
+      #   @textbook_tag = Tag.find_by_id(88)
+      #   @post.tag_to(@textbook_tag)
+      # end
 
       if @post.premium?
         @amount = 300
@@ -279,14 +281,6 @@ class PostsController < ApplicationController
     unless current_user.admin?
       flash[:error] = "You must be logged in as an admin to access this section #{current_user.admin?}"
       redirect_to 'users/sign_up'
-    end
-  end
-  def redirect_to_signup
-
-    unless signed_in?
-      store_location
-
-      redirect_to new_user_registration_path, notice: "Please sign up or in."
     end
   end
 

@@ -11,11 +11,13 @@ Communitymarket::Application.routes.draw do
 
   match "/404", to: "exceptions#not_found", via: [:get, :post]
 
-
+  # returns user names json for auto-fill
+  get '/find_users_autofill' => 'users#autocomplete'
 
   # devise_for :users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'}
   get '/auth/stripe_connect/callback', to: 'stripe_connect#create'
+
 
   # :registrations => "registrations",
   resources :email_settings
@@ -97,6 +99,8 @@ Communitymarket::Application.routes.draw do
     end
     resources :assignments
   end
+
+  match '/join-superseller', to: "users#join_super_seller"
 
   match '/textbooks', to: "pages#textbooks"
   match '/feed', :to =>"pages#feed"

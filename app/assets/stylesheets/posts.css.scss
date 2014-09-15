@@ -87,9 +87,10 @@ label.premium-checkbox {
 	left:0px;
 }
 
-.control-label{
-	width: 120px !important;
-}
+// .control-label{
+// 	width: 120px !important;
+// }
+
 .stripe-connect {
   display: inline-block;
   margin-bottom: 1px;
@@ -190,7 +191,7 @@ label.premium-checkbox {
   background-image: -moz-linear-gradient(#b5c3d8, #9cabc2);
   background-image: -ms-linear-gradient(#b5c3d8, #9cabc2);
   background-image: linear-gradient(#b5c3d8, #9cabc2);
-  
+
   -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1);
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -205,7 +206,7 @@ label.premium-checkbox {
   background-image: -moz-linear-gradient(#f0f5fa, #e4ecf5 85%, #e7eef6);
   background-image: -ms-linear-gradient(#f0f5fa, #e4ecf5 85%, #e7eef6);
   background-image: linear-gradient(#f0f5fa, #e4ecf5 85%, #e7eef6);
-    
+
   -moz-box-shadow: inset 0 1px 0 #fff;
   -webkit-box-shadow: inset 0 1px 0 #fff;
   box-shadow: inset 0 1px 0 #fff;
@@ -224,7 +225,7 @@ label.premium-checkbox {
   background-image: -moz-linear-gradient(#d7dee8, #e7eef6);
   background-image: -ms-linear-gradient(#d7dee8, #e7eef6);
   background-image: linear-gradient(#d7dee8, #e7eef6);
-    
+
   -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
   -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
   box-shadow: inset 0 1px 0 rgba(0,0,0,0.05);
@@ -311,7 +312,7 @@ p.helper{
 
 }
 .post-form{
-	
+
 }
 #tier_explanation{
 	/*margin: 2px;*/
@@ -325,7 +326,7 @@ p.helper{
 	width: 160px;*/
 }
 #tier_arrow{
-	background-image: url(/assets/tier_exp_arrow.png);	
+	background-image: url(/assets/tier_exp_arrow.png);
 	width:15px;
 	height:80px;
 	float:right;
@@ -435,7 +436,7 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
 transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s !important;
 }
 ul.token-input-list-facebook input{
-	
+
 	max-width: 400px !important;
 	min-width:100px !important;
 }

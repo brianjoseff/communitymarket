@@ -11,21 +11,30 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require_self
+//= require main.js
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui.min.js
 //= require jquery.mask.min.js
+//= require jquery.modal
+//= require smoothscroll.js
 //= require bootstrap.min.js
 //= require jquery.tokeninput
+//= require about.js.coffee
+//= require groups.js.coffee
+//= require landing.js.coffee
+//= require messages.js.coffee
 //= require posts.js.coffee
+//= require post_categories.js.coffee
 //= require pages.js.coffee
 //= require groups.js.coffee
 //= require transactions.js.coffee
 //= require jquery.validate.js
 //= require rails.validations.callbacks.js.coffee
-//= require jquery.modal
-//= require olark.js
-//= require_tree .
 
+
+
+// Turned off olark.js for now
 
 
 //
