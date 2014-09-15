@@ -125,65 +125,65 @@
               %br/
               =link_to "Take a Peek!", marketplace_path, class: "btn-lg btn-theme", id: "cta-peek-2"
   %section#faq.scrollspy{name: "faq"}
-  / #faqsection
-  /     .container
-  /       .row
-  /         %br/
-  /         %br/
-  /         .col-lg-6.col-lg-offset-3
-  /           %h2.centered FEATURES
-  /           %hr/
-  /           %br/
-  /           %br/
-  /         / col-lg-6
-  /         .col-lg-6{style: "text-align: left"}
-  /           /%img.img-responsive{src: "assets/img/animation.gif"}/
-  /           =image_tag "laptop1.png", class: "img-responsive"
-  / 
-  /         .col-lg-6.faq
-  /           #accordion2.accordion
-  /             .accordion-group
-  /               .accordion-heading
-  /                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
-  /                   
-  /                   %span.glyphicon.glyphicon-book
-  /                   Textbooks are guaranteed to sell
-  /               #collapseOne.accordion-body.collapse
-  /                 .accordion-inner
-  /                   %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
-  / 
-  /             %br/
-  /             .accordion-group
-  /               .accordion-heading
-  /                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseTwo"}
-  /                   %span.glyphicon.glyphicon-transfer
-  /                   Join groups and send them targeted notifications
-  /               #collapseTwo.accordion-body.collapse
-  /                 .accordion-inner
-  /                   %p Basically a glorified listserv, but allows you to notify more groups at once and view posts within Dartmouth, segmented by group
-  / 
-  /             %br/
-  /             .accordion-group
-  /               .accordion-heading
-  /                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseThree"}
-  /                   %span.glyphicon.glyphicon-tags
-  /                   
-  /                   Follow tags and get notified
-  /               #collapseThree.accordion-body.collapse
-  /                 .accordion-inner
-  /                   %p Searching for housing options and don't want to keep checking for new listings? Follow the housing tag and get alerts when new posts are made or weekly digests.
-  / 
-  /             %br/
-  /             .accordion-group
-  /               .accordion-heading
-  /                 %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
-  /                   %span.glyphicon.glyphicon-envelope
-  /                   Post things and notify people
-  /               #collapseFour.accordion-body.collapse.in
-  /                 .accordion-inner
-  /                   %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
-  / 
-  /             %br/
-  / 
-  /     %br/
-  /     %br/
+  #faqsection
+    .container
+      .row
+        %br/
+        %br/
+        .col-lg-6.col-lg-offset-3
+          %h2.centered FEATURES
+          %hr/
+          %br/
+          %br/
+        / col-lg-6
+        .col-lg-6{style: "text-align: left"}
+          /%img.img-responsive{src: "assets/img/animation.gif"}/
+          =image_tag "laptop1.png", class: "img-responsive"
+
+        .col-lg-6.faq
+          #accordion2.accordion
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseOne"}
+                
+                  %span.glyphicon.glyphicon-book
+                  Textbooks are guaranteed to sell
+              #collapseOne.accordion-body.collapse
+                .accordion-inner
+                  %p We partner with Belltower books so that whatever books you post on here are guaranteed to sell. We'll come to you and take them off your hands. #{link_to "Post some!", new_post_path, class: "linkify"}
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseTwo"}
+                  %span.glyphicon.glyphicon-transfer
+                  Join groups and send them targeted notifications
+              #collapseTwo.accordion-body.collapse
+                .accordion-inner
+                  %p Basically a glorified listserv, but allows you to notify more groups at once and view posts within Dartmouth, segmented by group
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseThree"}
+                  %span.glyphicon.glyphicon-tags
+                
+                  Follow tags and get notified
+              #collapseThree.accordion-body.collapse
+                .accordion-inner
+                  %p Searching for housing options and don't want to keep checking for new listings? Follow the housing tag and get alerts when new posts are made or weekly digests.
+
+            %br/
+            .accordion-group
+              .accordion-heading
+                %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseFour"}
+                  %span.glyphicon.glyphicon-envelope
+                  Post things and notify people
+              #collapseFour.accordion-body.collapse.in
+                .accordion-inner
+                  %p When you post your stuff you can send targeted email notifications to groups of people that care about your particular post
+
+            %br/
+
+    %br/
+    %br/
