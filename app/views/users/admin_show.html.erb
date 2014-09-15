@@ -72,54 +72,66 @@
 
   <!-- Main Middle -->
 
+  <!-- Regular Posts -->
+
   <div class="col-md-7 middle-panel user-col">
     <% if @posts.empty? %>
       <div class="panel panel-default text-center">
         <div class="panel-body">
-        <h2>You haven't posted anything yet.</h2>
-        <h3>Post your first item right now!</h3>
+        <h2>You have no posts.</h2>
           <%= link_to "Create New Post", new_post_path, :class => 'btn btn-success' %>
         </div>
       </div>
     <% else %>
-    <h4>Your Posts</h4>
-    <div class='posts-container'>
-      <table class="table table-striped">
-        <tr>
-          <th>Item</th>
-          <th>Date posted</th>
-          <th>Active?</th>
-          <th class='table-actions'>Actions</th>
-        </tr>
-          <% @posts.each do |post| %>
-            <tr>
-              <td><%= link_to post.title, post_url(post) %></td>
-              <td><%= time_ago_in_words(post.created_at) %> ago</td>
-              <td><%= post.active %></td>
-              <td class="post-management-buttons">
-                <%= link_to 'Edit', edit_post_path(post) %>
-                <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% if post.active? %>
-                  <%= link_to 'Deactivate', deactivate_post_path(post) %>
-                <% else %>
-                  <%= link_to 'Reactivate', reactivate_post_path(post) %>
-                <% end %>
-                <% if post.completed? %>
-                  <%= link_to 'Undo', undo_completed_post_path(post) %>
-                <% else %>
-                  <% if post.post_category == nil %>
-                    <%= link_to 'completed', complete_post_path(post) %>
-                  <% else %>
-                    <%= link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post) %>
-                  <% end %>
-                <% end %>
-            </td>
+      <h4>Your Posts</h4>
+      <div class='posts-container'>
+        <table class="table table-striped">
+          <tr>
+            <th>Item</th>
+            <th>Date posted</th>
+            <th>Active?</th>
+            <th class='table-actions'>Actions</th>
           </tr>
-        <% end %>
-      </table>
-    </div>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= link_to post.title, post_url(post) %></td>
+                <td><%= time_ago_in_words(post.created_at) %> ago</td>
+                <td><%= post.active %></td>
+                <td class="post-management-buttons">
+                  <%= link_to 'Edit', edit_post_path(post) %>
+                  <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <% if post.active? %>
+                    <%= link_to 'Deactivate', deactivate_post_path(post) %>
+                  <% else %>
+                    <%= link_to 'Reactivate', reactivate_post_path(post) %>
+                  <% end %>
+                  <% if post.completed? %>
+                    <%= link_to 'Undo', undo_completed_post_path(post) %>
+                  <% else %>
+                    <% if post.post_category == nil %>
+                      <%= link_to 'completed', complete_post_path(post) %>
+                    <% else %>
+                      <%= link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post) %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>  <!-- End Posts -->
+          </table>
+        </div>
+    <% end %>
+
+  <!-- SuperSeller Posts -->
 
     <% if @user.super_seller %>
+      <% if @sseller_posts.empty? %>
+        <div class="panel panel-default text-center">
+          <div class="panel-body">
+          <h2>You have no <span id="super-seller">SuperSeller</span> posts.</h2>
+            <%= link_to "Post New Item as SuperSeller", new_post_path(:sseller_post => true), :class => "btn btn-success"  %>
+          </div>
+        </div>
+      <% else %>
         <div class='super-seller-posts-container'>
         <h4>Your <span>SuperSeller</span> Posts</h4>
           <table class="table table-striped">
@@ -156,10 +168,14 @@
               </tr>
             <% end %>
           </table>
-        </div>
+        </div>  <!-- End super-seller-posts-container -->
       <% end %>
     <% end %>
+
   </div>
+
+
+
 
   <!-- Right Panel -->
 
@@ -167,85 +183,5 @@
     <%= render :partial => 'shared/banner_group', :locals => {:groups => @random_groups} %>
   </div>
 
-</div>   <!-- End Main User Page Content -->
+</div>   <!-- End "row user-page" -->
 
-
-
- <!-- Not sure what this is -->
-
-<div class="row">
-  <div class="col-lg-3">
-    <!--%a.btn{ :href => "mailto:#{@post.email}", :role => "button"}
-    -->
-    <div class="email-settings-cloak" style="display:none">
-      <%= render "edit_email_settings" %>
-    </div>
-  </div>
-</div>
-
-
- <!-- Not sure what this is -->
-
-  <% if current_user && current_user.admin? %>
-    <p>Users count: #{@users_count}</p>
-    <p>Group rank:</p>
-    <ul>
-      <% @group_rank.each do |g| %>
-        <li>#{g.members.count}/posts:#{g.posts.count}: #{link_to g.name, group_url(g)}</li>
-      <% end %>
-    </ul>
-    <p>Super Users:</p>
-    <ul>
-      <% if !@users_with_5_posts.nil? %>
-        <% @users_with_5_posts.each do |x| %>
-          <% if x.posts.count > 5 %>
-            <li>#{link_to x.name, user_path(x)}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}</li>
-          <% else %>
-            <li>#{link_to x.name, user_path(x)}, with #{x.posts.count}</li>
-          <% end %>
-        <% end %>
-      <% end %>
-    </ul>
-    <p>Posts count: #{@posts_count}</p>
-  <% end %>
-
-</div>
-
- <!-- Not sure what this is -->
-
-<% if current_user && current_user.admin? %>
-  <h1>Admin Post Dashboard</h1>
-  <table class="table table-striped">
-    <tr>
-      <th>My posts</th>
-      <th>Date posted</th>
-      <th>Active?</th>
-      <th class="table-actions">Actions</th>
-    </tr>
-    <% @admin_posts.each do |post| %>
-      <tr>
-        <td>#{link_to post.title, post_url(post)}</td>
-        <td>#{time_ago_in_words(post.created_at)} ago</td>
-        <td>#{post.active}</td>
-        <td class="post-management-buttons">
-          <%= link_to 'Edit', edit_post_path(post) %>
-          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% if post.active? %>
-            <%= link_to 'Deactivate', deactivate_post_path(post) %>
-          <% else %>
-            <%= link_to 'Reactivate', reactivate_post_path(post) %>
-          <% end %>
-          <% if post.completed? %>
-            <%= link_to 'Undo', undo_completed_post_path(post) %>
-          <% else %>
-            <% if post.post_category == nil %>
-              <%= link_to 'completed', complete_post_path(post) %>
-            <% else %>
-              <%= link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success' %>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-<% end %>

@@ -22,6 +22,7 @@
 //= require jquery.tokeninput
 //= require about.js.coffee
 //= require groups.js.coffee
+//= require users.js.coffee
 //= require landing.js.coffee
 //= require messages.js.coffee
 //= require posts.js.coffee

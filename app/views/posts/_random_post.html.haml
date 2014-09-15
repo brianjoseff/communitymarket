@@ -1,6 +1,6 @@
 %div.random-post.pull-left
   %div.image
-    -if post.post_category && post.post_category.name == "For Sale" || post.post_category.name == "Borrow/Rent"
+    -if post.post_category.name == "For Sale" || post.post_category.name == "Borrow/Rent"
       =link_to image_tag(post.assets.empty?  ? '/assets/small.png': post.assets.first.image.url(:small), :alt => post.title), post_url(post)
     -else
       =link_to "Wanted", post_url(post), class: 'wanted-random-post'
