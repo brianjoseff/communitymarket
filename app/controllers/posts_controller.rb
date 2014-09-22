@@ -90,15 +90,16 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post_categories = PostCategory.all
-    forsale = @post_categories.find{|a| a.name == "Wanted"}
-    @post_categories.delete(forsale)
-    @post_categories.unshift(forsale)
+    # Default to Post Category Id 4 for now until fixed.
 
+    # @post_categories = PostCategory.all
+    # forsale = @post_categories.find{|a| a.name == "Wanted"}
+    # @post_categories.delete(forsale)
+    # @post_categories.unshift(forsale)
 
     if !current_user && params[:password].present?
       @user = User.new(:email => params[:post][:email], :password => params[:password])
-      @post = @user.posts.new(params[:post])
+      @post = @user.posts.new(params[:post]).merge(post_category_id: 4)
 
       if !@post.for_sale?
         @post.tier_id = nil

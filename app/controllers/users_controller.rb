@@ -23,10 +23,10 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @random_groups = Group.last(20) - @user.groups_as_member
-    @badges = []
-    @user.badges.each do |badge|
-      @badges << badge.name
-    end
+    # @badges = []
+
+    @badges = @user.badges.map{|badge| badge.name}
+
     @badge_hash = Hash.new(0)
 
     @memberships = @user.memberships ||= []

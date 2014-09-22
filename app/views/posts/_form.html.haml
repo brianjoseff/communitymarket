@@ -40,7 +40,9 @@
         %button.switch.btn.btn-default.active{type:"radio", "data-id" => @post_categories.first.id, "id" => "category1", "data-toggle"=>"button"} #{@post_categories.first.name}
         -@post_categories[1..6].each do |c|
           %button.switch.btn.btn-default{type:"radio", "data-toggle"=>"button","data-id" => c.id, "id" => "category"+c.id.to_s} #{c.name}
-      =f.hidden_field :post_category_id, id: "post_cateogry_button_value", value: "1"
+
+      / Set post_category_id = 4 for now to prevent errors caused by funky seeding
+      =f.hidden_field :post_category_id, value: 4
 
 
   /POST TITLE

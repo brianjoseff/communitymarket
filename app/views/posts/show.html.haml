@@ -9,7 +9,7 @@
 /   %div.search-row
 /     %div.col-lg-2
 /       =render :partial => "search/category_dropdown"
-/ 
+/
 /     %div.col-lg-10
 /       /search bar
 /       =render :partial => "search/search_form"
@@ -27,7 +27,7 @@
       -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
         %div.col-lg-2
           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
+
           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
           %div#modal_image{:style => "display:none;"}
             =render 'modal_image', :post => @post
@@ -50,7 +50,7 @@
           %div.row
             %p #{simple_format h(@post.description)}
       -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"
-        %div.row      
+        %div.row
           -unless @post.assets.empty?
             %div.col-lg-2
               =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
@@ -70,7 +70,7 @@
         %div.row
           %p #{simple_format h(@post.description)}
       -elsif @post.post_category.name == "Wanted"
-        %div.row      
+        %div.row
           -unless @post.assets.empty?
             %div.col-lg-2
               =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
@@ -86,7 +86,7 @@
       -elsif @post.post_category.name == "Housing"
         %div.col-lg-2
           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
+
           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
           %div#modal_image{:style => "display:none;"}
             =render 'modal_image', :post => @post
@@ -111,7 +111,7 @@
       -else
         %div.col-lg-2
           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
+
           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
           %div#modal_image{:style => "display:none;"}
             =render 'modal_image', :post => @post
@@ -133,7 +133,7 @@
                 =link_to tag.name, tag_url(tag), :class => "tag"
           %div.row
             %p #{simple_format h(@post.description)}
-    
+
     %div.row
       %div.col-lg-4
         %div.buy.pull-left#show_post_buy
@@ -147,11 +147,11 @@
                       prohibited this transaction from being saved:
                     %ul
                       - @transaction.errors.full_messages.each do |msg|
-                        %li= msg                                          
+                        %li= msg
                 =f.hidden_field :post_id, :value => @post.id
                 =f.submit "Buy Now", class: "btn btn-default btn-medium btn-success"
             -elsif signed_in? && current_user.stripe_customer_id.nil?
-              =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
+              =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id
             -else
               =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-default btn-med btn-success", :data_postid => @post.id
         %div.email.pull-left

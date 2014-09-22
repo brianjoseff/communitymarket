@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140915154307) do
+ActiveRecord::Schema.define(:version => 20140922032852) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -186,6 +186,18 @@ ActiveRecord::Schema.define(:version => 20140915154307) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "super_seller_jobs", :force => true do |t|
+    t.integer "owner_id"
+    t.integer "super_seller_id"
+    t.string  "estimated_value"
+    t.integer "sell_options"
+    t.string  "pickup_location"
+    t.text    "notes"
+  end
+
+  add_index "super_seller_jobs", ["owner_id"], :name => "index_super_seller_jobs_on_owner_id"
+  add_index "super_seller_jobs", ["super_seller_id"], :name => "index_super_seller_jobs_on_super_seller_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

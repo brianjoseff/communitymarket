@@ -255,7 +255,7 @@ $ ->
 $ ->
 	$(".switch").click (e) ->
 		e.preventDefault()
-		$("#post_cateogry_button_value").val $(this).data "id"
+		$("#post_category_button_value").val $(this).data "id"
 
 # $ ->
 # 	$("input.group-box").change ->
