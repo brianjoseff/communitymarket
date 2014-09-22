@@ -1,0 +1,49 @@
+  <%= form_for(@super_seller_job) do |f| %>
+    <% if @super_seller_job.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@super_seller_job.errors.count, "error") %> prohibited this Super Seller Job from being saved:</h2>
+
+        <ul>
+        <% @super_seller_job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :phone, "Make sure your phone number is correct. Your Super Seller will use this number to contact you." %>
+      <%= f.text_field :phone, id: 'phone', class: "form-control", value: @user.phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :estimated_value, "What's the total estimated values for all your items?" %>
+      <div class="input-prepend">
+        <span class="add-on">$</span>
+        <%= f.text_field :estimated_value, id: 'prependedInput', class: "form-control", placeholder: "100" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :sell_options, "For any items that don't sell, what would you like your SuperSeller to do with them?" %>
+      <%= f.radio_button :sell_options, value: 'd-or-t', name: "sell_options", class: "form-control" %>Donate/Toss
+      <%= f.radio_button :sell_options, value: 'return', name: "sell_options", class: "form-control" %>Give back to you
+    </div>
+
+
+    <div class="field">
+      <%= f.label :pickup_location, "Where exactly should your items" %>
+      <%= f.text_field :pickup_location, class: "form-control", placeholder: "Room 205 2nd Schnader North" %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label :notes, "Any additional notes for your Super Seller?" %>
+      <%= f.text_area :notes, rows: "4", cols: "50", class: "form-control", placeholder: "Moving out so need to get rid of an arm chair and some textbooks. Text me when you get here." %>
+    </div>
+
+    <div class="actions">
+      <div class="text-center"><%= f.submit "Create new Super Seller Job", :class => 'btn btn-success' %></div>
+    </div>
+  <% end %>
+

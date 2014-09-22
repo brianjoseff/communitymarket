@@ -22,7 +22,7 @@ Communitymarket::Application.routes.draw do
   # :registrations => "registrations",
   resources :email_settings
   resources :followships
-
+  resources :super_seller_jobs
 
   # resources :assets do
   #    collection do

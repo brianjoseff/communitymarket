@@ -4,7 +4,7 @@ class CreateSuperSellerJobs < ActiveRecord::Migration
       t.integer :owner_id
       t.integer :super_seller_id
       t.string :estimated_value
-      t.integer :sell_options
+      t.string :sell_options
       t.string :pickup_location
       t.text :notes
     end

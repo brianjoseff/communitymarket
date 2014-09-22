@@ -14,7 +14,7 @@
 
   <div class="col-md-3 left-panel user-col">
         <%= link_to "Account Settings", edit_user_path(@user) %><br><br>
-        <%= link_to "Sell with SuperSeller", "#", :class => "btn btn-danger" %>
+        <%= link_to "Sell with SuperSeller", new_super_seller_job_path, :class => "btn btn-danger" %>
         <% if @user.super_seller %>
           <%= link_to "Post New Item as SuperSeller", new_post_path(:sseller_post => true), :class => "btn btn-success"  %>
         <% else %>

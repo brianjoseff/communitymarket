@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20140922032852) do
     t.integer "owner_id"
     t.integer "super_seller_id"
     t.string  "estimated_value"
-    t.integer "sell_options"
+    t.string  "sell_options"
     t.string  "pickup_location"
     t.text    "notes"
   end
