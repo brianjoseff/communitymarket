@@ -358,7 +358,10 @@ a.btn-primary{
 a:visited.btn.btn-primary{
 	color: #fff;
 }
-a:visited.btn.btn-danger, a:visited.btn.btn-deactivate, a:visited.btn.btn-success{
+a:visited.btn.btn-danger,
+a:visited.btn.btn-deactivate,
+a:visited.btn.btn-success,
+a:visited.btn.btn-warning {
 	color: #fff;
 }
 a:visited.btn{
@@ -541,6 +544,7 @@ input[type="text"].search-bar-field{
 	/*width: 80px;*/
 	display:block;
 	min-height: 45px;
+	margin-right: 10px;
 }
 .dropdown{
 	list-style-type:none;
@@ -806,13 +810,15 @@ i{
 	color: #fff;
 }
 
-
-
-
-
-
-
-
+.required {
+	display: inline;
+}
+.required:after {
+	content: "*";
+	color: red;
+	font-weight: bold;
+	font-size: 1.25em;
+}
 
 
 

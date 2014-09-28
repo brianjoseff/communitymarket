@@ -126,7 +126,7 @@ class UsersController < ApplicationController
     if current_user
       current_user.super_seller = true
     end
-    redirect_to edit_user_path(current_user), notice: "You've successfully signed up for our SuperSeller program! Please ouble-check your phone number to make sure it's correct."
+    redirect_to edit_user_path(current_user), notice: "To join our SuperSeller program please confirm your phone number is correct and check the Super Seller checkbox."
   end
 
   def autocomplete

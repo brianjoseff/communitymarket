@@ -17,7 +17,9 @@
         <%= link_to "Sell with SuperSeller", new_super_seller_job_path, :class => "btn btn-danger" %>
         <% if @user.super_seller %>
           <%= link_to "Post New Item as SuperSeller", new_post_path(:sseller_post => true), :class => "btn btn-success"  %>
+          <%= link_to "See all Super Seller Jobs", super_seller_jobs_path, :class => "btn btn-warning"  %>
         <% else %>
+          <br>
           <%= link_to "Join our SuperSeller program", '/join-superseller' if not @user.super_seller %>
         <% end %>
         <hr>
@@ -80,7 +82,7 @@
       <div class="panel panel-default text-center">
         <div class="panel-body">
         <h2>You have no posts.</h2>
-          <%= link_to "Create New Post", new_post_path, :class => 'btn btn-success' %>
+          <%= link_to "Post Something", new_post_path, class: "btn_post_flat" %>
         </div>
       </div>
     <% else %>

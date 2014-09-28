@@ -21,19 +21,14 @@
 /           =f.text_field :name_cont, :class => "form-control", :placeholder => "search for stuff or groups...type it here"
 /           %span.input-group-btn
 /             =f.submit 'Search', :class => "btn btn-flat", :id => "btn_search"
-/   
+/
 .container
   %div.search-row
-    %div.col-lg-3
-      /new post button
-      /.category-post-cluster
-      .center-block
-        =link_to "Post Something", new_post_path,:id => "btn_post_flat", class: "pull-left", :type => "button"
-    %div.col-lg-2
-      .center-block
-        =render :partial => "search/category_dropdown"
 
-    %div.col-lg-7
-      /search bar
-      .center-block
-        =render :partial => "search/search_form"
+    / Removed "Post Something" link here as it was redundant. Already "New Post" in top nav bar.
+
+    %div.col-md-8
+      =render :partial => "search/search_form"
+
+    %div.col-md-4
+      =render :partial => "search/category_dropdown"

@@ -1,6 +1,9 @@
 class SuperSellerJobsController < ApplicationController
+  before_filter :authorize_user!
+  before_filter :confirm_user_as_author, :only => [:edit, :destroy]
 
   def index
+    redirect_to root_path unless current_user.super_seller
     @super_seller_jobs = SuperSellerJob.all
   end
 
@@ -9,33 +12,40 @@ class SuperSellerJobsController < ApplicationController
 
   def new
     @super_seller_job = SuperSellerJob.new
-    @user = current_user
   end
 
   def edit
+    @super_seller_job = SuperSellerJob.find(params[:id])
   end
 
   def create
-    @super_seller_job = SuperSellerJob.new(super_seller_job_params.merge(owner_id: current_user.id))
+    # Strip phone number from form data
+    phone = params[:super_seller_job].delete(:phone)
+
+    # Update current user's phone # if different
+    current_user.update_attributes(phone: phone) if current_user.phone != phone
+
+    @super_seller_job = SuperSellerJob.new(params[:super_seller_job])
     respond_to do |format|
       if @super_seller_job.save
-        format.html { redirect_to super_seller_jobs_path, notice: 'Your SuperSeller will be in contact with you shortly!' }
-        format.json { render :show, status: :created, location: @super_seller_job }
+        format.html { redirect_to user_path(current_user), notice: 'Your Super Seller job was successfully added to our queue. A SuperSeller will be in contact with you shortly!' }
       else
         format.html { render :new }
-        format.json { render json: @super_seller_job.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
+    phone = params[:super_seller_job].delete(:phone)
+    current_user.update_attributes(phone: phone) if current_user.phone != phone
+
+    @super_seller_job = SuperSellerJob.find(params[:id])
+
     respond_to do |format|
-      if @super_seller_job.update(super_seller_job_params)
-        format.html { redirect_to @super_seller_job, notice: 'Super Seller Job was successfully updated.' }
-        format.json { render :show, status: :ok, location: @super_seller_job }
+      if @super_seller_job.update_attributes(params[:super_seller_job])
+        format.html { redirect_to user_path(current_user), notice: 'Super Seller Job was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @super_seller_job.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,22 +54,14 @@ class SuperSellerJobsController < ApplicationController
     @super_seller_job.destroy
     respond_to do |format|
       format.html { redirect_to super_seller_jobs_url, notice: 'Super Seller Job was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_super_seller_job
-      @super_seller_job = SuperSellerJob.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-
-    # BUGBUG: 'TypeError Exception: no implicit conversion of Symbol into String'
-    def super_seller_job_params
-      params.require(:super_seller_job).permit(:owner_id, :super_seller_id, :estimated_value, :sell_options, :pickup_location, :notes)
-    end
-
+  def confirm_user_as_author
+    super_seller_job = SuperSellerJob.find(params[:id])
+    redirect_to root_path, notice: "You can't edit someone else's post!" unless current_user.id == super_seller_job.owner_id
+  end
 
 end

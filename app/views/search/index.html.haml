@@ -1,13 +1,11 @@
 %div.row
-  =render :partial => "search_form"
-%div.row
   %div.col-lg-6
     %h1 Stuff:
     %p search returned #{pluralize(@posts_results.count, 'post')}
     /Post feed
 
     =render :partial => 'feed/feed',:locals => {:feed_items => @posts_results}
-    
+
   %div.col-lg-6
     %h1 Tags
     -@tag_results.each do |tag|
