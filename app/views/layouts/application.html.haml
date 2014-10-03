@@ -9,49 +9,12 @@
     %meta{:name=>"description", :content=> "A community marketplace where you interact with people you know and trust and can buy new items from local small businesses. Get rid of stuff, save money, and build your community."}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
       
-      
+    / start Mixpanel
     :javascript
-      $(function() {
-        var t1 = new Array( "Sell", "Get", "Borrow", "Give");
-        var i = 0;
-        var width;
-        var tid = setInterval(
-            function() {
-                $("#changingtext span").animate({'opacity': 0}, 1000, function () {
-                  $(this).text(t1[i]);
-                  width = $('#chkWidth').text(t1[i]).width();
-                  console.log(t1[i], width);
-                  $(this).animate({'opacity': 1, 'width': width}, 1000);
-              });
-
-              if(i < t1.length -1) 
-                  i++;
-              else i = 0;
-
-            }, 3000 );
-
-      });
-      $(function() {
-        var t2 = new Array( "people that care", "Dartmouth Students", "your workplace", "Upper Valley cyclists", "your teammates", "targeted groups" );
-        var i2 = 0;
-        var width;
-        var tid2 = setInterval(
-            function() {
-                $("#changingtext2 span").animate({'opacity': 0}, 1000, function () {
-                  $(this).text(t2[i2]);
-                  width = $('#chkWidth2').text(t2[i2]).width() +100;
-                  console.log(t2[i2], width);
-                  $(this).animate({'opacity': 1, 'width': width, 'height':38.5}, 1000);
-              });
-
-              if(i2 < t2.length -1) 
-                  i2++;
-              else i2 = 0;
-
-            }, 3000 );
-
-      });
-    
+      (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+      mixpanel.init("96c9e63d20b6842a51cbd2f6a598daaa");/ end Mixpanel
+    :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-37799908-1']);
       _gaq.push(['_trackPageview']);
@@ -72,8 +35,12 @@
 
     %div.container.main
       %div.row
-        %p.notice= notice
-        %p.alert= alert
+        -if notice
+          .notice
+            = notice
+        -if alert
+          .alert
+            = alert
         /=render partial: "shared/post_search_bar" unless @disable_nav
         -if current_user
           -if current_page?(root_url)
@@ -83,7 +50,14 @@
         = yield
         /= debug(params) if Rails.env.development?
       /%div#signup_modal.modal.hide
-    %footer
+    / %footer
+    /   %div.copyright
+    /           Icons made by Freepik from
+    /           %a{:href => "http://www.flaticon.com", :title => "Flaticon"} www.flaticon.com
+    /           is licensed by
+    /           %a{:href => "http://creativecommons.org/licenses/by/3.0/", :title => "Creative Commons BY 3.0"} CC BY 3.0
+    
+    / CRAZY EGG TRACKING SCRIPT  
     %script{:type=>"text/javascript"}
       setTimeout(function(){var a=document.createElement("script");
       var b=document.getElementsByTagName("script")[0];

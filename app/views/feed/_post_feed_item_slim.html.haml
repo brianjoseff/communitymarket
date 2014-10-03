@@ -51,7 +51,7 @@
       %div.slim-feed-title-row{class: "#{feed_item.completed? ? 'opaque' : '' }"}
         -if feed_item.post_category_id == 1
           -unless feed_item.assets.empty?
-            =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title, class: "#{feed_item.completed? ? 'opaque' : '' }"), post_url(feed_item)
+            =link_to_if !feed_item.completed?, image_tag(feed_item.assets.empty?  ? '/assets/small.png': feed_item.assets.first.image.url(:thumb), :alt => feed_item.title, class: "#{feed_item.completed? ? 'opaque' : 'thumb-post-photo' }"), post_url(feed_item)
         -elsif feed_item.post_category_id == 2
           /%div.wanted-marker
           %span.for-sale Wanted

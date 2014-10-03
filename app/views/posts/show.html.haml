@@ -15,156 +15,247 @@
 /       =render :partial => "search/search_form"
 .container
   %br/
-  %br/
-  %div.row
+  %div.row  
     -if !@post.active? && !@post.completed?
       %h3 Post is inactive
     -elsif @post.completed?
       %h3 Post has been completed! Sold, GotRE:, found, etc...
       %h5 Check out more stuff below
+      
+  
+  
+  
+  
   %div{:class => "#{@post.active? ? "" : "inactive-post"}"}
     %div.row
-      -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
-        %div.col-lg-2
-          / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
-          =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-          %div#modal_image{:style => "display:none;"}
-            =render 'modal_image', :post => @post
+      .post-show
+        -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
+          %div.col-lg-2.post-image
+            / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
 
-          %div.row
-            -if @post.price
-              $#{@post.price}
-            -elsif @tier
-              Tier #{@tier.id}
-              %p sells for: $#{@tier.price/100}
-          /buy button
-          /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-        %div.col-lg-10
-          %div.row
-            %h1 #{@post.title}
-            -@post.tags.each do |tag|
-              %div#whole_tag
-                %span#span-tag
-                =link_to tag.name, tag_url(tag), :class => "tag"
-          %div.row
-            %p #{simple_format h(@post.description)}
-      -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"
-        %div.row      
-          -unless @post.assets.empty?
-            %div.col-lg-2
-              =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-              %div#modal_image{:style => "display:none;"}
-                =render 'modal_image', :post => @post
-          %h1 Service: #{@post.title}
-          -if @post.lump_sum?
-            %h3 Compensation: $ #{@post.lump_sum}
-          -elsif @post.hourly_rate
-            %h3 Compensation: $#{@post.hourly_rate} per hour
-          -else
-            %h3 Compensation: #{@post.other}
-          -@post.tags.each do |tag|
-            %div#whole_tag
-              %span#span-tag
-              =link_to tag.name, tag_url(tag), :class => "tag"
-        %div.row
-          %p #{simple_format h(@post.description)}
-      -elsif @post.post_category.name == "Wanted"
-        %div.row      
-          -unless @post.assets.empty?
-            %div.col-lg-2
-              =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-              %div#modal_image{:style => "display:none;"}
-                =render 'modal_image', :post => @post
-          %h1 Wanted: #{@post.title}
-          -@post.tags.each do |tag|
-            %div#whole_tag
-              %span#span-tag
-              =link_to tag.name, tag_url(tag), :class => "tag"
-        %div.row
-          %p #{simple_format h(@post.description)}
-      -elsif @post.post_category.name == "Housing"
-        %div.col-lg-2
-          / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
-          =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-          %div#modal_image{:style => "display:none;"}
-            =render 'modal_image', :post => @post
+            =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+            %div#modal_image{:style => "display:none;"}
+              =render 'modal_image', :post => @post
 
-          %div.row
-            -if @post.price
-              $#{@post.price}
-            -elsif @tier
-              Tier #{@tier.id}
-              %p sells for: $#{@tier.price/100}
-          /buy button
-          /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-        %div.col-lg-10
-          %div.row
-            %h1 #{@post.title}
-            -@post.tags.each do |tag|
-              %div#whole_tag
-                %span#span-tag
-                =link_to tag.name, tag_url(tag), :class => "tag"
-          %div.row
-            %p #{simple_format h(@post.description)}
-      -else
-        %div.col-lg-2
-          / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
-    
-          =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
-          %div#modal_image{:style => "display:none;"}
-            =render 'modal_image', :post => @post
+            
+            -unless @post.assets.empty?
+              .post-thumbnails
+                -@post.assets[1..-1].each do |asset|
+                  =image_tag(asset.image.url(:thumb), :alt => @post.title, :class => "thumbnail post-thumbnail")
+            /buy button
+            /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+          %div.col-lg-7.post-content
+            .row.post-info
+              %h1.post-show-title
+                -if @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"        
+                  Service: 
+              
+                -elsif @post.post_category.name == "Wanted" 
+                  Wanted:
+                #{@post.title}
+                -if current_user && current_user.posts.include?(@post) || current_user && current_user.admin?
+                  =link_to 'Edit', edit_post_path(@post), style:"font-size: 50%;"
+              -if @post.price
+                %h3 $#{@post.price}
+            
+              -if @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"
+                -if @post.lump_sum?
+                  %h3 Compensation: $ #{@post.lump_sum}
+                -elsif @post.hourly_rate
+                  %h3 Compensation: $#{@post.hourly_rate} per hour
+                -else
+                  %h3 Compensation: #{@post.other}
+              -if @tier
+                Tier #{@tier.id}
+                %p sells for: $#{@tier.price/100}
 
-          %div.row
-            -if @post.price
-              $#{@post.price}
-            -elsif @tier
-              Tier #{@tier.id}
-              %p sells for: $#{@tier.price/100}
-          /buy button
-          /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
-        %div.col-lg-10
-          %div.row
-            %h1 #{@post.title}
-            -@post.tags.each do |tag|
-              %div#whole_tag
-                %span#span-tag
-                =link_to tag.name, tag_url(tag), :class => "tag"
-          %div.row
-            %p #{simple_format h(@post.description)}
-    
-    %div.row
-      %div.col-lg-4
-        %div.buy.pull-left#show_post_buy
-          -if @post.tier_id
-            -if signed_in? && current_user.stripe_customer_id
-              = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
-                - if @transaction.errors.any?
-                  .error_messages
-                    %h2
-                      = pluralize(@transaction.errors.count, "error")
-                      prohibited this transaction from being saved:
-                    %ul
-                      - @transaction.errors.full_messages.each do |msg|
-                        %li= msg                                          
-                =f.hidden_field :post_id, :value => @post.id
-                =f.submit "Buy Now", class: "btn btn-default btn-medium btn-success"
-            -elsif signed_in? && current_user.stripe_customer_id.nil?
-              =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
-            -else
-              =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-default btn-med btn-success", :data_postid => @post.id
-        %div.email.pull-left
-          =link_to_modal "Email", new_message_path(:post_id => @post.id, :post=>@post, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-default btn-mini"
-      %div.row
-      -unless @post.assets.empty?
-        -@post.assets[1..-1].each do |asset|
-          =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
+              
+              %p #{simple_format h(@post.description)}
+              -@post.tags.each do |tag|
+                %div#whole_tag
+                  %span#span-tag
+                  =link_to tag.name, tag_url(tag), :class => "tag"
+            .row.post-call-to-action
+              /CONTACT SELLER
+              %div.buy
+                -if @post.tier_id
+                  -if signed_in? && current_user.stripe_customer_id
+                    = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
+                      - if @transaction.errors.any?
+                        .error_messages
+                          %h2
+                            = pluralize(@transaction.errors.count, "error")
+                            prohibited this transaction from being saved:
+                          %ul
+                            - @transaction.errors.full_messages.each do |msg|
+                              %li= msg                                          
+                      =f.hidden_field :post_id, :value => @post.id
+                      =f.submit "Buy Now", class: "btn btn-default btn-medium btn-success"
+                  -elsif signed_in? && current_user.stripe_customer_id.nil?
+                    =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
+                  -else
+                    =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-default btn-med btn-success", :data_postid => @post.id
+              %div.email.pull-left
+                =link_to_modal "Email Seller", new_message_path(:post_id => @post.id, :post=>@post, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-default btn-mini"
 
-    -if current_user && current_user.posts.include?(@post)
-      = link_to 'Edit', edit_post_path(@post)
-      \|
-      = link_to 'Back', posts_path
+        .col-lg-3
+          /Recommended Posts
+          /=render partial: 'random_post', collection: @random_posts, as: :post
+ 
+
+
+
   %div.row.random-posts
     %h5 More Posts:
     =render partial: 'random_post', collection: @random_posts, as: :post
+    
+  / %div{:class => "#{@post.active? ? "" : "inactive-post"}"}
+  /     %div.row
+  /       -if @post.post_category.name == "For Sale" || @post.post_category.name == "Borrow/Rent"
+  /         %div.col-lg-2
+  /           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+  /     
+  /           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+  /           %div#modal_image{:style => "display:none;"}
+  /             =render 'modal_image', :post => @post
+  / 
+  / 
+  /           /buy button
+  /           /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+  /         %div.col-lg-10
+  /           %div.row
+  /             %h1.post-show-title
+  /               #{@post.title}
+  /               -if current_user && current_user.posts.include?(@post) || current_user.admin?
+  /                 =link_to 'Edit', edit_post_path(@post), style:"font-size: 50%;"
+  /             -if @post.price
+  /               %h3 $#{@post.price}
+  /             -elsif @tier
+  /               Tier #{@tier.id}
+  /               %p sells for: $#{@tier.price/100}
+  /             %p #{simple_format h(@post.description)}
+  /             -@post.tags.each do |tag|
+  /               %div#whole_tag
+  /                 %span#span-tag
+  /                 =link_to tag.name, tag_url(tag), :class => "tag"
+  / 
+  /             
+  /       -elsif @post.post_category.name == "Request Service" || @post.post_category.name == "Offer Service"
+  /         %div.row      
+  /           -unless @post.assets.empty?
+  /             %div.col-lg-2
+  /               =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+  /               %div#modal_image{:style => "display:none;"}
+  /                 =render 'modal_image', :post => @post
+  /           %h1 Service: #{@post.title}
+  /           -if @post.lump_sum?
+  /             %h3 Compensation: $ #{@post.lump_sum}
+  /           -elsif @post.hourly_rate
+  /             %h3 Compensation: $#{@post.hourly_rate} per hour
+  /           -else
+  /             %h3 Compensation: #{@post.other}
+  /           -@post.tags.each do |tag|
+  /             %div#whole_tag
+  /               %span#span-tag
+  /               =link_to tag.name, tag_url(tag), :class => "tag"
+  /         %div.row
+  /           %p #{simple_format h(@post.description)}
+  /       -elsif @post.post_category.name == "Wanted"
+  /         %div.row      
+  /           -unless @post.assets.empty?
+  /             %div.col-lg-2
+  /               =link_to_modal image_tag(@post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+  /               %div#modal_image{:style => "display:none;"}
+  /                 =render 'modal_image', :post => @post
+  /           %h1 Wanted: #{@post.title}
+  /           -@post.tags.each do |tag|
+  /             %div#whole_tag
+  /               %span#span-tag
+  /               =link_to tag.name, tag_url(tag), :class => "tag"
+  /         %div.row
+  /           %p #{simple_format h(@post.description)}
+  /       -elsif @post.post_category.name == "Housing"
+  /         %div.col-lg-2
+  /           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+  /     
+  /           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+  /           %div#modal_image{:style => "display:none;"}
+  /             =render 'modal_image', :post => @post
+  / 
+  /           %div.row
+  /             -if @post.price
+  /               $#{@post.price}
+  /             -elsif @tier
+  /               Tier #{@tier.id}
+  /               %p sells for: $#{@tier.price/100}
+  /           /buy button
+  /           /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+  /         %div.col-lg-10
+  /           %div.row
+  /             %h1
+  /               #{@post.title}
+  /               -if current_user && current_user.posts.include?(@post)
+  /                 =link_to 'Edit', edit_post_path(@post)
+  /             -@post.tags.each do |tag|
+  /               %div#whole_tag
+  /                 %span#span-tag
+  /                 =link_to tag.name, tag_url(tag), :class => "tag"
+  /           %div.row
+  /             %p #{simple_format h(@post.description)}
+  /       -else
+  /         %div.col-lg-2
+  /           / =link_to image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), post_url(@post), :class => "thumbnail"
+  /     
+  /           =link_to_modal image_tag(@post.assets.empty?  ? '/assets/small.png': @post.assets.first.image.url(:medium), :alt => @post.title), "#modal_image", :class => "thumbnail"
+  /           %div#modal_image{:style => "display:none;"}
+  /             =render 'modal_image', :post => @post
+  / 
+  /           %div.row
+  /             -if @post.price
+  /               $#{@post.price}
+  /             -elsif @tier
+  /               Tier #{@tier.id}
+  /               %p sells for: $#{@tier.price/100}
+  /           /buy button
+  /           /%a.btn btn-default{remote: :true, :href => "#buy_modal", :role => "button"} Buy
+  /         %div.col-lg-10
+  /           %div.row
+  /             %h1 #{@post.title}
+  /             -@post.tags.each do |tag|
+  /               %div#whole_tag
+  /                 %span#span-tag
+  /                 =link_to tag.name, tag_url(tag), :class => "tag"
+  /           %div.row
+  /             %p #{simple_format h(@post.description)}
+  /     
+  /     %div.row
+  /       %div.col-lg-4
+  /         %div.buy.pull-left#show_post_buy
+  /           -if @post.tier_id
+  /             -if signed_in? && current_user.stripe_customer_id
+  /               = form_for @transaction, :url => customer_purchase_transactions_path(@transaction)  do |f|
+  /                 - if @transaction.errors.any?
+  /                   .error_messages
+  /                     %h2
+  /                       = pluralize(@transaction.errors.count, "error")
+  /                       prohibited this transaction from being saved:
+  /                     %ul
+  /                       - @transaction.errors.full_messages.each do |msg|
+  /                         %li= msg                                          
+  /                 =f.hidden_field :post_id, :value => @post.id
+  /                 =f.submit "Buy Now", class: "btn btn-default btn-medium btn-success"
+  /             -elsif signed_in? && current_user.stripe_customer_id.nil?
+  /               =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-med btn-success", :data_postid => @post.id 
+  /             -else
+  /               =link_to 'Buy Now', new_transaction_path(:post_id => @post.id), :id => "new_transaction_link", :class => "btn btn-default btn-med btn-success", :data_postid => @post.id
+  /         %div.email.pull-left
+  /           =link_to_modal "Email", new_message_path(:post_id => @post.id, :post=>@post, :recipient => @post.user.try(:email)),:remote => true, class: "message-seller-button btn btn-default btn-mini"
+  /       %div.row
+  /       -unless @post.assets.empty?
+  /         -@post.assets[1..-1].each do |asset|
+  /           =image_tag(asset.image.url(:original), :alt => @post.title, :class => "thumbnail")
+  / 
+  / 
+  /   %div.row.random-posts
+  /     %h5 More Posts:
+  /     =render partial: 'random_post', collection: @random_posts, as: :post

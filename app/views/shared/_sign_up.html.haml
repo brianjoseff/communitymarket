@@ -11,13 +11,13 @@
   %div#name_field.form-group
     / =f.label :name, :class => 'control-label'
     / %div.controls
-    =f.text_field :name, type:"text",:class => "form-control", :placeholder => "Thomas More"        
+    =f.text_field :name, type:"text",:class => "form-control", :placeholder => "Eleazar Wheelock"        
   %div.form-group
     / =f.label :email, :class => 'control-label'
     /%div.controls
-    =f.text_field :email,type:"email", :class => "form-control", :placeholder => "hello@mom.com"  
+    =f.text_field :email,type:"email", :class => "form-control", :placeholder => "elly@dartmouth.edu"  
   %div.form-group
     /=f.label :password, :class => 'control-label'
     /%div.controls
     =f.password_field :password, type:"password",:class => "form-control", :placeholder => "Password"  
-  =f.submit "Sign Up", class: "btn btn-default btn-primary btn-landing-page"
+  =f.submit "Sign Up", class: "btn btn-default btn-primary", id: "cta-peek-2"

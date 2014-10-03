@@ -109,7 +109,9 @@ gem 'aws-sdk'
 
 #heroku db compatibility
 gem 'pg'
-gem 'heroku'
+gem 'heroku', '~>3.1.0'
+
+gem 'friendly_id'
 
 
 #transactional email
