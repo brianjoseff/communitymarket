@@ -42,6 +42,15 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'grape', :git => 'https://github.com/intridea/grape.git', :tag => 'v0.7.0'
+
+gem 'grape-rabl'        # rabl for Grape rendering
+gem 'grape-jbuilder'    # jbuilder for Grape rendering
+gem 'grape-swagger'     # API docs
+gem 'swagger-ui_rails'  # API docs hosting
+
+gem 'uuid'              # UUID generation
+
 #ENV variable management
 gem 'figaro'
 
@@ -120,7 +129,7 @@ gem 'mobile-fu'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby'
-
+gem 'active_model_serializers'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
@@ -132,8 +141,6 @@ gem 'bcrypt-ruby'
 
 # To use debugger
 # gem 'debugger'
-
-gem "localtunnel"
 
 
 gem "haml", ">= 3.0.0"

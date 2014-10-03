@@ -11,7 +11,6 @@ require 'jquery/modal/rails'
 require 'jquery/modal/filters'
 require 'jquery/modal/helpers'
 # require "rails/test_unit/railtie"
-
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   # Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -70,7 +69,16 @@ module Communitymarket
     config.assets.initialize_on_precompile = false
 
 
-    
+
+    # For grape (API)
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+
+
+    config.middleware.use(Rack::Config) do |env|
+      env['api.tilt.root'] = Rails.root.join "app", "views", "api"
+    end
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.generators do |g|

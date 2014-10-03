@@ -121,7 +121,10 @@ Communitymarket::Application.routes.draw do
   # match '/signin', :to => 'sessions#new'
   match '/invites', :to => 'invites#new', via: :post
   match '/contacts', :to => 'contacts#new', via: :post
-  
+
+  mount CommunityMarket::API =>'/'
+  get "/docs" => 'docs#index'
+
   root :to => 'pages#index'
   
   

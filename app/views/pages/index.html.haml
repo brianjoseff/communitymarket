@@ -42,11 +42,7 @@
           %div.col-sm-2
             %div.loading-indicator{:style => "display:none"}
               = image_tag("loader.gif")
-              
-              
-          / %div.span5
-          /   =link_to "Textbooks", {:action=>"textbooks"}, {:remote => true, :id=>"textbook_link", class: "special-vertical"}
-          /   =link_to "Dorm Furniture", {:action=>"dorm_furniture"}, {:remote => true, :id=>"furniture_link", class: "special-vertical"}
+
         /Should put these buttons on a "search result page"
         /Sorting buttons
         /=sort_link @sort_posts, :name, "Name"
@@ -70,8 +66,6 @@
         %h3 Popular Tags
         .page-element-background
           =render :partial => 'tags/popular_tags', :locals => {:tags => @popular_tags}
-        / %h4 Tags You Follow
-        / =render :partial => 'tags/your_tags', :locals => {:tags => @followed_tags}
       -else
         %h3 Popular Tags
         .page-element-background

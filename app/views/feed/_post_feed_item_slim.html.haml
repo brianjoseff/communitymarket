@@ -73,9 +73,9 @@
           = link_to_if !feed_item.completed?, feed_item.title, post_url(feed_item), :class => "slim-feed-title"
         -unless feed_item.assets.first.nil?
           %i.icon-medium.icon-camera
-        /COMMENTED OUT DATE  
+        /COMMENTED OUT DATE
         /%span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
-    
+
       / %div.row
       /   -feed_item.tags.each do |tag|
       /     =link_to tag.name, tag_url(tag), :class => "tag"
@@ -113,9 +113,7 @@
             %button.btn.btn-default.btn-sm.completed
               =link_to "Email", "#", class: "message-seller-button completed"
               %span.glyphicon.glyphicon-envelope{class: "#{feed_item.completed? ? 'opaque' : '' }"}
-          -else          
-            / = button_to 'Email <span class="glyphicon glyphicon-envelope"></span>.html_safe', new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)), :class=>"btn btn-default", :remote => true do                                                      
-            /   Email
+          -else
             =link_to_modal new_message_path(:post_id => feed_item.id, :recipient => feed_item.user.try(:email)),:remote => true, class: "btn btn-default btn-sm message-seller-button" do
               Email
               %span.glyphicon.glyphicon-envelope
