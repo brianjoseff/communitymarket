@@ -31,15 +31,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "authentications", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "badges_sashes", :force => true do |t|
     t.integer  "badge_id"
     t.integer  "sash_id"
@@ -160,11 +151,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "monologue_posts_tags", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "tag_id"
-  end
-
   create_table "post_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -179,14 +165,14 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.integer  "user_id"
     t.integer  "post_category_id"
     t.boolean  "premium"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "email"
     t.boolean  "cash"
     t.integer  "price"
     t.boolean  "active",           :default => true
     t.boolean  "post_to_facebook"
-    t.boolean  "completed"
+    t.boolean  "completed",        :default => false
     t.integer  "lump_sum"
     t.integer  "hourly_rate"
     t.string   "other"
@@ -243,10 +229,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.string   "stripe_customer_id"
     t.string   "password"
     t.boolean  "admin"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -255,6 +237,10 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
     t.integer  "sash_id"
     t.integer  "level",                                 :default => 0
   end

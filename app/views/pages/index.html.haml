@@ -59,10 +59,17 @@
 
           /Post feed
           /=render :partial => 'feed',:locals => {:feed_items => @posts}
+          #babylongrid
+            -@posts.each do |p|              
+              %article
+                -unless p.assets.empty?
+                  =link_to_if !p.completed?, image_tag(p.assets.empty?  ? '/assets/small.png': p.assets.first.image.url(:thumb), :alt => p.title, class: "#{p.completed? ? 'opaque' : 'thumb-post-photo' }"), post_url(p)
+                .h3.title=p.title
+                .desc=truncate(p.description, 10)
 
-          #post_feed.page-element-background
-            .col-lg-12
-              =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
+          / #post_feed.page-element-background
+          /   .col-lg-12
+          /     =render :partial => 'feed/feed',:locals => {:feed_items => @posts}
 
       /RIGHT COLUMN: TAGS AND GROUPS
 

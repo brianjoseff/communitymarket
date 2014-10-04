@@ -1,4 +1,32 @@
 $ ->
+  $("#babylongrid").babylongrid()
+  return
+
+$ ->
+  $("#babylongrid").babylongrid
+    scheme: [ # custom grid scheme
+      {
+        minWidth: 960
+        columns: 4
+      }
+      {
+        minWidth: 720
+        columns: 3
+      }
+      {
+        minWidth: 550
+        columns: 2
+      }
+      {
+        minWidth: 0
+        columns: 1
+      }
+    ]
+    display: null # 'tower' or 'city'. Set vertical align to bottom or center
+    firstToRight: false # Move first article to last column
+    heightDivisor: 25 # Article height divisor. For disable set 1
+
+$ ->
 	$(".completed").click (e) ->
 		e.preventDefault()
 

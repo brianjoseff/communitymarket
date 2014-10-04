@@ -318,6 +318,7 @@ class PostsController < ApplicationController
   
   
   private
+  
   def send_notification_emails_to_group_members(groups, user)
     all_memberships = []
     for group in @groups do
