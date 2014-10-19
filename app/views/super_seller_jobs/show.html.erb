@@ -1,0 +1,32 @@
+<h1>Super Seller Job</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <table class="table">
+      <tr>
+        <td><strong>Estimated value</strong></td>
+        <td>$<%= @super_seller_job.estimated_value %></td>
+      </tr>
+      <tr>
+        <td><strong>What to do with unsold items</strong></td>
+        <td><%= @super_seller_job.sell_options %></td>
+      </tr>
+      <tr>
+        <td><strong>Pickup location</strong></td>
+        <td><%= @super_seller_job.pickup_location %></td>
+      </tr>
+      <tr>
+        <td><strong>Notes from owner</strong></td>
+        <td><%= @super_seller_job.notes %></td>
+      </tr>
+    </table>
+    <div class="text-center">
+      <%= link_to "Contact Owner", "#", :class => "btn btn-success" %>
+    </div>
+
+  </div>
+
+
+</div>
+
+<%= link_to "← Back to all jobs", super_seller_jobs_path, :class => "btn btn-default"  %>

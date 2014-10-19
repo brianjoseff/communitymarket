@@ -8,6 +8,7 @@ class SuperSellerJobsController < ApplicationController
   end
 
   def show
+    @super_seller_job = SuperSellerJob.find(params[:id])
   end
 
   def new

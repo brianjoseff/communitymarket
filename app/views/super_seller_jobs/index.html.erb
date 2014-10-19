@@ -1,20 +1,22 @@
-<h1>All Super Seller Jobs available for pickup</h1>
+<h1>All Active Super Seller Jobs</h1>
 
 
 <table class="table table-hover">
   <tr>
     <thead>
+      <th>Posted</th>
       <th>Owner</th>
       <th>Estimated Value</th>
-      <th>Pickup Location</th>
-      <th></th>
+      <th colspan="3"></th>
     </thead>
   </tr>
+  <% @super_seller_jobs.each do |job| %>
   <tr>
-    <td>Kenji</td>
-    <td>$100</td>
-    <td>Room 205</td>
-    <td></td>
+    <td><%= time_ago_in_words(job.created_at) %> ago</td>
+    <td><%= job.owner_hidden %></td>
+    <td>$<%= job.estimated_value %></td>
+    <td><%= link_to "more info", super_seller_job_path(job), :class => "btn btn-default btn-xs" %></td>
+    <td><%= link_to "Contact Owner", "#", :class => "btn btn-success btn-xs" %></td>
   </tr>
-
+  <% end %>
 </table>

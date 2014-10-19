@@ -7,4 +7,15 @@ class SuperSellerJob < ActiveRecord::Base
   validates :pickup_location, :presence => true
 
 
+  def owner
+    User.find(self.owner_id).name
+  end
+
+  def owner_hidden
+    name = User.find(self.owner_id).name
+    name.split(" ").map do |name|
+      name[0] + "***"
+    end.join(" ")
+  end
+
 end
