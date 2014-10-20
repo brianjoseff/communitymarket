@@ -130,13 +130,13 @@
       <% if @sseller_posts.empty? %>
         <div class="panel panel-default text-center">
           <div class="panel-body">
-          <h2>You have no <span id="super-seller">SuperSeller</span> posts.</h2>
+          <h2>You have no <span id="super-seller">SuperSeller posts</span>.</h2>
             <%= link_to "Post New Item as SuperSeller", new_post_path(:sseller_post => true), :class => "btn btn-success"  %>
           </div>
         </div>
       <% else %>
         <div class='super-seller-posts-container'>
-        <h4>Your <span>SuperSeller</span> Posts</h4>
+        <h4>Your <span>SuperSeller Posts</span></h4>
           <table class="table table-striped">
             <tr>
               <th>Item</th>
@@ -174,6 +174,49 @@
         </div>  <!-- End super-seller-posts-container -->
       <% end %>
     <% end %>
+
+  <!-- Super Seller Jobs -->
+
+    <% if @user.super_seller_jobs.empty? %>
+       <div class="panel panel-default text-center">
+        <div class="panel-body">
+        <h2>You have no <span id="super-seller-jobs">SuperSeller jobs</span>.</h2>
+          <%= link_to "Sell with SuperSeller", new_super_seller_job_path, :class => "btn btn-danger" %>
+        </div>
+      </div>
+    <% else %>
+       <div class='super-seller-jobs-container'>
+        <h4>Your <span id="super-seller-jobs">SuperSeller Jobs</span></h4>
+          <table class="table table-striped">
+            <tr>
+              <th>Status</th>
+              <th>Your SuperSeller</th>
+              <th>Estimated Value</th>
+              <th>Date posted</th>
+              <th class='table-actions'>Actions</th>
+            </tr>
+            <% @user.super_seller_jobs.each do |job| %>
+              <tr>
+                <td><%= job.status %></td>
+                <td><%= job.super_seller_id %></td>
+                <td>$<%= job.estimated_value %></td>
+                <td><%= time_ago_in_words(job.created_at) %> ago</td>
+                <td class="post-management-buttons">
+                  <%= link_to 'Edit', edit_super_seller_job_path(job) %>
+                  <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure you want to permanently delete this job?' } %>
+                  <% if job.status == "active" %>
+                    <%= link_to 'Deactivate Job', super_seller_job_path(job, "super_seller_job[status]" => 'inprogress'), :method => :put, :confirm => "Did a SuperSeller pick up all items for this job?" %>
+                  <% else %>
+                    <%= link_to 'Reactivate Job', super_seller_job_path(job, "super_seller_job[status]" => 'active'), :method => :put, :confirm => "Reactivating your job means it will be visible again for all SuperSellers who want to sell for you.  Are you sure you want to reactivate this job?" %>
+                  <% end %>
+
+                </td>
+              </tr>
+              <% end %>
+            </table>
+        </div>  <!-- End super-seller-jobs-container -->
+    <% end %>
+
 
   </div>
 

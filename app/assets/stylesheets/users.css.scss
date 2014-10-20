@@ -133,6 +133,11 @@ a.feed-title{
   font-weight: bold;
 }
 
+.super-seller-jobs-container span {
+  color: #0b9102;
+  font-weight: bold;
+}
+
 .padding {
   padding: 10px;
 }
@@ -141,6 +146,34 @@ a.feed-title{
   margin-bottom: 10px;
 }
 
-// #estimated_value {
-//   width: 200px;
-// }
+.ssellerjobs span.available,
+.ssellerjobs span.in-progress {
+  display: inline-block;
+  color: green;
+  border: 1px solid green;
+  background: #bdf7b1;
+  padding: 1px 2px;
+  border-radius: 5px;
+}
+
+.ssellerjobs span.in-progress {
+  color: grey;
+  border: 1px solid grey;
+  background: #d3d3d3;
+}
+
+#super-seller-jobs {
+  font-weight: bold;
+  color: #d43f3a;
+}
+
+
+.modal-body {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+.modal-body textarea {
+  width: 100%;
+}

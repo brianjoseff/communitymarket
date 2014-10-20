@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141019192056) do
+ActiveRecord::Schema.define(:version => 20141019204045) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(:version => 20141019192056) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",          :default => "active"
   end
 
   add_index "super_seller_jobs", ["owner_id"], :name => "index_super_seller_jobs_on_owner_id"

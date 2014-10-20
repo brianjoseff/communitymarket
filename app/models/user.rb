@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   #has_many :images
   has_many :followships, :foreign_key => :follower_id
   has_many :followed_tags, through: :followships, source: :followed, :class_name => "Tag"
-  has_many :super_seller_jobs
+  has_many :super_seller_jobs, :foreign_key => :owner_id
 
   has_merit
 

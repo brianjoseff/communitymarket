@@ -4,7 +4,7 @@ class SuperSellerJobsController < ApplicationController
 
   def index
     redirect_to root_path unless current_user.super_seller
-    @super_seller_jobs = SuperSellerJob.all
+    @super_seller_jobs = SuperSellerJob.where(status: 'active')
   end
 
   def show
@@ -52,10 +52,17 @@ class SuperSellerJobsController < ApplicationController
   end
 
   def destroy
+    @super_seller_job = SuperSellerJob.find(params[:id])
     @super_seller_job.destroy
     respond_to do |format|
-      format.html { redirect_to super_seller_jobs_url, notice: 'Super Seller Job was successfully destroyed.' }
+      format.html { redirect_to user_path(current_user), notice: 'Super Seller Job was successfully destroyed.' }
     end
+  end
+
+  def notify_owner
+    super_seller_job = SuperSellerJob.find(params[:job_id])
+    @user = User.find(super_seller_job.owner_id)
+    SuperSellerJobMailer.contact_job_owner(@user).deliver
   end
 
   private

@@ -8,6 +8,7 @@ Communitymarket::Application.routes.draw do
 
   # resources :contacts
 
+  post "/notify_job_owner", to: "super_seller_jobs#notify_owner"
 
   match "/404", to: "exceptions#not_found", via: [:get, :post]
 
