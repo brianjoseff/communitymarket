@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+
+    <h3>Congrats <%= @seller.name %>!</h3>
+
+    <p>A job owner has agreed to let you sell for them.</p>
+
+    <p>Please arrange a pickup of the item as soon as possible:</p>
+
+    <p>Owner name: <strong><%= @owner.name %></strong></p>
+    <p>Owner phone number: <strong><%= @owner.phone %></strong></p>
+    <p>Total estimated value of items: <strong>$<%= @job.estimated_value %></strong></p>
+    <p>What to do with unsold items: <strong><%= @job.sell_options %></strong></p>
+    <p>Pickup location: <strong><%= @job.pickup_location %></strong></p>
+    <p>Additional notes: <strong><%= @job.notes %></strong></p>
+
+    <p>Sincerely,</p>
+    <p>- The People & Stuff Team</p>
+
+
+  </body>
+</html>
+
+

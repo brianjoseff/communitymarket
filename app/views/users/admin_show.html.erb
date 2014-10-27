@@ -198,7 +198,7 @@
             <% @user.super_seller_jobs.each do |job| %>
               <tr>
                 <td><%= job.status %></td>
-                <td><%= job.super_seller_id %></td>
+                <td><%= job.seller ? (link_to job.seller.name, user_path(job.seller)) : nil %></td>
                 <td>$<%= job.estimated_value %></td>
                 <td><%= time_ago_in_words(job.created_at) %> ago</td>
                 <td class="post-management-buttons">

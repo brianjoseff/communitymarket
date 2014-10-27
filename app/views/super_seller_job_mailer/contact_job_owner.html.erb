@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+
+    <h3>Congrats <%= @owner.name %>!</h3>
+
+    <p>A SuperSeller wants to sell your stuff!</p>
+
+    <p>Share your job info with the SuperSeller so they can pick up your stuff:</p>
+
+    <form name="accept_seller" action=<%= afwe90vccsIwXK_url %> method="post">
+    <input type="hidden" name="oid" value=<%=  @owner.id %> />
+    <input type="hidden" name="sid" value=<%= @seller.id %> />
+    <input type="hidden" name="jid" value=<%= @super_seller_job.id %> />
+    <input type="submit" value="Share job info with SuperSeller" style="padding: 5px 10px; background: #5cb85c; border: 1px solid #4cae4c; border-radius: 5px; color: white; text-decoration: none;" />
+    </form>
+    <p>(click OK if prompted to submit info.)</p>
+
+    <br>
+
+    <p><%= link_to "View SuperSeller's Profile", user_url(@seller), :style => 'padding: 5px 10px; background: #fff; border: 1px solid #ccc; border-radius: 5px; color: black; text-decoration: none;' %></p>
+    <br>
+
+
+    <p>Sincerely,</p>
+    <p>- The People & Stuff Team</p>
+
+
+  </body>
+</html>
+
+

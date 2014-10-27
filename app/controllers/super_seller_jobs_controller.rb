@@ -1,10 +1,10 @@
 class SuperSellerJobsController < ApplicationController
-  before_filter :authorize_user!
+  before_filter :authorize_user!, :except => :accept_super_seller  # allow POST requests from emails
   before_filter :confirm_user_as_author, :only => [:edit, :destroy]
 
   def index
     redirect_to root_path unless current_user.super_seller
-    @super_seller_jobs = SuperSellerJob.where(status: 'active')
+    @super_seller_jobs = SuperSellerJob.order('created_at DESC')
   end
 
   def show
@@ -61,8 +61,30 @@ class SuperSellerJobsController < ApplicationController
 
   def notify_owner
     super_seller_job = SuperSellerJob.find(params[:job_id])
-    @user = User.find(super_seller_job.owner_id)
-    SuperSellerJobMailer.contact_job_owner(@user).deliver
+    msg = params[:sseller_msg]
+    owner = User.find(super_seller_job.owner_id)
+    SuperSellerJobMailer.contact_job_owner(owner, current_user, msg, super_seller_job).deliver
+    redirect_to super_seller_jobs_path, notice: 'Your message was successfully sent to the job owner!'
+  end
+
+
+  def accept_super_seller
+    # ex. params {"oid"=>"66", "sid"=>"77", "controller"=>"super_seller_jobs", "jid"=>"2"}
+    job    = SuperSellerJob.find(params[:jid])
+    seller = User.find(params[:sid].to_i)
+    owner  = User.find(params[:oid].to_i)
+
+    # Make sure job params from email match job params in database
+    if job.owner_id != owner.id
+      redirect_to root_path, notice: "Sorry that job doesn't exist."
+    end
+
+    job.update_attributes(super_seller_id: seller.id)
+
+    # Send job info to SuperSeller
+    SuperSellerJobMailer.share_job_info_with_seller(owner, seller, job).deliver
+
+    redirect_to root_path, notice: "Your Super Seller Job info was successfully shared with #{seller.name}.\n\nOnce the SuperSeller picks up your items, please DEACTIVATE the job in your dashboard to remove it from being listed."
   end
 
   private

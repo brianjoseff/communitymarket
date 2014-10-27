@@ -6,9 +6,8 @@ class SuperSellerJob < ActiveRecord::Base
   validates :estimated_value, :presence => true
   validates :pickup_location, :presence => true
 
-
-  def owner
-    User.find(self.owner_id).name
+  def seller
+    return self.super_seller_id ? User.find(self.super_seller_id) : nil
   end
 
   def owner_hidden

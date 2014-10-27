@@ -15,7 +15,7 @@ Communitymarket::Application.configure do
   config.action_controller.perform_caching = false
 
   #make action mailer send shit in development AND raise errors.
-  config.action_mailer.perform_deliveries = true 
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
@@ -36,7 +36,7 @@ Communitymarket::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
-  
+
   config.assets.logger = false
   #PAPERCLIP AND AMAZON S3
   # config.paperclip_defaults = {
@@ -55,21 +55,32 @@ Communitymarket::Application.configure do
       secret_access_key: ENV['S3_SECRET']
     }
   }
-  
-  # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  # change to true to allow email to be sent during development
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"
+
+  # # ActionMailer Config
+  # config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # config.action_mailer.delivery_method = :smtp
+  # # change to true to allow email to be sent during development
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.default :charset => "utf-8"
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.gmail.com",
+  #   port: 587,
+  #   domain: "gmail.com",
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: ENV["GMAIL_USERNAME"],
+  #   password: ENV["GMAIL_PASSWORD"]
+  # }
+
+
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    :address   => "smtp.mandrillapp.com",
+    :domain => 'heroku.com',
+    :port      => '587',
+    :user_name => ENV["MANDRILL_USERNAME"],
+    :password  => ENV["MANDRILL_APIKEY"],
+    :authentication => :plain
   }
+
 
 end

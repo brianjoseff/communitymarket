@@ -1,6 +1,5 @@
 <h1>All Super Seller Jobs</h1>
 
-
 <table class="ssellerjobs table table-hover">
   <tr>
     <thead>
@@ -38,6 +37,7 @@
         <%= form_tag "/notify_job_owner", method: "post" do %>
           <%= text_area_tag :sseller_msg, "Hello!\r\rI'm a SuperSeller interested in selling your stuff.\r\rSincerely,\r\r" + current_user.name, :rows => 10 %>
           <%= hidden_field_tag :job_id %>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>

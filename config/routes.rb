@@ -6,9 +6,11 @@ Communitymarket::Application.routes.draw do
   resources :messages
 
 
-  # resources :contacts
-
+  # POST routes for connecting SuperSellerJob Owner & SuperSeller via email
   post "/notify_job_owner", to: "super_seller_jobs#notify_owner"
+  # Somewhat hidden POST request endpoint to allow owners to accept SSeller via email link
+  post "/afwe90vccsIwXK", to: "super_seller_jobs#accept_super_seller"
+
 
   match "/404", to: "exceptions#not_found", via: [:get, :post]
 
