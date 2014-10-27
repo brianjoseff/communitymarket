@@ -10,6 +10,10 @@
 
     <p>A SuperSeller wants to sell your stuff!</p>
 
+    <p>Here a message from them:</p>
+
+    <div style="padding: 10px 20px; border-radius: 5px; background: #dee4fe; "><span style="font-size: 3em; color: lightgrey;">"</span><%= @msg %><span style="font-size: 3em; color: lightgrey;">"</span></div>
+
     <p>Share your job info with the SuperSeller so they can pick up your stuff:</p>
 
     <form name="accept_seller" action=<%= afwe90vccsIwXK_url %> method="post">
@@ -24,6 +28,8 @@
 
     <p><%= link_to "View SuperSeller's Profile", user_url(@seller), :style => 'padding: 5px 10px; background: #fff; border: 1px solid #ccc; border-radius: 5px; color: black; text-decoration: none;' %></p>
     <br>
+
+
 
 
     <p>Sincerely,</p>
