@@ -4,7 +4,7 @@ class SuperSellerJobsController < ApplicationController
 
   def index
     redirect_to root_path unless current_user.super_seller
-    @super_seller_jobs = SuperSellerJob.order('created_at DESC')
+    @super_seller_jobs = SuperSellerJob.where(status: 'active').order('created_at DESC')
   end
 
   def show
