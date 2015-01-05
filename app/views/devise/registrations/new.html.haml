@@ -1,53 +1,57 @@
 / %p or #{link_to "Sign In", new_user_session_path}
 .container
-  .col-lg-6
-    %div.row.sign-up
-      .user-auth-offset
-        %h1 Sign up
-      = simple_form_for @user,  html: {class: 'form-horizontal form'} do |f|
-        -if params[:group_id]
-          =hidden_field_tag('group[member_ids][]', @user.id)
-        - if @user.errors.any?
-          #error_explanation
-            %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-            %ul
-              - @user.errors.full_messages.each do |msg|
-                %li= msg
+  .col-lg-5.page-element-background
+    /%div.row.sign-up
+    /.user-auth-offset
+    %h1 Sign up
+    = simple_form_for @user,  html: {role: "form", class: 'form'} do |f|
+      -if params[:group_id]
+        =hidden_field_tag('group[member_ids][]', @user.id)
+      - if @user.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      %div#school.form-group
+        //image of school
+        //collection select of all schools
+        = f.collection_select(:school_id, School.all, :id, :name, {:prompt => 'Choose your school:'},:class => "form-control")
+
+      %div#name_field.form-group
+        /=f.label :name, :class => 'col-lg-3 control-label'
+        /.col-lg-8
+        =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Thomas More"        
+      %div.form-group
+        /=f.label :email, :class => 'col-lg-3 control-label'
+        /.col-lg-8
+        =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"  
+      %div.form-group
+        /=f.label :password, :class => 'col-lg-3 control-label'
+        /.col-lg-8
+        =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
+      
+      /.user-auth-offset
+      =f.submit "Sign up", class: "btn btn-primary submit-button"
           
-        %div#name_field.form-group
-          =f.label :name, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.text_field :name, type: "text", :class => "form-control", :placeholder => "Thomas More"        
-        %div.form-group
-          =f.label :email, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "hello@mom.com"  
-        %div.form-group
-          =f.label :password, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"  
-        
-        .user-auth-offset
-          =f.submit "Sign up", class: "btn btn-primary submit-button"
-          
         
 
 
-  .col-lg-6
-    %div.row.sign-in
-      .user-auth-offset
-        %h1 Sign in
-      %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
-      =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
-        /=render "shared/error_messages", :target => @user
-        %div.form-group
-          =f.label :email, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
-        %div.form-group
-          =f.label :password, :class => 'col-lg-3 control-label'
-          .col-lg-8
-            =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
+  / .col-lg-6
+  /   %div.row.sign-in
+  /     .user-auth-offset
+  /       %h1 Sign in
+  /     %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+  /     =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
+  /       /=render "shared/error_messages", :target => @user
+  /       %div.form-group
+  /         =f.label :email, :class => 'col-lg-3 control-label'
+  /         .col-lg-8
+  /           =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+  /       %div.form-group
+  /         =f.label :password, :class => 'col-lg-3 control-label'
+  /         .col-lg-8
+  /           =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
 
-        .user-auth-offset
-          =f.submit "Sign in", class: "btn btn-primary submit-button"
+  /       .user-auth-offset
+  /         =f.submit "Sign in", class: "btn btn-primary submit-button"

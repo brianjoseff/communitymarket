@@ -8,26 +8,24 @@
 /     = f.button :submit, "Sign in"
 / = render "devise/shared/links"
 
-
-%div.col-lg-6
+.sign-in-container
+%div.col-lg-5.page-element-background.sign-in-block
   %h1 Sign in
-  %span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
-  =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal form", id: "session"}) do |f|
-    = notice
-    =flash[:alert]
+  /%span.facebook-signin #{link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)} 
+  =form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {role: "form", class: "form", id: "session"}) do |f|
+    / = notice
+    /=flash[:alert]
     /=render "shared/error_messages", :target => @user
     %div.form-group
-      =f.label :email, :class => 'col-lg-3 control-label'
-      .col-lg-8
-        =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
+      /=f.label :email, :class => 'col-lg-3 control-label'
+      =f.text_field :email, type: "text", :class => "form-control", :placeholder => "Email", :validate => { :presence => true } 
     %div.form-group
-      =f.label :password, :class => 'col-lg-3 control-label'
-      .col-lg-8
-        =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
+      /=f.label :password, :class => 'col-lg-3 control-label'
+      =f.password_field :password, type: "password", :class => "form-control", :placeholder => "Password"
 
     .user-auth-offset
-      =f.submit "Sign in", class: "btn btn-primary submit-button"
-      = render "devise/shared/links"
+    =f.submit "Sign in", class: "btn btn-primary submit-button"
+    /= render "devise/shared/links"
 
 
    

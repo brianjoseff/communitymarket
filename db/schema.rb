@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140624172029) do
+ActiveRecord::Schema.define(:version => 20150105091211) do
 
   create_table "assets", :force => true do |t|
     t.integer  "imageable_id"
@@ -27,15 +27,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
   create_table "assignments", :force => true do |t|
     t.integer  "post_id"
     t.integer  "group_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "authentications", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -102,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.float    "longitude"
     t.integer  "zipcode"
     t.string   "password"
+    t.integer  "school_id"
   end
 
   create_table "images", :force => true do |t|
@@ -160,11 +152,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "monologue_posts_tags", :id => false, :force => true do |t|
-    t.integer "post_id"
-    t.integer "tag_id"
-  end
-
   create_table "post_categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -179,22 +166,34 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.integer  "user_id"
     t.integer  "post_category_id"
     t.boolean  "premium"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "email"
     t.boolean  "cash"
     t.integer  "price"
     t.boolean  "active",           :default => true
     t.boolean  "post_to_facebook"
-    t.boolean  "completed"
+    t.boolean  "completed",        :default => false
     t.integer  "lump_sum"
     t.integer  "hourly_rate"
     t.string   "other"
+    t.integer  "school_id"
   end
 
   create_table "sashes", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "taggings", :force => true do |t|
@@ -243,10 +242,6 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.string   "stripe_customer_id"
     t.string   "password"
     t.boolean  "admin"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -255,8 +250,13 @@ ActiveRecord::Schema.define(:version => 20140624172029) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
     t.integer  "sash_id"
     t.integer  "level",                                 :default => 0
+    t.integer  "school_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

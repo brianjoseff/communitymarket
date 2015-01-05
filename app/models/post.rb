@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   belongs_to :post_category
   belongs_to :tier
   belongs_to :user
+  belongs_to :school
   has_many :assignments, :dependent => :destroy
   has_many :groups, :through => :assignments
   has_many :taggings

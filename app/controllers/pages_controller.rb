@@ -65,7 +65,7 @@ class PagesController < ApplicationController
         @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       else
-        @posts = filter_posts(Post.all).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(Post.all, @user).sort { |x,y| y.created_at <=> x.created_at }
         #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50) 
       end
@@ -251,12 +251,18 @@ class PagesController < ApplicationController
     end
   end
   
+  def admin
+    @schools = School.all
+  end
   
   private
   
-  def filter_posts(posts)
+  def filter_posts(posts, user)
     posts = posts.select do |post|
+      puts "are you from this school?: #{post.school_id == user.school_id}" 
       case
+      when post.school_id != user.school_id
+        false
       when post.active?
         true
       when !post.active? && post.completed?

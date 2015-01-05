@@ -89,8 +89,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 #image uploading
-gem 'paperclip'
 gem 'aws-sdk'
+gem 'paperclip'
+
 
 # gem 'fog'
 # gem 'carrierwave'

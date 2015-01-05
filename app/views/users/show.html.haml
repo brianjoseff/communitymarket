@@ -8,6 +8,9 @@
 
 %div.col-lg-8
   %h4 #{@user.name}
+  %p #{@school.name}
+  =image_tag(@school.image.url(:original), :alt => @school.name, class: "circle-image")
+  
 
   /=render "groups/group", :collection => @groups, :as => :group
   /=@groups

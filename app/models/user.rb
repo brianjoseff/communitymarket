@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password
   
-  attr_accessible :email, :name,:password, :password_confirmation, :current_password, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at
+  attr_accessible :email, :name,:password, :school_id, :password_confirmation, :current_password, :remember_me, :stripe_customer_id, :admin, :provider, :uid, :oauth_token, :oauth_expires_at
   # attr_accessor :password, :password_confirmation, :current_password
   #include Clearance::User
   
@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :groups_as_member, :through => :memberships, :source => :group, :class_name => "Group", :foreign_key => :user_id
   has_many :groups_as_owner, :class_name => "Group"
+  belongs_to :school
   has_many :memberships, :dependent => :destroy, :foreign_key => :member_id
   #has_many :images
   has_many :followships, :foreign_key => :follower_id
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates :email, :email_format => true, :presence => true
+  validates :school_id, presence: true
 
   
   

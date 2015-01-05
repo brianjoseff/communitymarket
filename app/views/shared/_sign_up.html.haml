@@ -8,6 +8,12 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
+
+  %div#school.form-group
+    //image of school
+    //collection select of all schools
+    = f.collection_select(:school_id, School.all, :id, :name, {:prompt => 'Choose your school:'},:class => "form-control")
+
   %div#name_field.form-group
     / =f.label :name, :class => 'control-label'
     / %div.controls
