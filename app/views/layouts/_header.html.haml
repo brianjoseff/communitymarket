@@ -11,10 +11,13 @@
         =image_tag "circlelogo1.png", :id => "header_logo"
         %h3.pull-left #{link_to "People and Stuff", root_path, :class => "header-title"}        
         %span.at-dartmouth.pull-right.hidden-xs.hidden-sm
-          -if current_page?(textbooks_url)
-            with Dartmouth Student Assembly
-          -else
-            at Dartmouth College
+          -if current_user
+            -if @school
+              at #{@school.name}
+          / -if current_page?(textbooks_url)
+          /   with Dartmouth Student Assembly
+          / -else
+          /   at Dartmouth College
       / Collect the nav links, forms, and other content for toggling
       .navbar-collapse.collapse
         %ul.nav.navbar-nav 

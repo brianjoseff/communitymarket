@@ -92,6 +92,10 @@ class ApplicationController < ActionController::Base
   
   def set_message
     @message = Message.new
+    if current_user
+      puts "woeirwwrer: #{current_user.email}"
+      @school = School.find(current_user.school_id)
+    end
   end
   
   #sets user instance variable for the "new user" button in the nav
