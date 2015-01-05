@@ -9,6 +9,7 @@ gem 'koala'
 
 group :development do
   gem 'debugger'
+  gem 'sqlite3'
   # gem 'rails-erd'
 end
 
