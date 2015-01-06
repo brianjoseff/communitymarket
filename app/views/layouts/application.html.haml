@@ -36,10 +36,10 @@
     %div.container.main
       %div.row
         -if notice
-          .notice
+          .notice.text-center
             = notice
         -if alert
-          .alert
+          .alert.text-center
             = alert
         /=render partial: "shared/post_search_bar" unless @disable_nav
         -if current_user

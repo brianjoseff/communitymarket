@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
       zipcode = params[:zipcode]
       @groups = Group.near(zipcode, 1000)
     else
-      @groups = Group.all
+      @groups = filter_groups(Group.all, current_user)
     end
     @g_categories = GroupCategory.all
     # respond_to do |format|
@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
      if params[:sort]
        @groups= Group.order(params[:sort])
      else
-       @groups = Group.order(:name)
+       @groups = filter_groups(Group.order(:name), current_user)
      end 
 
      respond_to do |format|
@@ -112,7 +112,7 @@ class GroupsController < ApplicationController
     @user = current_user
     @group = @user.groups_as_owner.new(params[:group])
     params[:group][:member_ids] = (params[:group][:member_ids] << @group.member_ids).flatten
-
+    @group.school_id = @user.school_id
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -182,6 +182,17 @@ class GroupsController < ApplicationController
     Kaminari.paginate_array(posts).page(params[:page]).per(per_page)
   end
   
+  def filter_groups(groups, user)
+    groups = groups.select do |group|
+      case
+      when group.school_id != user.school_id
+        false
+      else
+        true
+      end
+    end
+  end
+
   def filter_posts(posts)
     posts = posts.select do |post|
       case

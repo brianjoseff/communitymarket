@@ -1,4 +1,7 @@
 Communitymarket::Application.routes.draw do
+  resources :schools
+
+
   resources :dresses
 
 
@@ -99,6 +102,7 @@ Communitymarket::Application.routes.draw do
   end
   
   match '/textbooks', to: "pages#textbooks"
+  match '/admin', to: "pages#admin"
   match '/feed', :to =>"pages#feed"
   match '/bulk_update', :to => "groups#bulk_update"
   match '/for_sale', :to => "pages#for_sale"

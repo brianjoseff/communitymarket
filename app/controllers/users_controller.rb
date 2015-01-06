@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     #@user = User.find(params[:id])
 
     @user = User.find(params[:id])
+    @school = School.find(@user.school_id)
     @random_groups = Group.last(20) - @user.groups_as_member
     @badges = []
     @user.badges.each do |badge|

@@ -58,14 +58,14 @@ class PagesController < ApplicationController
       #OLD######@posts = Post.all.select{|x| x.active?}.paginate(:page => params[:page], :per_page => 35, :order => "created_at DESC")
       # @posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
       # @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(50)
-      
+      @school = School.find(@user.school_id)
       
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
         @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       else
-        @posts = filter_posts(Post.all).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(@school.posts).sort { |x,y| y.created_at <=> x.created_at }
         #@posts = Post.all.select{|x| x.active?}.sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50) 
       end
@@ -251,11 +251,21 @@ class PagesController < ApplicationController
     end
   end
   
+  def admin
+    @schools = School.all
+  end
   
   private
   
   def filter_posts(posts)
     posts = posts.select do |post|
+      # puts "USERUSEURSEUR: #{user}"
+      # unless user.empty?
+      #   if post.school_id != user.first.school_id
+      #     false
+      #   end
+      # end
+
       case
       when post.active?
         true
