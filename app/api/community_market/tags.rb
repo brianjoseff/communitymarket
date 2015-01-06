@@ -14,7 +14,7 @@ END
       requires :auth_token, type:String, desc:'Obtain this from the auth API'
 
     end
-    get 'random', http_codes:[
+    get 'random', rabl: "tags", http_codes:[
         [200, "400 - Missing required params"]
     ] do
 
@@ -22,8 +22,8 @@ END
 
       @user = current_user
 
-      @random_tags = Tag.order("RANDOM()").first(10)
-      @random_tags = Tag.first(10)
+      @tags = Tag.order("RANDOM()").first(10)
+
 
     end
 
@@ -40,7 +40,7 @@ END
       requires :auth_token, type:String, desc:'Obtain this from the auth API'
 
     end
-    get 'popular', http_codes:[
+    get 'popular', rabl: "tags", http_codes:[
         [200, "400 - Missing required params"]
     ] do
 
@@ -48,8 +48,8 @@ END
 
       @user = current_user
 
-      @popular_tags = Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc').first(10)
-      @popular_tags
+      @tags = Tag.joins(:taggings).select('tags.*, count(tag_id) as "tag_count"').group('tags.id').order(' tag_count desc').first(10)
+
 
     end
 

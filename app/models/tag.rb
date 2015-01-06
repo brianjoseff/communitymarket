@@ -19,4 +19,9 @@ class Tag < ActiveRecord::Base
     tokens.gsub!(/<<<(.+?)>>>/) { create!(:name => $1).id }
     tokens.split(',')
   end
+
+  def has_this_user user
+    self.followers.include? user
+  end
+
 end

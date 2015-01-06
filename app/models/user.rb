@@ -276,7 +276,11 @@ class User < ActiveRecord::Base
   def unfollow!(tag)
     followships.find_by_followed_id(tag.id).destroy
   end
-  
+
+  def joining?(group)
+    memberships.find_by_group_id(group.id)
+  end
+
   def join!(group)
     if group.members.count > 100
       memberships.create!(group_id: group.id, email_setting_id: 2)
@@ -286,7 +290,7 @@ class User < ActiveRecord::Base
   end
   
   def leave!(group)
-    memberships.find_by_followed_id(tag.id).destroy
+    memberships.find_by_group_id(group.id).destroy
   end
   
 

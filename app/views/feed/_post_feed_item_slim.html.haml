@@ -73,14 +73,6 @@
           = link_to_if !feed_item.completed?, feed_item.title, post_url(feed_item), :class => "slim-feed-title"
         -unless feed_item.assets.first.nil?
           %i.icon-medium.icon-camera
-        /COMMENTED OUT DATE
-        /%span.slim-feed-timestamp #{time_ago_in_words(feed_item.created_at)} ago.
-
-      / %div.row
-      /   -feed_item.tags.each do |tag|
-      /     =link_to tag.name, tag_url(tag), :class => "tag"
-
-
 
     %div.col-lg-4
       %div.slim-button-row

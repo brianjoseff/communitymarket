@@ -32,5 +32,8 @@ class Group < ActiveRecord::Base
     result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
     result
   end
+  def has_this_user user
+    self.members.include? user
+  end
 
 end

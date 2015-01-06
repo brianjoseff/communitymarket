@@ -33,6 +33,7 @@ class CommunityMarket::Auth < Grape::API
     end
 
 
+
     desc "Return an auth_token for the exising or newly registered user who can login with facebook credentials", {
       notes: <<-END
         Add a new user with the given name.  Use the resulting auth_token in API calls that require a logged in user.
@@ -99,7 +100,7 @@ class CommunityMarket::Auth < Grape::API
     end
 
 
-    desc "Log out the user", {
+    desc "Join or leave a group", {
       notes: <<-END
         Invalidate the auth_token for this instance.  To use the APIs, this instance will need to register or login to obtain a new auth_token.
 
@@ -110,12 +111,112 @@ class CommunityMarket::Auth < Grape::API
     params do
       requires :auth_token, type:String, desc:'Obtain this from the auth API'
     end
-    post 'logout', http_codes: [
+    post 'join_or_leave', http_codes: [
         [200, "400 - Missing required params"]
       ] do
       validate_user!
 
+
+      group = Group.find params[:id]
+
+      if current_user.joining? group
+        current_user.leave! group
+      else
+        current_user.join! group
+      end
+
+      is_member = current_user.joining?(group) ? 1: 0
+      {is_member:is_member}
+    end
+
+    desc "Follow or unfollow a tag", {
+        notes: <<-END
+        Invalidate the auth_token for this instance.  To use the APIs, this instance will need to register or login to obtain a new auth_token.
+
+                #### Example response
+                    {}
+        END
+    }
+    params do
+      requires :auth_token, type:String, desc:'Obtain this from the auth API'
+    end
+    post 'follow_or_unfollow', http_codes: [
+        [200, "400 - Missing required params"]
+    ] do
+      validate_user!
+
+      tag = Tag.find params[:id]
+
+      if current_user.following? tag
+        current_user.unfollow! tag
+      else
+        current_user.follow! tag
+      end
+
+      is_member = current_user.following?(tag) ? 1: 0
+      {is_member:is_member}
+    end
+
+
+    desc "Log out the user", {
+        notes: <<-END
+        Invalidate the auth_token for this instance.  To use the APIs, this instance will need to register or login to obtain a new auth_token.
+
+                #### Example response
+                    {}
+        END
+    }
+    params do
+      requires :auth_token, type:String, desc:'Obtain this from the auth API'
+    end
+    post 'logout', http_codes: [
+        [200, "400 - Missing required params"]
+    ] do
+      validate_user!
+
       current_user.update_attributes auth_token:nil
+
+      {}
+    end
+
+    desc "Update the user's profile", {
+        notes: <<-END
+        Invalidate the auth_token for this instance.  To use the APIs, this instance will need to register or login to obtain a new auth_token.
+
+                #### Example response
+                    {}
+        END
+    }
+    params do
+      requires :auth_token, type:String, desc:'Obtain this from the auth API'
+      requires :name, type:String, desc:'Obtain this from the auth API'
+      requires :email, type:String, desc:'Obtain this from the auth API'
+    end
+    post '/', http_codes: [
+        [200, "400 - Missing required params"]
+    ] do
+
+      validate_user!
+
+      user = current_user
+
+      user.name = name
+      user.email = email
+
+
+
+
+      params[:groups].each do |group_param|
+        group = Group.find group_param
+        user.groups_as_member << group
+      end
+
+
+      params[:tags].each do |tag_param|
+        tag = Tag.find tag_param
+        user.followed_tags << tag
+      end
+
 
       {}
     end

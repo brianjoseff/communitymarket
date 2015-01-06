@@ -18,7 +18,6 @@
             .pull-right
               -if feed_item.private?
                 -if !current_user
-              
                   = render "groups/join_form", :group => feed_item
                 -else
                   -unless current_user && current_user.groups_as_member.include?(feed_item)

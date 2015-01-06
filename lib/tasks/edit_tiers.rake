@@ -2,18 +2,21 @@
 
 namespace :db do
   desc "change names of tiers"
-  task :edit_tiers => :environment do
-    require 'faker'
-    require 'forgery'
-    Tier.delete_all
-    Tier.reset_pk_sequence
-    #tiers
-    Tier.create!(:name => "$1-5: Tier 1", :price => 250, :id => 1)
-    Tier.create!(:name => "$6-10: Tier 2", :price => 600, :id => 2)
-    Tier.create!(:name => "$11-25: Tier 3", :price => 1200, :id => 3)
-    Tier.create!(:name => "$26-50: Tier 4", :price => 3000, :id => 4)
-    Tier.create!(:name => "$51-99: Tier 5", :price => 6000, :id => 5)
-    Tier.create!(:name => "$100+: Tier 6", :price => 1100, :id => 6)
-    
+  task :edit_tier => :environment do
+
+    PostCategory.delete_all
+    PostCategory.reset_pk_sequence
+
+    #current production db Post Categories
+    PostCategory.create!(:name => "For Sale", id: 1)
+    PostCategory.create!(:name => "Wanted", id: 2)
+    # PostCategory.create!(:name => "Jobs/Internships")
+    # PostCategory.create!(:name => "Free Stuff")
+    PostCategory.create!(:name => "Housing", id: 6)
+    PostCategory.create!(:name => "Textbook", id: 7)
+    PostCategory.create!(:name => "Request Service", id: 4)
+    PostCategory.create!(:name => "Offer Service", id: 5)
+
   end
+
 end 
