@@ -91,6 +91,8 @@ class GroupsController < ApplicationController
     @categories = GroupCategory.all
     @group.assets.build
     @assets = @group.assets
+    @school = School.find(current_user.school_id)
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @group }
@@ -184,11 +186,15 @@ class GroupsController < ApplicationController
   
   def filter_groups(groups, user)
     groups = groups.select do |group|
-      case
-      when group.school_id != user.school_id
-        false
-      else
+      if groups.nil? || user.nil?
         true
+      else
+        case      
+        when group.school_id != user.school_id
+          false
+        else
+          true
+        end
       end
     end
   end

@@ -62,7 +62,7 @@ class PagesController < ApplicationController
       
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
-        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(@post_category.posts.where(school_id: @school.id)).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       else
         @posts = filter_posts(@school.posts).sort { |x,y| y.created_at <=> x.created_at }

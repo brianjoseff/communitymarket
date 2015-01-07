@@ -2,7 +2,7 @@ class Group < ActiveRecord::Base
   extend ::Geocoder::Model::ActiveRecord
   geocoded_by :zipcode
   after_validation :geocode, :if => :zipcode_changed?
-  attr_accessible :description, :group_category, :name,  :group_category_id, :user_id, :member_ids, :private, :longitude, :latitude, :zipcode, :password, :image, :assets_attributes
+  attr_accessible :description, :group_category, :name, :school_id, :group_category_id, :user_id, :member_ids, :private, :longitude, :latitude, :zipcode, :password, :image, :assets_attributes
   #acts_as_mappable :auto_geocode=>{:field=>:zipcode, :error_message=>'Could not geocode address'}
   # geocoded_by :full_street_address   # can also be an IP address
   
@@ -19,6 +19,7 @@ class Group < ActiveRecord::Base
   belongs_to :owner,    :class_name => "User", :foreign_key => :user_id
   belongs_to :group_category
   has_many :assignments
+  belongs_to :school
   has_many :posts,      :through => :assignments
   
   validates :name, :presence => true
@@ -31,9 +32,6 @@ class Group < ActiveRecord::Base
     columns = self.searchable_columns
     result = columns.map{ |column| [Group.human_attribute_name(column.to_sym), column] }
     result
-  end
-  def has_this_user user
-    self.members.include? user
   end
 
 end
