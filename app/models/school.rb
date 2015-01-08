@@ -16,7 +16,7 @@ class School < ActiveRecord::Base
      {:bucket => "zounds-prod", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
   end
   def s3_credentials
-      {:bucket => "zounds-dev", :access_key_id => "AKIAJQRMRJJSRUFI2PKQ", :secret_access_key => "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"}
+      {:bucket => "zounds-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
   end
   
 end
