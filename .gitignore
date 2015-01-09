@@ -34,5 +34,6 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/env.yml
 
 .DS_Store
