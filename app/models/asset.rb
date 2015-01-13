@@ -21,10 +21,10 @@ class Asset < ActiveRecord::Base
   end
 
   def prod_s3_credentials
-     {:bucket => "ambition-prod", :access_key_id => ENV['S3_SECRET'], :secret_access_key => ENV['S3_SECRET_KEY']}
+     {:bucket => "zounds-prod", :access_key_id => ENV['S3_SECRET'], :secret_access_key => ENV['S3_SECRET_KEY']}
   end
   def s3_credentials
-      {:bucket => "ambition-dev", :access_key_id => ENV['S3_SECRET'], :secret_access_key => ENV['S3_SECRET_KEY']}
+      {:bucket => "zounds-dev", :access_key_id => ENV['S3_SECRET'], :secret_access_key => ENV['S3_SECRET_KEY']}
   end
 
 end
