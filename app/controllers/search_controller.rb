@@ -16,7 +16,7 @@ class SearchController < ApplicationController
         @posts = filter_posts(@q2.result.where(school_id: @school.id)).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
     else
-        @posts = filter_posts(@q2.result.sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(@q2.result).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
     end
     
