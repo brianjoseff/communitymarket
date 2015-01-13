@@ -13,10 +13,10 @@ class School < ActiveRecord::Base
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   def prod_s3_credentials
-     {:bucket => "zounds-prod", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
+     {:bucket => "zounds-prod", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET_KEY']}
   end
   def s3_credentials
-      {:bucket => "zounds-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET']}
+      {:bucket => "zounds-dev", :access_key_id => ENV['S3_KEY'], :secret_access_key => ENV['S3_SECRET_KEY']}
   end
   
 end

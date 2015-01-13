@@ -52,7 +52,7 @@ Communitymarket::Application.configure do
     s3_credentials: {
       bucket: ENV['S3_DEV_BUCKET'],
       access_key_id:ENV['S3_KEY'],
-      secret_access_key: ENV['S3_SECRET']
+      secret_access_key: ENV['S3_SECRET_KEY']
     }
   }
   
