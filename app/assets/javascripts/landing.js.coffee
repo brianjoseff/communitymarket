@@ -1,12 +1,14 @@
 $ ->
-	$("body").scrollspy
-	  target: ".navbar-example"
-	  offset: 100
-  
-	$window.on "load", ->
-	  $body.scrollspy "refresh"
-	  return
+  $("body").scrollspy
+    target: ".navbar-example"
+    offset: 100
 
-	$("#navbar-main [href=#]").click (e) ->
-	  e.preventDefault()
-	  return
+  $window.on "load", ->
+    $body.scrollspy "refresh"
+    return
+
+  $("#navbar-main [href=#]").click (e) ->
+    e.preventDefault()
+    return
+
+  # $("#school_select")

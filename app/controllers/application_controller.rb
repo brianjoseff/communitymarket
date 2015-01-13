@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   #include Clearance::Authentication
   protect_from_forgery
+  rescue_from StandardError, with: :render_resource_error
   has_mobile_fu false
   before_filter :get_search_object, :set_user, :get_location, :set_message, :update_last_sign_in_at, :get_category_tags, :get_group_categories_for_nav, :admin_chosen_nav_tags
   # before_filter :configure_devise_permitted_parameters, if: :devise_controller?
@@ -16,7 +17,12 @@ class ApplicationController < ActionController::Base
     @group_categories = GroupCategory.all
   end
   
-  
+  def render_resource_error(exception)
+    Airbrake.notify(exception, airbrake_request_data)
+    flash[:error] = exception.message
+    redirect_to root_path
+  end
+
   def admin_chosen_nav_tags
     @textbooks = Tag.find_by_id(88)
     @appliances = Tag.find_by_id(4)
