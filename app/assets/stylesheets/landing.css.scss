@@ -9,6 +9,13 @@
  */
 
 
+#school_image{
+/*position: absolute;
+left: 42%;
+top: -1px;*/
+height: 50px;
+margin-bottom: 10px;
+}
 body {
   padding-top: 36px;
   background-color: #efeee9;
@@ -131,7 +138,10 @@ hr {
 /* ========== WRAP Configuration ========== */
 
 #headerwrap {
-	background: url('dartmouth-panorama2.jpg') no-repeat center top;
+	background-image: url('dartmouth-panorama2.jpg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center top;
 	margin-top: -50px;
 	padding-top:60px;
 	text-align:center;
@@ -171,8 +181,14 @@ hr {
 	letter-spacing: 1px;
 }
 
+.landing-header-text{
+	margin: 0 auto;
+	text-align: center;
+}
 .landing-signup{
-	padding-top:60px;
+	/*padding-top:60px;*/
+	max-width: 500px;
+	margin: 0 auto;
 }
 .phonefront {
 	position: absolute;

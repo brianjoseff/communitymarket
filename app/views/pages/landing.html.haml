@@ -25,13 +25,14 @@
   #headerwrap
     .container
       .col-lg-8
+        
         %h1 A marketplace for your school
         %p.hidden-xs buy and sell stuff with people you know. Textbooks are guaranteed to sell. Be part of the magic.
       .col-lg-4
         // SIGN UP FORM GOES HERE
         .landing-signup
-        -unless current_user
-          = render "shared/sign_up"
+          -unless current_user
+            = render "shared/sign_up"
   / ========== WELCOME TEXT ==========
   / .container
   /   .row

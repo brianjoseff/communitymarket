@@ -287,8 +287,15 @@ class User < ActiveRecord::Base
   def join!(group)
     if group.members.count > 100
       memberships.create!(group_id: group.id, email_setting_id: 2)
+
+
     else
-      memberships.create!(group_id: group.id, email_setting_id: 1)
+      begin
+        memberships.create!(group_id: group.id, email_setting_id: 1)
+      rescue Exception => e
+        nil
+      end
+
     end
   end
   

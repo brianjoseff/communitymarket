@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
-
+ruby '2.1.1' 
 gem 'rails', '3.2.9'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -114,6 +115,8 @@ gem 'heroku', '~>3.1.0'
 
 gem 'friendly_id'
 
+#error tracking
+gem 'airbrake'
 
 #transactional email
 gem 'mandrill-api'

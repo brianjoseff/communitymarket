@@ -65,6 +65,7 @@ Communitymarket::Application.routes.draw do
     collection do
       # get :textbooks
       get :dorm_furniture
+      get :school_select
     end
   end
   # get 'users/new_modal'

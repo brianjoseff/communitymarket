@@ -1,3 +1,4 @@
+#school_image
 = simple_form_for @user,  html: {role:"form", class: 'form'} do |f|
   -if params[:group_id]
     =hidden_field_tag('group[member_ids][]', @user.id)
@@ -12,7 +13,7 @@
   %div#school.form-group
     //image of school
     //collection select of all schools
-    = f.collection_select(:school_id, School.all, :id, :name, {:prompt => 'Choose your school:'},:class => "form-control")
+    = f.collection_select(:school_id, School.all, :id, :name, {:prompt => 'Choose your school:'},:class => "form-control", id: "school_select", "data-remote" => true, "data-url" => school_select_pages_path)
 
   %div#name_field.form-group
     / =f.label :name, :class => 'control-label'

@@ -62,7 +62,7 @@ class PagesController < ApplicationController
       
       if params[:categorize] && params[:categorize] != "All" 
         @post_category= PostCategory.find_by_name(params[:categorize])
-        @posts = filter_posts(@post_category.posts).sort { |x,y| y.created_at <=> x.created_at }
+        @posts = filter_posts(@post_category.posts.where(school_id: @school.id)).sort { |x,y| y.created_at <=> x.created_at }
         @posts = kaminari_paginate(@posts, 50)
       else
         @posts = filter_posts(@school.posts).sort { |x,y| y.created_at <=> x.created_at }
@@ -255,6 +255,16 @@ class PagesController < ApplicationController
     @schools = School.all
   end
   
+  def school_select
+    puts "xyxyxyxyxyxyxy"
+    
+    @school = School.find(params[:user][:school_id])
+    puts "THIS IS THE SCHOOL ID MUTHAFUCKA #{params[:user][:school_id]}"
+    respond_to do |format|
+      format.js {@school}
+    end
+  end 
+
   private
   
   def filter_posts(posts)
@@ -286,8 +296,9 @@ class PagesController < ApplicationController
   def landing
   end
   
-  private
+ 
 
+  
   def get_popular_tags
     adapter_type = ActiveRecord::Base.connection.adapter_name.downcase.to_sym
     case adapter_type
