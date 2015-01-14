@@ -32,8 +32,6 @@ class CommunityMarket::Auth < Grape::API
       {auth_token:user.auth_token, email:user.email, name:user.name, phone_number:user.phone_number}
     end
 
-
-
     desc "Return an auth_token for the exising or newly registered user who can login with facebook credentials", {
       notes: <<-END
         Add a new user with the given name.  Use the resulting auth_token in API calls that require a logged in user.
