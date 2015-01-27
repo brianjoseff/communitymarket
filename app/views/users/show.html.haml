@@ -1,114 +1,85 @@
-%p#notice= notice
-
-%div.col-lg-12
-  
-  %h5 Join some groups so that when you post you can notify people in the groups
-  
-  =render :partial => 'shared/banner_group', :locals => {:groups => @random_groups}
-
-%div.col-lg-8
-  %h4 #{@user.name}
-  %p #{@school.name}
-  =image_tag(@school.image.url(:original), :alt => @school.name, class: "circle-image")
-  
-
-  /=render "groups/group", :collection => @groups, :as => :group
-  /=@groups
-  -if current_user && current_user.admin?
-    %p Users count: #{@users_count}
-    %p Group rank:
-    %ul
-      -@group_rank.each do |g|
-        %li #{g.members.count}/posts:#{g.posts.count}: #{link_to g.name, group_url(g)}
-    %p Super Users:
-    %ul
-      -if !@users_with_5_posts.nil?
-        -@users_with_5_posts.each do |x|
-          -if x.posts.count > 5
-            %li #{link_to x.name, user_path(x)}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
-          -else
-            %li #{link_to x.name, user_path(x)}, with #{x.posts.count}
-    %p Posts count: #{@posts_count}
-      
-  %div.row
-    %p
-      %b Points:
-      = @user.points
-  
-  %div.row  
-    = link_to 'Edit Your Details', edit_user_registration_path
-  %div.row
-    %div.col-lg-3
-      /%a.btn{ :href => "mailto:#{@post.email}", :role => "button"}
-      =link_to "Edit Email Settings", "#", :id => "email_settings_link"
-      %div.email-settings-cloak{:style=>"display:none"}
-        =render "edit_email_settings"
-
-  / %div.row
-  /   =link_to "Post  a Post", new_post_path, :class => "btn btn-primary", :role => "button"
-
-%div.col-lg-4
-
-  -if !@groups.nil?
-    %h4 Your Groups
-    =render :partial => 'shared/your_group_feed', :collection => @groups, :as => :group
-
-  -if !@rec_groups.nil? && @rec_groups.first.is_a?(Group)
-    %h3 Recommended Groups:
-    -@rec_groups.each do |group|
-      %div.row
-        %div.image.col-lg-2
-          =link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)
-        %div.feed_item
-          %div.col-lg-10
-            %div.row
-              %span.feed-title
-              = link_to group.name, group_url(group)
-            %div.row
-              %span.description
-                = truncate(group.description, 10)
-          %div.col-lg-2
+.row.user-profile-header
+  %h1
+    = "#{@user.name}  "
+    %span= "#{@user.points} points"
+    %span
+      /= "SuperSeller✓" if @user.super_seller
+.row.user-page
+  / Left panel
+  .col-md-3.left-panel.user-col
+    - if !@groups.nil?
+      %h4 Groups
+      = render :partial => 'shared/your_group_feed', :collection => @groups, :as => :group
+    - if !@rec_groups.nil? && @rec_groups.first.is_a?(Group)
+      %h3 Recommended Groups:
+      - @rec_groups.each do |group|
+        .row
+          .image.col-lg-2
+            = link_to image_tag(group.assets.empty?  ? '/assets/small.png': group.assets.first.image.url(:small), :alt => group.name), group_url(group)
+          .feed_item
+            .col-lg-10
+              .row
+                %span.feed-title
+                = link_to group.name, group_url(group)
+              .row
+                %span.description
+                  = truncate(group.description, 10)
             = render "groups/join_form", :group => group
-  
-
-  %h4 Badges:
-  -@badges.each do |v|
-    -@badge_hash[v] += 1
-
-  -@badge_hash.each do |k, v|
-    %p.badge #{k}
-    -if v>1
-      x #{v}
-
-%table.table.table-striped
-  %tr
-    %th My posts
-    %th Date posted
-    %th Active?
-    %th.table-actions Actions
-  -@posts.each do |post|
-    %tr
-      %td #{link_to post.title, post_url(post)}
-      %td #{time_ago_in_words(post.created_at)} ago
-      %td #{post.active}
-      %td.post-management-buttons
-        = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
-        = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger destroy_region'
-        -if post.active?
-          = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-deactivate deactivate_region'
-        -else
-          = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
-        -if post.completed?
-          = link_to 'Undo', undo_completed_post_path(post), :class => 'btn btn-mini deactivate_region'
-        -else
-          -if post.post_category == nil
-            = link_to 'completed', complete_post_path(post), :class => 'btn btn-mini btn-success'
-          -else
-            = link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
-
-
-
--if current_user && current_user.admin?
+    %hr
+      %h4 Badges
+      - if @badges.empty?
+        %p No badges
+      - else
+        - @badges.each do |v|
+          - @badge_hash[v] += 1
+        - @badge_hash.each do |k, v|
+          %p.badge= k
+          - if v>1
+            x #{v}
+      %hr
+  / Main Middle
+  .col-md-7.middle-panel.user-col
+    - if @posts.empty?
+      .panel.panel-default.text-center
+        .panel-body
+          %h2 This user has no active posts.
+    - else
+      %table.table.table-striped
+        %tr
+          %th Posts
+          %th Date posted
+        - @posts.each do |post|
+          %tr
+            %td= link_to post.title, post_url(post)
+            / <td><haml:loud> time_ago_in_words(post.created_at) </haml:loud> ago</td>
+  / Right Panel
+  .col-md-2.right-panel.user-col
+/ End Main User Page Content
+/ Not sure what this is
+.row
+  .col-lg-3
+    /
+      \%a.btn{ :href => "mailto:\#{@post.email}", :role => "button"}
+    .email-settings-cloak{:style => "display:none"}
+      = render "edit_email_settings"
+/ Not sure what this is
+- if current_user && current_user.admin?
+  %p Users count: \#{@users_count}
+  %p Group rank:
+  %ul
+    - @group_rank.each do |g|
+      %li \#{g.members.count}/posts:\#{g.posts.count}: \#{link_to g.name, group_url(g)}
+  %p Super Users:
+  %ul
+    - if !@users_with_5_posts.nil?
+      - @users_with_5_posts.each do |x|
+        - if x.posts.count > 5
+          %li \#{link_to x.name, user_path(x)}, with \#{x.posts.count}, fifth post was created: \#{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+        - else
+          %li \#{link_to x.name, user_path(x)}, with \#{x.posts.count}
+  %p Posts count: \#{@posts_count}
+/ Not sure what this is
+- if current_user && current_user.admin?
   %h1 Admin Post Dashboard
   %table.table.table-striped
     %tr
@@ -116,26 +87,22 @@
       %th Date posted
       %th Active?
       %th.table-actions Actions
-    -@admin_posts.each do |post|
+    - @admin_posts.each do |post|
       %tr
-        %td #{link_to post.title, post_url(post)}
-        %td #{time_ago_in_words(post.created_at)} ago
-        %td #{post.active}
+        %td \#{link_to post.title, post_url(post)}
+        %td \#{time_ago_in_words(post.created_at)} ago
+        %td \#{post.active}
         %td.post-management-buttons
-          = link_to 'Edit', edit_post_path(post), :class => 'btn btn-mini'
-          = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger destroy_region'
-          -if post.active?
-            = link_to 'Deactivate', deactivate_post_path(post), :class => 'btn btn-mini btn-deactivate deactivate_region'
-          -else
-            = link_to 'Reactivate', reactivate_post_path(post), :class => 'btn btn-mini btn-success'
-          -if post.completed?
-            = link_to 'Undo', undo_completed_post_path(post), :class => 'btn btn-mini deactivate_region'
-          -else
-            -if post.post_category == nil
-              = link_to 'completed', complete_post_path(post), :class => 'btn btn-mini btn-success'
-            -else
+          = link_to 'Edit', edit_post_path(post)
+          = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+          - if post.active?
+            = link_to 'Deactivate', deactivate_post_path(post)
+          - else
+            = link_to 'Reactivate', reactivate_post_path(post)
+          - if post.completed?
+            = link_to 'Undo', undo_completed_post_path(post)
+          - else
+            - if post.post_category == nil
+              = link_to 'completed', complete_post_path(post)
+            - else
               = link_to post.post_category.name == 'Wanted' ? 'Got It' : 'Sold It', complete_post_path(post), :class => 'btn btn-mini btn-success'
-
-
-
-
