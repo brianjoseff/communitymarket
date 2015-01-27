@@ -64,20 +64,20 @@
       = render "edit_email_settings"
 / Not sure what this is
 - if current_user && current_user.admin?
-  %p Users count: \#{@users_count}
+  %p Users count: #{@users_count}
   %p Group rank:
   %ul
     - @group_rank.each do |g|
-      %li \#{g.members.count}/posts:\#{g.posts.count}: \#{link_to g.name, group_url(g)}
+      %li #{g.members.count}/posts:#{g.posts.count}: #{link_to g.name, group_url(g)}
   %p Super Users:
   %ul
     - if !@users_with_5_posts.nil?
       - @users_with_5_posts.each do |x|
         - if x.posts.count > 5
-          %li \#{link_to x.name, user_path(x)}, with \#{x.posts.count}, fifth post was created: \#{x.posts.fifth.created_at.strftime("%d %b. %Y")}
+          %li #{link_to x.name, user_path(x)}, with #{x.posts.count}, fifth post was created: #{x.posts.fifth.created_at.strftime("%d %b. %Y")}
         - else
-          %li \#{link_to x.name, user_path(x)}, with \#{x.posts.count}
-  %p Posts count: \#{@posts_count}
+          %li #{link_to x.name, user_path(x)}, with #{x.posts.count}
+  %p Posts count: #{@posts_count}
 / Not sure what this is
 - if current_user && current_user.admin?
   %h1 Admin Post Dashboard
@@ -89,9 +89,9 @@
       %th.table-actions Actions
     - @admin_posts.each do |post|
       %tr
-        %td \#{link_to post.title, post_url(post)}
-        %td \#{time_ago_in_words(post.created_at)} ago
-        %td \#{post.active}
+        %td #{link_to post.title, post_url(post)}
+        %td #{time_ago_in_words(post.created_at)} ago
+        %td #{post.active}
         %td.post-management-buttons
           = link_to 'Edit', edit_post_path(post)
           = link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
